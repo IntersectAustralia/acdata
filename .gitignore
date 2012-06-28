@@ -14,3 +14,16 @@ capybara-*.html
 **.orig
 rerun.txt
 pickle-email-*.html
+rdoc
+doc
+.yardoc
+.bundle
+pkg
+.DS_Store
+*.swp
+.svn
+certreq.csr
+build
+bin
+*keystore
+.idea
