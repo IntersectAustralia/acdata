@@ -1,0 +1,149 @@
+<div id="activity_dialog" class="jqmWindow lightbox">
+
+  <img src='/images/ICON_VECTOR_300_DEL_000000.png' border=0 class='icon jqmClose' id="close_activity_dialog" alt='reject'/>
+
+  <h2>
+    <% if @project.activity %>
+      Edit Project Grant
+    <% else %>
+      Assign a Grant to this Project
+    <% end %>
+  </h2>
+
+
+  <%= form_for([@project, @activity], :remote => true) do |f| %>
+
+  <div id="activity_error_explanation">
+    <%= render "shared/modal_errors", :target => @activity %>
+  </div>
+
+      <div class="field line">
+        <%= f.label :project_name, 'Project Name:<span class="required">*</span>'.html_safe %>
+        <%= f.text_field :project_name, :class => "text", :placeholder => "Project name (mandatory)" %>
+      </div>
+
+      <div class="field line">
+        <%= f.label :initial_year, 'Initial Year:' %>
+        <%= f.text_field :initial_year, :class => "text", :placeholder => "Year the project started" %>
+      </div>
+
+      <div class="field line">
+        <%= f.label :duration, 'Duration:' %>
+        <%= f.text_field :duration, :class => "text", :placeholder => "Length of time for project funding" %>
+      </div>
+
+      <div class="field line">
+        <%= f.label :total_grant_budget, 'Total Grant Budget:' %>
+        <%= f.text_field :total_grant_budget, :class => "text", :placeholder => "Grant budget amount" %>
+      </div>
+
+      <div class="field line">
+        <%= f.label :funding_sponsor, 'Funding Sponsor:<span class="required">*</span>'.html_safe %>
+        <%= f.text_field :funding_sponsor, :class => "text", :placeholder =>"Name of funding organisation (mandatory)" %>
+      </div>
+
+      <div class="field line">
+        <%= f.label :funding_scheme, 'Funding Scheme:' %>
+        <%= f.text_field :funding_scheme, :class => "text", :placeholder => "Funding scheme (if applicable)" %>
+      </div>
+
+      <div class="field line">
+        <%= f.label :project_type, 'Project Type:' %>
+        <%= f.text_field :project_type, :class => "text", :placeholder => "Project type (if applicable under funding scheme)" %>
+      </div>
+
+    <%=  f.hidden_field :from_rda, :value => false %>
+    <%=  f.hidden_field :rda_grant_id, :value => "" %>
+
+      <div id="for_code_picker">
+
+        <div class="field">
+          <h3>Field of Research (FOR) Tags:</h3>
+
+          <div class="instruction instructions"> Type FOR name such as Chemistry and you'll see the list of values
+            available. Fields of Research classification is used by
+            <a href="http://www.abs.gov.au/ausstats/abs@.nsf/0/4AE1B46AE2048A28CA25741800044242">ANZSRC</a> to
+            categorise research activities.
+          </div>
+          <%= text_field_tag 'for_code', nil, :title => 'Start typing a code', :class => "text basic_field", :placeholder => "Search here for FOR tags to add", :maxlength => 255 %>
+        </div>
+
+        <div class="field">
+          <ul id="for_code_list">
+            <% if @activity.for_codes.present? %>
+                <% @activity.for_codes.each do |code| %>
+                    <li id="for_code_<%= code.id %>">
+                      <%= code.code %> - <%= code.name %>
+                      <input type="hidden" name="activity[for_code_ids][]" value="<%= code.id %>">
+                      <span name="remove_for_code" class="remove_button basic_field"></span>
+                    </li>
+                <% end %>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field line">
+
+        <div class="field actions">
+          <%= link_to '<span>Back</span>'.html_safe, select_grant_type_project_activities_path(@project), {:method => :get, :remote => true, :id => 'back_button', :class => 'button left'} %>
+          <%= f.submit "Finish", :class => "blue basic_field" %>
+        </div>
+      </div>
+  <% end %>
+</div>
+
+<script>
+    <% dialog_id = "activity_dialog" %>
+    $("#for_code", "#<%= dialog_id %>").autocomplete({
+        source:'/activities/list_for_codes',
+        minLength:1,
+        delay:1000,
+        autoFocus:true,
+        open:function () {
+            $('.ui-menu').width(643)
+        },
+        select:function (event, ui) {
+            if (ui) {
+                var member_id = ui.item.id;
+                var selector = $("li#for_code_" + member_id);
+                if (selector.length == 0) {
+                    var member_name = escapeHTML(ui.item.value);
+
+                    $('ul#for_code_list').append('<li id="for_code_'
+                            + member_id
+                            + '">'
+                            + '<input type="hidden" name="activity[for_code_ids][]" value="'
+                            + member_id
+                            + '">'
+                            + member_name
+                            + '<span name="remove_for_code" class="remove_button basic_field"></span></li>');
+
+                }
+
+            }
+            $('#for_code', "#<%= dialog_id %>").val('');
+            return false;
+        }
+    });
+
+    // http://blog.nickburwell.com/2011/02/escape-html-tags-in-javascript.html
+    // useful for autocomplete
+    function escapeHTML(string) {
+        return jQuery('<pre>').text(string).html();
+    }
+    $(".remove_button", "#<%= dialog_id %>").live('click', function () {
+        $(this).parent().remove();
+        return false;
+    });
+
+
+    $(function () {
+        $('#for_code', "#<%= dialog_id %>").keypress(function (e) {
+            // Stop "Enter" choosing arbitrary text from input text field
+            if (e.keyCode == 13) {
+                return false;
+            }
+        });
+    });
+</script>

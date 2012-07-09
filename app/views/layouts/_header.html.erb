@@ -1,0 +1,28 @@
+<div id="container_header" class="line">
+
+  <div class="unit">
+    <a id="unsw_logo_container" href="/"><img src="/images/unsw-logo-white.png" border="0"></a>
+  </div>
+
+  <div id="header_title" class="unit">
+    <img src="/images/LOGO_ACDATA.png">
+    Analytical Centre Data Management System
+  </div>
+
+  <div class="unit" id="header_menu">
+    <% if user_signed_in? %>
+        <% if can? :moderate, User %>
+            <%= link_to 'RDA Publishables', ands_publishable_requests_users_path %> |
+        
+        <% end %>
+        <% if can? :admin, User %>
+            <%= link_to 'Admin Tasks', admin_users_path %> |
+        <% end %>
+        <%= link_to 'Projects', "/projects" %> |
+        <%= link_to 'Preferences', edit_user_registration_path %> |
+        <%= link_to 'Help', '/help', :target => '_blank' %> |
+        <%= link_to 'Logout', destroy_user_session_path %>
+    <% end %>
+  </div>
+</div>
+

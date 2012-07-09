@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Session>
+  <Formdata>
+    <!-- Form submitted time -->
+    <SubmissionDate>2012-06-26 13:50</SubmissionDate>
+
+    <!-- resource type  -->
+    <deposit_type>material_form</deposit_type>
+
+    <!-- *********** Bulk Details *************** -->
+    <bd_name>test</bd_name>
+    <bd_class_name>Organic</bd_class_name>
+    <!-- Creator of the membrane -->
+    <bd_source>UNSW</bd_source>
+    <bd_source_note_characterised_by>Ronald McDonald (KFC)
+Burger King (Oportos)</bd_source_note_characterised_by>
+    <bd_form_description>Flat Sheet</bd_form_description>
+
+    <!-- *********** Processing Details *************** -->
+    <bd_processing_details_name>Processing Name</bd_processing_details_name>
+    <bd_processing_details_notes>Processing Notes</bd_processing_details_notes>
+
+    <!-- First Property Data information -->
+    <PropertyDetails id="PD0">
+      <Name>Contact Area</Name>
+      <Type>Surface</Type>
+      <Units>cm</Units>
+    </PropertyDetails>
+
+    <MeasurementTechniqueDetails id="MT0">
+      <Name>Goniometer Method</Name>
+    </MeasurementTechniqueDetails>
+
+    <DataSourceDetails id="DS0" type="Book">
+      <Name>Some citation 1</Name>
+      <Notes>google.com</Notes>
+    </DataSourceDetails>
+
+    <PropertyDataDetails property="PD0" technique="MT0" source="DS0">
+      <Notes>Property 1 description</Notes>
+      <Qualifier>Property 1 qualifier 1</Qualifier>
+      <Qualifier>Property 1 qualifier 2</Qualifier>
+      <Qualifier>Property 1 qualifier 3</Qualifier>
+      <Data></Data>
+    </PropertyDataDetails>
+
+    <!-- Second Property Data information -->
+    <PropertyDetails id="PD1">
+      <Name>Diffusion Coefficient</Name>
+      <Type>Volumetric</Type>
+      <Units>m&lt;sup&gt;2&lt;/sup&gt; s&lt;sup&gt;-1&lt;/sup&gt;</Units>
+    </PropertyDetails>
+
+    <MeasurementTechniqueDetails id="MT1">
+      <Name>Atomistic Simulation</Name>
+    </MeasurementTechniqueDetails>
+
+    <DataSourceDetails id="DS1" type="Book Chapter">
+      <Name>Some citation 2</Name>
+      <Notes>yahoo.com</Notes>
+    </DataSourceDetails>
+
+    <PropertyDataDetails property="PD1" technique="MT1" source="DS1">
+      <Notes>Property 2 description</Notes>
+      <Qualifier>Property 2 qualifier 1</Qualifier>
+      <Qualifier>Property 2 qualifier 2</Qualifier>
+      <Qualifier>Property 2 qualifier 3</Qualifier>
+      <Data></Data>
+    </PropertyDataDetails>
+  </Formdata>
+
+  <!-- This section for any files associated material. any id can be used but must be unique -->
+  <Attachments>
+  </Attachments>
+</Session>

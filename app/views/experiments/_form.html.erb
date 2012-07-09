@@ -1,0 +1,64 @@
+<div id="<%= action %>_experiment_dialog" class="jqmWindow lightbox">
+
+  <img src='/images/ICON_VECTOR_300_DEL_000000.png' border=0 class='icon jqmClose' id="close_<%= action %>_experiment_dialog" alt='reject'/>
+
+  <h2>
+    <% if action.eql?("new") %>
+      Create New Experiment
+    <% else %>
+        Edit Experiment
+    <% end %>
+  </h2>
+
+  <%= form_for [@project, @experiment], :html => {:multipart => true}, :remote => true do |f| %>
+
+      <div id="modal_flash">
+        <% if flash[:notice] %>
+            <p class="info_notice"><%= flash[:notice] %></p>
+        <% end %>
+      </div>
+
+      <div id="<%= action %>_experiment_error_explanation">
+        <%= render 'shared/modal_errors', :target => @experiment %>
+      </div>
+
+      <div class="field line">
+        <%= f.label :project_id, 'Project:' %>
+          <%= f.collection_select :project_id, @projects + @collaborations, :id, :name, :class => 'basic_field' %>
+      </div>
+
+      <div class="field line">
+        <%= f.label :name, 'Name:<span class="required">*</span>'.html_safe %>
+        <div class="lastUnit">
+          <%= f.text_field :name, :class => "text basic_field", :placeholder => "The name of the experiment" %>
+        </div>
+      </div>
+
+      <div class="field line">
+        <%= f.label :description, 'Description:' %>
+        <div class="lastUnit">
+          <%= f.text_area :description, :rows => 5, :class => "text basic_field" %>
+        </div>
+      </div>
+
+      <div class="field line">
+        <%= f.label :url, 'Related Link:' %>
+        <div class="lastUnit">
+          <%= f.text_field :url, :class => "text basic_field" %>
+        </div>
+      </div>
+
+      <div class="field line">
+        <%= f.label :document, 'Related Document:' %>
+        <div id="document_container"><%= render :partial => "shared/related_document_upload", :locals => {:klass => @experiment} %></div>
+        <div class="lastUnit">
+          <%= f.file_field :document %>
+        </div>
+
+
+        <div class="field actions">
+          <%= f.submit :class => "blue basic_field" %>
+        </div>
+      </div>
+  <% end %>
+</div>

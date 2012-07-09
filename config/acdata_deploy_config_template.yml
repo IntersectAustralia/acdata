@@ -1,0 +1,41 @@
+defaults: &defaults
+  eln_url:
+  eln_uid:
+  nmr:
+    ftp_host:
+    ftp_user:
+    ftp_password:
+    download_dir:
+  aperio:
+    base_url:
+    project_list_url:
+    export_data_url:
+    slide_thumbnail_url:
+    label_thumbnail_url:
+    username:
+    password:
+    instrument_name:
+    slide_file_type:
+    label_file_type:
+    dataserver:
+      --- url:
+      --- port:
+      url:
+      port:
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+  eln_url:
+  eln_uid:
+
+qa:
+  <<: *defaults
+
+staging:
+  <<: *defaults

@@ -1,0 +1,39 @@
+<h3>Fill in user details</h3>
+
+<div class="row"><%= f.label :first_name, "First Name:" %>
+  <span class="userdetails"><%= @user.first_name %></span></div>
+
+<div class="row"><%= f.label :last_name, "Last Name:" %>
+  <span class="userdetails"><%= @user.last_name %></span></div>
+
+<div class="row"><%= f.label :email, 'Email:<span class="required">*</span>'.html_safe %><%= f.text_field :email, :size => 40, :maxlength => 150, :class => "text" %></div>
+
+<div class="row"><%= f.label :phone_number, "Phone Number:" %><%= f.text_field :phone_number, :maxlength => 20, :class => "text" %></div>
+
+<div class="row"><%= f.label :is_student, "I'm a research student:" %><%= f.check_box :is_student %></div>
+
+<div class="row"><%= f.label :supervisor_name, 'Supervisor Name:<span class="required">*</span>'.html_safe %><%= f.text_field :supervisor_name, :size => 40, :maxlength => 150, :class => "text" %></div>
+
+<div class="row"><%= f.label :supervisor_email, 'Supervisor Email:<span class="required">*</span>'.html_safe %><%= f.text_field :supervisor_email, :size => 40, :maxlength => 150, :class => "text" %></div>
+
+<script type="text/javascript">
+
+    function toggleSupervisorFields() {
+        if ($('#user_is_student').is(':checked')) {
+            $('#user_supervisor_name').removeAttr('disabled');
+            $('#user_supervisor_email').removeAttr('disabled');
+        } else {
+            $('#user_supervisor_name').attr('disabled', 'true');
+            $('#user_supervisor_email').attr('disabled', 'true');
+        }
+    }
+
+    $('#user_is_student').click(function () {
+        toggleSupervisorFields();
+    });
+
+    $(document).ready(function () {
+        toggleSupervisorFields();
+    });
+
+</script>

@@ -1,0 +1,9 @@
+<% if @redirect_path %>
+window.location = '<%= @redirect_path %>';
+<% flash[:notice] = "Dataset was successfully updated." %>
+<% else %>
+$("#edit_dataset_error_explanation").html("<%= escape_javascript(render 'shared/modal_errors', :target => @dataset) %>");
+$("#edit_dataset_error_explanation").addClass('alert');
+$('input[type=submit]', '#wizard').removeClass('ac_loading');
+$('input[type=submit]', '#wizard').removeAttr('disabled');
+<% end %>

@@ -1,0 +1,45 @@
+##TITLE= Audit trail, TOPSPIN		Version 3.0
+##JCAMPDX= 5.01
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= nmrsu
+$$ F:/data/cdb/nmr/120213-cdb/1/pdata/1/auditp.txt
+##AUDIT TRAIL=  $$ (NUMBER, WHEN, WHO, WHERE, PROCESS, VERSION, WHAT)
+(   1,<2012-02-13 14:43:55.832 +1100>,<nmrsu>,<GYRO>,<go>,<TOPSPIN 3.0>,
+      <created by zg
+	started at 2012-02-13 14:39:23.940 +1100,
+	POWCHK enabled, PULCHK disabled,
+       configuration hash MD5:
+       38 76 80 E4 D7 7A B2 74 D0 2B 75 86 21 34 EC 17
+       data hash MD5: 32K
+       5D BA EC 05 91 53 37 8A 4B 45 60 A9 F0 CE C5 C6>)
+(   2,<2012-02-13 14:43:56.316 +1100>,<nmrsu>,<GYRO>,<audit>,<TOPSPIN 3.0>,
+      <user comment:
+       ICON-NMR User ID: cdb
+       data hash MD5: 32K
+       5D BA EC 05 91 53 37 8A 4B 45 60 A9 F0 CE C5 C6>)
+(   3,<2012-02-13 14:43:56.534 +1100>,<nmrsu>,<GYRO>,<proc1d>,<TOPSPIN 3.0>,
+      <Start of raw data processing
+       ef LB = 0.1 FT_mod = 6 PKNL = 1 SI = 128K 
+       data hash MD5: 128K
+       84 E6 01 49 23 B2 37 72 35 0F 00 C2 CF CC 18 4D>)
+(   4,<2012-02-13 14:43:57.190 +1100>,<nmrsu>,<GYRO>,<proc1d>,<TOPSPIN 3.0>,
+      <apk 
+       data hash MD5: 128K
+       83 7F AD 3A E3 0F B1 25 C9 C7 84 A6 94 F3 7D 6B>)
+(   5,<2012-02-13 14:43:57.346 +1100>,<nmrsu>,<GYRO>,<proc1d>,<TOPSPIN 3.0>,
+      <abs n ABSG = 5 
+       data hash MD5: 128K
+       75 21 1A 2B BB C0 09 FA 68 23 3E 6E B0 1B 54 BE>)
+(   6,<2012-02-13 16:12:12.455 +1100>,<iconnmr>,<NMRHUB04>,<proc1d>,<TOPSPIN 3.0>,
+      <Unknown data manipulation detected
+       apk 
+       data hash MD5: 128K
+       83 7F AD 3A E3 0F B1 25 C9 C7 84 A6 94 F3 7D 6B>)
+(   7,<2012-02-13 16:12:15.731 +1100>,<iconnmr>,<NMRHUB04>,<proc1d>,<TOPSPIN 3.0>,
+      <abs n ABSG = 5 
+       data hash MD5: 128K
+       75 21 1A 2B BB C0 09 FA 68 23 3E 6E B0 1B 54 BE>)
+##END=
+
+$$ hash MD5
+$$ 03 21 B3 A6 59 40 A5 A6 5C 10 49 26 52 4D 80 A5

@@ -1,0 +1,21 @@
+<h3>Electronic Laboratory Notebook (ELN) Details</h3>
+<div class="row"><%= f.check_box :eln_enabled %><%= f.label :eln_enabled, "Enable exporting to an ELN blog" %></div>
+
+<div class="row">
+
+  <div id="container_useredit_blogs">
+    <div class="labelblock"><%= f.label :eln_blogs, "ELN Blogs:" %></div>
+    <div class="note">(Use the ELN blog short name.)</div>
+    <div class="inputblock">
+      <%= f.fields_for :eln_blogs do |field| %>
+        <%= field.text_field :name, :class => "text_blog" %>
+        <%= field.link_to_remove "", :class => "remove_button" %>
+      <% end %>
+      <%= f.link_to_add "<span>Add ELN Blog</span>".html_safe, :eln_blogs, :class => "button add" %>
+    </div>
+  </div>
+
+</div>
+
+<h3>Membrane Research Environment</h3>
+<div class="row"><%= f.check_box :memre_enabled %><%= f.label :memre_enabled, "Enable exporting to the membrane research environment (www.membranes.edu.au)" %></div>

@@ -1,0 +1,154 @@
+<div id="<%= action %>_project_dialog" class="jqmWindow lightbox">
+
+  <img src='/images/ICON_VECTOR_300_DEL_000000.png' border=0 class='icon jqmClose' id="close_<%= action %>_project_dialog" alt='reject'/>
+
+  <h2>
+    <% if action.eql?("new") %>
+      Create New Project
+    <% else %>
+      Edit Project
+    <% end %>
+  </h2>
+
+
+
+  <%= form_for(@project, :remote => true) do |f| %>
+
+  <div id="modal_flash">
+    <% if flash[:notice] %>
+      <p class="info_notice"><%= flash[:notice] %></p>
+    <% end %>
+  </div>
+
+    <div id="<%= action %>_project_error_explanation">
+      <%= render "shared/modal_errors", :target => @project %>
+    </div>
+
+    <div class="field line">
+      <%= f.label :name, 'Name:<span class="required">*</span>'.html_safe %>
+
+      <div class="lastUnit">
+        <%= f.text_field :name, :class => "text basic_field", :placeholder => "The name of your project" %>
+      </div>
+    </div>
+
+    <div class="field line">
+      <%= f.label :description, 'Description:', :class => "" %>
+      <div class="lastUnit">
+        <%= f.text_area :description, :rows => 5, :class => "text basic_field", :placeholder => "A description of your project" %>
+      </div>
+    </div>
+
+
+    <div id="member_picker" <%= action.eql?("new") ^ can?(:edit_member, @project) ? "" : "class='hidden'" %>>
+      <div class="field">
+        <label for="member">Project Members:</label>
+        <%= text_field_tag 'member', nil, :title => 'Start typing a name', :class => "text basic_field", :placeholder => "Search here for members to add" %>
+      </div>
+
+      <div class="field">
+        <span for="member_list" class="details">Current members: Tick the members who are also collaborating on this project.</span>
+        <ul class="" id="member_list">
+          <% if action.eql?("new") %>
+            <li><%= current_user.full_name %></li>
+          <% else %>
+            <li><%= @project.user.full_name %></li>
+          <% end %>
+
+          <% if @project.memberships.present? %>
+            <% @project.memberships.each do |project_membership| %>
+              <li id="member_<%= project_membership.user_id %>">
+                <input type="checkbox" name="project[collaborating][<%= project_membership.user_id %>]" <%= project_membership.collaborating? ? "checked" : "" %> class="basic_field">
+                <%= project_membership.user.full_name %>
+                <input type="hidden" name="project[member_ids][]" value="<%= project_membership.user_id %>">
+                <span name="remove_member" class="remove_button basic_field"></span>
+                <span>
+                  <%= link_to "Make Owner", make_owner_project_path(@project, project_membership.user), {:class => 'button' } %>
+                </span>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+    <div class="field line">
+      <%= f.label :url, 'Related Link:' %>
+      <div class="lastUnit">
+        <%= f.text_field :url, :class => "text basic_field" %>
+      </div>
+    </div>
+
+    <div class="field line">
+      <%= f.label :document, 'Related Document:' %>
+      <div id="document_container"><%= render :partial => "shared/related_document_upload", :locals => {:klass => @project} %></div>
+      <div class="lastUnit">
+        <%= f.file_field :document %>
+      </div>
+    </div>
+    <div class="field actions">
+      <%= f.submit :class => "blue basic_field" %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  <% dialog_id = action + "_project_dialog" %>
+
+  $("#member", "#<%= dialog_id %>").autocomplete({
+    source:'/users/list',
+    minLength:1,
+    open: function() { $('.ui-menu').width(643) },
+    select:function (event, ui) {
+      if (ui) {
+        var member_id = ui.item.id;
+        var selector = $("li#member_" + member_id);
+        if (selector.length == 0) {
+          var member_name = ui.item.value;
+          $('ul#member_list').append('<li id="member_'
+                  + member_id
+                  + '"><input type="hidden" name="member_ids[]" value="'
+                  + member_id
+                  + '">'
+                  + '<input type="checkbox" name="project[collaborating]['
+                  + member_id
+                  + ']" class="basic_field"><input type="hidden" name="project[member_ids][]" value="'
+                  + member_id
+                  + '">'
+                  + member_name
+                  + '<span name="remove_member" class="remove_button basic_field"></span></li>');
+
+        }
+
+      }
+      $('#member', "#<%= dialog_id %>").val('');
+      return false;
+    }
+  });
+
+  // monkey patch for jquery ui autocomplete to highlight terms
+  //http://stackoverflow.com/questions/2435964/jqueryui-how-can-i-custom-format-the-autocomplete-plug-in-results
+//  $.ui.autocomplete.prototype._renderItem = function (ul, item) {
+//    // highlights first case-insensitive match
+//    item.label = item.label.replace(new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + $.ui.autocomplete.escapeRegex(this.term) + ")(?![^<>]*>)(?![^&;]+;)", "i"), "<strong>$1</strong>");
+//    return $("<li></li>")
+//            .data("item.autocomplete", item)
+//            .append(item.label)
+//            .appendTo(ul);
+//  };
+
+  $(".remove_button", "#<%= dialog_id %>").live('click', function () {
+o
+    $(this).parent().remove();
+    return false;
+  });
+  $(function () {
+    $('#member', "#<%= dialog_id %>").keypress(function (e) {
+      // Stop "Enter" choosing arbitrary text from input text field
+      if (e.keyCode == 13) {
+        return false;
+      }
+    });
+  })
+</script>
+

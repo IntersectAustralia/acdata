@@ -1,0 +1,10 @@
+<% if alert %>
+   <div class="container_alerts"> <p id="*.errors" class="alert"><%= alert %></p> </div>
+<% end %>
+<% flash.each do |key, msg| %>
+    <% if not key.to_s[/alert/] %>
+        <p class="info_notice"><%= msg %></p>
+    <% elsif key.to_s.eql?("entry_alert") %>
+        <p id="*.errors" class="alert"><%= msg %></p>
+    <% end %>
+<% end %>

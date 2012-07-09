@@ -1,0 +1,10 @@
+/spare/acdata/acdata-web/shared/log/*.log {
+    rotate 520
+    weekly
+    copytruncate
+    missingok
+    notifempty
+    olddir /spare/acdata/acdata-web/shared/log_archive
+    compress
+    dateext
+}

@@ -1,0 +1,26 @@
+<% title 'Edit Slide Scanning Email' %>
+
+<div id="container_usersignup">
+  <h3><%= form_header "Edit slide scanning email" %></h3>
+
+  <%= form_for(@settings, :url => update_slide_scanning_email_settings_path, :html => {:method => :put}) do |f| %>
+      <div id="container_usersignup_forms">
+        <div id="error_explanation">
+          <%= render "shared/error_messages", :target => @settings %>
+        </div>
+        <div class="row">
+          <%= f.label :slide_scanning_email, "Slide Scanning Email:" %>
+          <%= f.text_field :slide_scanning_email, :maxlength => 255 %>
+        </div>
+
+      </div>
+      <div id="container_usersignup_footer">
+        <%= f.submit "Save", :class => "blue right" %>
+        <%= link_to '<span>Cancel</span>'.html_safe, admin_users_path, :class => "button" %>
+      </div>
+
+  <% end %>
+
+
+</div>
+

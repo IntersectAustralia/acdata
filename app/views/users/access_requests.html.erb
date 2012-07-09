@@ -1,0 +1,42 @@
+<% title 'Access Requests' %>
+
+<div id="container_userrequests">
+
+  <h3>Access Requests</h3>
+
+  <table class="data_table margin_top_small" id="access_requests">
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>zID</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Actions</th>
+    </tr>
+
+    <% @users.each do |user| %>
+        <tr class="<%= cycle('stripe', '') %>">
+          <td><%= user.first_name %></td>
+          <td><%= user.last_name %></td>
+          <td><%= user.login %></td>
+          <td><%= user.email %></td>
+          <td><%= user.phone_number %></td>
+          <td>
+            <% if can?(:approve, user) then %>
+                <%= link_to icon('approve') + "Approve", edit_approval_user_path(user), :id => "approve_#{user.id}" %>&nbsp;
+            <% end %>
+            <% if can?(:reject, user) then %>
+                <%= link_to icon('reject') + "Reject", reject_user_path(user), :id => "reject_#{user.id}" %>&nbsp;
+                <%= link_to icon('spam') + "Reject Permanently", reject_as_spam_user_path(user), :id => "reject_as_spam_#{user.id}" %>&nbsp;
+            <% end %>
+  
+            <%= link_to icon('view') + "View Details", user, :id => "view_#{user.id}" %></td>
+        </tr>
+    <% end %>
+  </table>
+  
+  <div id="container_usersignup_footer">
+      <%= link_to '<span>Back</span>'.html_safe, admin_users_path, :class => "button" %>
+  </div>
+
+</div>

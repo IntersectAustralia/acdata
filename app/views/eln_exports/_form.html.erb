@@ -1,0 +1,76 @@
+<div id="export_eln_dialog" class="jqmWindow lightbox">
+
+  <img src="/images/ICON_VECTOR_300_DEL_000000.png" border="0" class="icon jqmClose" id="close_dataset_dialog" alt="Close"/>
+
+  <div id="title">
+    <h2>Export to ELN</h2>
+
+  </div>
+
+  <%= nested_form_for [@dataset, @eln_export], :remote => true do |f| %>
+    <div id="error_explanation">
+      <%= render "shared/modal_errors", :target => @eln_export %>
+    </div>
+    <div class="smallred field">Please ensure the values used in "Entry title", "Section", and the "Metadata" keys and values do not contain any of: <strong>&amp;</strong>&nbsp;or&nbsp;<strong>&lt;</strong>&nbsp;or&nbsp;<strong>&gt;</strong></div>
+
+    <div class="field line">
+      <div class="line">
+        <%= f.label :name, 'Entry title:<span class="required">*</span>'.html_safe, :class => "unit" %>
+      </div>
+      <%= f.text_field :title, :class => "text" %>
+    </div>
+
+    <div class="field line">
+      <%= f.label :blog_name, 'Export to Blog:<span class="required">*</span>'.html_safe %>
+      <% if action.eql?('edit') %>
+      <%= @eln_export.blog_name %>
+      <% else %>
+      <%= f.select :blog_name, options_from_collection_for_select(@blogs, :name, :name) %>
+      <% end %>
+    </div>
+
+    <div class="field line">
+      <%= f.label :section, 'Section:<span class="required">*</span>'.html_safe %>
+      <%= f.text_field :section, :class => "text" %>
+    </div>
+
+    <div class="field line">
+      <%= f.label :content, :class => "unit" %>
+      <%= f.text_area :content, :rows => "10", :class => "text" %>
+    </div>
+
+    <div class="field line">
+      <div class="labelblock"><h3><%= f.label :eln_export_metadatas, "Metadata:" %></h3></div>
+      <%= f.fields_for :eln_export_metadatas do |field| %>
+       <span class="label">Key:</span>
+       <%= field.text_field :key, :class => "inline" %>
+       <span class="label">Value:</span>
+       <%= field.text_field :value, :class => "inline" %>
+        <%= field.link_to_remove "", :class => "remove_button" %>  
+      <% end %>
+      <%= f.link_to_add "<span>Add Metadata</span>".html_safe, :eln_export_metadatas, :class => "button green add" %>    
+    </div>
+
+    <div class="field actions">
+      <%= f.submit "Export", :class=> "blue" %>
+    </div>
+
+  <% end %>
+
+</div>
+
+<script>
+
+    $('#new_eln_export').bind("ajax:error", function(event, data, status, jqXHR) {
+      if (jqXHR.status == 401) {
+        var session_message = "<%= I18n.t :session_timeout, :scope => [:views, :shared] %>";
+        alert(session_message);
+        window.location = '<%= root_path %>';
+      }
+      else {
+        alert(jqXHR.status + ": " + jqXHR.responseText);
+      }
+    });
+
+</script>
+

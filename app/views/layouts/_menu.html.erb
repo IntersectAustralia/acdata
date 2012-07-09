@@ -1,0 +1,11 @@
+<% if user_signed_in? %>
+    <span id="header_menu" class="">
+        <% if can? :admin, User %>
+            <%= link_to 'User Management', admin_users_path %> |
+        <% end %>
+        <%= link_to 'My Projects', "/projects" %> |
+        <%= link_to 'My Details', edit_user_registration_path %> |
+        <%= link_to "Logout #{current_user.full_name}", destroy_user_session_path %>
+    </span>
+<% end %>
+

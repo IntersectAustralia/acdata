@@ -1,0 +1,7 @@
+<h3><%= pluralize(dataset.errors.count, "error") %> prohibited this dataset from being saved:</h3>
+
+<ul>
+  <% dataset.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+</ul>

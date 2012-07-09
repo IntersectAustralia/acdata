@@ -1,0 +1,1545 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/
+         http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+  <responseDate>2012-05-01T03:52:49Z</responseDate>
+  <request verb="ListRecords" metadataPrefix="rif" set="class:party" from="2012-04-01T00:00:00Z" until="2012-04-04T00:00:00Z">http://services.ands.org.au/home/orca/services/oai.php</request>
+  <ListRecords>
+    <record>
+      <header>
+        <identifier>MON:0000123711</identifier>
+        <datestamp>2012-04-03T23:26:44Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Monash0x20University</setSpec>
+        <setSpec>dataSource:monash.edu.au%2Feif019</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Monash University">
+    <key>MON:0000123711</key>
+    <originatingSource type="authoritative">http://www.monash.edu.au</originatingSource>
+    <party type="person" dateModified="2011-12-19T15:51:51Z">
+      <identifier type="local">MON:0000123711</identifier>
+      <name type="primary">
+        <namePart type="title">Dr</namePart>
+        <namePart type="given">Oded</namePart>
+        <namePart type="family">Kleifeld</namePart>
+      </name>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>Oded.Kleifeld@monash.edu</value>
+          </electronic>
+          <electronic type="url">
+            <value>http://www.monash.edu.au/research/profiles/profile.html?sid=48951&#38;pid=5418</value>
+          </electronic>
+        </address>
+      </location>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>MON:0000096892</identifier>
+        <datestamp>2012-04-03T23:26:44Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Monash0x20University</setSpec>
+        <setSpec>dataSource:monash.edu.au%2Feif019</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Monash University">
+    <key>MON:0000096892</key>
+    <originatingSource type="authoritative">http://www.monash.edu.au</originatingSource>
+    <party type="person" dateModified="2012-02-20T12:14:49Z">
+      <identifier type="local">MON:0000096892</identifier>
+      <name type="primary">
+        <namePart type="title">Dr</namePart>
+        <namePart type="given">Andrew</namePart>
+        <namePart type="family">Perry</namePart>
+      </name>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>Andrew.Perry@monash.edu</value>
+          </electronic>
+          <electronic type="url">
+            <value>http://www.monash.edu.au/research/profiles/profile.html?sid=25325&#38;pid=4926</value>
+          </electronic>
+        </address>
+      </location>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>MON:0000079309</identifier>
+        <datestamp>2012-04-03T23:13:22Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Monash0x20University</setSpec>
+        <setSpec>dataSource:monash.edu.au%2Fdc6d</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Monash University">
+    <key>MON:0000079309</key>
+    <originatingSource>http://services.ands.org.au/home/orca/register_my_data</originatingSource>
+    <party type="person" dateModified="2012-03-28T13:34:08Z">
+      <identifier type="local">MON:0000079309</identifier>
+      <name type="primary">
+        <namePart type="title">Dr</namePart>
+        <namePart type="given">Peter</namePart>
+        <namePart type="family">Isaac</namePart>
+      </name>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>Peter.Isaac@monash.edu</value>
+          </electronic>
+          <electronic type="url">
+            <value>http://www.monash.edu.au/research/directory/?type=cperson&#38;query=0000079309</value>
+          </electronic>
+        </address>
+      </location>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>MON:0000015173</identifier>
+        <datestamp>2012-04-03T23:13:22Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Monash0x20University</setSpec>
+        <setSpec>dataSource:monash.edu.au%2Fdc6d</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Monash University">
+    <key>MON:0000015173</key>
+    <originatingSource>http://services.ands.org.au/home/orca/register_my_data</originatingSource>
+    <party type="person" dateModified="2012-03-28T13:34:08Z">
+      <identifier type="local">MON:0000015173</identifier>
+      <name type="primary">
+        <namePart type="title">Prof</namePart>
+        <namePart type="given">Jason</namePart>
+        <namePart type="family">Beringer</namePart>
+      </name>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>Jason.Beringer@monash.edu</value>
+          </electronic>
+          <electronic type="url">
+            <value>http://www.monash.edu.au/research/profiles/profile.html?sid=3208&#38;pid=121</value>
+          </electronic>
+        </address>
+      </location>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>MON:0000090046</identifier>
+        <datestamp>2012-04-03T22:47:52Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Monash0x20University</setSpec>
+        <setSpec>dataSource:monash.edu.au%2Fdc6a</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Monash University">
+    <key>MON:0000090046</key>
+    <originatingSource type="authoritative">http://www.monash.edu.au</originatingSource>
+    <party type="person" dateModified="2012-02-14T13:13:03Z">
+      <identifier type="local">MON:0000090046</identifier>
+      <name type="primary">
+        <namePart type="title">Dr</namePart>
+        <namePart type="given">Fasseli</namePart>
+        <namePart type="family">Coulibaly</namePart>
+      </name>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>Fasseli.Coulibaly@monash.edu</value>
+          </electronic>
+          <electronic type="url">
+            <value>http://www.monash.edu.au/research/profiles/profile.html?sid=18193&#38;pid=4677</value>
+          </electronic>
+        </address>
+      </location>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>MON:0000086103</identifier>
+        <datestamp>2012-04-03T22:47:52Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Monash0x20University</setSpec>
+        <setSpec>dataSource:monash.edu.au%2Fdc6a</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Monash University">
+    <key>MON:0000086103</key>
+    <originatingSource type="authoritative">http://www.monash.edu.au</originatingSource>
+    <party type="person" dateModified="2012-02-14T12:58:31Z">
+      <identifier type="local">MON:0000086103</identifier>
+      <name type="primary">
+        <namePart type="title">Mr</namePart>
+        <namePart type="given">Steve</namePart>
+        <namePart type="family">Androulakis</namePart>
+      </name>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>Steve.Androulakis@med.monash.edu.au</value>
+          </electronic>
+          <electronic type="url">
+            <value>http://www.monash.edu.au/research/directory/?type=cperson&#38;query=0000086103</value>
+          </electronic>
+        </address>
+      </location>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>MON:0000079965</identifier>
+        <datestamp>2012-04-03T22:47:52Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Monash0x20University</setSpec>
+        <setSpec>dataSource:monash.edu.au%2Fdc6a</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Monash University">
+    <key>MON:0000079965</key>
+    <originatingSource type="authoritative">http://www.monash.edu.au</originatingSource>
+    <party type="person" dateModified="2012-02-14T13:13:03Z">
+      <identifier type="local">MON:0000079965</identifier>
+      <name type="primary">
+        <namePart type="title">Mr</namePart>
+        <namePart type="given">Michael</namePart>
+        <namePart type="family">D&#39;Angelo</namePart>
+      </name>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>Michael.Dangelo@monash.edu</value>
+          </electronic>
+          <electronic type="url">
+            <value>http://www.monash.edu.au/research/directory/?type=cperson&#38;query=0000079965</value>
+          </electronic>
+        </address>
+      </location>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>MON:0000042593</identifier>
+        <datestamp>2012-04-03T22:47:52Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Monash0x20University</setSpec>
+        <setSpec>dataSource:monash.edu.au%2Fdc6a</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Monash University">
+    <key>MON:0000042593</key>
+    <originatingSource type="authoritative">http://www.monash.edu.au</originatingSource>
+    <party type="person" dateModified="2012-02-14T13:10:57Z">
+      <identifier type="local">MON:0000042593</identifier>
+      <name type="primary">
+        <namePart type="title">Dr</namePart>
+        <namePart type="given">Sheena</namePart>
+        <namePart type="family">McGowan</namePart>
+      </name>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>Sheena.McGowan@monash.edu</value>
+          </electronic>
+          <electronic type="url">
+            <value>http://www.monash.edu.au/research/profiles/profile.html?sid=3301&#38;pid=3399</value>
+          </electronic>
+        </address>
+      </location>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>MON:0000039330</identifier>
+        <datestamp>2012-04-03T22:47:52Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Monash0x20University</setSpec>
+        <setSpec>dataSource:monash.edu.au%2Fdc6a</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Monash University">
+    <key>MON:0000039330</key>
+    <originatingSource type="authoritative">http://www.monash.edu.au</originatingSource>
+    <party type="person" dateModified="2012-02-14T13:13:02Z">
+      <identifier type="local">MON:0000039330</identifier>
+      <name type="primary">
+        <namePart type="title">Dr</namePart>
+        <namePart type="given">Michelle</namePart>
+        <namePart type="family">Dunstone</namePart>
+      </name>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>Michelle.Dunstone@monash.edu</value>
+          </electronic>
+          <electronic type="url">
+            <value>http://www.monash.edu.au/research/profiles/profile.html?sid=5061&#38;pid=3696</value>
+          </electronic>
+        </address>
+      </location>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>MON:0000038513</identifier>
+        <datestamp>2012-04-03T22:47:52Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Monash0x20University</setSpec>
+        <setSpec>dataSource:monash.edu.au%2Fdc6a</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Monash University">
+    <key>MON:0000038513</key>
+    <originatingSource type="authoritative">http://www.monash.edu.au</originatingSource>
+    <party type="person" dateModified="2012-02-14T13:13:01Z">
+      <identifier type="local">MON:0000038513</identifier>
+      <name type="primary">
+        <namePart type="title">Dr</namePart>
+        <namePart type="given">Ruby</namePart>
+        <namePart type="family">Law</namePart>
+      </name>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>Ruby.Law@monash.edu</value>
+          </electronic>
+          <electronic type="url">
+            <value>http://www.monash.edu.au/research/profiles/profile.html?sid=435&#38;pid=2689</value>
+          </electronic>
+        </address>
+      </location>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>MON:0000027613</identifier>
+        <datestamp>2012-04-03T22:47:52Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Monash0x20University</setSpec>
+        <setSpec>dataSource:monash.edu.au%2Fdc6a</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Monash University">
+    <key>MON:0000027613</key>
+    <originatingSource type="authoritative">http://www.monash.edu.au</originatingSource>
+    <party type="person" dateModified="2012-02-14T13:13:04Z">
+      <identifier type="local">MON:0000027613</identifier>
+      <name type="primary">
+        <namePart type="title">Prof</namePart>
+        <namePart type="given">James</namePart>
+        <namePart type="family">Whisstock</namePart>
+      </name>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>James.Whisstock@monash.edu</value>
+          </electronic>
+          <electronic type="url">
+            <value>http://www.monash.edu.au/research/profiles/profile.html?sid=1614&#38;pid=2427</value>
+          </electronic>
+        </address>
+      </location>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>MON:0000022448</identifier>
+        <datestamp>2012-04-03T22:47:51Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Monash0x20University</setSpec>
+        <setSpec>dataSource:monash.edu.au%2Fdc6a</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Monash University">
+    <key>MON:0000022448</key>
+    <originatingSource type="authoritative">http://www.monash.edu.au</originatingSource>
+    <party type="person" dateModified="2012-02-14T12:55:36Z">
+      <identifier type="local">MON:0000022448</identifier>
+      <name type="primary">
+        <namePart type="title">Prof</namePart>
+        <namePart type="given">Arthur</namePart>
+        <namePart type="family">Lesk</namePart>
+      </name>
+      <location>
+        <address>
+          <electronic type="url">
+            <value>http://www.monash.edu.au/research/directory/?type=cperson&#38;query=0000022448</value>
+          </electronic>
+        </address>
+      </location>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>MON:0000016280</identifier>
+        <datestamp>2012-04-03T22:47:51Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Monash0x20University</setSpec>
+        <setSpec>dataSource:monash.edu.au%2Fdc6a</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Monash University">
+    <key>MON:0000016280</key>
+    <originatingSource>http://services.ands.org.au/home/orca/register_my_data</originatingSource>
+    <party type="person" dateModified="2012-02-14T12:55:37Z">
+      <identifier type="local">MON:0000016280</identifier>
+      <name type="primary">
+        <namePart type="title">Prof</namePart>
+        <namePart type="given">Jamie</namePart>
+        <namePart type="family">Rossjohn</namePart>
+      </name>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>Jamie.Rossjohn@monash.edu</value>
+          </electronic>
+          <electronic type="url">
+            <value>http://www.monash.edu.au/research/profiles/profile.html?sid=3924&#38;pid=3522</value>
+          </electronic>
+        </address>
+      </location>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>MON:0000016056</identifier>
+        <datestamp>2012-04-03T22:47:51Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Monash0x20University</setSpec>
+        <setSpec>dataSource:monash.edu.au%2Fdc6a</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Monash University">
+    <key>MON:0000016056</key>
+    <originatingSource type="authoritative">http://www.monash.edu.au</originatingSource>
+    <party type="person" dateModified="2012-02-14T12:55:35Z">
+      <identifier type="local">MON:0000016056</identifier>
+      <name type="primary">
+        <namePart type="title">Prof</namePart>
+        <namePart type="given">Stephen</namePart>
+        <namePart type="family">Bottomley</namePart>
+      </name>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>Steve.Bottomley@monash.edu</value>
+          </electronic>
+          <electronic type="url">
+            <value>http://www.monash.edu.au/research/profiles/profile.html?sid=1613&#38;pid=2991</value>
+          </electronic>
+        </address>
+      </location>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>MON:0000016053</identifier>
+        <datestamp>2012-04-03T22:47:51Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Monash0x20University</setSpec>
+        <setSpec>dataSource:monash.edu.au%2Fdc6a</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Monash University">
+    <key>MON:0000016053</key>
+    <originatingSource type="authoritative">http://www.monash.edu.au</originatingSource>
+    <party type="person" dateModified="2012-02-14T13:13:04Z">
+      <identifier type="local">MON:0000016053</identifier>
+      <name type="primary">
+        <namePart type="title">Prof</namePart>
+        <namePart type="given">Phillip</namePart>
+        <namePart type="family">Bird</namePart>
+      </name>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>Phil.Bird@monash.edu</value>
+          </electronic>
+          <electronic type="url">
+            <value>http://www.monash.edu.au/research/profiles/profile.html?sid=664&#38;pid=2758</value>
+          </electronic>
+        </address>
+      </location>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>piccloud.arcs.org.au.maintainer.D.C._Franklin</identifier>
+        <datestamp>2012-04-01T06:43:53Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Polar0x20Information0x20Commons</setSpec>
+        <setSpec>dataSource:piccloud.arcs.org.au</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Polar Information Commons">
+    <key>piccloud.arcs.org.au.maintainer.D.C._Franklin</key>
+    <originatingSource>http://piccloud.arcs.org.au/oai/provider</originatingSource>
+    <party type="group">
+      <name type="primary">
+        <namePart type="given">D.C</namePart>
+        <namePart type="family">Franklin</namePart>
+      </name>
+      <location>
+        <address>
+          <physical>
+            <addressPart type="country">Australia</addressPart>
+          </physical>
+        </address>
+      </location>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>mail:fxmzb123@gmail.com</value>
+          </electronic>
+          <physical>
+            <addressPart type="telephoneNumber">+61 3 6200 0000</addressPart>
+          </physical>
+        </address>
+      </location>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.NDGdvQBPrn1275675572361</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>piccloud.arcs.org.au.maintainer.Ian_Robbins</identifier>
+        <datestamp>2012-04-01T06:43:31Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Polar0x20Information0x20Commons</setSpec>
+        <setSpec>dataSource:piccloud.arcs.org.au</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Polar Information Commons">
+    <key>piccloud.arcs.org.au.maintainer.Ian_Robbins</key>
+    <originatingSource>http://piccloud.arcs.org.au/oai/provider</originatingSource>
+    <party type="person">
+      <name type="primary">
+        <namePart>Ian Robbins</namePart>
+      </name>
+      <location>
+        <address>
+          <physical>
+            <addressPart type="country">United States</addressPart>
+          </physical>
+        </address>
+      </location>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>mail:fxmzb123@gmail.com</value>
+          </electronic>
+          <physical>
+            <addressPart type="telephoneNumber">8057567131</addressPart>
+          </physical>
+        </address>
+      </location>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.DECeeAjOBI1293000543519</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.LWECFDTgWH1292999476404</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.SuwVelCxpG1293000089743</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.tBSWfIVCba1293001400718</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.VUKMQPkfqG1292999793424</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.XxavDtrFOM1293001804228</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.hEdLFbVXcF1293000309360</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>piccloud.arcs.org.au.maintainer.Kathleen_Cass_Cass</identifier>
+        <datestamp>2012-04-01T06:43:27Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Polar0x20Information0x20Commons</setSpec>
+        <setSpec>dataSource:piccloud.arcs.org.au</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Polar Information Commons">
+    <key>piccloud.arcs.org.au.maintainer.Kathleen_Cass_Cass</key>
+    <originatingSource>http://piccloud.arcs.org.au/oai/provider</originatingSource>
+    <party type="person">
+      <name type="primary">
+        <namePart>Kathleen Cass Cass</namePart>
+      </name>
+      <location>
+        <address>
+          <physical>
+            <addressPart type="country">Aland</addressPart>
+          </physical>
+        </address>
+      </location>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>mail:fxmzb123@gmail.com</value>
+          </electronic>
+          <physical>
+            <addressPart type="telephoneNumber">88888</addressPart>
+          </physical>
+        </address>
+      </location>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.GRbOcOYfhn1276694648710</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>piccloud.arcs.org.au.maintainer.Geoff_Copson</identifier>
+        <datestamp>2012-04-01T06:43:13Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Polar0x20Information0x20Commons</setSpec>
+        <setSpec>dataSource:piccloud.arcs.org.au</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Polar Information Commons">
+    <key>piccloud.arcs.org.au.maintainer.Geoff_Copson</key>
+    <originatingSource>http://piccloud.arcs.org.au/oai/provider</originatingSource>
+    <party type="person">
+      <name type="primary">
+        <namePart>Geoff Copson</namePart>
+      </name>
+      <location>
+        <address>
+          <physical>
+            <addressPart type="country">Australia</addressPart>
+          </physical>
+        </address>
+      </location>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>mail:fxmzb123@gmail.com</value>
+          </electronic>
+          <physical>
+            <addressPart type="telephoneNumber">+61 3 6233 6728</addressPart>
+          </physical>
+        </address>
+      </location>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.MkytPVHeNI1275622204517</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>piccloud.arcs.org.au.maintainer.Ian_Allison</identifier>
+        <datestamp>2012-04-01T06:42:39Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Polar0x20Information0x20Commons</setSpec>
+        <setSpec>dataSource:piccloud.arcs.org.au</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Polar Information Commons">
+    <key>piccloud.arcs.org.au.maintainer.Ian_Allison</key>
+    <originatingSource>http://piccloud.arcs.org.au/oai/provider</originatingSource>
+    <party type="person">
+      <name type="primary">
+        <namePart>Ian Allison</namePart>
+      </name>
+      <location>
+        <address>
+          <physical>
+            <addressPart type="country">Australia</addressPart>
+          </physical>
+        </address>
+      </location>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>mail:fxmzb123@gmail.com</value>
+          </electronic>
+          <physical>
+            <addressPart type="telephoneNumber">+61 3 6226 7648</addressPart>
+          </physical>
+        </address>
+      </location>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.UmQNdNNSjn1275675902226</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>piccloud.arcs.org.au.maintainer.Hiroshi_Miyaoka</identifier>
+        <datestamp>2012-04-01T06:42:30Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Polar0x20Information0x20Commons</setSpec>
+        <setSpec>dataSource:piccloud.arcs.org.au</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Polar Information Commons">
+    <key>piccloud.arcs.org.au.maintainer.Hiroshi_Miyaoka</key>
+    <originatingSource>http://piccloud.arcs.org.au/oai/provider</originatingSource>
+    <party type="person">
+      <name type="primary">
+        <namePart>Hiroshi Miyaoka</namePart>
+      </name>
+      <location>
+        <address>
+          <physical>
+            <addressPart type="country">Japan</addressPart>
+          </physical>
+        </address>
+      </location>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>mail:fxmzb123@gmail.com</value>
+          </electronic>
+          <physical>
+            <addressPart type="telephoneNumber">+81 42 512 0662</addressPart>
+          </physical>
+        </address>
+      </location>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.mPvijMJEQU1296789308473</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>piccloud.arcs.org.au.maintainer.Chris_Paterson</identifier>
+        <datestamp>2012-04-01T06:42:26Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Polar0x20Information0x20Commons</setSpec>
+        <setSpec>dataSource:piccloud.arcs.org.au</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Polar Information Commons">
+    <key>piccloud.arcs.org.au.maintainer.Chris_Paterson</key>
+    <originatingSource>http://piccloud.arcs.org.au/oai/provider</originatingSource>
+    <party type="person">
+      <name type="primary">
+        <namePart>Chris Paterson</namePart>
+      </name>
+      <location>
+        <address>
+          <physical>
+            <addressPart type="country">Australia</addressPart>
+          </physical>
+        </address>
+      </location>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>mail:fxmzb123@gmail.com</value>
+          </electronic>
+          <physical>
+            <addressPart type="telephoneNumber">+61 3 6232 3222</addressPart>
+          </physical>
+        </address>
+      </location>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.gutPTuAbas1276088958660</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>piccloud.arcs.org.au.maintainer.John_Gibson</identifier>
+        <datestamp>2012-04-01T06:42:12Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Polar0x20Information0x20Commons</setSpec>
+        <setSpec>dataSource:piccloud.arcs.org.au</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Polar Information Commons">
+    <key>piccloud.arcs.org.au.maintainer.John_Gibson</key>
+    <originatingSource>http://piccloud.arcs.org.au/oai/provider</originatingSource>
+    <party type="person">
+      <name type="primary">
+        <namePart>John Gibson</namePart>
+      </name>
+      <location>
+        <address>
+          <physical>
+            <addressPart type="country">Australia</addressPart>
+          </physical>
+        </address>
+      </location>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>mail:fxmzb123@gmail.com</value>
+          </electronic>
+          <physical>
+            <addressPart type="telephoneNumber">+61 3 6226 7488</addressPart>
+          </physical>
+        </address>
+      </location>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.IlZhJUZtpY1275674233053</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>piccloud.arcs.org.au.maintainer.Akira_Yukimatsu</identifier>
+        <datestamp>2012-04-01T06:42:00Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Polar0x20Information0x20Commons</setSpec>
+        <setSpec>dataSource:piccloud.arcs.org.au</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Polar Information Commons">
+    <key>piccloud.arcs.org.au.maintainer.Akira_Yukimatsu</key>
+    <originatingSource>http://piccloud.arcs.org.au/oai/provider</originatingSource>
+    <party type="person">
+      <name type="primary">
+        <namePart>Akira Yukimatsu</namePart>
+      </name>
+      <location>
+        <address>
+          <physical>
+            <addressPart type="country">Japan</addressPart>
+          </physical>
+        </address>
+      </location>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>mail:fxmzb123@gmail.com</value>
+          </electronic>
+          <physical>
+            <addressPart type="telephoneNumber">+81 22 795 0659</addressPart>
+          </physical>
+        </address>
+      </location>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.XRNTgTwmWA1296623671073</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>piccloud.arcs.org.au.maintainer.Andrew_Davidson</identifier>
+        <datestamp>2012-04-01T06:41:25Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Polar0x20Information0x20Commons</setSpec>
+        <setSpec>dataSource:piccloud.arcs.org.au</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Polar Information Commons">
+    <key>piccloud.arcs.org.au.maintainer.Andrew_Davidson</key>
+    <originatingSource>http://piccloud.arcs.org.au/oai/provider</originatingSource>
+    <party type="person">
+      <name type="primary">
+        <namePart>Andrew Davidson</namePart>
+      </name>
+      <location>
+        <address>
+          <physical>
+            <addressPart type="country">Australia</addressPart>
+          </physical>
+        </address>
+      </location>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>mail:fxmzb123@gmail.com</value>
+          </electronic>
+          <physical>
+            <addressPart type="telephoneNumber">+61 3 6232 3444</addressPart>
+          </physical>
+        </address>
+      </location>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.oQPOGyaJLF1276160986920</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>piccloud.arcs.org.au.maintainer.Doug_Thost</identifier>
+        <datestamp>2012-04-01T06:41:16Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Polar0x20Information0x20Commons</setSpec>
+        <setSpec>dataSource:piccloud.arcs.org.au</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Polar Information Commons">
+    <key>piccloud.arcs.org.au.maintainer.Doug_Thost</key>
+    <originatingSource>http://piccloud.arcs.org.au/oai/provider</originatingSource>
+    <party type="person">
+      <name type="primary">
+        <namePart>Doug Thost</namePart>
+      </name>
+      <location>
+        <address>
+          <physical>
+            <addressPart type="country">Australia</addressPart>
+          </physical>
+        </address>
+      </location>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>mail:fxmzb123@gmail.com</value>
+          </electronic>
+          <physical>
+            <addressPart type="telephoneNumber">+61 3 6226 7541</addressPart>
+          </physical>
+        </address>
+      </location>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.UXAotsOgBP1276007607948</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>piccloud.arcs.org.au.maintainer.Falk_Huettmann</identifier>
+        <datestamp>2012-04-01T06:41:11Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Polar0x20Information0x20Commons</setSpec>
+        <setSpec>dataSource:piccloud.arcs.org.au</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Polar Information Commons">
+    <key>piccloud.arcs.org.au.maintainer.Falk_Huettmann</key>
+    <originatingSource>http://piccloud.arcs.org.au/oai/provider</originatingSource>
+    <party type="person">
+      <name type="primary">
+        <namePart>Falk Huettmann</namePart>
+      </name>
+      <location>
+        <address>
+          <physical>
+            <addressPart type="country">United States</addressPart>
+          </physical>
+        </address>
+      </location>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>mail:fxmzb123@gmail.com</value>
+          </electronic>
+          <physical>
+            <addressPart type="telephoneNumber">+1 907 474 7882</addressPart>
+          </physical>
+        </address>
+      </location>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.FhqeNgbzSQ1292972830087</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.SoLLYJbIFs1276168347831</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>piccloud.arcs.org.au.maintainer.Ian_Goodwin</identifier>
+        <datestamp>2012-04-01T06:41:07Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Polar0x20Information0x20Commons</setSpec>
+        <setSpec>dataSource:piccloud.arcs.org.au</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Polar Information Commons">
+    <key>piccloud.arcs.org.au.maintainer.Ian_Goodwin</key>
+    <originatingSource>http://piccloud.arcs.org.au/oai/provider</originatingSource>
+    <party type="person">
+      <name type="primary">
+        <namePart>Ian Goodwin</namePart>
+      </name>
+      <location>
+        <address>
+          <physical>
+            <addressPart type="country">Australia</addressPart>
+          </physical>
+        </address>
+      </location>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>mail:fxmzb123@gmail.com</value>
+          </electronic>
+          <physical>
+            <addressPart type="telephoneNumber">+61 2 4921 8870</addressPart>
+          </physical>
+        </address>
+      </location>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.VMPMZtrYcU1275630822771</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>piccloud.arcs.org.au.maintainer.Ulf_Jonsell</identifier>
+        <datestamp>2012-04-01T06:41:03Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Polar0x20Information0x20Commons</setSpec>
+        <setSpec>dataSource:piccloud.arcs.org.au</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Polar Information Commons">
+    <key>piccloud.arcs.org.au.maintainer.Ulf_Jonsell</key>
+    <originatingSource>http://piccloud.arcs.org.au/oai/provider</originatingSource>
+    <party type="person">
+      <name type="primary">
+        <namePart>Ulf Jonsell</namePart>
+      </name>
+      <location>
+        <address>
+          <physical>
+            <addressPart type="country">Sweden</addressPart>
+          </physical>
+        </address>
+      </location>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>mail:fxmzb123@gmail.com</value>
+          </electronic>
+          <physical>
+            <addressPart type="telephoneNumber">0046702882773</addressPart>
+          </physical>
+        </address>
+      </location>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.NGcFvFErtd1298321104526</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>piccloud.arcs.org.au.maintainer.Knowles_Kerry</identifier>
+        <datestamp>2012-04-01T06:40:50Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Polar0x20Information0x20Commons</setSpec>
+        <setSpec>dataSource:piccloud.arcs.org.au</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Polar Information Commons">
+    <key>piccloud.arcs.org.au.maintainer.Knowles_Kerry</key>
+    <originatingSource>http://piccloud.arcs.org.au/oai/provider</originatingSource>
+    <party type="person">
+      <name type="primary">
+        <namePart>Knowles Kerry</namePart>
+      </name>
+      <location>
+        <address>
+          <physical>
+            <addressPart type="country">Australia</addressPart>
+          </physical>
+        </address>
+      </location>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>mail:fxmzb123@gmail.com</value>
+          </electronic>
+          <physical>
+            <addressPart type="telephoneNumber">+61 3 6260 4216</addressPart>
+          </physical>
+        </address>
+      </location>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.yzxsFQAEHi1275622007568</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>piccloud.arcs.org.au.maintainer.Sharon_Robinson</identifier>
+        <datestamp>2012-04-01T06:40:45Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Polar0x20Information0x20Commons</setSpec>
+        <setSpec>dataSource:piccloud.arcs.org.au</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Polar Information Commons">
+    <key>piccloud.arcs.org.au.maintainer.Sharon_Robinson</key>
+    <originatingSource>http://piccloud.arcs.org.au/oai/provider</originatingSource>
+    <party type="person">
+      <name type="primary">
+        <namePart>Sharon Robinson</namePart>
+      </name>
+      <location>
+        <address>
+          <physical>
+            <addressPart type="country">Australia</addressPart>
+          </physical>
+        </address>
+      </location>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>mail:fxmzb123@gmail.com</value>
+          </electronic>
+          <physical>
+            <addressPart type="telephoneNumber">+61 2 4221 5753</addressPart>
+          </physical>
+        </address>
+      </location>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.GmlVNcJrWD1275676237036</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>piccloud.arcs.org.au.maintainer.Yusuke_Ebihara</identifier>
+        <datestamp>2012-04-01T06:40:41Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Polar0x20Information0x20Commons</setSpec>
+        <setSpec>dataSource:piccloud.arcs.org.au</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Polar Information Commons">
+    <key>piccloud.arcs.org.au.maintainer.Yusuke_Ebihara</key>
+    <originatingSource>http://piccloud.arcs.org.au/oai/provider</originatingSource>
+    <party type="person">
+      <name type="primary">
+        <namePart>Yusuke Ebihara</namePart>
+      </name>
+      <location>
+        <address>
+          <physical>
+            <addressPart type="country">Japan</addressPart>
+          </physical>
+        </address>
+      </location>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>mail:fxmzb123@gmail.com</value>
+          </electronic>
+          <physical>
+            <addressPart type="telephoneNumber">+81 42 512 0608</addressPart>
+          </physical>
+        </address>
+      </location>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.hEehoxwQHa1299650489749</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>piccloud.arcs.org.au.maintainer.Hideyasu_Kojima</identifier>
+        <datestamp>2012-04-01T06:40:37Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Polar0x20Information0x20Commons</setSpec>
+        <setSpec>dataSource:piccloud.arcs.org.au</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Polar Information Commons">
+    <key>piccloud.arcs.org.au.maintainer.Hideyasu_Kojima</key>
+    <originatingSource>http://piccloud.arcs.org.au/oai/provider</originatingSource>
+    <party type="person">
+      <name type="primary">
+        <namePart>Hideyasu Kojima</namePart>
+      </name>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>mail:kojima@nipr.ac.jp</value>
+          </electronic>
+        </address>
+      </location>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.gAbkAparhC1324880945585</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>piccloud.arcs.org.au.maintainer.Toshifumi_Mukai</identifier>
+        <datestamp>2012-04-01T06:40:23Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Polar0x20Information0x20Commons</setSpec>
+        <setSpec>dataSource:piccloud.arcs.org.au</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Polar Information Commons">
+    <key>piccloud.arcs.org.au.maintainer.Toshifumi_Mukai</key>
+    <originatingSource>http://piccloud.arcs.org.au/oai/provider</originatingSource>
+    <party type="person">
+      <name type="primary">
+        <namePart>Toshifumi Mukai</namePart>
+      </name>
+      <location>
+        <address>
+          <physical>
+            <addressPart type="country">Japan</addressPart>
+          </physical>
+        </address>
+      </location>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>mail:fxmzb123@gmail.com</value>
+          </electronic>
+          <physical>
+            <addressPart type="telephoneNumber">+81 42 759 8351</addressPart>
+          </physical>
+        </address>
+      </location>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.zDvxrpqLHu1296802676311</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>piccloud.arcs.org.au.maintainer.Jeff_Ayton</identifier>
+        <datestamp>2012-04-01T06:39:57Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Polar0x20Information0x20Commons</setSpec>
+        <setSpec>dataSource:piccloud.arcs.org.au</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Polar Information Commons">
+    <key>piccloud.arcs.org.au.maintainer.Jeff_Ayton</key>
+    <originatingSource>http://piccloud.arcs.org.au/oai/provider</originatingSource>
+    <party type="person">
+      <name type="primary">
+        <namePart>Jeff Ayton</namePart>
+      </name>
+      <location>
+        <address>
+          <physical>
+            <addressPart type="country">Australia</addressPart>
+          </physical>
+        </address>
+      </location>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>mail:fxmzb123@gmail.com</value>
+          </electronic>
+          <physical>
+            <addressPart type="telephoneNumber">+61 3 6232 3300</addressPart>
+          </physical>
+        </address>
+      </location>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.hInGtfEman1275675141500</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>piccloud.arcs.org.au.maintainer.Hideki_Miura</identifier>
+        <datestamp>2012-04-01T06:39:44Z</datestamp>
+        <setSpec>class:party</setSpec>
+        <setSpec>group:Polar0x20Information0x20Commons</setSpec>
+        <setSpec>dataSource:piccloud.arcs.org.au</setSpec>
+      </header>
+      <metadata>
+        <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" 
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                         xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="Polar Information Commons">
+    <key>piccloud.arcs.org.au.maintainer.Hideki_Miura</key>
+    <originatingSource>http://piccloud.arcs.org.au/oai/provider</originatingSource>
+    <party type="person">
+      <name type="primary">
+        <namePart>Hideki Miura</namePart>
+      </name>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>mail:miura@nipr.ac.jp</value>
+          </electronic>
+        </address>
+      </location>
+      <relatedObject>
+        <key>piccloud.arcs.org.au.data.GaVPqXiPrT1328078715359</key>
+        <relation type="isOwnerOf">
+        </relation>
+      </relatedObject>
+    </party>
+  </registryObject>
+        </registryObjects>
+      </metadata>
+    </record>
+    
+  </ListRecords>
+</OAI-PMH>

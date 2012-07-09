@@ -1,0 +1,10 @@
+/home/devel/acdata/shared/log/*.log {
+    rotate 520
+    weekly
+    copytruncate
+    missingok
+    notifempty
+    olddir /home/devel/acdata/shared/log_archive
+    compress
+    dateext
+}

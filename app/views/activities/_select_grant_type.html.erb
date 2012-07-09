@@ -1,0 +1,38 @@
+<div id="activity_dialog" class="jqmWindow lightbox">
+
+  <img src='/images/ICON_VECTOR_300_DEL_000000.png' border=0 class='icon jqmClose' id="close_activity_dialog" alt='reject'/>
+
+  <h2>
+    <% if @project.activity %>
+      Edit Project Grant
+    <% else %>
+      Assign a Grant to this Project
+    <% end %>
+  </h2>
+
+<div class="container">
+  <div id="modal_flash">
+    <% if flash[:alert] %>
+        <p class="alert"><%= flash[:alert] %></p>
+    <% end %>
+  </div>
+
+  <h3> Is your grant funded by the ARC or NHMRC? </h3>
+
+  <div class="instructions">
+    If your project has been funded by either the Australian Research Council (ARC) or the National Health and Medical
+    Research Centre (NHMRC), these bodies have already made information regarding your project available. Please use the
+    below menu to select your project.
+
+  </div>
+
+  <div id="activity_choices" class="field actions">
+    <%= link_to '<span>Yes</span>'.html_safe, select_rda_grant_project_activities_path(@project), {:remote => true, :class => 'button green'} %>
+    <% if @project.activity %>
+      <%= link_to '<span>No</span>'.html_safe, edit_project_activity_path(@project, @project.activity), {:remote => true, :class => 'button red'} %>
+    <% else %>
+      <%= link_to '<span>No</span>'.html_safe, new_project_activity_path(@project), {:remote => true, :class => 'button red'} %>
+    <% end %>
+  </div>
+  </div>
+</div>

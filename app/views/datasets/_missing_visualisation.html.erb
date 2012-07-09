@@ -1,0 +1,11 @@
+<div id="visualisation_placeholder">
+  Visualisation requires a file of type <%= visualisation_file_options %>.
+
+  <% if can? :manage, @dataset %>
+  <div>
+    <%= link_to '<span>Upload Visualisation File</span>'.html_safe, get_upload_dataset_path(@dataset, :file_type => visualisation_file_options), :remote => true, :id => "", :class=>"button green add" %>
+  </div>
+
+  <% end %>
+</div>
+

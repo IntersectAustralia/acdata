@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% title = (yield :title).to_s %>
+  <title>ACData <%= "- #{title}" unless title.empty? %></title>
+  <%= stylesheet_link_tag :all, :media => "all" %>
+  <%= stylesheet_link_tag 'custom-theme/jquery-ui-1.8.16.custom' %>
+
+  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag 'jqModal.js' %>
+  <%= javascript_include_tag 'jquery-ui.min' %>
+  <%= javascript_include_tag 'nested_form.js' %>
+  <%= javascript_include_tag 'jquery.placeholder.js' %>
+  <%= javascript_include_tag 'jquery.easing.1.3.js' %>
+  <%= javascript_include_tag 'jquery.mousewheel.min.js' %>
+  <%= javascript_include_tag 'JSVfunctions.js' %>
+  <%= javascript_include_tag 'bootstrap-dropdown.js' %>
+  <%= csrf_meta_tag %>
+</head>
+
+<body>
+
+<%= render 'layouts/header' %>
+<%= render 'shared/left_nav' %>
+
+<div id="container_right_content" class="<%=params[:controller] == "datasets_controller" ? 'datasets' : ' ' %>">
+  <%= render 'layouts/messages' %>
+  <%= yield %>
+</div>
+
+<div id="wizard"></div>
+
+<div id="footer">
+  <a target="_about" href="http://www.intersect.org.au/attribution-policy" class="intersect_logo_link"></a>
+  Developed by Intersect Australia Ltd
+  <%= debug(params) if Rails.env.development? %>
+</div>
+
+<script>
+  $(document).ready(function () {
+    setTimeout(function () {
+      // Appear/Disappear
+      $('.expandable > li > a.expanded').parent().find('> ul').show();
+      $('.expandable a[id="arrow"]').click(function () {
+        $(this).toggleClass('expanded').toggleClass('collapsed').parent().find('> ul').toggle();
+
+      });
+    }, 250);
+
+    $('[id^=show_][id$=_wizard]').click(function () {
+      $(this).addClass('ac_loading');
+    });
+
+    $('.button[data-remote=true]').live('click', function () {
+      $(this).addClass('ac_loading');
+    });
+    
+    $('input[type=submit]', '#wizard').live('click', function() {
+        $(this).addClass('ac_loading');
+    });
+
+    $('#show_experiment_wizard').click(function () {
+      $('#add_dropdown').addClass('ac_loading');
+    });
+
+    $('#show_sample_wizard').click(function () {
+      $('#add_dropdown').addClass('ac_loading');
+    });
+
+    $('#show_dataset_wizard').click(function () {
+      $('#add_dropdown').addClass('ac_loading');
+    });
+
+    $('#show_new_ands_publishable_wizard').click(function () {
+      $('#share_dropdown').addClass('ac_loading');
+    });
+
+    $('#add_attachments_button').click(function () {
+      $('#add_dropdown').addClass('ac_loading');
+    });
+
+    $('#show_eln_wizard').click(function () {
+      $('#share_dropdown').addClass('ac_loading');
+    });
+
+    $('#show_memre_wizard').click(function () {
+      $('#share_dropdown').addClass('ac_loading');
+    });
+
+    $('input[type=submit]', '#wizard').live('click', function () {
+      $(this).addClass('ac_loading');
+    });
+
+    $('form', '#wizard').live('submit', function () {
+      $('.basic_field').attr('disabled', 'disabled');
+      $('.remove_button').css('visibility', 'hidden');
+    });
+
+    $('[id$=wizard]').on("ajaxError", function (event, jqXHR, settings, thrownError) {
+      // Remotipart utilises ajax abort, so ignore it here
+      if (thrownError == "abort") {
+        return true;
+      }
+      event.stopPropagation();
+      if (jqXHR.status == 401) {
+        var session_message = "<%= I18n.t :session_timeout, :scope => [:views, :shared] %>";
+        alert(session_message);
+        window.location = '<%= root_path %>';
+      }
+      else {
+        alert("Wizard failed: " + thrownError);
+        $('[id$=_dialog]').jqmHide();
+      }
+      $('[id$=_wizard]').removeClass('ac_loading');
+    });
+
+    // Close dialog box when Escape key pressed.
+    $(document).keydown(function (e) {
+      if (e.which == 27) {  // escape key
+        if ($('.jqmDelete').size() > 0) {
+          $('.jqmDelete').click();
+          return false;
+
+        } else {
+          $('[id$=_dialog]').jqmHide();
+        }
+      }
+
+    });
+
+  });
+</script>
+
+</body>
+
+</html>

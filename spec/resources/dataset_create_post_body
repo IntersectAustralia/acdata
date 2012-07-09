@@ -1,0 +1,22 @@
+--IntersectACDataDatasetAPI
+Content-Disposition: form-data; name="dataset"
+Content-Type: application/json; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+{"name":"API dataset creation test 1","sample_id":16,"instrument_id":2,"files":[{"file_1":"test2.txt"},{"file_2":"test.txt"}],"metadata":{"key1":"value1","key2":"value2"}}
+--IntersectACDataDatasetAPI
+Content-Disposition: form-data; name="file_1"; filename="test2.txt"
+Content-Type: application/octet-stream; charset=ISO-8859-1
+Content-Transfer-Encoding: binary
+
+test file 2
+
+--IntersectACDataDatasetAPI
+Content-Disposition: form-data; name="file_2"; filename="test.txt"
+Content-Type: application/octet-stream; charset=ISO-8859-1
+Content-Transfer-Encoding: binary
+
+Test file
+
+
+--IntersectACDataDatasetAPI--

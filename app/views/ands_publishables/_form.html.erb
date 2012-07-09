@@ -1,0 +1,162 @@
+<div id="<%= action %>_ands_publishable_dialog" class="jqmWindow lightbox">
+
+  <% if action.eql?("new") %>
+    <img src='/images/ICON_VECTOR_300_DEL_000000.png' border=0 class='icon jqmClose' id="close_<%= action %>_ands_publishable_dialog" alt='reject'/>
+  <% elsif @ands_publishable.to_be_submitted? %>
+    <%= link_to "<img src='/images/ICON_VECTOR_300_DEL_000000.png' border=0 id='close_edit_ands_publishable_dialog' class='icon jqmDelete' alt='reject'/>".html_safe, project_ands_publishable_path(@project, @ands_publishable, :new => true), :method => "delete" %>
+  <% else %>
+    <img src='/images/ICON_VECTOR_300_DEL_000000.png' border=0 class='icon jqmClose' id="close_edit_ands_publishable_dialog" alt='reject'/>
+
+  <% end %>
+
+  <div id="container">
+
+    <div id="title">
+      <% if action.eql?("new") or @ands_publishable.to_be_submitted? %>
+        <h2>1. Publishable Project Details </h2>
+      <% else %>
+        <h2>1. Edit Publishable Project Details</h2>
+      <% end %>
+    </div>
+
+    <%= nested_form_for([@project, @ands_publishable], :remote => true) do |f| %>
+
+    <div id="<%= action %>_ands_publishable_error_explanation">
+      <%= render "ands_publishables/error_messages", :target => @ands_publishable %>
+    </div>
+
+      <div class="field line">
+        <%= f.label :moderator_id, 'Moderator:<span class="required">*</span>'.html_safe %>
+        <%= f.select(:moderator_id, moderators, {:include_blank => false}) %>
+      </div>
+
+      <div class="field line">
+        <%= f.label :collection_name, 'Collection Name:<span class="required">*</span>'.html_safe %>
+        <div class="lastUnit">
+          <%= f.text_field :collection_name, :class => "text" %>
+        </div>
+      </div>
+
+      <div class="field line">
+        <%= f.label :collection_description, 'Description:<span class="required">*</span>'.html_safe %>
+        <div class="lastUnit">
+          <%= f.text_area :collection_description, :rows => 3, :class => "text" %>
+        </div>
+      </div>
+
+      <div class="field line">
+        <%= f.label :address, 'Address:<span class="required">*</span>'.html_safe %>
+        <div class="lastUnit">
+          <%= f.text_area :address, :rows => 3, :class => "text" %>
+        </div>
+      </div>
+
+      <div class="field line">
+        <%= f.label :access_rights, 'Access Rights:<span class="required">*</span>'.html_safe %>
+
+        <%= select_tag :templates, options_for_select(APP_CONFIG['access_rights_templates'].keys) %>
+
+        <div class="lastUnit">
+          <%= f.text_area :access_rights, :rows => 3, :class => "text" %>
+        </div>
+      </div>
+
+      <div class="field line">
+        <%= f.label :has_temporal_coverage, 'Temporal Coverage:' %>
+        <%= f.check_box :has_temporal_coverage %>
+      </div>
+
+      <div id="coverage_dates" class="field line">
+        <div>
+          <%= f.label :coverage_start_date, 'From:' %>
+          <%= f.text_field :coverage_start_date, :datepicker => true %>
+        </div>
+        <div>
+          <%= f.label :coverage_end_date, 'To:' %>
+          <%= f.text_field :coverage_end_date, :datepicker => true %>
+        </div>
+      </div>
+
+      <div class="field actions">
+        <%= f.submit :value => "Next", :class => "blue" %>
+      </div>
+
+    <% end %>
+
+  </div>
+</div>
+
+<script type="text/javascript">
+
+
+  $(document).ready(function () {
+    <% if action.eql?("new")%>
+
+    updateAccessRightTemplate();
+    <% end %>
+    toggleDatePicker($('input[datepicker=true]'));
+    toggleCoverageDateFields();
+  });
+
+  $('#ands_publishable_has_temporal_coverage').change(function () {
+    toggleCoverageDateFields();
+  });
+
+
+  $('#templates').change(function () {
+    updateAccessRightTemplate();
+  });
+
+
+  function toggleCoverageDateFields() {
+    if ($("#ands_publishable_has_temporal_coverage:checked").length > 0) {
+      $('.hasDatepicker').datepicker("enable");
+      $('#coverage_dates').show();
+    }
+    else {
+
+      $('.hasDatepicker').datepicker("disable");
+      $('#coverage_dates').hide();
+
+    }
+  }
+
+  function updateAccessRightTemplate() {
+    var access_rights_text_area = $('#ands_publishable_access_rights');
+    $("#templates option:selected").each(function () {
+      var template_key = $(this).text();
+
+      var templates = <%= get_templates_json %>;
+
+      access_rights_text_area.val(templates[template_key]);
+
+
+    });
+  }
+
+  function toggleDatePicker(field) {
+    field.datepicker({
+      autosize:true,
+      changeMonth:true,
+      changeYear:true,
+      dateFormat:'dd/mm/yy',
+      showOn:'both'
+
+    });
+
+  }
+  <% if action.eql?("new") or @ands_publishable.to_be_submitted? %>
+
+  $('.jqmDelete').click(function () {
+    var proceed = confirm("Are you sure you want to cancel the creation of this publishable?");
+    if (proceed) {
+      $('#container').html("<span class='loading'/>");
+      $(this).hide();
+
+    }
+    else {
+      return false;
+    }
+  });
+  <% end %>
+</script>

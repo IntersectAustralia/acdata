@@ -1,0 +1,43 @@
+<% title 'Admin Tasks' %>
+
+<div id="container_usersignup">
+
+  <h3>User Management</h3>
+
+  <% if can?(:read, User) %>
+    <%= link_to "<span>List of approved users</span>".html_safe, users_path, :class => "button" %>
+  <% end %>
+
+  <% if can?(:access_requests, User) %>
+    <%= link_to "<span>View Access Requests</span>".html_safe, access_requests_users_path, :class => "button" %>
+  <% end %>
+
+  <div class="field line">
+    <h3>Slide Scanning</h3>
+
+    <% if can?(:edit_slide_guidelines, Settings) %>
+      <%= link_to "<span>Edit Slide Scanning Guidelines</span>".html_safe, edit_slide_guidelines_settings_path, :class => "button" %>
+    <% end %>
+
+    <% if can?(:edit_fluorescent_labels, Settings) %>
+      <%= link_to "<span>Edit Fluorescent Labels</span>".html_safe, edit_fluorescent_labels_settings_path, :class => "button" %>
+    <% end %>
+
+    <% if can?(:edit_slide_scanning_email, Settings) %>
+      <%= link_to "<span>Edit Slide Scanning Email</span>".html_safe, edit_slide_scanning_email_settings_path, :class => "button" %>
+    <% end %>
+  </div>
+
+  <div class="field line">
+    <h3>Others</h3>
+
+    <% if can?(:manage, Instrument) %>
+      <%= link_to "<span>Instrument Management</span>".html_safe, instruments_path, :class => "button" %>
+    <% end %>
+
+    <% if can?(:edit_handles, Settings) %>
+      <%= link_to "<span>Edit Handle Range</span>".html_safe, edit_handles_settings_path, :class => "button" %>
+    <% end %>
+
+  </div>
+</div>

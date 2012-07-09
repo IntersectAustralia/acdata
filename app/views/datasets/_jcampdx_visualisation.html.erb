@@ -1,0 +1,30 @@
+<div id="jspecview_holder">
+
+  <div id="jspecview">
+  </div>
+    <script language="javascript" type="text/javascript" >
+      function addJspecView(selector) {
+        var token;
+        $.ajax({
+          url: '<%= users_get_authentication_token_url(:format => :json) %>',
+          dataType: 'json',
+          data: {},
+          async: false,
+          cache: false,
+          success: function(json) {
+            token = json.toString();
+          }
+        });
+        jsvls = "load <%= show_display_attachment_dataset_path(@dataset) %>?auth_token="+token+"; interface single; reverseplot true; enablezoom true; menuon true; backgroundcolor #EEEEEE;";
+
+        insertJSVObject("/applets/jspecview.jar", "JSVApplet", "700", "300", jsvls, selector);
+      }
+
+      $('#tabs-vis').on('click', function() {
+        addJspecView('#jspecview');
+      });
+
+      addJspecView('#jspecview');
+    </script>
+  
+</div>

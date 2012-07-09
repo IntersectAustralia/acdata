@@ -1,0 +1,41 @@
+<% title 'RDA Publishable Requests' %>
+<div id="container_userrequests">
+  <% if @ands_publishables.present? %>
+      <h3>RDA Publishable Requests</h3>
+
+      <table class="data_table margin_top_small" id="access_requests">
+        <tr>
+          <th>Project</th>
+          <th>Owner</th>
+          <th>Owner's email</th>
+          <th>Collection name</th>
+          <th>Research Group</th>
+          <th>Actions</th>
+        </tr>
+
+        <% @ands_publishables.each do |ands_publishable| %>
+            <tr class="<%= cycle('stripe', '') %>">
+              <td><%= ands_publishable.project.name %></td>
+              <td><%= ands_publishable.project.user.full_name %></td>
+              <td><%= ands_publishable.project.user.email %></td>
+              <td><%= ands_publishable.collection_name %></td>
+              <td><%= ands_publishable.research_group %></td>
+              <td>
+                <%= link_to "<span>Preview</span>".html_safe, preview_ands_publishable_path(ands_publishable), :remote => true, :class => "button" %>
+                <%= link_to "Approve", approve_ands_publishable_path(ands_publishable), :class => "blue" %>
+                <%= link_to "<span>Reject</span>".html_safe, reject_reason_ands_publishable_path(ands_publishable), :remote => true, :class => "red" %>
+              </td>
+
+            </tr>
+        <% end %>
+      </table>
+  <% else %>
+      No RDA Publishables awaiting your approval.
+  <% end %>
+  
+  <div id="container_usersignup_footer">
+    <%= link_to '<span>Back</span>'.html_safe, projects_path, :class => "button" %>
+  </div>
+</div>
+
+<div id='wizard'></div>

@@ -1,0 +1,5 @@
+$('#document_container').html('<%= escape_javascript(render "shared/related_document_upload", :klass => @project) %>');
+<% if flash[:notice] %>
+   $('#modal_flash').html('<p class="info_notice"><%= flash[:notice] %></p>');
+<% end %>
+$('#related_document_container').html('');

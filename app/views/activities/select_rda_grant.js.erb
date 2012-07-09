@@ -1,0 +1,17 @@
+$('#activity_dialog').jqmHide();
+$('#wizard').html('<%= escape_javascript(render :partial => 'select_rda_grant') %>');
+var open = function(hash) {
+    $('#jspecview').empty();
+    hash.w.show();
+};
+var close = function(hash) {
+    hash.w.hide();
+    // Check if this is defined (dataset page views only)
+    if (typeof addJspecView == 'function') {
+      addJspecView('#jspecview');
+    }
+    hash.o.remove();
+};
+$('#activity_dialog').jqm({ modal:true, onShow: open, onHide: close });
+$('#activity_dialog').jqmShow();
+$('[id^=show_][id$=_wizard]').removeClass('ac_loading');

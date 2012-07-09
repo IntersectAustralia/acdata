@@ -1,0 +1,17 @@
+##TITLE= Parameter file, TOPSPIN		Version 2.1
+##JCAMPDX= 5.0
+##DATATYPE= Parameter Values
+##NPOINTS= 2	$$ modification sequence number
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= iconnmr
+$$ 2011-07-06 11:22:01.359 +1000  iconnmr@GAUSS
+$$ D:/data/dmg/nmr/110706-dmg/1/pdata/1/outd
+$$ process C:\Bruker\TOPSPIN2.1pl5\prog\mod\edparproc.exe
+##$CURPLOT= <HP LaserJet 2100 PCL6 - Gauss>
+##$CURPRIN= <$HP Color LaserJet 2605dn_2605dtn PCL 6>
+##$DFORMAT= <normdp>
+##$LAYOUT= <+/1D_H.xwp>
+##$LFORMAT= <normlp>
+##$PFORMAT= <normpl>
+##$SURQMSG= 1
+##END=

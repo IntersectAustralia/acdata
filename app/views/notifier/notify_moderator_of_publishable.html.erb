@@ -1,0 +1,14 @@
+<p>An RDA publishable has been made with the following details:</p>
+
+<p>
+  Project: <%= @project.name %><br/>
+  Project owner : <%= @project.user.full_name %><br/>
+  Project owner's email : <%= @project.user.email %><br/>
+  Collection name: <%= @ands_publishable.collection_name %><br/>
+  Collection description: <br/>
+  <%= @ands_publishable.collection_description %>
+  <br/>
+
+</p>
+
+<p>You can view unapproved RDA publishables here: <%= ands_publishable_requests_users_url %></p>

@@ -1,0 +1,20 @@
+<div id="container_userlogin">
+	
+		<h3>Please sign in using your UNSW zID</h3>
+		
+		<div id="container_userlogin_forms">
+		
+			<div class="row"><%= f.label :login, "zID:" %><%= f.text_field :login %></div>
+			
+			<div class="row"><%= f.label :password, "zPass:" %><%= f.password_field :password %></div>
+			
+			<button id="login_button" class="blue right" value="Log in" type="submit">Login</button><br>
+		
+		</div>
+	
+		<div id="container_userlogin_footer">
+			<%= link_to 'Register', new_user_registration_path %> to use ACData. If you cannot log in, please contact the <a href="mailto:acdata@unsw.edu.au">ACData Administrator</a>.
+		</div>
+		
+	</div>
+

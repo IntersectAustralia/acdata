@@ -1,0 +1,15 @@
+<% if @saved %>
+  $('#show_memre_wizard').attr('href', '<%= get_memre_export_path(@dataset) %>');
+  $('#export_memre_dialog').jqmHide();
+<% else %>
+  $("#error_explanation").html("<%= escape_javascript(render 'shared/modal_errors', :target => @memre_export) %>");
+  $("#error_explanation").addClass('alert');
+  <% if @memre_export.errors.has_key?(:material_name) %>
+    $('#memre_1').css('display', 'block');
+    $('#memre_2').css('display', 'none');
+  <% end %>
+  $('input[type=submit]', '#wizard').removeClass('ac_loading');
+  $('#share_dropdown').removeClass('ac_loading');
+  $('input[type=submit]', '#wizard').removeAttr('disabled');
+  $('.remove_button', '#data_source_list').removeAttr('style');
+<% end %>

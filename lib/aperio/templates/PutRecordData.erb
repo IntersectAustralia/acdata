@@ -1,0 +1,1 @@
+<ns1:PutRecordData><Token><%= token %></Token><TableName>Project</TableName><Id><%= id %></Id><DataRow><% data.each do |key,value| %><<%= key %>><%= value %></<%= key %>><% end %></DataRow></ns1:PutRecordData>

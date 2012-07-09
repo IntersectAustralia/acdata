@@ -1,0 +1,18 @@
+$('#new_dataset_dialog').jqmHide();
+$('#wizard').html('<%= escape_javascript(render :partial => 'upload_form') %>');
+var open = function(hash) {
+    $('#jspecview').empty();
+    hash.w.show();
+};
+var close = function(hash) {
+    hash.w.hide();
+    if (typeof addJspecView == 'function') {
+      addJspecView('#jspecview');
+    }
+    hash.o.remove();
+};
+$('#new_dataset_dialog').jqm({ modal:true, onShow: open, onHide: close, closeClass:false });
+$('#new_dataset_dialog').jqmShow();
+<% if @from_show_page %>
+$('.button').removeClass('ac_loading');
+<% end %>

@@ -1,0 +1,11 @@
+##TITLE= Parameter file, TOPSPIN		Version 2.1
+##JCAMPDX= 5.0
+##DATATYPE= Parameter Values
+##NPOINTS= 3	$$ modification sequence number
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= iconnmr
+$$ 2011-07-06 14:38:36.511 +1000  iconnmr@GAUSS
+$$ D:/data/dmg/nmr/110706-dmg/1/pdata/1/assocs
+$$ process C:\Bruker\TOPSPIN2.1pl5\prog\mod\dataserver.exe
+##$MULTDISP= <L:/Tesla/data/dmg/nmr/110602-dmg/5/pdata/1|L:/Tesla/data/dmg/nmr/110602-dmg/1/pdata/1>
+##END=

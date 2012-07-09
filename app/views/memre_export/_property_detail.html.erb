@@ -1,0 +1,47 @@
+<div class="property_listing">
+  <span class="remove_button right"></span>
+  <input type="hidden" value="<%= property_details.type_of_property%>" name="memre_export[property_details_attributes][<%= property_details.id %>][type_of_property]">
+  <input type="hidden" value="<%= property_details.property_units%>" name="memre_export[property_details_attributes][<%= property_details.id %>][property_units]">
+  <input type="hidden" value="<%= property_details.description%>" name="memre_export[property_details_attributes][<%= property_details.id %>][description]">
+  <input type="hidden" value="<%= property_details.qualifier_1%>" name="memre_export[property_details_attributes][<%= property_details.id %>][qualifier_1]">
+  <input type="hidden" value="<%= property_details.qualifier_2%>" name="memre_export[property_details_attributes][<%= property_details.id %>][qualifier_2]">
+  <input type="hidden" value="<%= property_details.qualifier_3%>" name="memre_export[property_details_attributes][<%= property_details.id %>][qualifier_3]">
+  <input type="hidden" value="<%= property_details.identifier%>" name="memre_export[property_details_attributes][<%= property_details.id %>][identifier]">
+  <input type="hidden" value="<%= property_details.notes%>" name="memre_export[property_details_attributes][<%= property_details.id %>][notes]">
+  <input type="hidden" value="<%= property_details.name%>" name="memre_export[property_details_attributes][<%= property_details.id %>][name]">
+  <input type="hidden" value="<%= property_details.measurement_technique%>" name="memre_export[property_details_attributes][<%= property_details.id %>][measurement_technique]">
+  <input type="hidden" value="<%= property_details.info_type%>" name="memre_export[property_details_attributes][<%= property_details.id %>][info_type]">
+  <label for="name">Property Type:</label>
+  <%= property_details.name%>
+  <br>
+  <label for="measurement_technique">Technique:</label>
+  <%= property_details.measurement_technique%>
+  <br>
+  <label class="unit" for="type_of_property">Type:</label>
+  <%= property_details.type_of_property%>
+  <br>
+  <label class="unit" for="property_units">Units:</label>
+  <%= property_details.property_units%>
+  <br>
+  <label class="unit" for="description">Description:</label>
+  <%= property_details.description%>
+  <br>
+  <label class="unit" for="qualifier_1">Qualifier 1:</label>
+  <%= property_details.qualifier_1%>
+  <br>
+  <label class="unit" for="qualifier_2">Qualifier 2:</label>
+  <%= property_details.qualifier_2%>
+  <br>
+  <label class="unit" for="qualifier_3">Qualifier 3:</label>
+  <%= property_details.qualifier_3%>
+  <br>
+  <label for="identifier">Identifier:</label>
+  <%= property_details.identifier%>
+  <br>
+  <label for="notes">Citation:</label>
+  <%= property_details.notes%>
+  <br>
+  <label for="info_type">Data Source Type:</label>
+  <%= property_details.info_type%>
+  <br>
+</div>

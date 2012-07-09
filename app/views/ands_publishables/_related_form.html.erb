@@ -1,0 +1,292 @@
+<div id="edit_ands_publishable_dialog" class="jqmWindow lightbox">
+
+  <% if @ands_publishable.to_be_submitted? %>
+    <%= link_to "<img src='/images/ICON_VECTOR_300_DEL_000000.png' border=0 id='close_edit_ands_publishable_dialog' class='icon jqmDelete' alt='reject'/>".html_safe, project_ands_publishable_path(@project, @ands_publishable, :new => true), :method => "delete" %>
+  <% else %>
+    <img src='/images/ICON_VECTOR_300_DEL_000000.png' border=0 class='icon jqmClose' id="close_edit_ands_publishable_dialog" alt='reject'/>
+  <% end %>
+
+  <div id="container">
+
+    <h2>
+      2. Specify Related Information
+    </h2>
+
+    <%= form_for(@ands_publishable, :url => related_info_specified_project_ands_publishable_path(@project, @ands_publishable), :html => {:method => :put, :remote => true}) do |f| %>
+
+    <div id="modal_flash">
+      <% if flash[:notice] %>
+        <p class="info_notice"><%= flash[:notice] %></p>
+      <% end %>
+    </div>
+
+    <div id="edit_ands_publishable_error_explanation">
+      <%= render "shared/modal_errors", :target => @ands_publishable %>
+    </div>
+
+      <div id="for_code_picker">
+
+        <div class="field">
+          <h3 for="for_code">Field of Research (FOR) Tags:</h3>
+
+          <div class="instruction instructions"> Type FOR name such as Chemistry and you'll see the list of values
+            available. Fields of Research classification is used by
+            <a href="http://www.abs.gov.au/ausstats/abs@.nsf/0/4AE1B46AE2048A28CA25741800044242">ANZSRC</a> to
+            categorise research activities.
+          </div>
+          <%= text_field_tag 'for_code', nil, :title => 'Start typing a code', :class => "text basic_field enter_proof", :placeholder => "Search here for FOR tags to add", :maxlength => 255 %>
+        </div>
+
+        <div class="field">
+          <ul class="" id="for_code_list">
+            <% if @ands_publishable.for_codes.present? %>
+              <% @ands_publishable.for_codes.each do |code| %>
+                <li id="for_code_<%= code.id %>">
+                  <%= code.code %> - <%= code.name %>
+                  <input type="hidden" name="ands_publishable[for_code_ids][]" value="<%= code.id %>">
+                  <span name="remove_for_code" class="remove_button basic_field"></span>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+
+      <div id="subject_keyword_picker">
+
+        <div class="field">
+          <h3 for="ands_subject">Subject Tags:</h3>
+
+          <div class="instruction instructions">
+            What subject terms can be used to describe this dataset? (Press 'enter' after each term)
+          </div>
+          <%= text_field_tag 'ands_subject', nil, :title => 'Start typing a subject tag', :class => "text basic_field enter_proof", :placeholder => "Search here for subject tags to add", :maxlength => 255 %>
+        </div>
+        <div class="field">
+          <ul class="" id="ands_subject_list">
+            <% if @ands_publishable.ands_subjects.present? %>
+              <% @ands_publishable.ands_subjects.each do |subject| %>
+                <li id="ands_subject_<%= subject.id %>">
+                  <%= subject.keyword %>
+                  <input type="hidden" name="ands_publishable[ands_subject_ids][]" value="<%= subject.id %>">
+                  <span name="remove_ands_subject" class="remove_button basic_field"></span>
+
+                </li>
+              <% end %>
+            <% end %>
+
+          </ul>
+        </div>
+      </div>
+      <div class="field"></div>
+      <h3 for="related_info">Related Information:</h3>
+
+      <div class="instruction instructions"> Related information might be citation, or a reference to a publication,
+        journal or thesis
+        based on this research dataset. It can be described by a URI and should point to a webpage providing contextual
+        information about the object being identified.
+      </div>
+
+      <div id="related_info">
+        <div class="field"></div>
+        <div class="field">
+          <%= label_tag 'related_info_type', "Type:" %>
+          <%= select_tag 'related_info_type', options_for_select(APP_CONFIG['related_information_types'].invert), :include_blank => true %>
+        </div>
+        <div class="field">
+          <%= label_tag 'related_info_identifier', "Identifier:" %>
+          <%= text_field_tag 'related_info_identifier', nil, :class => "text basic_field enter_proof", :placeholder => "Identifier URI", :maxlength => 255 %>
+        </div>
+        <div class="field">
+          <%= label_tag 'related_info_title', "Description:" %>
+          <%= text_field_tag 'related_info_title', nil, :class => "text basic_field enter_proof", :placeholder => "Description", :maxlength => 255 %>
+          <%= link_to '<span>Add</span>'.html_safe, '', {:id => 'add_related_info', :class => 'button add'} %>
+        </div>
+      </div>
+
+      <div class="field line"></div>
+
+      <ul id="related_info_list">
+        <% if @ands_publishable.ands_related_infos.present? %>
+          <% @ands_publishable.ands_related_infos.each do |info| %>
+
+            <li class="instructions instruction" id="related_info_<%= info.id %>">
+              <input type="hidden" name="ands_publishable[related_info][<%= info.id %>][info_type]" value="<%= info.info_type %>">
+              <input type="hidden" name="ands_publishable[related_info][<%= info.id %>][identifier]" value="<%= info.identifier %>">
+              <input type="hidden" name="ands_publishable[related_info][<%= info.id %>][title]" value="<%= info.title %>">
+
+              (<%= info.info_type %>) <%= info.identifier %> <br>
+              <%= info.title %>
+              <span name="remove_related_info" class="remove_button right"></span>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+
+      <input type="hidden" name="ands_publishable[id]" value=<%= @ands_publishable.id %>>
+
+      <div class="field line">
+
+        <div class="field actions">
+          <%= f.submit "Back", :id => 'back_button', :class => 'gray left basic_field' %>
+          <%= f.submit "Next", :class => "blue basic_field" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  <% dialog_id = "edit_ands_publishable_dialog" %>
+  $("#for_code", "#<%= dialog_id %>").autocomplete({
+    source:'/ands_publishables/list_for_codes',
+    minLength:1,
+    delay:1000,
+    autoFocus:true,
+    open:function () {
+      $('.ui-menu').width(643)
+    },
+    select:function (event, ui) {
+      if (ui) {
+        var member_id = ui.item.id;
+        var selector = $("li#for_code_" + member_id);
+        if (selector.length == 0) {
+          var member_name = escapeHTML(ui.item.value);
+          $('ul#for_code_list').append('<li id="for_code_'
+                  + member_id
+                  + '">'
+                  + '<input type="hidden" name="ands_publishable[for_code_ids][]" value="'
+                  + member_id
+                  + '">'
+                  + member_name
+                  + '<span name="remove_for_code" class="remove_button basic_field"></span></li>');
+
+        }
+
+      }
+      $('#for_code', "#<%= dialog_id %>").val('');
+      return false;
+    }
+  });
+
+  $("#ands_subject", "#<%= dialog_id %>").autocomplete({
+    source:'/ands_publishables/list_subject_keywords',
+    minLength:1,
+    autoFocus:true,
+    delay:1000,
+    open:function () {
+      $('.ui-menu').width(643)
+    },
+    select:function (event, ui) {
+      if (ui) {
+        var member_id = escapeHTML(ui.item.id);
+        var li_id = member_id.replace(/\s/g, "_");
+        var selector = $("li#ands_subject_" + li_id);
+        if (selector.length == 0) {
+          var member_name = escapeHTML(ui.item.value);
+          $('ul#ands_subject_list').append('<li id="ands_subject_'
+                  + li_id
+                  + '">'
+                  + '<input type="hidden" name="ands_publishable[ands_subject_ids][]" value="'
+                  + member_id
+                  + '">'
+                  + member_name
+                  + '<span name="remove_ands_subject" class="remove_button basic_field"></span></li>');
+        }
+      }
+      $('#ands_subject', "#<%= dialog_id %>").val('');
+      return false;
+    }
+  });
+
+  function generateID() {
+    return new Date().getTime();
+  }
+
+  $('#add_related_info').click(function () {
+    var new_id = 'new_' + generateID();
+    var type_val = $("#related_info_type").val();
+    var identifier_val = escapeHTML($("#related_info_identifier").val());
+    var title_val = escapeHTML($("#related_info_title").val());
+    $(this).removeClass('ac_loading');
+    if (type_val && identifier_val && title_val) {
+
+      $('ul#related_info_list').append('<li class= "instructions instruction" id="related_info_'
+              + new_id
+              + '">'
+              + '<input type="hidden" name="ands_publishable[related_info]['
+              + new_id
+              + '][info_type]" value="'
+              + type_val
+              + '">'
+              + '<input type="hidden" name="ands_publishable[related_info]['
+              + new_id
+              + '][identifier]" value="'
+              + identifier_val
+              + '">'
+              + '<input type="hidden" name="ands_publishable[related_info]['
+              + new_id
+              + '][title]" value="'
+              + title_val
+              + '">'
+              + '('
+              + type_val
+              + ') '
+              + identifier_val
+              + '<br>'
+              + title_val
+              + '<span name="remove_related_info" class="remove_button right"></span></li>'
+      );
+      $("#related_info_type").val('');
+      $("#related_info_identifier").val('');
+      $("#related_info_title").val('');
+    } else {
+      alert("You must specify a type, identifier and description before adding.");
+    }
+
+    return false;
+  });
+
+  // http://blog.nickburwell.com/2011/02/escape-html-tags-in-javascript.html
+  // useful for autocomplete
+  function escapeHTML(string) {
+    return jQuery('<pre>').text(string).html();
+  }
+
+  $(".remove_button", "#<%= dialog_id %>").live('click', function () {
+    $(this).parent().remove();
+    return false;
+  });
+
+
+  $(function () {
+    $('.enter_proof', "#<%= dialog_id %>").keypress(function (e) {
+      // Stop "Enter" choosing arbitrary text from input text field
+      if (e.keyCode == 13) {
+        return false;
+      }
+    });
+
+  });
+  <% if @ands_publishable.to_be_submitted? %>
+
+  $('.jqmDelete').click(function () {
+    var proceed = confirm("Are you sure you want to cancel the creation of this publishable?");
+    if (proceed) {
+      $('#container').html("<span class='loading'/>");
+      $(this).hide();
+
+    }
+    else {
+      return false;
+    }
+  });
+  <% else %>
+
+  $('.jqmClose').click(function () {
+    return confirm("Are you sure you want to cancel the the republishing process?");
+  });
+
+  <% end %>
+</script>
+

@@ -1,0 +1,27 @@
+<div id="container_userinstruments">
+
+  <h3>Instruments</h3>
+
+  <%= link_to '<span>Add New Instrument</span>'.html_safe, new_instrument_path, :class => "button" %>
+  <table class="data_table margin_top_small" id="instruments">
+    <tr>
+      <th>Name</th>
+      <th>Key</th>
+      <th>Instrument Class</th>
+      <th>Instrument Status</th>
+      <th>Actions</th>
+    </tr>
+    <% @instruments.each do |instrument| %>
+      <tr class="<%= cycle('stripe', '') %>">
+        <td><%= instrument.name %></td>
+        <td><%= instrument.handle %></td>
+        <td><%= instrument.instrument_class %></td>
+        <td><%= available_string(instrument) %></td>
+        <td>
+          <%= link_to icon('view') + 'View', instrument_path(instrument), :id => "view_#{instrument.id}" %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+</div>

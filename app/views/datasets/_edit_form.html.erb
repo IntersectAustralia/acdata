@@ -1,0 +1,92 @@
+<div id="edit_dataset_dialog" class="jqmWindow lightbox">
+
+  <img src='/images/ICON_VECTOR_300_DEL_000000.png' border=0 class='icon jqmClose' id="close_dataset_dialog" alt='reject'/>
+
+  <div id="title">
+    <h2>Edit Dataset</h2>
+  </div>
+
+  <%= form_for(@dataset, :remote => true) do |f| %>
+
+      <div id="edit_dataset_error_explanation">
+        <%= render 'shared/modal_errors', :target => @dataset %>
+      </div>
+
+      <div class="field line">
+        <%= f.label :name, 'Name:' %>
+        <div class="lastUnit">
+          <%= f.text_field :name, :class => "text" %>
+        </div>
+      </div>
+
+      <div class="field line">
+      <%= label_tag :parent_project, 'Project:' %>
+      <%= select_tag :parent_project, options_from_collection_for_select(non_empty_projects(@projects + @collaborations), :id, :name, @sample.samplable_type.eql?('Project') ? @sample.samplable_id : @experiment.project.id) %>
+      </div>
+
+      <div class="field line">
+      <%= label_tag :parent_experiment, 'Experiment:' %>
+      <%= select_tag :parent_experiment, options_from_collection_for_select(@project.experiments, :id, :name, @dataset.sample.samplable_type.eql?('Experiment') ? @dataset.sample.samplable_id : nil), {:include_blank => true} %>
+      </div>
+
+      <div class="field line">
+      <%= label_tag :parent_sample, 'Sample:' %>
+      <%= select_tag :parent_sample, options_from_collection_for_select(@dataset.sample.samplable_type.eql?('Experiment') ? @dataset.sample.samplable.samples : @project.samples, :id, :name, @dataset.sample.id) %>
+      </div>
+
+      <div class="field actions">
+        <%= f.submit :class=> "blue" %>
+      </div>
+
+  <% end %>
+</div>
+<script>
+  $(document).ready(function() {
+    var project_samples = <%= get_samples_json(@projects + @collaborations) %>;
+    var exp_dropdown = $('#parent_experiment');
+    var samples_dropdown = $('#parent_sample');
+
+    $('#parent_experiment').change(function() {
+      $("#parent_experiment option:selected").each(function() {
+        var project_val = $("#parent_project option:selected").val();
+        var exp_val = $(this).val();
+        samples_dropdown.find('option').remove();
+        if (exp_val == "") {
+          $.each(project_samples[project_val]['samples'], function(id, name) {
+            samples_dropdown
+              .append($('<option>', { value : id })
+              .text(name));
+          });
+        }
+        else {
+          $.each(project_samples[project_val]['experiments'][exp_val]['samples'], function(id, name) {
+            samples_dropdown
+              .append($('<option>', { value : id })
+              .text(name));
+          });
+        }
+      });
+    });
+
+    $('#parent_project').change(function() {
+      $("#parent_project option:selected").each(function() {
+        var project_val = $("#parent_project option:selected").val();
+
+        exp_dropdown.find('option').remove();
+        exp_dropdown.append($('<option>'));
+        $.each(project_samples[project_val]['experiments'], function(id, content) {
+          exp_dropdown
+            .append($('<option>', { value : id })
+            .text(content['name']));
+        });
+
+        samples_dropdown.find('option').remove();
+        $.each(project_samples[project_val]['samples'], function(id, name) {
+          samples_dropdown
+            .append($('<option>', { value : id })
+            .text(name));
+        });
+      });
+    });
+  });
+</script>

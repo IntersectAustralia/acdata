@@ -1,0 +1,27 @@
+<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => {:method => :put}) do |f| %>
+
+    <%= render "shared/error_messages", :target => @user %>
+    <%= f.hidden_field :reset_password_token %>
+    <div id="reset_password">
+      <div id="body_container">
+        <div id="body_container_inner">
+          <div id="loginbox_identifier" class="loginbox_container">
+            <div class="contentbox_header">
+              <h3> Change Your Password</h3>
+            </div>
+            <div class="contentbox_body">
+              <div class="input_group">
+                <span id="changepassword_password"><%= f.label :password %></span><%= f.password_field :password %>
+              </div>
+              <div class="input_group">
+                <span id="changepassword_confirm"><%= f.label :password_confirmation %></span><%= f.password_field :password_confirmation %>
+              </div>
+
+              <button value="Change Your Password" type="submit">Change Your Password
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>

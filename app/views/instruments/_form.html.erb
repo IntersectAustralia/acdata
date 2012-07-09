@@ -1,0 +1,123 @@
+<div id="container_narrow_form">
+  <% if @instrument.errors.any? %>
+      <h3 class="required">The Instrument could not be saved because:</h3>
+  <% else %>
+      <h3><%= form_header title %></h3>
+  <% end %>
+
+  <%= form_for @instrument do |f| %>
+
+      <%= render "shared/error_messages", :target => @instrument %>
+
+      <div class="column_form">
+
+        <div class="row">
+          <%= f.label :name, 'Name:<span class="required">*</span>'.html_safe %><%= f.text_field :name, :placeholder => "The name of the new instrument" %>
+        </div>
+
+        <div class="row">
+
+          <div class="select_instrument_class_container">
+            <div class="select_instrument_class">
+              <%= f.label :instrument_class, 'Instrument class:<span class="required">*</span>'.html_safe %><%= select(:instrument, :instrument_class, all_instrument_classes) %>
+            <a href="#" id="add" class="button"><span>Add new class</span></a>
+            </div>
+          </div>
+
+          <div class="new_instrument_class_container"></div>
+
+        </div>
+
+        <div class="row">
+          <%= f.label :description, 'Description:' %><%= f.text_area :description, :size => "50x10" %>
+        </div>
+
+        <div class="row"><%= f.label :upload_prompt, 'Upload prompt text:' %><%= f.text_field :upload_prompt, :placeholder => 'E.g. Upload a JCAMP-DX file and an NMR directory.' %></div>
+
+        <div class="row">
+          <%= f.label :address, 'Address:' %><%= f.text_area :address, :size => "50x4" %>
+        </div>
+
+        <div class="row">
+          <%= f.label :email, 'Email:' %><%= f.text_field :email %>
+        </div>
+
+        <div class="row">
+          <%= f.label :voice, 'Voice:' %><%= f.text_field :voice %>
+        </div>
+
+        <div class="row">
+          <%= f.label :managed_by, 'Managed by:' %><%= f.text_field :managed_by, :placeholder => 'E.g. Mark Wainright Analytical Centre' %>
+        </div>
+
+        <div class="row">
+
+          <%= label_tag "instrument_file_types", 'File types:' %>
+          <%= select_tag("instrument_file_type_ids[]", options_for_select(instrument_file_types, @instrument.instrument_file_type_ids), {:multiple => true, :size => 5, :id => 'instrument_file_types'}) %>
+        </div>
+      </div>
+      <h3>Instrument Rules</h3>
+      <div class="instructions">Please ensure you select instrument rules, especially if you have changed the 'File types' selection above.</div>
+      <div id="instrument_rules" class="column_form">
+        <div class="row">
+          <%= label_tag 'instrument_rule[metadata_list]', 'Metadata file types:' %>
+          <%= select_tag('instrument_rule[metadata_list]', options_for_select(@file_type_options, @metadata_selections), {:multiple => true, :size => 5, :id => 'instrument_rule_metadata'}) %>
+          <div class="instruction">The file type(s) from which metadata will be extracted.</div>
+        </div>
+        <div class="row">
+          <%= label_tag 'instrument_rule[visualisation_list]', 'Visualisation file types:' %>
+          <%= select_tag('instrument_rule[visualisation_list]', options_for_select(@file_type_options, @visualisation_selections), {:multiple => true, :size => 5, :id => 'instrument_rule_visualisation'}) %>
+          <div class="instruction">The file type(s) used in visual presentation.</div>
+        </div>
+        <div class="row">
+          <%= label_tag 'instrument_rule[unique_list]', 'Unique file types:' %>
+          <%= select_tag('instrument_rule[unique_list]', options_for_select(@file_type_options, @unique_selections), {:multiple => true, :size => 5, :id => 'instrument_rule_unique'}) %>
+          <div class="instruction">May only upload <strong>one of each</strong> of the selected file type(s).</div>
+        </div>
+        <div class="row">
+          <%= label_tag 'instrument_rule[exclusive_list]', 'Exclusive file types:' %>
+          <%= select_tag('instrument_rule[exclusive_list]', options_for_select(@file_type_options, @exclusive_selections), {:multiple => true, :size => 5, :id => 'instrument_rule_exclusive'}) %>
+          <div class="instruction">May only upload <strong>one of any</strong> of the selected file type(s).</div>
+        </div>
+        <div class="row">
+          <%= label_tag 'instrument_rule[indelible_list]', 'Indelible file types:' %>
+          <%= select_tag('instrument_rule[indelible_list]', options_for_select(@file_type_options, @indelible_selections), {:multiple => true, :size => 5, :id => 'instrument_rule_indelible'}) %>
+          <div class="instruction">File type(s) that may not be deleted once uploaded.</div>
+        </div>
+      </div>
+
+      <div id="container_usersignup_footer">
+        <%= f.submit :class => "blue right" %>
+        <%= link_to '<span>Cancel</span>'.html_safe, cancel_path, :class => "button" %>
+      </div>
+
+  <% end %>
+
+</div>
+<script>
+  function updateOptions() {
+    $('[id^=instrument_rule_] option').remove();
+    $('#instrument_file_types option:selected').each(function() {
+      var name = $(this).text();
+      var id = $(this).val();
+      $('[id^=instrument_rule_]')
+        .append($('<option>', { value : id })
+        .text(name));
+    });
+  };
+
+  $(document).ready(function() {
+    <% unless action_name == 'edit' %>
+    updateOptions();
+    <% end %>
+
+    $('#instrument_file_types').live('change', function() {
+      var oldIDs = $('[id^=instrument_rule_] option:selected').length;
+      if (oldIDs > 0) {
+        alert('You have changed the file types. The Instrument Rules have been reset. Make sure you set these again.');
+      }
+      updateOptions();
+    });
+  });
+</script>
+

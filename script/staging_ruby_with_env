@@ -1,0 +1,4 @@
+#!/bin/bash
+
+umask 0007
+/home/devel/.rvm/wrappers/ruby-1.9.3-p194@acdata/ruby $*

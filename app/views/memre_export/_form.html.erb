@@ -1,0 +1,336 @@
+<div id="export_memre_dialog" class="jqmWindow lightbox">
+
+  <img src="/images/ICON_VECTOR_300_DEL_000000.png" border="0" class="icon jqmClose" id="close_dataset_dialog" alt="Close"/>
+
+  <div id="title">
+    <h2>Share with MemRE </h2>
+
+  </div>
+
+  <%= nested_form_for [@dataset, @memre_export], :url => (@memre_export.new_record? ? dataset_memre_export_index_path(@dataset) : dataset_memre_export_path(@dataset)), :remote => true do |f| %>
+
+    <div id="error_explanation">
+      <%= render "shared/modal_errors", :target => @memre_export %>
+    </div>
+
+    <div id="memre_1">
+      <div class="field line">
+        <div class="line">
+          <%= f.label :material_name, 'Material Name:<span class="required">*</span>'.html_safe, :class => "unit" %>
+        </div>
+        <%= f.text_field :material_name, :class => "text", :maxlength => 255 %>
+      </div>
+
+      <div class="field line">
+        <%= f.label :material_class_name, 'Class Name:<span class="required">*</span>'.html_safe %>
+        <%= f.select :material_class_name, options_for_select(%w{Organic Inorganic Biological Hybrid}, @memre_export.material_class_name) %>
+      </div>
+
+      <div class="field line">
+        <%= f.label :creator, 'Membrane Creator:', :class => "unit" %>
+        <%= f.text_field :creator, :class => "text", :maxlength => 255 %>
+      </div>
+
+      <div id="characterised_by_picker">
+
+        <div class="field">
+          <label for='party_name'>Membrane Characterised by:</label>
+
+          <%= text_field_tag 'party_name', nil, :title => 'Start typing a name', :class => "text", :placeholder => "Start typing a person or group name to search", :maxlength => 255 %>
+        </div>
+
+        <div class="field">
+          <ul id="characterised_by_list">
+            <% @memre_export.characterised_by.each do |party| %>
+              <li id="characterised_by_<%= party.id %>">
+                <%= party.display_label %>
+                <%= hidden_field_tag "characterised_by[]", party.key %>
+
+                <span name="remove_characterised_by" class="remove_button basic_field right"></span>
+
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field line">
+        <%= f.label :form_description, 'Form Description:' %>
+        <%= f.select :form_description, options_for_select(['Flat Sheet', 'Hollow Fibre', 'Tubular', 'Other'], @memre_export.form_description) %>
+      </div>
+
+      <div class="field line">
+        <h3>Processing Details:</h3>
+
+        <div>
+          <%= f.label :name, :class => "unit" %>
+          <%= f.text_field :name, :class => "text", :maxlength => 255 %>
+          <%= f.label :notes, :class => "unit" %>
+          <%= f.text_field :notes, :class => "text", :maxlength => 255 %>
+        </div>
+      </div>
+
+      <div class="field line">
+        <div class="field actions">
+          <%= f.submit "Next", :id => 'next_button', :class => "blue" %>
+        </div>
+      </div>
+    </div>
+    <div id="memre_2">
+      <div id="memre_2_content">
+        <div id="property_detail">
+
+          <div class="field line">
+            <%= label_tag :name, 'Property Type:<span class="required">*</span>'.html_safe %>
+            <%= select_tag :name, options_for_select(MembraneProperty.all.map(&:name)) %>
+          </div>
+          <div class="field line">
+            <%= label_tag :measurement_technique, 'Technique:<span class="required">*</span>'.html_safe %>
+            <%= select_tag :measurement_technique %>
+          </div>
+          <div class="field line">
+            <%= label_tag :type_of_property, 'Type:', :class => "unit" %>
+            <%= text_field_tag :type_of_property, "", :class => "text", :maxlength => 255 %>
+          </div>
+          <div class="field line">
+            <%= label_tag :property_units, 'Units:', :class => "unit" %>
+            <%= text_field_tag :property_units, "", :class => "text", :maxlength => 255 %>
+          </div>
+          <div class="field line">
+            <%= label_tag :description, 'Description:', :class => "unit" %>
+            <%= text_field_tag :description, "", :class => "text", :maxlength => 255 %>
+          </div>
+          <div class="field line">
+            <%= label_tag :qualifier_1, 'Qualifier 1:', :class => "unit" %>
+            <%= text_field_tag :qualifier_1, "", :class => "text", :maxlength => 255 %>
+          </div>
+          <div class="field line">
+            <%= label_tag :qualifier_2, 'Qualifier 2:', :class => "unit" %>
+            <%= text_field_tag :qualifier_2, "", :class => "text", :maxlength => 255 %>
+          </div>
+          <div class="field line">
+            <%= label_tag :qualifier_3, 'Qualifier 3:', :class => "unit" %>
+            <%= text_field_tag :qualifier_3, "", :class => "text", :maxlength => 255 %>
+          </div>
+
+          <h3>Data Source Details:</h3>
+
+          <div class="field"></div>
+          <div>
+            <%= label_tag 'info_type', "Type:" %>
+            <%= select_tag 'info_type', options_for_select(APP_CONFIG['related_information_types'].invert), :include_blank => true %>
+          </div>
+          <div>
+            <%= label_tag 'identifier', "Identifier:" %>
+            <%= text_field_tag 'identifier', nil, :class => "text ", :placeholder => "Identifier URI", :maxlength => 255 %>
+          </div>
+          <div>
+            <%= label_tag 'notes', "Citation:" %>
+            <%= text_field_tag 'notes', nil, :class => "text", :placeholder => "Citation", :maxlength => 255 %>
+          </div>
+        </div>
+
+        <div class="field"></div>
+
+        <%= link_to '<span>Add Property To List</span>'.html_safe, '#', {:id => 'add_property_detail', :class => 'button add'} %>
+
+
+        <h3>Properties List</h3>
+
+        <div class="field line"></div>
+
+        <div id="property_details_list">
+          <% @memre_export.property_details.each do |property_details| %>
+            <%= render :partial => "property_detail", :locals => { :property_details => property_details } %>
+          <% end %>
+
+        </div>
+      </div>
+      <div class="field line">
+        <div class="field actions">
+          <div class="left">
+            <%= f.submit "Back", :id => 'back_button', :class => "blue" %>
+          </div>
+          <%= f.submit "Finish", :class => "blue" %>
+        </div>
+      </div>
+
+    </div>
+
+  <% end %>
+
+</div>
+
+<script>
+  $(document).ready(function () {
+    $('#memre_2').css('display', 'none');
+
+    var property_json = <%= get_properties_json %>;
+
+    function updateOptions() {
+      var mt = $('select#measurement_technique');
+      $('select#name option:selected').each(
+              function () {
+                var pt = $(this).text();
+
+                var mt_names = property_json[pt]['measurement_techniques'];
+                mt.find('option').remove();
+                $.each(mt_names, function (key, value) {
+                  mt.append($('<option>', { value:value })
+                          .text(value));
+                });
+
+                $.each(['type_of_property', 'property_units', 'info_type', 'description', 'qualifier_1', 'qualifier_2', 'qualifier_3'], function (index, value) {
+                  $('input#' + value).val(property_json[pt][value]);
+                });
+              }
+      );
+    }
+
+    updateOptions();
+
+    $('select#name').change(function () {
+      updateOptions();
+    });
+
+
+    function generateID() {
+      return new Date().getTime();
+    }
+
+    // http://blog.nickburwell.com/2011/02/escape-html-tags-in-javascript.html
+    // useful for autocomplete
+    function escapeHTML(string) {
+      return jQuery('<pre>').text(string).html();
+    }
+
+    $('.remove_button', "#export_memre_dialog").live('click', function () {
+      var hidden_field = $(this).prev('input[type=hidden]')[0];
+      if (hidden_field) {
+        hidden_field.value = '1';
+      }
+      var text_field = $('input[type=text]', $(this).closest('.property_listing'));
+      if (text_field) {
+        text_field.removeAttr('id');
+      }
+      $(this).closest('.property_listing').remove();
+      return false;
+    });
+
+    $('#add_property_detail').click(function () {
+      var new_id = 'new_' + generateID();
+
+      $(this).removeClass('ac_loading');
+
+      var display_fields = '<div class="property_listing"><span class="remove_button right"></span>';
+
+      display_fields += '<input type="hidden" name="memre_export[property_details_attributes][' + new_id + '][name]" value="' +$("#name").val()+ '">';
+      display_fields += '<label for="name">Property Type:</label>'+$("#name").val();
+      display_fields += '<input type="hidden" name="memre_export[property_details_attributes][' + new_id + '][measurement_technique]" value="' +$("#measurement_technique").val()+ '">';
+      display_fields += '<br><label for="measurement_technique">Technique:</label>'+$("#measurement_technique").val();
+      display_fields += $('<div>').append($(this).prev('label').clone()).remove().html() + $(this).val() + '<br>';
+
+      $('input', "#property_detail").each(function () {
+        display_fields += '<input type="hidden" name="memre_export[property_details_attributes][' + new_id + '][' + $(this).attr('name') + ']" value="' +$(this).val()+ '">';
+        display_fields += $('<div>').append($(this).prev('label').clone()).remove().html() + $(this).val() + '<br>';
+      });
+
+      display_fields += '<input type="hidden" name="memre_export[property_details_attributes][' + new_id + '][info_type]" value="' +$("#info_type").val()+ '">';
+      display_fields += '<label for="info_type">Data Source Type:</label>'+$("#info_type").val();
+      display_fields += '</div>';
+
+      $('#property_details_list').append(display_fields);
+
+      return false;
+    });
+
+
+    function valid() {
+      if (!$('#memre_export_material_name').val()) {
+        alert('Material Name is required.');
+        return false;
+      }
+      return true;
+    }
+
+
+    $('#next_button').on('click', function () {
+      if (valid()) {
+        $('#memre_title').text('Membrane Property Details');
+        $('#memre_1').css('display', 'none');
+        $('#memre_2').css('display', 'block');
+        $('.lightbox form').scrollTop(0);
+      }
+      else {
+        $('#memre_export_material_name').focus();
+      }
+      return false;
+    });
+
+    $('#back_button').on('click', function () {
+      $('#memre_title').text('Share with MemRE');
+      $('#memre_2').css('display', 'none');
+      $('#memre_1').css('display', 'block');
+      return false;
+    });
+
+    $('#party_name').keypress(function (e) {
+      // Stop "Enter" choosing arbitrary text from input text field
+      if (e.keyCode == 13) {
+        return false;
+      }
+    });
+
+    $("#party_name").autocomplete({
+      source:'/ands_publishables/list_ands_parties',
+      minLength:1,
+      delay:500,
+      open:function () {
+        $('.ui-menu').width(658)
+      },
+      select:function (event, ui) {
+        if (ui) {
+          var member_id = ui.item.id;
+          var selector = $("li#characterised_by_" + member_id);
+          if (selector.length == 0) {
+            var member_name = ui.item.value;
+            // expecting id to be ands handle
+
+            $('ul#characterised_by_list').append('<li id="characterised_by_'
+                    + member_id
+                    + '">'
+                    + member_name
+                    + '<input type="hidden" name="characterised_by[]"'
+                    + ' value="'
+                    + member_id
+                    + '">'
+                    + '<span name="remove_characterised_by" class="remove_button basic_field right"></span>'
+                    + '</li>'
+            );
+
+          }
+
+        }
+        $('#party_name', "#export_memre_dialog").val('');
+        return false;
+      }
+    });
+
+    $('#new_memre_export').bind("ajax:error", function (event, data, status, jqXHR) {
+      if (jqXHR.status == 401) {
+        var session_message = "<%= I18n.t :session_timeout, :scope => [:views, :shared] %>";
+        alert(session_message);
+        window.location = '<%= root_path %>';
+      }
+      else {
+        alert(jqXHR.status + ": " + jqXHR.responseText);
+      }
+    });
+
+
+
+  });
+
+
+</script>
+

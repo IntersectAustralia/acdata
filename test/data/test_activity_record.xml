@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="University of New South Wales">
+    <key>hdl:1959.4/004_325</key>
+    <originatingSource>https://www.researchdata.unsw.edu.au</originatingSource>
+    <activity type="project">
+      <identifier type="local">hdl:1959.4/004_325</identifier>
+      <name type="primary">
+        <namePart>Project Name</namePart>
+      </name>
+      <relatedObject>
+        <key>http://nla.gov.au/nla.party-593921</key>
+        <relation type="isManagedBy"/>
+      </relatedObject>
+      <subject type="anzsrc-for">0904</subject>
+      <subject type="anzsrc-for">090404</subject>
+      <description type="notes">Initial Year: 2003
+Duration: 3 years
+Total Grant Budget: $1,000,000
+Funding Sponsor: The Government
+Funding Scheme: Some scheme
+</description>
+    </activity>
+  </registryObject>
+</registryObjects>

@@ -1,0 +1,8 @@
+$('#new_ands_publishable_dialog').jqmHide();
+$('#edit_ands_publishable_dialog').jqmHide();
+$('#party_ands_publishable_dialog').jqmHide();
+$('#preview_ands_publishable_dialog').jqmHide();
+$('#wizard').html('<%= escape_javascript(render :partial => 'party_form') %>');
+$('#party_ands_publishable_dialog').jqm({modal:true});
+$('#party_ands_publishable_dialog').jqmShow();
+$('[id^=show_][id$=_wizard]').removeClass('ac_loading');

@@ -1,0 +1,10 @@
+<% if target.errors.any? %>
+    <h2><%= pluralize(target.errors.count, "error") %> prohibited
+      the publishable data from being saved:</h2>
+
+    <ul>
+      <% target.errors.full_messages.each do |msg| %>
+          <li><%= msg.sub("Ands contact","Contact").sub("family", "last").sub("given", "first") %></li>
+      <% end %>
+    </ul>
+<% end %>

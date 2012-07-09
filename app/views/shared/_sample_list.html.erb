@@ -1,0 +1,32 @@
+<% for sample in samples do %>
+  <% current_sample = is_current_sample?(sample) %>
+  <ul id="project_sample<%= sample.datasets.empty? ? "_empty" : "" %>" class="expandable <%= "hidden" unless current_parent %>">
+    <li class="nav_sample">
+      <% if !sample.datasets.empty? %>
+        <a class="<%= current_sample ? "expanded" : "collapsed" %>" id="arrow">&nbsp;</a>
+      <% else %>
+        <span class="sample_empty"></span>
+      <% end %>
+      <%= link_to sample.nav_name,
+                  sample_path(sample),
+                  :id => "experiment_sample_#{sample.id}",
+                  :title => sample.nav_name,
+                  :class => ["experiment_sample", current_sample ? "current" : ""] %>
+
+      <ul id="project_dataset" class="expandable <%= "hidden" unless current_sample %>">
+        <!-- Dataset level -->
+        <% for dataset in sample.datasets.includes(:sample).name_ordered do %>
+          <% current_dataset = is_current_dataset?(dataset) %>
+          <li class="nav_sample_dataset ">
+            <%= link_to "#{dataset.name}",
+                        get_dataset_path(dataset),
+                        :title => dataset.name,
+                        :class => ["experiment_sample_dataset", current_dataset ? "current" : ""] %>
+          </li>
+        <% end %> <!-- end dataset -->
+      </ul>
+
+    </li>
+  </ul>
+<% end %> <!-- end sample -->
+

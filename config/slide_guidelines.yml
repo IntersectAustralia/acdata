@@ -1,0 +1,19 @@
+development: &dev
+  slide_guidelines:
+    - The slides should be in clean and good condition -- no air pockets under cover slip, no dirt, no fingerprints, no markings, no writing, no extra adhesive, no broken slides, no chips, no scratches, no overhanging cover slip etc.
+    - The tissue ideally should be located in the middle of the slide a distance from the edges of the slide, the label and any other markings.
+    - Make sure there is no glue around the edges of a slide that would cause it to stick or catch in the ScanScope stage area.
+    - Keep the glue attaching the cover slip to a minimum. Excess glue makes it hard for the tissue finder to distinguish between actual tissue and the glue. If a focus point lands on the glue, slide focus will not be accurate.
+    - Some of the mechanical problems of a slide can be resolved by cleaning the slide with a cotton rag (don't use chemical cleaners) or trimming the sides with a razor blade. Permanent problems with a slide may require the preparation of a new slide.
+    - Tissue thickness will affect the quality of the scan. Ideally, tissues will be 5- to 10-microns (μ) thick. Brain sections are often cut at 40- to 100-μm. Thick sections present challenges to focusing and calibration and often result in digital slides with striping artifacts.
+    - Slides must contain an antifade agent in the mounting medium. If possible, a counterstain such as DAPI should be used, although the slide should be stained with DAPI first, and the excess stain should be washed off before antifade is applied to the slide.
+    - "'Wet' or 'non-hardening' mounting medium on slides may damage the system. The mounting medium may leak onto the tray or other components, and evaporation of mounting medium may cause deposits to form on optical surfaces. Excess mounting medium must be blotted from the slide, and if possible, coverslips should be sealed with clear nail polish or another appropriate sealant."
+    - "Researchers should be advised to check their slides under a fluorescence microscope prior to scanning them on the ScanScope FL. It is important to verify that the experiment actually 'worked' before they can be scanned. Researchers may be asked to point out the area of interest to be scanned by HMU staff. Please ensure all contact details are correct."
+test:
+  <<: *dev
+qa:
+  <<: *dev
+staging:
+  <<: *dev
+production:
+  <<: *dev

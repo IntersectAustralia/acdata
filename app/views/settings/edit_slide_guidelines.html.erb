@@ -1,0 +1,34 @@
+<% title 'Edit Slide Scanning Guidelines' %>
+
+<div id="container_usersignup">
+  <h3><%= form_header "Edit slide scanning guidelines" %></h3>
+
+  <%= nested_form_for(@settings, :url => update_slide_guidelines_settings_path, :html => {:method => :put}) do |f| %>
+    <div id="container_edit_guidelines_forms">
+
+      <div class="instructions">
+        Guidelines will be displayed in the order shown here
+      </div>
+      <div class="fields"></div>
+
+      <%= f.fields_for :slide_guidelines do |slide_form| %>
+          <span>
+            <%= slide_form.text_area :description, :class => "text", :rows => 5 %>
+          </span>
+          <span>
+            <%= slide_form.link_to_remove icon("delete") %>
+          </span>
+      <% end %>
+      <p><%= f.link_to_add '<span>Add Guideline</span>'.html_safe, :slide_guidelines, :class => "button green add right" %></p>
+
+    </div>
+    <div id="container_usersignup_footer">
+      <%= f.submit "Save", :class => "blue right" %>
+      <%= link_to '<span>Cancel</span>'.html_safe, admin_users_path, :class => "button" %>
+    </div>
+
+  <% end %>
+
+
+</div>
+

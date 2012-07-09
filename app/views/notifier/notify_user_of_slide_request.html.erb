@@ -1,0 +1,43 @@
+<p>You have made a slide scanning service request with the following details:</p>
+
+<p>
+  Name : <%= @user.full_name %><br/>
+  Email : <%= @user.email %><br/>
+  Supervisor : <%= @user.get_supervisor_name %><br/>
+  Supervisor Email : <%= @user.get_supervisor_email %><br/>
+  Dept/Group: <%= @params[:dept_group] %><br/>
+  Reference Lab:  <%= @params[:reference_lab] %><br/>
+  Project: <%= @project.name %><br/>
+  Project owner : <%= @project.user.full_name %><br/>
+  Project owner's email : <%= @project.user.email %><br/>
+
+</p>
+
+<h3>Account Details</h3>
+<p>
+
+  Fund Number: <%= @params[:fund_number] %><br/>
+  Dept ID: <%= @params[:dept_id] %><br/>
+  Project Number: <%= @params[:project_number] %><br/>
+
+</p>
+<h3>Ethics Approval</h3>
+<p>
+  <% if @params[:approval_not_required] %>
+    Ethics approval not required.
+  <% else %>
+    Ethics Approval Number: <%= @params[:approval_number] %><br/>
+  <% end %>
+
+</p>
+
+<h3>Scanning Details</h3>
+<p>
+
+  Number of slides to be scanned: <%= @params[:num_slides] %><br/>
+  Type of Scanning: <%= @params[:scanning_type] %><br/>
+  Magnification: <%= @params[:magnification] %><br/>
+  Include Algorithms: <%= @params[:include_algorithms] %><br/>
+  Fluorescent Label: <%= @params[:fluorescent_label] %><br/>
+
+</p>

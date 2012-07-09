@@ -1,0 +1,42 @@
+<div id="container_usersignup">
+
+  <h3><%= "Viewing #{@instrument.name}" %></h3>
+
+  <div class="row">
+    <%= link_to 'Edit', edit_instrument_path(@instrument), :class => "button" %><br />
+    <% if @instrument.is_available %> 
+	<p>
+<span class="label_view">Instrument Status:</span>
+	<span class="greenbullet"></span> Currently Available
+      (<%= link_to 'Toggle status', mark_unavailable_instrument_path(@instrument), :method => :put, :id => "unavailable_#{@instrument.id}" %>)
+</p>
+    <% else %>
+      <p>
+<span class="label_view">Instrument Status:</span>
+	  <span class="redbullet"></span> Currently Unavailable
+	  (<%= link_to 'Toggle status', mark_available_instrument_path(@instrument), :method => :put, :id => "available_#{@instrument.id}" %>)
+      </p>
+    <% end %>
+  </div>
+
+  <div class="row"><%= render_field "Name", render_safe_html(@instrument.name) %></div>
+  <div class="row"><%= render_field "Handle", render_safe_html(@instrument.handle) %></div>
+  <div class="row"><%= render_field "Instrument Class", @instrument.instrument_class %></div>
+  <div class="row"><%= render_field "Description", render_safe_html(@instrument.description) %></div>
+  <div class="row"><%= render_field "Upload Prompt", render_safe_html(@instrument.upload_prompt) %></div>
+  <div class="row"><%= render_field "Email", @instrument.email %></div>
+  <div class="row"><%= render_field "Voice", @instrument.voice %></div>
+  <div class="row"><%= render_field "Address", render_safe_html(@instrument.address) %></div>
+  <div class="row"><%= render_field "Managed by", @instrument.managed_by %></div>
+  <div class="row"><%= render_field "File Types", @instrument.instrument_file_types.map {|ft| ft.name}.join('<br />').html_safe %></div>
+  <div class="row"><%= render_field "Metadata file types", render_rule(@instrument, 'metadata') %></div>
+  <div class="row"><%= render_field "Visualisation file types", render_rule(@instrument, 'visualisation') %></div>
+  <div class="row"><%= render_field "Unique file types", render_rule(@instrument, 'unique') %></div>
+  <div class="row"><%= render_field "Exclusive file types", render_rule(@instrument, 'exclusive') %></div>
+  <div class="row"><%= render_field "Indelible file types", render_rule(@instrument, 'indelible') %></div>
+  
+  <div id="container_usersignup_footer">
+      <%= link_to '<span>Back</span>'.html_safe, instruments_path, :class => "button" %>
+  </div>
+
+</div>

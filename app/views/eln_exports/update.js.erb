@@ -1,0 +1,8 @@
+<% if @saved %>
+  $('#export_eln_dialog').jqmHide();
+<% else %>
+  $("#error_explanation").html("<%= escape_javascript(render 'shared/modal_errors', :target => @eln_export) %>");
+  $("#error_explanation").addClass('alert');
+  $('input[type=submit]', '#wizard').removeClass('ac_loading');
+  $('input[type=submit]', '#wizard').removeAttr('disabled');
+<% end %>

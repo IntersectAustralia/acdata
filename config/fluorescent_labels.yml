@@ -1,0 +1,55 @@
+development: &dev
+  fluorescent_labels:
+    - Alexa Fluor 350
+    - Alexa Fluor 430
+    - Alexa Fluor 488
+    - Alexa Fluor 532
+    - Alexa Fluor 555
+    - Alexa Fluor 568
+    - Alexa Fluor 594
+    - Alexa Fluor 610
+    - Alexa Fluor 633
+    - Alexa Fluor 647
+    - Alexa Fluor 660
+    - AMCA
+    - APC
+    - BOBO-1
+    - BOBO-3
+    - BODIPY
+    - CY3
+    - Cy3.5
+    - Cy5
+    - DAPI
+    - EBFP
+    - ECFP
+    - EGFP
+    - Eosin-isothiocyanate
+    - EYFP
+    - FITC
+    - Fluoro Gold
+    - GFP
+    - Hoechst 33258
+    - Hoechst 33342
+    - Hoechst 34580
+    - MitoTracker Red
+    - POPO-1
+    - POPO-3
+    - RFP
+    - Rhodamine Green
+    - Rhodamine Red
+    - rsGFP
+    - Texas Red
+    - TO-PRO-3
+    - TOTO-1
+    - TOTO-3
+    - TRITC
+    - YOYO-1
+    - YOYO-3
+test:
+  <<: *dev
+qa:
+  <<: *dev
+staging:
+  <<: *dev
+production:
+  <<: *dev

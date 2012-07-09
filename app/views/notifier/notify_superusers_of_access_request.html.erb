@@ -1,0 +1,9 @@
+<p>An access request has been made with the following details:</p>
+
+<p>
+Email: <%= @user.email %><br/>
+First name: <%= @user.first_name %><br/>
+Last name: <%= @user.last_name %>
+</p>
+
+<p>You can view unapproved access requests here: <a href="<%= access_requests_users_url %>"><%= access_requests_users_url %></a></p>

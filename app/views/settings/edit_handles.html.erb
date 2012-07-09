@@ -1,0 +1,35 @@
+<% title 'Edit Dataset Handle Range' %>
+
+<div id="container_usersignup">
+  <h3><%= form_header "Edit range of dataset handles" %></h3>
+
+  <%= form_for(@settings, :url => update_handles_settings_path, :html => {:method => :put}) do |f| %>
+      <div id="container_usersignup_forms">
+        <div id="error_explanation">
+          <%= render "shared/error_messages", :target => @settings %>
+        </div>
+
+        <div class="instructions">
+          Handles must be in the format: <span class="instruction">hdl:1959.4/004_x</span>, where x is a number
+        </div>
+
+        <div class="row">
+          <%= f.label :start_handle_range, "Start Handle Range:" %>
+          <%= f.text_field :start_handle_range %>
+        </div>
+        <div class="row">
+          <%= f.label :end_handle_range, "End Handle Range:" %>
+          <%= f.text_field :end_handle_range %>
+        </div>
+
+      </div>
+      <div id="container_usersignup_footer">
+        <%= f.submit "Save", :class => "blue right" %>
+        <%= link_to '<span>Cancel</span>'.html_safe, admin_users_path, :class => "button" %>
+      </div>
+
+  <% end %>
+
+
+</div>
+

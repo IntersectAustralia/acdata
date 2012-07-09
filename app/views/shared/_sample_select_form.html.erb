@@ -1,0 +1,38 @@
+<div id="new_dataset_dialog" class="jqmWindow lightbox">
+  <img src='/images/ICON_VECTOR_300_DEL_000000.png' border=0 class='icon jqmClose' id="close_dataset_dialog" alt='reject'/>
+
+  <div id="title">
+    <h2>Select Sample</h2>
+  </div>
+
+  <%= form_for @dataset, :url => save_sample_select_datasets_path, :remote => true do |f| %>
+      <%= render "shared/error_messages", :target => @dataset %>
+      <div class="field">
+        <%= f.label :sample_id, "Sample name:<span class='required'>*</span>".html_safe, :id => "sample_name" %>
+        <%= f.select :sample_id, options_from_collection_for_select(@samples, :id, :select_name), {:include_blank => true} %>
+      </div>
+
+      <div class="field actions">
+        <%= f.submit 'Next', :id => "next_button", :class => "blue", :disabled => 'disabled' %>
+      </div>
+  <% end %>
+
+  <script type='text/javascript'>
+      $('#next_button').click(function() {
+          $(this).addClass('ac_loading');
+//          $(this).attr('disabled', 'disabled');
+      });
+
+      $('#dataset_sample_id').change(function() {
+          if ($(this).val() == "") {
+              $('#next_button', '#new_dataset_dialog').attr('disabled', 'disabled');
+          } else {
+              $('#next_button', '#new_dataset_dialog').removeAttr('disabled');
+
+          }
+
+      });
+
+  </script>
+</div>
+

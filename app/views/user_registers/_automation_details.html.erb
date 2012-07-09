@@ -1,0 +1,29 @@
+<h3>NMR Data Importing</h3>
+
+<div class="row"><%= f.check_box :nmr_enabled %><%= f.label :nmr_enabled, "Enable importing new NMR data to your ACData Account" %></div>
+<div class="row"><%= f.label :nmr_username, "NMR username" %><%= f.text_field :nmr_username %></div>
+<div class="details">Your three letter username.</div>
+
+<h3>Microscope And Slide Scanning Requests</h3>
+
+<div class="row"><%= f.check_box :slide_request_enabled %><%= f.label :slide_request_enabled, "Enable Slide Scanning Service requests" %></div>
+
+<script type="text/javascript">
+
+  function toggleNMRFields() {
+    if ($('#user_nmr_enabled').is(':checked')) {
+      $('#user_nmr_username').removeAttr('disabled');
+    } else {
+      $('#user_nmr_username').attr('disabled', 'true');
+    }
+  }
+
+  $('#user_nmr_enabled').click(function () {
+    toggleNMRFields();
+  });
+
+  $(document).ready(function () {
+    toggleNMRFields();
+  });
+
+</script>

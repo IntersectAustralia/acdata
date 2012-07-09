@@ -1,0 +1,21 @@
+<applet id="upload_applet"
+        type="application/x-java-applet;version=1.6"
+        code="au.org.intersect.uploader.main.UploadApplet"
+        archive="/applets/uploader.jar, /applets/commons-codec-1.4.jar, /applets/commons-httpclient-3.1.jar, /applets/commons-logging-1.1.1.jar, /applets/log4j-1.2.15.jar, /applets/plugin.jar"
+        name='UploadApplet'
+        width="110"
+        height="40"
+        MAYSCRIPT>
+
+  <param name="destDir" value="<%= @sample.id %>/<%= @dataset.id %>">
+  <param name="uploadURL" value="<%= upload_url %>">
+  <param name="sendVerifyRequestFirst" value="<%= verify_first %>">
+  <param name="verifyRequestURL" value="<%= verify_url %>">
+  <param name="allowMultiselect" value="<%= allow_multiselect %>">
+  <param name="fileSelectionMode" value="<%= file_selection_mode %>">
+  <param name="backgroundColour" value="#FFFFFF">
+  <% if extension_filter %>
+      <param name="filter" value="<%= extension_filter %>">
+  <% end %>
+</applet>
+

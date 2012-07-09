@@ -1,0 +1,114 @@
+[Free Programming Procedure]
+Nr of segments= 4
+[Segment  1]
+Used=-1
+Type= 1
+ScrnCode= 1
+Potential=-.2999878
+Sampletime= 28.99822
+Total time= 30
+End potential= 1.2
+Scan rate= 1
+Step potential= .0050354
+Start potential= 0
+[Segment  2]
+Used=-1
+Type= 2
+ScrnCode= 2
+Potential= 1.2
+Sampletime= 1.2
+Total time= 1.2
+End potential= 1.30127
+Scan rate= .999881
+Step potential= .0050354
+Start potential=-.2999878
+[Segment  3]
+Used=-1
+Type= 1
+ScrnCode= 3
+Potential= 1.300049
+Sampletime= 1.20012
+Total time= 1.2
+End potential=-.3
+Scan rate= .5
+Step potential= .0050354
+Start potential= 1.21994
+[Segment  4]
+Used=-1
+Type= 2
+ScrnCode= 4
+Potential=-.3
+Sampletime= 30
+Total time= 30
+End potential=-.3012085
+Scan rate= .49994
+Step potential= .0050354
+Start potential= 1.300049
+[Segment  5]
+Used= 0
+Type= 2
+ScrnCode= 5
+Potential= 0
+Sampletime= .1
+Total time= 10
+End potential= .002
+Scan rate= .4999405
+Step potential= .0050354
+Start potential=-.2799988
+[Segment  6]
+Used= 0
+Type= 1
+ScrnCode= 6
+Potential= 0
+Sampletime= .1
+Total time= 10
+End potential= 1
+Scan rate= .1
+Step potential= .005
+Start potential= 0
+[Segment  7]
+Used= 0
+Type= 1
+ScrnCode= 7
+Potential= 0
+Sampletime= .1
+Total time= 10
+End potential= 1
+Scan rate= .1
+Step potential= .005
+Start potential= 0
+[Segment  8]
+Used= 0
+Type= 1
+ScrnCode= 8
+Potential= 0
+Sampletime= .1
+Total time= 10
+End potential= 1
+Scan rate= .1
+Step potential= .005
+Start potential= 0
+[Segment  9]
+Used= 0
+Type= 1
+ScrnCode= 9
+Potential= 0
+Sampletime= .1
+Total time= 10
+End potential= 1
+Scan rate= .1
+Step potential= .005
+Start potential= 0
+[Segment 10]
+Used= 0
+Type= 1
+ScrnCode= 10
+Potential= 0
+Sampletime= .1
+Total time= 10
+End potential= 1
+Scan rate= .1
+Step potential= .005
+Start potential= 0
+[Test Procedure]
+Test flag= 0

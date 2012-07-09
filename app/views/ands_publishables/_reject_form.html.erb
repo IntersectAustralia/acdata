@@ -1,0 +1,24 @@
+<div id="edit_ands_publishable_dialog" class="jqmWindow lightbox">
+
+  <img src='/images/ICON_VECTOR_300_DEL_000000.png' border=0 class='icon jqmClose' id="close_dialog" alt='reject'/>
+
+  <div id="title">
+    <h2>Rejecting RDA publishable for  <%= @ands_publishable.project.name %></h2>
+  </div>
+
+  <%= form_for @ands_publishable, :url => reject_ands_publishable_path(@ands_publishable), :method => :put, :remote => true do |f| %>
+
+  <div id="edit_ands_publishable_error_explanation">
+    <%= render "shared/modal_errors", :target => @ands_publishable %>
+  </div>
+
+      <%= label_tag 'reason', '<span class="bold">Please specify a reason:</span>'.html_safe %>
+      <%= text_field_tag 'reason', nil, :maxlength => 500, :class => "text" %>
+
+      <div class="field actions">
+        <%= f.submit "Reject", :class=> "blue" %>
+      </div>
+
+  <% end %>
+
+</div>

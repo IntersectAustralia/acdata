@@ -1,0 +1,14 @@
+<% if values.present? %>
+    <table id="<%= table_id %>_metadata" class="data_table">
+      <% values.each do |metadata| %>
+          <tr class="<%= cycle("stripe", "") %>">
+            <td class="bold"><%= metadata.key %></td>
+            <td><%= metadata.value.nil? ? '' : newline_to_br(metadata.value).html_safe %></td>
+          </tr>
+      <% end %>
+      <% reset_cycle %>
+    </table>
+<% else %>
+    No <%= table_id %> metadata available.
+
+<% end %>

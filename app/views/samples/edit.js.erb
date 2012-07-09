@@ -1,0 +1,5 @@
+$('#edit_sample_dialog').jqmHide();
+$('#wizard').html('<%= escape_javascript(render :partial => 'form', :locals => {:action => "edit"}) %>');
+$('#edit_sample_dialog').jqm({modal:true});
+$('#edit_sample_dialog').jqmShow();
+$('[id^=show_][id$=_wizard]').removeClass('ac_loading');

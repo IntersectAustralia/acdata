@@ -1,0 +1,123 @@
+<div id="new_dataset_dialog" class="jqmWindow lightbox">
+
+
+  <% if action.eql?("edit") %>
+      <%= link_to "<img src='/images/ICON_VECTOR_300_DEL_000000.png' border=0 id='close_dataset_dialog' class='icon jqmDelete' alt='reject'/>".html_safe, get_dataset_path(@dataset, :new => true), :method => "delete" %>
+  <% else %>
+      <img src='/images/ICON_VECTOR_300_DEL_000000.png' border=0 class='icon jqmClose' id="close_dataset_dialog" alt='reject'/>
+
+  <% end %>
+
+  <div id="title">
+
+    <% if action.eql?("edit") %>
+        <h2>Editing New Dataset Details</h2>
+    <% else %>
+        <h2>1. Add New Dataset</h2>
+    <% end %>
+
+  </div>
+
+
+  <%= form_for [@project, @experiment, @sample, @dataset].compact, :remote => true do |f| %>
+
+    <% if action.eql?("edit") %>
+        <div id="edit_dataset_error_explanation">
+          <%= render "shared/modal_errors", :target => @dataset %>
+        </div>
+    <% else %>
+        <div id="new_dataset_error_explanation">
+          <%= render "shared/modal_errors", :target => @dataset %>
+        </div>
+    <% end %>
+
+      <div class="field line">
+        <div class="line">
+          <%= f.label :name, 'Dataset name:<span class="required">*</span>'.html_safe, :class => "unit" %>
+        </div>
+        <%= f.text_field :name, :class => "text", :placeholder => "Your Dataset name" %>
+      </div>
+
+      <div class="field line">
+        <div class="line">
+          <%= label_tag :instrument_instrument_class, "Instrument class:", :class => "unit" %>
+          <%= select(:instrument, :instrument_class, {}, {:selected => @instrument_class}) %>
+        </div>
+
+        <div class="field line">
+          <%= label_tag :dataset_instrument_id, "Instrument name:", :class => "unit" %>
+          <div class="lastUnit">
+            <%= select(:dataset, :instrument_id, []) %>
+          </div>
+        </div>
+
+        <div class="field actions">
+          <%= f.submit "Next", :id => "next_button", :class=> "blue" %>
+        </div>
+      </div>
+
+  <% end %>
+
+</div>
+
+<script>
+  function updateOptions() {
+    var names_drop_down = $('#dataset_instrument_id');
+    $("#instrument_instrument_class option:selected").each(function() {
+        var class_key = $(this).text();
+
+        var instruments = <%= get_instruments_json %>;
+
+        var instrument_names = instruments[class_key];
+        names_drop_down.find('option').remove();
+        $.each(instrument_names, function(key, value) {
+          names_drop_down
+            .append($('<option>', { value : value })
+            .text(key));
+        });
+
+        $("option:empty", names_drop_down).remove();
+
+    });
+  }
+
+  $(document).ready(function() {
+    var instruments = <%= get_instruments_json %>;
+    $.each(instruments, function(key, value) {
+      $('#instrument_instrument_class')
+        .append($('<option>', { value : key })
+        .text(key));
+    });
+    $('#instrument_instrument_class').val('<%= @instrument_class %>');
+    updateOptions();
+    $("#dataset_instrument_id").val('<%= @instrument_id %>');
+
+    $('#instrument_instrument_class').change( function() {
+      updateOptions();
+    });
+
+/*
+    $('#new_dataset').bind("ajax:error", function(event, data, status, jqXHR) {
+      if (jqXHR.status == 401) {
+        var session_message = "<%= I18n.t :session_timeout, :scope => [:views, :shared] %>";
+        alert("session_message: "+session_message);
+        window.location = '<%= root_path %>';
+      }
+      else if (jqXHR) {
+        alert(jqXHR.responseText);
+      }
+    });
+*/
+
+    $('.jqmDelete').click(function() {
+      var proceed = confirm("Are you sure you want to cancel the creation of this dataset?");
+      if (proceed) {
+        $('#new_dataset_dialog').html("<span class='loading'/></div>");
+      }
+      else {
+        return false;
+      }
+    });
+  });
+</script>
+

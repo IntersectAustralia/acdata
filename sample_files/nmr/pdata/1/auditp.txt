@@ -1,0 +1,33 @@
+##TITLE= Audit trail, TOPSPIN		Version 2.1
+##JCAMPDX= 5.01
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= iconnmr
+$$ D:/data/dmg/nmr/110706-dmg/1/pdata/1/auditp.txt
+##AUDIT TRAIL=  $$ (NUMBER, WHEN, WHO, WHERE, PROCESS, VERSION, WHAT)
+(   1,<2011-07-06 11:28:29.859 +1000>,<iconnmr>,<GAUSS>,<go>,<TOPSPIN 2.1>,
+      <created by zg
+	started at 2011-07-06 11:28:13.390 +1000,
+	POWCHK enabled, PULCHK disabled,
+       configuration hash MD5:
+       AD 17 23 88 E1 B0 77 EA 61 BA 79 5A E5 EB FA C5
+       data hash MD5: 48076
+       63 06 17 B9 74 59 46 A9 AD B5 E7 17 7A C1 10 34>)
+(   2,<2011-07-06 11:28:31.546 +1000>,<iconnmr>,<GAUSS>,<proc1d>,<TOPSPIN 2.1>,
+      <Start of raw data processing
+       fp FT_mod = 6 PKNL = 1 PHC0 = 90.15168 PHC1 = -19.84799 SI = 128K 
+       data hash MD5: 128K
+       3F 2F 5D 60 5E 99 54 FD 7D B9 F6 B0 87 8D 73 E9>)
+(   3,<2011-07-06 11:40:16.218 +1000>,<iconnmr>,<GAUSS>,<audit>,<TOPSPIN 2.1>,
+      <user comment:
+       TITLE=50% partial reduction of arsanilic acid
+       16 scan fpTITLE_END
+       data hash MD5: 128K
+       3F 2F 5D 60 5E 99 54 FD 7D B9 F6 B0 87 8D 73 E9>)
+(   4,<2011-07-06 14:39:59.918 +1000>,<iconnmr>,<GAUSS>,<proc1d>,<TOPSPIN 2.1>,
+      <apk 
+       data hash MD5: 128K
+       A4 10 9A 7E EE 87 EB 1D 58 29 44 65 B6 E6 03 B1>)
+##END=
+
+$$ hash MD5
+$$ 17 F2 A2 5F 0C 1F 96 C7 35 3B 84 5F B7 4A 42 23

@@ -1,0 +1,154 @@
+<div id="container_page_header" class="wrapper clearfix">
+
+  <div id="container_page_title"><h2 class="orange"><%= @project.name %></h2></div>
+
+  <div id="container_page_details">
+    <% if can? :update, @project %>
+      <div id="container_page_buttons" class="right">
+        <%= link_to '<span>Edit</span>'.html_safe, edit_project_path(@project), {:remote => true, :id => 'show_edit_project_wizard', :class => 'button'} %>
+
+        <% if can? :destroy, @project %>
+          <%= link_to '<span>Delete</span>'.html_safe, project_path, :method => "delete",
+                      :confirm => "Are you sure you want to delete this project and all related experiments/samples?",
+                      :id => 'project_delete_link', :class => 'button red' %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="right flushright details">
+      <p>Project Created: <%= local_date(@project.created_at) %></p>
+
+      <p>Last Modified: <%= local_date(@project.updated_at) %></p>
+    </div>
+
+  </div>
+
+</div>
+
+<div id="container_page_actions" class="wrapper">
+
+  <% if can? :update, @project %>
+    <div class="unit btn-group">
+      <a id="add_dropdown" class="button blue dropdown-toggle" data-toggle="dropdown">
+        <span>Add</span>
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <li> <%= link_to '<span>Add Experiment</span>'.html_safe, new_project_experiment_path(@project), {:remote => true, :id => "show_experiment_wizard", :class => 'experiment'} %> </li>
+        <li>
+          <%= link_to '<span>Add Sample</span>'.html_safe, new_project_sample_path(@project), {:remote => true, :id => "show_sample_wizard", :class => 'sample'} %>
+        </li>
+        <% if has_samples?(@project) %>
+        <li>
+            <%= link_to '<span>Add Dataset</span>'.html_safe, sample_select_project_path(@project), {:remote => true, :class => 'dataset', :id => "show_dataset_wizard"} %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="unit btn-group">
+      <a id="share_dropdown" class="button green dropdown-toggle" data-toggle="dropdown">
+        <span>Share</span>
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu greendropdown">
+
+        <li>
+          <% if has_attachments?(@project) %>
+            <a id="download_data" class="" href="<%= download_project_path(@project) %>"><span>Download Project Data</span></a>
+          <% end %>
+        </li>
+
+        <li>
+          <%= get_publishable_link(@project) %>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="unit">
+      <% if current_user.slide_request_enabled? %>
+        <%= link_to '<span>Request Slide Scanning</span>'.html_safe, request_slide_scanning_project_path(@project), {:remote => true, :id => "show_request_wizard", :class => 'button'} %>
+      <% end %>
+    </div>
+
+    <div class="unit">
+      <% if @project.activity.blank? %>
+        <%= link_to '<span>Assign Grant</span>'.html_safe, select_grant_type_project_activities_path(@project), {:remote => true, :id => "show_activity_wizard", :class => 'button'} %>
+      <% else %>
+        <% if @project.activity.from_rda? %>
+          <%= link_to '<span>Edit Grant</span>'.html_safe, select_rda_grant_project_activities_path(@project), {:remote => true, :id => "show_activity_wizard", :class => 'button'} %>
+        <% else %>
+          <%= link_to '<span>Edit Grant</span>'.html_safe, edit_project_activity_path(@project), {:remote => true, :id => "show_activity_wizard", :class => 'button green'} %>
+        <% end %>
+      <% end %>
+    </div>
+
+
+  <% end %>
+</div>
+
+<div id="container_page_content" class="wrapper">
+  <div class="unit project_left_col">
+    <h3>People with Access</h3>
+    <table id="members_table">
+      <tr class="lightgray_bg">
+        <td><%= @project.user.full_name %></td>
+        <td>Owner</td>
+        <td></td>
+      </tr>
+      <% @project.memberships.order('collaborating desc').each do |membership| %>
+        <tr>
+          <td><%= membership.user.full_name %></td>
+          <td><%= membership.collaborating? ? "Collaborator" : "Member" %></td>
+          <td>
+            <% if can? :remove_member, @project %>
+              <%= link_to '', remove_member_project_path(@project, membership.user), :class => 'remove_button' %>
+            <% end %></td>
+        </tr>
+      <% end %>
+
+      <tr>
+        <td colspan="3">
+          <% if can? :edit_member, @project %>
+            <%= link_to '<span>Add User</span>'.html_safe, edit_project_path(@project), {:remote => true, :id => 'show_edit_project_wizard', :class => 'button add'} %>
+
+          <% end %>
+          <% if can? :leave, @project %>
+            <%= link_to '<span>Remove Me</span>'.html_safe, leave_project_path(@project),
+                        {:class => 'button delete', :method => :post, :confirm => "Are you sure you no longer wish to be a member of this project?"} %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="lastUnit project_right_col">
+
+    <div class="left line"><h3>Project Information</h3></div>
+
+    <div class="row information">
+      <p>
+        <% if @project.url.present? %>
+          <span class="bold">Related Link:</span> <%= link_to "Visit", @project.url, :target => "_blank" %>
+          (<%= @project.url_domain %>)
+        <% end %>
+      </p>
+
+      <p>
+        <% if @project.document.present? %>
+        <span id="related_document_container">
+            <span class="bold">Related Document:</span> <%= link_to @project.document_display_name, @project.document.url %>
+        </span>
+        <% end %>
+      </p>
+    </div>
+
+    <div id="project_description" class="information">
+      <span class="bold">Project description:</span> <%= render_safe_html(@project.description) %>
+    </div>
+
+  </div>
+
+
+</div>
