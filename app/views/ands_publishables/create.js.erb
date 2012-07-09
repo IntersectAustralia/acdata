@@ -1,0 +1,7 @@
+<% unless @redirect_path %>
+
+$("#new_ands_publishable_error_explanation").html("<%= escape_javascript(render 'ands_publishables/error_messages', :target => @ands_publishable) %>");
+$("#new_ands_publishable_error_explanation").addClass('alert');
+$('input[type=submit]', '#wizard').removeClass('ac_loading');
+$('input[type=submit]', '#wizard').removeAttr('disabled');
+<% end %>

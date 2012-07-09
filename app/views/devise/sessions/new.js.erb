@@ -1,0 +1,3 @@
+<% flash[:alert] = 'Your session expired, please sign in again to continue.' %>
+<% puts session %>
+window.location = '<%= new_user_session_url %>';

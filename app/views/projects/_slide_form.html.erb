@@ -1,0 +1,170 @@
+<div id="slide_form">
+  <% if @project.slide_request_sent %>
+    <div class="alert">Continue only if you wish to submit an additional request for this project.</div>
+  <% end %>
+  <div id="slide_form_content">
+
+    <%= hidden_field_tag 'slide[user_id]', current_user.id %>
+    <%= hidden_field_tag 'slide[project_id]', @project.id %>
+
+    <div class="field">
+      <%= label_tag 'slide[name]', "Name:" %>
+      <%= current_user.full_name %>
+    </div>
+
+    <div class="field">
+      <%= label_tag 'slide[email]', "Email:" %>
+      <%= current_user.email %>
+    </div>
+
+    <div class="field">
+      <%= label_tag 'slide[phone_number]', "Phone:" %>
+      <%= current_user.phone_number %>
+    </div>
+
+    <div class="field">
+      <%= label_tag 'slide[supervisor_name]', "Supervisor:" %>
+      <%= current_user.get_supervisor_name %>
+    </div>
+
+    <div class="field">
+      <%= label_tag 'slide[supervisor_email]', "Supervisor Email:" %>
+      <%= current_user.get_supervisor_email %>
+    </div>
+
+    <div class="field">
+      <%= label_tag 'slide[project_name]', "Project Name:" %>
+      <%= @project.name %>
+    </div>
+
+    <div class="field">
+      <%= label_tag 'slide[dept_group]', 'Dept/Group:<span class="required">*</span>'.html_safe %>
+      <%= text_field_tag 'slide[dept_group]', "", :max_length => 255 %>
+    </div>
+
+    <div class="field">
+      <%= label_tag 'slide[reference_lab]', 'Reference Lab:<span class="required">*</span>'.html_safe %>
+      <%= text_field_tag 'slide[reference_lab]', "", :max_length => 255 %>
+    </div>
+
+    <h3>Account Details</h3>
+
+    <div class="field">
+      <%= label_tag 'slide[fund_number]', 'Fund Number:<span class="required">*</span>'.html_safe %>
+      <%= text_field_tag 'slide[fund_number]', "", :max_length => 255 %>
+    </div>
+
+    <div class="field">
+      <%= label_tag 'slide[dept_id]', 'Dept ID:<span class="required">*</span>'.html_safe %>
+      <%= text_field_tag 'slide[dept_id]', "", :max_length => 255 %>
+    </div>
+
+    <div class="field">
+      <%= label_tag 'slide[project_number]', 'Project Number:<span class="required">*</span>'.html_safe %>
+      <%= text_field_tag 'slide[project_number]', "", :max_length => 255 %>
+    </div>
+
+    <h3>Ethics Approval</h3>
+
+    <div class="field">
+      <%= check_box_tag 'slide[approval_not_required]' %>
+      <span class="instructions">
+    I confirm that ethics approval is not required for these samples.
+    </span>
+    </div>
+
+    <div class="field">
+      <%= label_tag 'slide[approval_number]', 'Ethics Approval No:<span class="required">*</span>'.html_safe %>
+      <%= text_field_tag 'slide[approval_number]', "", :max_length => 255 %>
+    </div>
+
+    <h3>Scanning Details</h3>
+
+    <div class="field">
+      <%= label_tag 'slide[num_slides]', 'Number of Slides:<span class="required">*</span>'.html_safe %>
+      <%= text_field_tag 'slide[num_slides]', "", :max_length => 255, :placeholder => "Enter an integer" %>
+    </div>
+
+    <div class="field">
+      <%= label_tag 'slide[scanning_type]', 'Type of Scanning:<span class="required">*</span>'.html_safe %>
+      <%= select_tag 'slide[scanning_type]', options_for_select(%w(Brightfield Fluorescent)) %>
+    </div>
+
+    <div class="field">
+      <%= label_tag 'slide[magnification]', 'Magnification:<span class="required">*</span>'.html_safe %>
+      <%= select_tag 'slide[magnification]', options_for_select(%w(20x 40x)) %>
+    </div>
+
+    <div class="field">
+      <%= label_tag 'slide[include_algorithms]', 'Include Algorithms:<span class="required">*</span>'.html_safe %>
+      <%= select_tag 'slide[include_algorithms]', options_for_select(%w(No Yes)) %>
+    </div>
+
+    <div class="field">
+      <%= label_tag 'slide[fluorescent_label]', 'Fluorescent Label:<span class="required">*</span>'.html_safe %>
+      <%= select_tag 'slide[fluorescent_label]', options_for_select(@fluorescent_labels), :include_blank => "Please select..." %>
+    </div>
+  </div>
+
+  <div class="field instruction instructions">
+    Upon submission, a request for slide scanning will be forwarded to your supervisor and the histology department
+  </div>
+
+  <div class="field actions">
+
+    <%= link_to '<span>Cancel</span>'.html_safe, "", {:id => 'back_button', :class => 'cancel button left'} %>
+    <% if @project.slide_request_sent %>
+      <%= f.submit "Submit", :class => "blue", :confirm => 'You have already requested slide scanning services for this project. Press OK only if you wish to submit an additional request.' %>
+    <% else %>
+      <%= f.submit "Submit", :class => "blue" %>
+    <% end %>
+      
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  $('#slide_approval_not_required').click(function () {
+    if ($('#slide_approval_not_required').is(':checked')) {
+      $('#slide_approval_number').attr('disabled', 'true');
+    } else {
+      $('#slide_approval_number').removeAttr('disabled');
+    }
+
+  });
+
+  $('input').blur(function () {
+    var old_val = $(this).val();
+    $(this).val($.trim(old_val));
+
+  });
+
+  $('form.edit_project').submit(function () {
+    if ($(":input:not(:disabled)[value=]").length) {
+
+      alert("You must specify a value for every field.");
+      $('#project_submit').removeClass('ac_loading');
+      return false;
+    }
+  });
+
+  $("#slide_num_slides").keydown(function (event) {
+    // Allow: backspace, delete, tab and escape
+    if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 ||
+      // Allow: Ctrl+A
+            (event.keyCode == 65 && event.ctrlKey === true) ||
+      // Allow: home, end, left, right
+            (event.keyCode >= 35 && event.keyCode <= 39)) {
+      // let it happen, don't do anything
+      return;
+    }
+    else {
+      // Ensure that it is a number and stop the keypress
+      if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
+        event.preventDefault();
+      }
+    }
+  });
+
+
+</script>

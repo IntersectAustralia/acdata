@@ -1,0 +1,68 @@
+<div id="<%= action %>_sample_dialog" class="jqmWindow lightbox">
+
+  <img src='/images/ICON_VECTOR_300_DEL_000000.png' border=0 class='icon jqmClose' id="close_<%= action %>_sample_dialog" alt='reject'/>
+
+  <div id="title">
+    <% if action.eql?("new") %>
+        <h2>Create New Sample</h2>
+    <% else %>
+        <h2>Edit Sample</h2>
+    <% end %>
+  </div>
+
+  <%= form_for([@project, @experiment, @sample], :remote => true) do |f| %>
+
+    <div id="<%= action %>_sample_error_explanation">
+      <%= render "shared/modal_errors", :target => @sample %>
+    </div>
+
+      <div class="field line">
+        <%= f.label :name, 'Name:<span class="required">*</span>'.html_safe %>
+        <div class="lastUnit">
+          <%= f.text_field :name, :class => "text basic_field", :placeholder => "The name of the sample" %>
+        </div>
+      </div>
+
+      <div class="field line">
+        <%= f.label :description, 'Description:' %>
+        <div class="lastUnit">
+          <%= f.text_area :description, :id => "sample_description", :class => "text basic_field", :rows => 5, :placeholder => "A description of the sample" %>
+        </div>
+      </div>
+
+      <% if action.eql?('edit') %>
+      <div class="field line">
+      <%= label_tag :parent_project, 'Project:' %>
+      <%= select_tag :parent_project, options_from_collection_for_select(@projects + @collaborations, :id, :name, @sample.samplable_type.eql?('Project') ? @sample.samplable_id : @experiment.project.id) %>
+      </div>
+
+      <div class="field line">
+      <%= label_tag :parent_experiment, 'Experiment:' %>
+      <%= select_tag :parent_experiment, options_from_collection_for_select(@project.experiments, :id, :name, @sample.samplable_type.eql?('Experiment') ? @sample.samplable_id : nil), {:include_blank => true} %>
+<script>
+  $(document).ready(function() {
+    var project_experiments = <%= get_project_experiments_json(@projects) %>;
+    var exp_dropdown = $('#parent_experiment');
+    $('#parent_project').change(function() {
+      $("#parent_project option:selected").each(function() {
+        var select_val = $(this).val();
+        exp_dropdown.find('option').remove();
+        exp_dropdown.append($('<option>'));
+        $.each(project_experiments[select_val], function(id, name) {
+          exp_dropdown
+            .append($('<option>', { value : id })
+            .text(name));
+        });
+      });
+    });
+  });
+</script>
+      </div>
+      <% end %>
+
+      <div class="field actions">
+        <%= f.submit :class=> "blue basic_field" %>
+      </div>
+
+  <% end %>
+</div>

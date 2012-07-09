@@ -1,0 +1,14 @@
+Date: 01-10-09
+
+Time: 13:10:54
+
+
+
+Exp. Conditions:
+
+Cyclic voltammetry
+
+Start potential (V) = .0000
+
+First vertex potential (V) = 1.5000
+

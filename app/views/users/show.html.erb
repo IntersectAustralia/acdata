@@ -1,0 +1,99 @@
+<% title 'User Details' %>
+
+<div id="container_usersignup">
+
+  <h3>User details:</h3>
+
+  <% if @user.pending_approval? %>
+    <div class="row">
+
+      <% if can?(:approve, @user) %>
+        <%= link_to "<span>Approve</span>".html_safe, edit_approval_user_path(@user), :class => "green", :method => :get %>
+      <% end %>
+
+      <% if can?(:reject, @user) %>
+        <%= link_to "<span>Reject</span>".html_safe, reject_user_path(@user), :class => "red" %>
+        <%= link_to "<span>Reject permanently</span>".html_safe, reject_as_spam_user_path(@user), :class => "red" %>
+      <% end %>
+
+      <%= link_to '<span>Back</span>'.html_safe, access_requests_users_path, :class => "button" %>
+
+    </div>
+  <% end %>
+
+  <% if @user.approved? %>
+
+    <div class="row">
+
+      <% if can?(:update_role, User) %>
+        <%= link_to '<span>Edit role</span>'.html_safe, edit_role_user_path(@user), :class => "button" %>
+      <% end %>
+
+      <% if can?(:deactivate, User) %>
+        <% if @user == current_user %>
+          <%= link_to "<span>Deactivate</span>".html_safe, deactivate_user_path(@user), :class => "red", :confirm => "This is the user you are currently logged is as. Are you sure you want to deactivate it?", :method => :put %>
+        <% else %>
+          <%= link_to "<span>Deactivate</span>".html_safe, deactivate_user_path(@user), :class => "red", :method => :put %>
+        <% end %>
+      <% end %>
+
+    </div>
+  <% end %>
+
+  <% if @user.deactivated? %>
+
+    <div class="row right">
+
+      <% if can?(:update_role, User) %>
+        <%= link_to '<span>Edit role</span>'.html_safe, edit_role_user_path(@user), :class => "button" %>
+      <% end %>
+
+      <% if can?(:activate, User) %>
+        <%= link_to "<span>Activate</span>".html_safe, activate_user_path(@user), :classs => "green", :method => :put %>
+      <% end %>
+
+    </div>
+  <% end %>
+
+  <div id="container_usersignup_forms">
+
+    <div class="row"><%= render_field "First name", @user.first_name %></div>
+    <div class="row"><%= render_field "Last name", @user.last_name %></div>
+    <div class="row"><%= render_field "Email", @user.email %></div>
+    <div class="row"><%= render_field "Phone", @user.phone_number %></div>
+
+    <% if !@user.pending_approval? %>
+      <div class="row"><%= render_field_with_block "Last Logged In" do %>
+          <% if @user.last_sign_in_at.nil? %>Never logged in
+            <% else %><%= @user.last_sign_in_at.localtime.strftime("%d/%m/%Y %I:%M%p") %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="row"><%= render_field "Is a research student?", @user.is_student? ? "Yes" : "No" %></div>
+    <div class="row"><%= render_field "Supervisor Name", (@user.get_supervisor_name) %></div>
+    <div class="row"><%= render_field "Supervisor Email", (@user.get_supervisor_email) %></div>
+
+    <div class="row"><%= render_field "Role", (@user.role ? @user.role.name : "") %></div>
+
+    <div class="row">
+      <%= render_field_with_block "Status" do %>
+        <% if @user.status == 'A' %>
+          Active
+        <% elsif @user.status == 'D' %>
+          Deactivated
+        <% elsif @user.status == 'U' %>
+          Pending Approval
+        <% elsif @user.status == 'R' %>
+          Rejected
+        <% end %>
+      <% end %>
+    </div>
+    <div id="container_usersignup_footer">
+      <%= link_to '<span>Back</span>'.html_safe, users_path, :class => "button" %>
+    </div>
+
+  </div>
+
+</div>

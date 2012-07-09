@@ -1,0 +1,156 @@
+<h3>Login Test</h3>
+<form id="login_form">
+Username: <input id="username" type="text" name="username"><br>
+Password: <input id="password" type="password" name="password">
+<input type="button" id="login" value="Login">
+</form>
+
+<h3>List Samples Test</h3>
+
+<form id="list_samples_form" action="">
+<input type="button" id="list_samples" value="List samples for <%= current_user.login %>"><span id="list_samples_waiting"><img src="/images/indicator.gif"></span>
+</form>
+
+<h3>List Instruments Test</h3>
+
+<form id="list_instruments_form" action="">
+<input type="button" id="list_instruments" value="List instruments"><span id="list_instruments_waiting"><img src="/images/indicator.gif"></span>
+</form>
+
+<!--
+<h3>Create Dataset Test</h3>
+<form id="create_form" data-remote="true">
+Dataset Name: <input id="dataset_name" type="text" name="dataset"><br>
+Sample: <select id="sample_name" name="sample_id"></select> (if this is empty, run the list samples test above)<br>
+Instrument: <select id="instrument_id" name="instrument_id"></select> (if this is empty, run the list instruments test above)<br>
+File: <input type="file" name="file_id_1"><br>
+Metadata:<br>
+Key: <input id="metadata_key" name="metadata_key" type="text"><br>
+Value: <input id="metadata_value" name="metadata_value" type="text"><br>
+<input type="button" id="create" value="Create Dataset">
+</form>
+-->
+
+<h3>Send Notification Test</h3>
+
+<h3>Results</h3>
+<div id="result">
+  <strong>Response Code</strong>
+  <div id="response_code"></div>
+  <strong>Response Body</strong>
+  <div id="response_body"></div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $("span[id$='_waiting']").hide();
+  });
+  function waiting() {
+    $('#response_body').empty();
+    $('#response_code').empty();
+    $("span[id$='_waiting']").show();
+  };
+
+  function show_response(content, status_code) {
+    $('#response_body').html('<pre>'+JSON.stringify(content, null, 4)+'</pre>');
+    $('#response_code').html(status_code);
+  }
+
+  $.ajaxSetup({
+    complete: function(jqXHR, textStatus) {
+      $("span[id$='_waiting']").hide();
+    }
+  });
+
+  $('#list_samples').click(function() {
+    waiting();
+    var resp;
+    resp = $.ajax({
+      url: "<%= api_samples_path %>",
+      type: "GET",
+      contentType: "application/json",
+      success: function(content, textStatus, jqXHR) {
+        show_response(content, jqXHR.status);
+        $('#sample_name').find('option').remove();
+        for each (var elem in content.samples) {
+          $('#sample_name').append("<option value="+elem.id+">"+elem.name+"</option>");
+        }
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        alert("list failed: "+textStatus+", "+errorThrown);
+      }
+    });
+  });
+
+  $('#list_instruments').click(function() {
+    waiting();
+    $.ajax({
+      url: "<%= api_instruments_path %>",
+      type: "GET",
+      contentType: "application/json",
+      success: function(content, textStatus, jqXHR) {
+        show_response(content, jqXHR.status);
+        $('#instrument_id').find('option').remove();
+        for each (var elem in content.instruments["Chemistry Instruments"]) {
+          $('#instrument_id').append("<option value="+elem.id+">"+elem.name+"</option>");
+        }
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        alert("list failed: "+textStatus+", "+errorThrown);
+      }
+    });
+  });
+
+  $('#create').click(function() {
+    waiting();
+    formdata = {
+      "sample_id" : $('#sample_id'),
+      "name" : $('#dataset_name'),
+      "files" : [ "file_id_1" ],
+      "metadata" : {
+      }
+    };
+    $.ajax({
+      url: "<%= api_datasets_path %>",
+      type: "POST",
+      contentType: "application/json",
+      success: function(content, textStatus, jqXHR) {
+        show_response(content, jqXHR.status);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        alert("list failed: "+textStatus+", "+errorThrown);
+      }
+    });
+  });
+
+  $('#login').click(function() {
+    username = $('#username').val();
+    password = $('#password').val();
+    formdata = {
+        "user" : {
+          "login" : username,
+          "password" : password
+        }
+      };
+    $.ajaxSetup({
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+      }
+    });
+
+    $.ajax({
+      type: "POST",
+      url: "<%= new_user_session_path(:format => :json) %>",
+      data: JSON.stringify(formdata),
+      //accepts: 'application/json',
+      dataType: 'json',
+      contentType: "application/json; charset=utf-8",
+      success: function(content, textStatus, jqXHR) {
+        show_response(content, jqXHR.status);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        alert("login failed: "+textStatus+", "+errorThrown);
+      }
+    });
+  });
+</script>

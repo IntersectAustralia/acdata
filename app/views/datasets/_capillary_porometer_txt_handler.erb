@@ -1,0 +1,8 @@
+<div id="chartview">
+  <% if !CapillaryPorometerFileHandler.visualisable?(@dataset) %>
+Test Method "<%= CapillaryPorometerFileHandler.test_type_from_metadata(@dataset) %>" has no visualisation.
+  <% else %>
+  <%= image_tag show_display_attachment_dataset_path(@dataset), :alt => @visualisation_attachment.filename %>
+  <% end %>
+</div>
+

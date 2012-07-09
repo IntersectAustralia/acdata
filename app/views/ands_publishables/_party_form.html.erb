@@ -1,0 +1,258 @@
+<div id="party_ands_publishable_dialog" class="jqmWindow lightbox">
+
+  <% if @ands_publishable.to_be_submitted? %>
+    <%= link_to "<img src='/images/ICON_VECTOR_300_DEL_000000.png' border=0 id='close_party_ands_publishable_dialog' class='icon jqmDelete' alt='reject'/>".html_safe, project_ands_publishable_path(@project, @ands_publishable, :new => true), :method => "delete" %>
+  <% else %>
+    <img src='/images/ICON_VECTOR_300_DEL_000000.png' border=0 class='icon jqmClose' id="close_party_ands_publishable_dialog" alt='reject'/>
+  <% end %>
+
+  <div id="container">
+
+    <h2>
+      3. Specify Party and Activity Information
+    </h2>
+
+    <%= form_for(@ands_publishable, :url => party_info_specified_project_ands_publishable_path(@project, @ands_publishable), :html => {:method => :put, :remote => true}) do |f| %>
+
+      <div id="party_ands_publishable_error_explanation">
+        <%= render "shared/modal_errors", :target => @ands_publishable %>
+      </div>
+
+      <div id="unsw_party_picker">
+
+        <div class="field">
+          <label for="unsw_party">Include UNSW People or Groups:</label>
+
+          <%= text_field_tag 'unsw_party', nil, :title => 'Start typing a name', :class => "text basic_field", :placeholder => "Start typing a person or group name to search", :disabled => true %>
+        </div>
+
+        <div class="field">
+          <ul class="" id="unsw_party_list">
+            <% @ands_publishable.ands_related_objects.unsw.each do |party| %>
+              <li id="unsw_party_<%= party.handle %>">
+                <%= party.name %>
+                <%= hidden_field_tag "name", party.name, :name => "ands_publishable[unsw_parties][#{party.handle}][name]" %>
+                <span name="remove_unsw_party" class="remove_button basic_field right"></span>
+                <%= select_tag "parties", options_for_select(APP_CONFIG['party_types'].invert, party.relation), :class => "right", :name => "ands_publishable[unsw_parties][#{party.handle}][relation]" %>
+
+              </li>
+            <% end %>
+
+          </ul>
+        </div>
+      </div>
+
+      <div id="non_unsw_party_picker">
+
+        <div class="field">
+          <label for='non_unsw_party'>Include non-UNSW People or Groups:</label>
+
+          <%= text_field_tag 'non_unsw_party', nil, :title => 'Start typing a name', :class => "text basic_field", :placeholder => "Start typing a person or group name to search" %>
+        </div>
+
+        <div class="field">
+          <ul class="" id="non_unsw_party_list">
+            <% @ands_publishable.ands_related_objects.non_unsw.each do |party| %>
+              <li id="non_unsw_party_<%= party.handle %>">
+                <span class="name">
+                  <%= party.name %>
+                  <%= hidden_field_tag "name", party.name, :name => "ands_publishable[non_unsw_parties][#{party.handle}][name]" %>
+                </span>
+
+                <span name="remove_non_unsw_party" class="remove_button basic_field right"></span>
+                <%= select_tag "parties", options_for_select(APP_CONFIG['party_types'].invert, party.relation), :class => "right", :name => "ands_publishable[non_unsw_parties][#{party.handle}][relation]" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+
+      <div class="field"></div>
+      <h3>Service and Activity Records</h3>
+
+      <div class="instruction instructions"> Include:</div>
+      <% @mandatory_services.each do |name, handle| %>
+        <%= hidden_field_tag 'ands_publishable[services][]', handle %>
+      <% end %>
+
+      <% @conditional_services.each do |name, handle| %>
+        <div class="field instructions">
+          <%= check_box_tag 'ands_publishable[services][]', handle, @checked_handles.include?(handle) %>
+          <%= name %>
+        </div>
+      <% end %>
+
+      <% @instruments.each do |instrument| %>
+        <div class="field instructions">
+          <%= check_box_tag 'ands_publishable[instruments][]', instrument.handle, @checked_handles.include?(instrument.handle), :id => instrument.handle[/\d+$/] %>
+          <%= instrument.name %>
+        </div>
+      <% end %>
+      <% if @activity %>
+        <div class="field instructions">
+          <%= check_box_tag 'ands_publishable[activity]', @activity.handle, @checked_handles.include?(@activity.handle), :id => @activity.handle[/\d+$/] %>
+          <%= @activity.display_name %>
+        </div>
+      <% end %>
+
+      <div class="field line">
+
+        <div class="field actions">
+          <%= f.submit "Back", :id => 'back_button', :class => 'gray left basic_field' %>
+          <%= f.submit "Next", :class => "blue basic_field" %>
+        </div>
+      </div>
+
+      <div id="party_types_blueprint">
+        <%= select_tag "parties", options_for_select(APP_CONFIG['party_types'].invert), :class => "right", :name => "handle" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<script>
+  <% dialog_id = "party_ands_publishable_dialog" %>
+  $("#unsw_party", "#<%= dialog_id %>").autocomplete({
+    source:'/users/list',
+    minLength:1,
+    delay:1000,
+    open:function () {
+      $('.ui-menu').width(500)
+    },
+    select:function (event, ui) {
+      if (ui) {
+        var member_id = ui.item.id;
+        var selector = $("li#unsw_party_" + member_id);
+        if (selector.length == 0) {
+          var member_name = ui.item.value;
+          // expecting id to be ands handle
+          var content = $('#party_types_blueprint').html();
+          var regexp = new RegExp('handle', 'g');
+          content = content.replace(regexp, 'ands_publishable[unsw_parties][' + member_id + '][relation]');
+
+          $('ul#unsw_party_list').append('<li id="unsw_party_'
+                  + member_id
+                  + '">'
+                  + '<span class="name">'
+                  + member_name
+                  + '</span>'
+                  + '<input type="hidden" name="ands_publishable[unsw_parties]['
+                  + member_id
+                  + '][name]" value="'
+                  + member_name
+                  + '">'
+                  + '<span name="remove_unsw_party" class="remove_button basic_field right"></span>'
+                  + content
+                  + '</li>'
+          );
+
+        }
+
+      }
+      $('#unsw_party', "#<%= dialog_id %>").val('');
+      return false;
+    }
+  });
+
+  $("#non_unsw_party", "#<%= dialog_id %>").autocomplete({
+    source:'/ands_publishables/list_ands_parties',
+    minLength:1,
+    delay:1000,
+    open:function () {
+      $('.ui-menu').width(643)
+    },
+    select:function (event, ui) {
+      if (ui) {
+        var member_id = ui.item.id;
+        var selector = $("li#non_unsw_party_" + member_id);
+        if (selector.length == 0) {
+          var member_name = ui.item.value;
+          // expecting id to be ands handle
+          var content = $('#party_types_blueprint').html();
+          var regexp = new RegExp('handle', 'g');
+          content = content.replace(regexp, 'ands_publishable[non_unsw_parties][' + member_id + '][relation]');
+
+          $('ul#non_unsw_party_list').append('<li id="non_unsw_party_'
+                  + member_id
+                  + '">'
+                  + '<span class="name">'
+                  + member_name
+                  + '</span>'
+                  + '<input type="hidden" name="ands_publishable[non_unsw_parties]['
+                  + member_id
+                  + '][name]" value="'
+                  + member_name
+                  + '">'
+                  + '<span name="remove_non_unsw_party" class="remove_button basic_field right"></span>'
+                  + content
+                  + '</li>'
+          );
+
+        }
+
+      }
+      $('#non_unsw_party', "#<%= dialog_id %>").val('');
+      return false;
+    }
+  });
+
+
+  function generateID() {
+    return new Date().getTime();
+  }
+
+  $(".remove_button", "#<%= dialog_id %>").live('click', function () {
+    $(this).parent().remove();
+    return false;
+  });
+
+
+  $(function () {
+    $('#unsw_party', "#<%= dialog_id %>").keypress(function (e) {
+      // Stop "Enter" choosing arbitrary text from input text field
+      if (e.keyCode == 13) {
+        return false;
+      }
+    });
+    $('#non_unsw_party', "#<%= dialog_id %>").keypress(function (e) {
+      // Stop "Enter" choosing arbitrary text from input text field
+      if (e.keyCode == 13) {
+        return false;
+      }
+    });
+  });
+
+  <% if @ands_publishable.to_be_submitted? %>
+
+  $('.jqmDelete').click(function () {
+    var proceed = confirm("Are you sure you want to cancel the creation of this publishable?");
+    if (proceed) {
+      $('#container').html("<span class='loading'/>");
+      $(this).hide();
+
+    }
+    else {
+      return false;
+    }
+  });
+  <% else %>
+
+  $('.jqmClose').click(function () {
+    return confirm("Are you sure you want to cancel the the republishing process?");
+  });
+
+  <% end %>
+
+  $('form.edit_ands_publishable').submit(function () {
+    var party_count = $('ul#non_unsw_party_list > li').length;
+    party_count += $('ul#unsw_party_list > li').length;
+
+    var selected = $("#ands_publishable_submit:focus");
+    if (selected.length && party_count == 0) {
+      $('input[type="submit"]').removeClass('ac_loading');
+      alert("There must be at least one party member specified.");
+      return false;
+    }
+
+  });
+
+</script>

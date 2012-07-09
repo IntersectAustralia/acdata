@@ -1,0 +1,61 @@
+<div id="new_dataset_dialog" class="jqmWindow lightbox">
+
+  <%= link_to "<img src='/images/ICON_VECTOR_300_DEL_000000.png' border=0 id='close_dataset_dialog' class='icon jqmDelete' alt='reject'/>".html_safe, get_dataset_path(@dataset, :new => true), :method => "delete" %>
+  <div id="container">
+
+    <div id="title">
+      <h2>3. View Metadata</h2>
+    </div>
+    <%= nested_form_for @dataset, :remote => true do |f| %>
+
+    <div id="edit_dataset_error_explanation">
+      <%= render "shared/modal_errors", :target => @dataset %>
+    </div>
+
+      <div id="metadata_display" class="field">
+        <p class="">Supplied Metadata</p><br>
+        <div>
+          <%= f.fields_for :supplied_metadata do |metadata_form| %>
+	  <span class="label">Key:</span>
+	  <%= metadata_form.text_field :key, :class => "inline" %>
+	  <span class="label">Value:</span>
+	  <%= metadata_form.text_field :value, :class => "inline" %>
+	  <%= metadata_form.hidden_field :supplied, {:value => true} %>
+	  <%= metadata_form.link_to_remove "", :class=> "remove_button"  %>
+          <% end %>
+
+          <p><%= f.link_to_add '<span>Add metadata</span>'.html_safe, :supplied_metadata, :class => "button green add" %></p>
+        </div>
+        <br>
+        <p class="">Extracted Metadata</p><br>
+        <%= render 'metadata_values', :values => @dataset.metadata_values.extracted, :table_id => "extracted" %>
+        <br>
+
+        <br>
+      </div>
+
+
+      <div class="field actions">
+        <div class="left">
+          <%= link_to '<span>Back</span>'.html_safe, get_upload_dataset_path(@dataset), :method => :get, :id => "back_button", :class => "button", :remote => true %>
+        </div>
+        <%= f.submit 'Finish', :class => "blue", :id => "next_button" %>
+
+      </div>
+    <% end %>
+  </div>
+</div>
+<script type="text/javascript">
+
+  $('.jqmDelete').click(function () {
+    var proceed = confirm("Are you sure you want to cancel the creation of this dataset?");
+    if (proceed) {
+      $('#container').html("<span class='loading'/>");
+      $(this).hide();
+
+    }
+    else {
+      return false;
+    }
+  });
+</script>

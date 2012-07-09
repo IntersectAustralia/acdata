@@ -1,0 +1,170 @@
+<div id="activity_dialog" class="jqmWindow lightbox">
+
+  <img src='/images/ICON_VECTOR_300_DEL_000000.png' border=0 class='icon jqmClose' id="close_activity_dialog" alt='reject'/>
+
+  <h2>
+    <% if @project.activity %>
+      Edit Project Grant
+    <% else %>
+      Assign a Grant to this Project
+    <% end %>
+  </h2>
+
+  <%= form_for([@project, @activity], :remote => true) do |f| %>
+
+  <div id="activity_error_explanation">
+    <%= render "shared/modal_errors", :target => @activity %>
+  </div>
+
+    <h3> ARC and NHMRC Grants </h3>
+
+    <div class="instructions instruction">
+      Use the menu box below to search the project by its ID. However, if your grant cannot be found, either speak to the
+      respective funding body or alternatively use the back button, select NO and create the project manually. You may
+      also
+      check <%= link_to "Research Data Australia Activity Records", "http://services.ands.org.au/home/orca/rda/search#!/tab=activity", :target => "_blank" %>
+
+    </div>
+    <div id="rda_grant_picker">
+
+      <div class="field">
+        <label for="rda_grant">Search Project ID:</label>
+
+        <%= text_field_tag 'rda_grant', nil, :title => 'Start typing a project', :class => "text basic_field", :placeholder => "Type the project ID", :maxlength => 255 %>
+        <%= link_to '<span>Search</span>'.html_safe, '#', {:id => 'search_rda_grant', :class => 'button'} %>
+
+      </div>
+      <%= f.hidden_field :from_rda %>
+      <%= f.hidden_field :published %>
+      <%= f.hidden_field :rda_grant_id %>
+
+      <div id='grant_attributes'>
+        <% if @rda_grant.present? %>
+          <div class="field">
+            <%= label_tag 'project_id', "Project ID:" %>
+            <div id='project_id'>
+              <%= @rda_grant.grant_id %>
+            </div>
+          </div>
+          <div class="field">
+            <%= label_tag 'primary_name', "Project Name:" %>
+            <div id='primary_name'>
+              <%= @rda_grant.primary_name %>
+
+            </div>
+          </div>
+          <div class="field">
+            <%= label_tag 'alternative_name', "Alternative Name:" %>
+            <div id='alternative_name'>
+              <%= @rda_grant.alternative_name %>
+
+            </div>
+          </div>
+          <div class="field">
+            <%= label_tag 'description', "Description:" %>
+            <div id='description'>
+              <% if @rda_grant.description %>
+                <% @rda_grant.description.split("\n").each do |line| %>
+
+                  <%= line %> <br/>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+
+        <% else %>
+          <div class="field">
+            <%= label_tag 'project_id', "Project ID:" %>
+            <div id='project_id'></div>
+          </div>
+          <div class="field">
+            <%= label_tag 'primary_name', "Project Name:" %>
+            <div id='primary_name'></div>
+          </div>
+          <div class="field">
+            <%= label_tag 'alternative_name', "Alternative Name:" %>
+            <div id='alternative_name'></div>
+          </div>
+          <div class="field">
+            <%= label_tag 'description', "Description:" %>
+            <div id='description'></div>
+          </div>
+        <% end %>
+      </div>
+      <div id="container"></div>
+    </div>
+
+
+    <div class="field line">
+
+      <div class="field actions">
+        <%= link_to '<span>Back</span>'.html_safe, select_grant_type_project_activities_path(@project), {:method => :get, :remote => true, :id => 'back_button', :class => 'button left'} %>
+        <%= f.submit "Finish", :class => "blue basic_field" %>
+
+      </div>
+    </div>
+
+  <% end %>
+
+  <script type='text/javascript'>
+
+    $('#rda_grant', "#activity_dialog").keypress(function (e) {
+      // Stop "Enter" choosing arbitrary text from input text field
+      if (e.keyCode == 13) {
+        $('#search_rda_grant').click();
+        return false;
+      }
+    });
+
+    $('#search_rda_grant').click(function () {
+      var search = $(this);
+      var rda_grant = $('#rda_grant');
+
+      if (rda_grant.val() != "") {
+        search.addClass('ac_loading');
+        $('#activity_rda_grant_id').val('');
+        $('#project_id').html('');
+        $('#primary_name').html('');
+        $('#alternative_name').html('');
+        $('#description').html('');
+
+        $('#container').addClass('ac_loading');
+
+        // check with server
+        $.get('/activities/validate_rda_grant', {
+          grant_id:rda_grant.val()
+        }).success(
+                function (data) {
+                  search.removeClass('ac_loading');
+
+                  if (data == null) {
+                    rda_grant.addClass('field_with_errors');
+                    rda_grant.css('backgroundColor', 'pink');
+
+                    $("#activity_error_explanation").html("Grant with project ID '" + rda_grant.val() + "' could not be found");
+                    $("#activity_error_explanation").addClass('alert');
+                    return false;
+
+                  } else {
+                    $("#activity_error_explanation").html("");
+                    $("#activity_error_explanation").removeClass('alert');
+                    rda_grant.removeClass('field_with_errors');
+                    rda_grant.css('backgroundColor', '');
+
+                    $('#activity_rda_grant_id').val(data['id']);
+                    $('#project_id').html(data['grant_id']);
+                    $('#primary_name').html(data['primary_name']);
+                    $('#alternative_name').html(data['alternative_name']);
+                    $('#description').html(data['description'].replace(/\n/g, "<br/>"));
+                    return false;
+
+                  }
+
+                });
+      }
+
+    });
+
+  </script>
+</div>
+

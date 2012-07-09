@@ -1,0 +1,8 @@
+POST /Aperio.<%= server_url %>.asmx HTTP/1.1
+User-Agent: Ruby
+SOAPAction: "http://www.aperio.com/webservices/#<%= method_name %>"
+Content-Type: text/xml; charset=utf-8
+Host: <%= server %>:<%= port %>
+Content-Length: <%= content_length %>
+
+<%= soap_body %>

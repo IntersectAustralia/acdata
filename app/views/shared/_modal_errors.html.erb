@@ -1,0 +1,11 @@
+<% if target.errors.any? %>
+    <h2><%= pluralize(target.errors.count, "error") %> prohibited
+      this <%= target.class.name.underscore.humanize.downcase %>
+      from being saved:</h2>
+
+    <ul>
+      <% target.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+      <% end %>
+    </ul>
+<% end %>

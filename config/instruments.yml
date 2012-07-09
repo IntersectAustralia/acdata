@@ -1,0 +1,407 @@
+development: &dev
+  - name: Gaussian 03W
+    instrument_class: DFT
+    description: |
+      Gaussian 03W is a complete implementation of Gaussian 03 for the Windows environment.
+      
+      Gaussian 03W can be used to model:
+      
+      -Vibrational spectra, including IR, non-resonant and pre-resonance Raman intensities, anharmonic vibrational analysis and vibration-rotation coupling.
+      
+      -Magnetic properties, including NMR chem-ical shifts and spin-spin coupling constants.
+      Spectra of chiral molecules: optical rotations, VCD and ROA
+      
+      -G tensors and other contributions to hyper-fine spectra.
+
+    is_available: true
+    upload_prompt: Select a JCAMP-DX (v4 or v5) file for visualisation and metadata information. You may also upload any other file type.
+    instrument_file_types: 
+    - JCAMP-DX (v4)
+    - JCAMP-DX (v5)
+    instrument_rules: 
+      visualisation_list: JCAMP-DX (v4),JCAMP-DX (v5)
+      metadata_list: JCAMP-DX (v4),JCAMP-DX (v5)
+      unique_list: 
+      indelible_list: JCAMP-DX (v4),JCAMP-DX (v5)
+      exclusive_list: 
+  - name: Bruker IFS66
+    instrument_class: FTIR
+    description: http://www.camd.unsw.edu.au/index.php?option=com_content&view=article&id=203&Itemid=68
+    is_available: true
+    upload_prompt: Please upload a SPC file and a JCAMP-DX file for visualisation
+    instrument_file_types: 
+    - JCAMP-DX (v4)
+    - JCAMP-DX (v5)
+    - SP (RamanStation)
+    instrument_rules: 
+      visualisation_list: JCAMP-DX (v4),JCAMP-DX (v5)
+      metadata_list: JCAMP-DX (v4),JCAMP-DX (v5)
+      unique_list: SP (RamanStation)
+      indelible_list: JCAMP-DX (v4),JCAMP-DX (v5)
+      exclusive_list: SP (RamanStation)
+  - name: Nicolet FTIR
+    instrument_class: FTIR
+    description: ""
+    is_available: true
+    upload_prompt: Select a JCAMP-DX (v4 or v5) file for visualisation and metadata information. You may also upload any other file type.
+    instrument_file_types: 
+    - JCAMP-DX (v4)
+    - JCAMP-DX (v5)
+    - SP (RamanStation)
+    instrument_rules: 
+      visualisation_list: JCAMP-DX (v4),JCAMP-DX (v5)
+      metadata_list: JCAMP-DX (v4),JCAMP-DX (v5)
+      unique_list: SP (RamanStation)
+      indelible_list: 
+      exclusive_list: SP (RamanStation)
+  - name: Perkin Elmer Spotlight 400 FTIR Microscope
+    instrument_class: FTIR
+    description: |
+      The Spotlight is a Fourier transform infrared (FTIR) spectrometer fitted with with a microscope and attenuated total reflectance (ATR) accessories.
+      
+      Automated XYZ sample stage to enable chemical imaging using reflected or transmitted light with a maximum spatial resolution of 6.25 micron.
+      
+      Universal ATR enables fast analysis of thin films, opaque solids and powders.
+      
+      An ATR imaging crystal is available for fast imaging at 1.56 micron spatial resolution - ideal for biological samples, as interference from water is significantly reduced.
+      
+      Harrick Grazing Angle ATR accessory enables analysis of ultrathin films and monolayers.
+      
+      Typical samples include organic powders and liquids and films, biological sections, minerals and polymers. 
+
+    is_available: true
+    upload_prompt: Select a JCAMP-DX (v4 or v5) file for visualisation and metadata information. You may also upload any other file type.
+    instrument_file_types: 
+    - JCAMP-DX (v4)
+    - JCAMP-DX (v5)
+    instrument_rules: 
+      visualisation_list: JCAMP-DX (v4),JCAMP-DX (v5)
+      metadata_list: JCAMP-DX (v4),JCAMP-DX (v5)
+      unique_list: 
+      indelible_list: JCAMP-DX (v4),JCAMP-DX (v5)
+      exclusive_list: 
+  - name: Bruker Avance III 300 Solid State (Pines)
+    instrument_class: NMR
+    description: 
+    is_available: true
+    upload_prompt: Select a JCAMP-DX file and an NMR directory
+    instrument_file_types: 
+    - JCAMP-DX (v4)
+    - JCAMP-DX (v5)
+    - NMR
+    instrument_rules: 
+      visualisation_list: JCAMP-DX (v4), JCAMP-DX (v5)
+      metadata_list: NMR
+      unique_list: 
+      indelible_list: 
+      exclusive_list: 
+  - name: Bruker Avance III 400 (Gauss)
+    instrument_class: NMR
+    description: 
+    is_available: true
+    upload_prompt: Select a JCAMP-DX file and an NMR directory
+    instrument_file_types: 
+    - JCAMP-DX (v4)
+    - JCAMP-DX (v5)
+    - NMR
+    instrument_rules: 
+      visualisation_list: JCAMP-DX (v4), JCAMP-DX (v5)
+      metadata_list: NMR
+      unique_list: 
+      indelible_list: 
+      exclusive_list: 
+  - name: Bruker Avance III 500 (Hertz)
+    instrument_class: NMR
+    description: 
+    is_available: true
+    upload_prompt: Select a JCAMP-DX file and an NMR directory
+    instrument_file_types: 
+    - JCAMP-DX (v4)
+    - JCAMP-DX (v5)
+    - NMR
+    instrument_rules: 
+      visualisation_list: JCAMP-DX (v4), JCAMP-DX (v5)
+      metadata_list: NMR
+      unique_list: 
+      indelible_list: 
+      exclusive_list: 
+  - name: Bruker Avance III 600 (Tesla)
+    instrument_class: NMR
+    description: 
+    is_available: true
+    upload_prompt: Select a JCAMP-DX file and an NMR directory
+    instrument_file_types: 
+    - JCAMP-DX (v4)
+    - JCAMP-DX (v5)
+    - NMR
+    instrument_rules: 
+      visualisation_list: JCAMP-DX (v4), JCAMP-DX (v5)
+      metadata_list: NMR
+      unique_list: 
+      indelible_list: 
+      exclusive_list: 
+  - name: Bruker DPX 300 (Flip)
+    instrument_class: NMR
+    description: 
+    is_available: true
+    upload_prompt: Select a JCAMP-DX file and an NMR directory
+    instrument_file_types: 
+    - JCAMP-DX (v4)
+    - JCAMP-DX (v5)
+    - NMR
+    instrument_rules: 
+      visualisation_list: JCAMP-DX (v4), JCAMP-DX (v5)
+      metadata_list: NMR
+      unique_list: 
+      indelible_list: 
+      exclusive_list: 
+  - name: Bruker DPX 300 (Gyro)
+    instrument_class: NMR
+    description: 
+    is_available: true
+    upload_prompt: Select a JCAMP-DX file and an NMR directory
+    instrument_file_types: 
+    - JCAMP-DX (v4)
+    - JCAMP-DX (v5)
+    - NMR
+    instrument_rules: 
+      visualisation_list: JCAMP-DX (v4), JCAMP-DX (v5)
+      metadata_list: NMR
+      unique_list: 
+      indelible_list: 
+      exclusive_list: 
+  - name: PMI Capilary Flow Porometer
+    instrument_class: Porometer
+    description: ""
+    is_available: true
+    upload_prompt: Select both a .cft raw data file as well as either a .txt or .xls file that you have exported (but not both).
+    instrument_file_types: 
+    - Capillary Porometer (.txt)
+    - Capillary Porometer (.xls)
+    - Capillary Porometer (.cft)
+    instrument_rules: 
+      visualisation_list: Capillary Porometer (.txt),Capillary Porometer (.xls)
+      metadata_list: Capillary Porometer (.txt),Capillary Porometer (.xls)
+      unique_list: 
+      indelible_list: Capillary Porometer (.cft)
+      exclusive_list: Capillary Porometer (.txt),Capillary Porometer (.xls)
+  - name: Autolab PGSTAT 12 Potentiostat
+    instrument_class: Potentiostats
+    description: "General-purpose potentiostat.\r\n\
+      \r\n\
+      Instrument specifications\r\n\
+      \r\n\
+      Electrode connections: 2, 3 or 4\r\n\
+      Potential range: \xC2\xB1 10 V\r\n\
+      Compliance voltage: \xC2\xB1 12 V\r\n\
+      Maximum current:  \xC2\xB1 250 mA\r\n\
+      \r\n\
+      Current ranges: \r\n\
+      100 mA, 10 mA, 1 mA, 100 \xC2\xB5A, 10 \xC2\xB5A, 1 \xC2\xB5A, 100 nA, 10 nA\r\n\
+      \r\n\
+      Potentiostat bandwidth: 500 kHz\r\n\
+      \r\n\
+      Computer interface: Proprietry via PC (ISA-16bit) interface\r\n\
+      \r\n"
+    is_available: true
+    upload_prompt: Select the set of potentiostat output files consisting of one each of .txt, .ifi, .ifw, .ofw and a .frp file
+    instrument_file_types: 
+    - Potentiostat (.txt)
+    - Potentiostat (.ifi)
+    - Potentiostat (.ifw)
+    - Potentiostat (.ofw)
+    - Potentiostat (.frp)
+    instrument_rules: 
+      visualisation_list: Potentiostat (.txt)
+      metadata_list: Potentiostat (.txt)
+      unique_list: Potentiostat (.txt),Potentiostat (.ifw),Potentiostat (.ofw),Potentiostat (.ifi),Potentiostat (.frp)
+      indelible_list: Potentiostat (.ifw),Potentiostat (.ofw),Potentiostat (.ifi),Potentiostat (.frp)
+      exclusive_list: 
+  - name: "\xC2\xB5AUTOLAB Potentiostat"
+    instrument_class: Potentiostats
+    description: "The most basic in the Autolab family of instruments, the \xC2\xB5AutolabIII in combination with the powerful NOVA software, can be used for all standard DC-electrochemical techniques. \r\n\
+      \r\n\
+      The instrument has a built in analog integrator, analog and digital inputs and analog and digital outputs, making it a versatile instrument despite its non-modular nature.\r\n\
+      \r\n\
+      The analog input allows you to measure an external signal (e.g. voltage) and the analog output can be used to control Autolab accessories or external devices (e.g. Rotating Disk Electrode). The digital inputs and outputs can be used to control devices such as mercury drop electrodes. \r\n\
+      \r\n\
+      Key features: \t \r\n  \t \r\n\
+      Electrode connections \t2, 3\r\n\
+      Potential range \t+/- 5 V\r\n\
+      Compliance voltage \t+/- 12 V\r\n\
+      Maximum current \t+/- 80 mA\r\n\
+      \r\n\
+      Current ranges\r\n\
+      \t\r\n\
+      \r\n\
+      10 mA to 10 nA\r\n\
+      Potential accuracy \t+/- 0.2 %\r\n\
+      Potential resolution \t3 \xC2\xB5V\r\n\
+      Current accuracy \t+/- 0.2 %\r\n\
+      Current resolution \t0.0003 % (of current range)\r\n\
+      Input impedance \t> 100 GOhm\r\n\
+      Potentiostat bandwidth \t500 kHz\r\n\
+      Computer interface \tUSB\r\n\
+      Control software \tNOVA"
+    is_available: false
+    upload_prompt: Select the set of potentiostat output files consisting of one each of .txt, .ifi, .ifw, .ofw and a .frp file
+    instrument_file_types: 
+    - Potentiostat (.txt)
+    - Potentiostat (.ifi)
+    - Potentiostat (.ifw)
+    - Potentiostat (.ofw)
+    - Potentiostat (.frp)
+    instrument_rules: 
+      visualisation_list: Potentiostat (.txt)
+      metadata_list: Potentiostat (.txt)
+      unique_list: Potentiostat (.txt),Potentiostat (.ifi),Potentiostat (.ifw),Potentiostat (.ofw),Potentiostat (.frp)
+      indelible_list: Potentiostat (.txt),Potentiostat (.ifi),Potentiostat (.ifw),Potentiostat (.ofw),Potentiostat (.frp)
+      exclusive_list: 
+  - name: Perkin Elmer Ramanstation 400
+    instrument_class: Raman Spectrometers
+    description: |
+      Raman spectrometer with a low magnification camera to enable micron-scale chemical and structural mapping of samples as well as standard point spectra of solids, powders and liquids. 
+      
+          Excitation source: 785nm (infrared) laser, laser spot size on sample using 100x objective is 10 micron with maximum of 100mW laser power at the sample.
+      
+          Automated XYZ stage with 5x, 20x, 50x and 100x microscope objectives for mapping and depth profiling.
+      
+          Echelle-based spectrograph which avoids the requirement to "stitch" high-resolution scans together.
+      
+          Example samples: organic compounds and polymers with chromophores exhibiting fluorescence.
+      
+          The camera/laser can be configured sideways to accommodate larger samples and an optic fibre probe available for samples of any size.
+
+    is_available: true
+    upload_prompt: Select a JCAMP-DX file and an SP (RamanStation) or FSM (RamanStation) file
+    instrument_file_types: 
+    - JCAMP-DX (v4)
+    - JCAMP-DX (v5)
+    - SP (RamanStation)
+    - FSM (RamanStation)
+    instrument_rules: 
+      visualisation_list: JCAMP-DX (v4),JCAMP-DX (v5)
+      metadata_list: SP (RamanStation),FSM (RamanStation)
+      unique_list: 
+      indelible_list: 
+      exclusive_list: SP (RamanStation),FSM (RamanStation)
+  - name: Renishaw Invia Raman Microscope
+    instrument_class: Raman Spectrometers
+    description: |
+      The inVia is a Raman spectrometer coupled to a microscope. The microscope focuses a laser source onto specific areas of a sample then collects the light scattered off the surface of the sample and directs it through a Raman spectrometer. The inVia is located on the left-hand side of lab G31. 
+      
+          Standard set-up: Raman using 514nm (green) Argon ion laser with 1800 l/mm grating.
+      
+          Raman using 325nm or 442nm - email the lab 24 hours before your booking.
+      
+          Mapping to 500nm resolution using 514nm laser.
+          Standard mode laser spot size is around 1.5 micron at 50x magnification. Smaller spot size of 0.5 micron is possible when using confocal mode.
+      
+          Photoluminescence at 325nm - email the lab 24 hours before your booking.
+      
+          Near excitation measurements, down to ~8cm-1 - email the lab 24 hours before your booking.
+      
+          Higher spectral resolution is available for the 514nm laser by using a the 2400 or 3000 l/mm gratings (see image below) - email the lab 24 hours before your booking.
+      
+          An optic fibre probe is available for samples that don't fit under the microscope - email the lab 24 hours before your booking.
+
+    is_available: false
+    upload_prompt: select a DX file for visualisation (use WIRE2 file converter to convert wxd file to dx files), add other files as supplement
+    instrument_file_types: 
+    - JCAMP-DX (v4)
+    - JCAMP-DX (v5)
+    instrument_rules: 
+      visualisation_list: JCAMP-DX (v4),JCAMP-DX (v5)
+      metadata_list: JCAMP-DX (v4),JCAMP-DX (v5)
+      unique_list: JCAMP-DX (v4),JCAMP-DX (v5)
+      indelible_list: JCAMP-DX (v4),JCAMP-DX (v5)
+      exclusive_list: JCAMP-DX (v4),JCAMP-DX (v5)
+  - name: Renishaw Raman RM1000
+    instrument_class: Raman Spectrometers
+    description: "The RM1000 uses a microscope to focus a 780nm laser onto a sample and the scattered light passes through a Raman spectrometer. The 50x microscope objective on the 1000RM enables the 780nm laser spot to be focused to a smaller spot than is possible with the 785nm laser on the RamanStation. We recommend the RM1000 when you need to measure features smaller than 100micron on the sample surface\n\n\
+      \xE2\x80\xA2 Excitation source: 780nm (infrared) laser.\n\
+      \xE2\x80\xA2 Microscope objectives available: 5x, 10x, and 50x, plus 20x long working distance.\n\
+      \xE2\x80\xA2 Manual stage only (mapping not available).\n\
+      \xE2\x80\xA2 Samples include organic compounds and polymers with chromophores exhibiting fluorescence.\n"
+    is_available: true
+    upload_prompt: Select a JCAMP-DX file and an SP (RamanStation) or FSM (RamanStation) file
+    instrument_file_types: 
+    - JCAMP-DX (v4)
+    - JCAMP-DX (v5)
+    - SP (RamanStation)
+    - FSM (RamanStation)
+    instrument_rules: 
+      visualisation_list: JCAMP-DX (v4), JCAMP-DX (v5)
+      metadata_list: SP (RamanStation), FSM (RamanStation)
+      unique_list: 
+      indelible_list: 
+      exclusive_list: SP (RamanStation), FSM (RamanStation)
+  - name: Renishaw Raman RM2000
+    instrument_class: Raman Spectrometers
+    description: |
+      The RM2000 uses a microscope to focus a 633nm laser onto a sample and the scattered light passes through a Raman spectrometer.
+      
+      Excitation source: 633nm (near infrared) laser.
+        
+      Microscope objectives available: 10x, 20x, 50x plus 20x and 80x long working distance.
+      
+      Manual stage only (mapping not available).
+          
+      Samples include nanotubes, graphene, polymers.
+
+    is_available: true
+    upload_prompt: Select a JCAMP-DX file and an SP (RamanStation) or FSM (RamanStation) file
+    instrument_file_types: 
+    - JCAMP-DX (v4)
+    - JCAMP-DX (v5)
+    - SP (RamanStation)
+    - FSM (RamanStation)
+    instrument_rules: 
+      visualisation_list: JCAMP-DX (v4),JCAMP-DX (v5)
+      metadata_list: SP (RamanStation),FSM (RamanStation)
+      unique_list: 
+      indelible_list: 
+      exclusive_list: SP (RamanStation),FSM (RamanStation)
+  - name: SS6109
+    instrument_class: Slide Scanner
+    description: Aperio ScanScope XT Slide Scanner
+    is_available: false
+    upload_prompt: ""
+    instrument_file_types:
+    - Aperio Label Thumbnail
+    - Aperio Slide Thumbnail
+    instrument_rules: 
+      visualisation_list: Aperio Label Thumbnail,Aperio Slide Thumbnail
+  - name: PerkinElmer Lambda 35 UV-Visible Spectrometer
+    instrument_class: UVVis Spectrometer
+    description: |
+      The Lambda is a double-beam UV-Visible spectrometer that measures light absorption from the visible to the ultraviolet region (1100nm to 200nm, 1.1eV to 6.2eV). A sample is usually made up to a known concentration in a non-absorbing solvent (such as water) and loaded into a quartz cuvette (available from the lab). Liquids, solutions and transparent solids can be measured. Note that we are not able to measure specular reflectance on this instrument.
+      
+      Standard sample solutions: 10mm pathlength cuvette including stoppers for air-sensitive work
+          
+      Small quantities: 1mm pathlength cuvette is available
+        
+      Solids: a sample holder for measuring transparent solids and thin films on solid substrates such as glass
+
+    is_available: true
+    upload_prompt: Select a JCAMP-DX (v4 or v5) file for visualisation and metadata information. You may also SP Files.
+    instrument_file_types: 
+    - JCAMP-DX (v4)
+    - JCAMP-DX (v5)
+    - SP (RamanStation)
+    instrument_rules: 
+      visualisation_list: JCAMP-DX (v4),JCAMP-DX (v5)
+      metadata_list: JCAMP-DX (v4),JCAMP-DX (v5)
+      unique_list: 
+      indelible_list: JCAMP-DX (v4),JCAMP-DX (v5),SP (RamanStation)
+      exclusive_list: JCAMP-DX (v4),JCAMP-DX (v5)
+  - name: Anton Paar Surpass
+    instrument_class: Zeta Potential
+    description: ""
+    is_available: false
+    upload_prompt: ""
+    instrument_file_types: []
+test: *dev
+qa: *dev
+staging: *dev
+production: *dev

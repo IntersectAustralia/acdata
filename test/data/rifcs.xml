@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<registryObjects xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd" xmlns="http://ands.org.au/standards/rif-cs/registryObjects" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <registryObject group="University of New South Wales">
+    <key>hdl:1959.4/004_300</key>
+    <originatingSource>https://www.researchdata.unsw.edu.au</originatingSource>
+    <collection type="dataset">
+      <name>
+        <namePart>Oxidative Degradation of Polyamide Reverse Osmosis Membranes</namePart>
+      </name>
+      <location>
+        <address>
+          <physical type="postalAddress">
+            <addressPart type="addressLine">UNESCO Centre for Membrane Science and Technology</addressPart>
+            <addressPart type="addressLine">School of Chemical Engineering</addressPart>
+            <addressPart type="addressLine">UNSW Australia 2052</addressPart>
+          </physical>
+        </address>
+      </location>
+      <coverage>
+        <temporal>
+          <date type="dateTo" dateFormat="W3CDTF">2009-05-01T00:00:00+10:00</date>
+          <date type="dateFrom" dateFormat="W3CDTF">2008-05-01T00:00:00+10:00</date>
+        </temporal>
+      </coverage>
+      <relatedObject>
+        <key>http://nla.gov.au/nla.party-593921</key>
+        <relation type="hasAssociationWith"/>
+      </relatedObject>
+      <relatedObject>
+        <key>hdl:1959.4/004_128</key>
+        <relation type="isPresentedBy"/>
+      </relatedObject>
+      <relatedObject>
+        <key>hdl:1959.4/004_135</key>
+        <relation type="hasAssociationWith"/>
+      </relatedObject>
+      <relatedObject>
+        <key>hdl:1959.4/004_126</key>
+        <relation type="isPresentedBy"/>
+      </relatedObject>
+      <relatedObject>
+        <key>hdl:1959.4/004_133</key>
+        <relation type="hasAssociationWith">
+          <description>Supervisor</description>
+        </relation>
+      </relatedObject>
+      <relatedObject>
+        <key>hdl:1959.4/004_136</key>
+        <relation type="hasAssociationWith"/>
+      </relatedObject>
+      <relatedObject>
+        <key>hdl:1959.4/004_132</key>
+        <relation type="isOwnedBy"/>
+      </relatedObject>
+      <subject type="anzsrc-for">0904</subject>
+      <subject type="anzsrc-for">090404</subject>
+      <subject type="local">ATR-FTIR</subject>
+      <subject type="local">reverse osmosis</subject>
+      <subject type="local">polyamide</subject>
+      <subject type="local">salt rejection</subject>
+      <description type="full">The collection was obtained from a range of experiments investigating the influence of free chlorine on polyamide reverse osmosis membranes under accelerated ageing conditions. Sodium Hypochlorite was used as a source of free chlorine and ATR-FTIR has been used to characterize the changes in membrane surface chemistry</description>
+      <rights>
+        <rightsStatement>Copyright © University of New South Wales 2012</rightsStatement>
+        <accessRights>For access to this data, please contact:
+  [Insert Name]
+  [Address Line 1]
+  [Address Line 2]
+  Phone: [Insert number]
+  Email: [Insert email address]
+</accessRights>
+      </rights>
+      <relatedInfo type="publication">
+        <identifier type="doi">10.1016/j.memsci.2009.10.018</identifier>
+        <title>A. Antony, R. Fudianto, S. Cox, G. Leslie, Assessing the oxidative degradation of polyamide reverse osmosis membrane—Accelerated ageing with hypochlorite exposure, Journal of Membrane Science, Volume 347, Issues 1-2, 1 February 2010, Pages 159-164</title>
+      </relatedInfo>
+    </collection>
+  </registryObject>
+</registryObjects>

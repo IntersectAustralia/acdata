@@ -1,0 +1,56 @@
+<% title 'Listing Users' %>
+
+<div id="container_usershow">
+
+  <h3>User list</h3>
+
+  <table class="data_table margin_top_small" id="users">
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Role</th>
+      <th>Status</th>
+      <th>Last signed in</th>
+      <th>Actions</th>
+    </tr>
+  
+    <% @users.each do |user| %>
+        <tr class="<%= cycle('stripe', '') %>">
+          <td><%= user.first_name %></td>
+          <td><%= user.last_name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.phone_number %></td>
+          <td><%= user.role.name if user.role %></td>
+          <td>
+            <% if user.status == 'A' %>
+                Active
+            <% else %>
+                Deactivated
+            <% end %>
+          </td>
+          <td>
+            <% if user.last_sign_in_at.nil? %>
+                Never logged in
+            <% else %>
+                <%= user.last_sign_in_at.localtime.strftime("%d/%m/%Y %I:%M%p") %>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to "View Details", user, :id => "view_#{user.id}" %>
+            <% if can?(:update_role, User) %>
+                <%= link_to 'Edit role', edit_role_user_path(user), :id => "edit_role_#{user.id}" %>&nbsp;
+            <% end %>
+          </td>
+        </tr>
+    <% end %>
+  </table>
+  
+  <div id="container_usersignup_footer">
+      <%= link_to '<span>Back</span>'.html_safe, admin_users_path, :class => "button" %>
+  </div>
+  
+</div>
+
+

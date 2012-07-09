@@ -1,0 +1,24 @@
+<% title 'Edit Role' %>
+
+<div id="container_usersignup">
+
+  <h3><%= form_header "Edit role for #{@user.full_name}" %></h3>
+  
+  <%= form_for(@user, :url => update_role_user_path(@specimen)) do |f| %>
+    
+  <div id="container_usersignup_forms">
+    
+    <%= render "shared/error_messages", :target => @user %>
+        
+    <div class="row"><%= f.label :role_id, "Role:" %><%= f.collection_select(:role_id, @roles, :id, :name)%></div>
+      
+  </div>
+    
+  <div id="container_usersignup_footer">
+      <%= f.submit "Save", :class => "blue right" %>
+      <%= link_to '<span>Cancel</span>'.html_safe, @user, :class => "button" %>
+  </div>
+    
+<% end %>
+
+</div>

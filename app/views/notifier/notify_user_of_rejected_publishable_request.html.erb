@@ -1,0 +1,12 @@
+<p>Hi <%= @user.first_name %> <%= @user.last_name %>,</p>
+
+<p>You made a request to publish data to RDA for the project "<%= @project.name %>". Your request has been
+  rejected. </p>
+
+<p>
+  The reason given was:<br>
+  <%= simple_format(@reason) %>
+</p>
+
+<p> Please contact the ACData team for further information.</p>
+

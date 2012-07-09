@@ -1,0 +1,11 @@
+<% if @redirect_path %>
+window.location = '<%= @redirect_path %>';
+<% else %>
+
+$("#activity_error_explanation").html("<%= escape_javascript(render 'shared/modal_errors', :target => @activity) %>");
+$("#activity_error_explanation").addClass('alert');
+$('.basic_field', '#activity_dialog').removeAttr('disabled');
+$('#back_button', '#activity_dialog').removeAttr('disabled');
+$('input[type=submit]', '#wizard').removeClass('ac_loading');
+$('input[type=submit]', '#wizard').removeAttr('disabled');
+<% end %>

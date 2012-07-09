@@ -1,0 +1,133 @@
+defaults: &defaults
+  account_request_user_status_email_sender: account-status@researchdata.unsw.edu.au
+  account_request_admin_notification_sender: account-request@researchdata.unsw.edu.au
+  ands_publishable_moderator_notification_sender: moderation-request@researchdata.unsw.edu.au
+  slide_scanning_request_notification_sender: slide-scanning@researchdata.unsw.edu.au
+  slide_scanning_request_admin_email: acdata@unsw.edu.au
+  files_root: /data/acdata-samples
+  rda_files_root: /data/acdata-rda
+  memre_files_root: /data/acdata-memre
+  deploy_config_root: /data
+  document_max_mib: 20 #maximum size (in MiB) for files uploaded to projects
+  filename_display_length: 50 #characters for the name of the related document
+  chart_width: 600
+  chart_height: 400
+  thumbnail_size: 40
+  preview_size: 200
+  preview_format: png #valid options are ONLY 'jpg', 'png' or 'gif'.
+  thumbnail_size: 40
+  thumbnail_background: #background for thumbnail images if using jpg. rgb triplet, 0..255
+    r: 0
+    g: 0
+    b: 0
+  known_formats: #for dataset thumbnails
+    - dx #sample formats
+    - jdx
+    - sp
+    - spa
+    - spc
+    - spg
+    - asc
+    - fsm
+    - nmr
+    - cft
+    - doc #office formats
+    - docx
+    - dot
+    - xls
+    - xlsx
+    - xlsm
+    - ppt
+    - pptx
+    - pps
+    - txt
+    - rtf
+    - csv
+    - pdf # web formats
+    - ps
+    - zip
+    - rar
+    - 7z
+    - gif #image formats (if preview fails)
+    - jpg
+    - jpeg
+    - png
+    - tiff
+    - tif
+    - bmp #needs icon - not supported by gd2 library
+  default_address: |
+    The University of New South Wales
+    Sydney NSW 2052
+    Australia
+  access_rights_templates:
+    Template 1: |
+      For access to this data, please contact:
+        [Insert Name]
+        [Address Line 1]
+        [Address Line 2]
+        Phone: [Insert number]
+        Email: [Insert email address]
+    Template 2: This data is freely available to any individual for any purpose.
+    Template 3: Access only available to registered users.
+    Template 4: Data not yet available to the public.
+    Template 5: Please notify Primary Investigator for permission to access this data.
+  related_information_types:
+    ark: ARK Persistent Identifier Scheme
+    doi: Digital Object Identifier
+    ean13: International Article Number
+    eissn: Electronic International Standard Serial Number
+    handle: HANDLE System Identifier
+    infouri: info URI scheme
+    local: identifer unique within a local context
+    purl: Persistent Uniform Resource Locator
+    uri: Uniform Resource Identifier
+    issn: International Standard Serial Number
+    isbn: International Standard Book Number
+    istc: International Standard Text Code
+    lissn: linking ISSN (ISSN-L)
+    upc: Universal Product Code
+    urn: Uniform Resource Name
+  party_types:
+    isOwnerOf: Data Owner
+    isManagedBy: Data Manager
+    hasCollector: Data Collector
+    hasAssociationWithSupervisor: Supervisor
+    hasAssociationWithPI: Primary Investigator
+    hasAssociationWith: Other Association
+  handles:
+    mandatory:
+      UNSW: http://nla.gov.au/nla.party-593921
+      ACData: hdl:1959.4/004_128
+    conditional:
+      MemRE: hdl:1959.4/004_126
+      ELN: hdl:1959.4/004_127
+  eln_file_size_limit: 20 # in MB
+  ands:
+    party_url: http://services.ands.org.au/home/orca/services/oai.php
+    grant_url: http://services.ands.org.au/home/orca/services/oai.php
+  memre:
+    base_url: http://membranes.edu.au/valet/ajax.cgi
+  # http://en.wikipedia.org/wiki/Base64#Padding
+  # works out to be ~1.4
+  encoding_padding: 1.4
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+  files_root: tmp
+  rda_files_root: tmp/rda
+  memre_files_root: tmp/memre
+
+production:
+  <<: *defaults
+  files_root: /spare/acdata/data
+  rda_files_root: /spare/acdata/data/rda
+  memre_files_root: /spare/acdata/data/memre
+  deploy_config_root: /spare/acdata
+
+qa:
+  <<: *defaults
+
+staging:
+  <<: *defaults

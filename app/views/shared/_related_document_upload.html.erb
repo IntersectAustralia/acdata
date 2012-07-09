@@ -1,0 +1,16 @@
+<% if klass.document.present? %>
+    <div>
+      <span class="instructions">Existing File: <%= klass.document.original_filename %></span>
+      <span>&nbsp;</span>
+      <%= link_to '<span>Remove</span>'.html_safe,
+                  klass.instance_of?(Experiment) ? delete_document_project_experiment_path : delete_document_project_path,
+                  :method => "delete",
+                  :confirm =>"Are you sure you want to remove this experiment's related document?",
+                  :remote => true,
+                  :id => 'experiment_delete_link', :class => "button red basic_field" %>
+    </div>
+
+    <span class="instructions">Replace with new file (maximum <%= APP_CONFIG['document_max_mib']%>MB)</span>
+<% else %>
+    <span class="instructions">Selected file must be less than <%= APP_CONFIG['document_max_mib']%>MB</span>
+<% end %>

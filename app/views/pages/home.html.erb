@@ -1,0 +1,6 @@
+<% if !user_signed_in? %>
+    <%= form_for("user", :url => user_session_path) do |f| %>
+        <%= render(:partial => 'devise/sessions/form', :locals => {:f => f}) %>
+    <% end %>
+<% end %>
+

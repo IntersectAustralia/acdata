@@ -1,0 +1,25 @@
+$('#new_dataset_dialog').jqmHide();
+$('#edit_dataset_dialog').jqmHide();
+
+var open = function(hash) {
+    $('#jspecview').empty();
+    hash.w.show();
+};
+var close = function(hash) {
+    hash.w.hide();
+    if (typeof addJspecView == 'function') {
+      addJspecView('#jspecview');
+    }
+    hash.o.remove();
+};
+
+<% if params[:name_only] %>
+$('#wizard').html('<%= escape_javascript(render :partial => 'edit_form') %>');
+$('#edit_dataset_dialog').jqm({ modal:true, onShow: open, onHide: close });
+$('#edit_dataset_dialog').jqmShow();
+<% else %>
+$('#wizard').html('<%= escape_javascript(render :partial => 'form', :locals => {:action => "edit"}) %>');
+$('#new_dataset_dialog').jqm({ modal:true, onShow: open, onHide: close });
+$('#new_dataset_dialog').jqmShow();
+<% end %>
+$('[id^=show_][id$=_wizard]').removeClass('ac_loading');

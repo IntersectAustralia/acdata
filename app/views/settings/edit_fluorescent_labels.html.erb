@@ -1,0 +1,29 @@
+<% title 'Edit Fluorescent Labels' %>
+
+<div id="container_usersignup">
+  <h3><%= form_header "Edit fluorescent labels" %></h3>
+
+  <%= nested_form_for(@settings, :url => update_fluorescent_labels_settings_path, :html => {:method => :put}) do |f| %>
+    <div id="container_edit_fluorescent_labels_form">
+
+      <%= f.fields_for :fluorescent_labels do |label_form| %>
+          <span>
+            <%= label_form.text_field :name, :class => "text", :maxlength => 255 %>
+          </span>
+          <span>
+            <%= label_form.link_to_remove icon("delete") %>
+          </span>
+      <% end %>
+      <p><%= f.link_to_add '<span>Add Label</span>'.html_safe, :fluorescent_labels, :class => "button green add right" %></p>
+
+    </div>
+    <div id="container_usersignup_footer">
+      <%= f.submit "Save", :class => "blue right" %>
+      <%= link_to '<span>Cancel</span>'.html_safe, admin_users_path, :class => "button" %>
+    </div>
+
+  <% end %>
+
+
+</div>
+

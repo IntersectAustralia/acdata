@@ -1,0 +1,35 @@
+<div id="project_dialog" class="jqmWindow lightbox">
+
+  <img src='/images/ICON_VECTOR_300_DEL_000000.png' border=0 class='icon jqmClose' id="close_project_dialog" alt='reject'/>
+
+  <h2>
+    Slide Scanning Services Request
+  </h2>
+  <%= form_for(@project, :url => send_slide_request_project_path(@project), :html => { :method => :post }) do |f| %>
+
+    <%= render :partial => 'slide_guidelines', :locals => {:f => f} %>
+    <%= render :partial => 'slide_form', :locals => {:f => f} %>
+  <% end %>
+
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#slide_form').css('display', 'none');
+    $('.lightbox #next_button').css('margin', 0);
+  });
+
+  $('#next_button').on('click', function () {
+    $('#memre_title').text('Membrane Property Details');
+    $('#slide_guidelines').css('display', 'none');
+    $('#slide_form').css('display', 'block');
+    return false;
+  });
+
+  $('.cancel').click(function(){
+    $('.jqmClose').click();
+    return false;
+  });
+
+
+</script>

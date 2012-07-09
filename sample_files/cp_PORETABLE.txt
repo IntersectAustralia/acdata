@@ -1,0 +1,26 @@
+
+
+                            PORE TABLE TEST ANALYSIS
+
+                                   11-22-2011
+
+              Porous Materials, Inc.  Analytical Services Division
+                                20 Dutch Mill Rd.
+                             Ithaca, NY  14850  USA
+                PHONE 607.257.4267, 257.5544, or 1.800.825.5764
+                             Email: info@pmiapp.com
+                                 www.pmiapp.com
+
+
+ BPD = Bubble Point diameter (microns)
+ MPD = Mean Pore diameter (microns)
+
+ Output data file      Sample ID                    BPD      MPD  
+ utures\110-6F-2.CFT   110-F6-2                     1.603    0.943 
+
+
+                                Files Processed
+
+C:\Documents and Settings\shima\My Documents\membrane Futures\110-6F-2.CFT
+
+---------------------------------------------------------------------------

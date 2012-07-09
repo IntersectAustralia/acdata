@@ -1,0 +1,72 @@
+<div id="container_usersignup">
+
+  <h3>User Sign Up</h3>
+
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+
+    <div id="container_usersignup_forms">
+      <%= render "shared/error_messages", :target => @user %>
+
+      <div class="row">
+        <%= f.label :login, 'zID:<span class="required">*</span>'.html_safe %><%= f.text_field :login, :maxlength => 20 %>
+      </div>
+
+      <div class="row"><%= f.label :password, 'zPass:<span class="required">*</span>'.html_safe %><%= f.password_field :password, :maxlength => 20 %>
+      </div>
+
+      <div class="row">
+        <%= f.label :email, "Email:" %><%= f.text_field :email, :size => 40, :maxlength => 150, :class => "text" %>
+        <div class="details">If no email address is supplied then the one associated with your zID will be used by
+          default.
+        </div>
+      </div>
+
+      <div class="row">
+        <%= f.label :phone_number, "Phone Number:", :class => "twocolumn" %><%= f.text_field :phone_number, :maxlength => 20, :class => "text" %>
+        <div class="details">The phone number you prefer to be contacted on.</div>
+      </div>
+
+      <div class="row">
+          <%= f.label :is_student, "I'm a research student:" %><%= f.check_box :is_student %>
+          <div class="details">If you are a research student (i.e. honours, masters, PhD) please tick the box and enter the details of your supervisor.
+          </div>
+        </div>
+
+        <div class="row">
+          <%= f.label :supervisor_name, 'Supervisor Name:<span class="required">*</span>'.html_safe %><%= f.text_field :supervisor_name, :size => 40, :maxlength => 150, :class => "text" %>
+        </div>
+
+        <div class="row">
+          <%= f.label :supervisor_email, 'Supervisor Email:<span class="required">*</span>'.html_safe %><%= f.text_field :supervisor_email, :size => 40, :maxlength => 150, :class => "text" %>
+        </div>
+
+
+      </div>
+
+      <div id="container_usersignup_footer">
+        <%= f.submit "Complete Registration", :class => "blue right" %>
+        <%= link_to '<span>Cancel</span>'.html_safe, root_path, :class => "button" %>
+      </div>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+
+    function toggleSupervisorFields() {
+        if ($('#user_is_student').is(':checked')) {
+            $('#user_supervisor_name').removeAttr('disabled');
+            $('#user_supervisor_email').removeAttr('disabled');
+        } else {
+            $('#user_supervisor_name').attr('disabled', 'true');
+            $('#user_supervisor_email').attr('disabled', 'true');
+        }
+    }
+
+    $('#user_is_student').click(function () {
+        toggleSupervisorFields();
+    });
+
+    $(document).ready(function () {
+        toggleSupervisorFields();
+    });
+</script>

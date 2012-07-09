@@ -1,0 +1,143 @@
+development: &dev
+  users:
+#    -
+#      login: z3228583
+#      email: dmgloria@unsw.edu.au
+#      first_name: Danmar
+#      last_name: Gloria
+#      password: Pass.123
+#      role: Superuser
+#      is_student: false
+    -
+      login: ands_user
+      email: acdata@student.unsw.edu.au
+      first_name: ANDS
+      last_name: User
+      password: Pass.123
+      role: Researcher
+      is_student: false
+    -
+      login: sean
+      email: sean@example.com.au
+      first_name: Sean
+      last_name: McCarthy
+      password: Pass.123
+      role: Superuser
+      is_student: false
+    -
+      login: z3401351
+      email: sean@example.com.au
+      first_name: Sean
+      last_name: McCarthy
+      password: Pass.123
+      nmr_username: aaa
+      role: Moderator
+      is_student: false
+    -
+      login: marc
+      email: marc@example.com.au
+      first_name: Marc
+      last_name: Ziani de Ferranti
+      password: Pass.123
+      role: Superuser
+      is_student: false
+    -
+      login: sq
+      email: sq@example.com.au
+      first_name: Shuqian
+      last_name: Hon
+      password: Pass.123
+      role: Moderator
+      is_student: false
+    -
+      login: shuqian
+      email: shuqian@example.com.au
+      first_name: Shuqian
+      last_name: Hon
+      password: Pass.123
+      role: Researcher
+      is_student: false
+    - #TODO clear this for GitHub
+      login: kali
+      email: kali@intersect.org.au
+      first_name: Kali
+      last_name: Waterford
+      password: Pass.123
+      role: Moderator
+      is_student: false
+    -
+      login: kali_admin
+      email: kali@intersect.org.au
+      first_name: Kali
+      last_name: Waterford
+      password: Pass.123
+      role: Superuser
+      is_student: false
+    -
+      login: z1
+      email: normal1@example.com.au
+      first_name: Normal
+      last_name: User1
+      password: Pass.123
+      role: Researcher
+      is_student: false
+    -
+      login: z2
+      email: normal2@example.com.au
+      first_name: Normal
+      last_name: User2
+      password: Pass.123
+      role: Researcher
+      is_student: false
+    -
+      login: z3
+      email: normal3@example.com.au
+      first_name: Normal
+      last_name: User3
+      password: Pass.123
+      role: Researcher
+      is_student: false
+    -
+      login: bad_email_user
+      email: not@this.address
+      first_name: Bad
+      last_name: Email
+      password: Pass.123
+      role: Researcher
+      is_student: false
+    -
+      login: register_kali
+      first_name: Kali
+      last_name: Waterford
+      email: kali@example.com.au
+      password: Pass.123
+      is_student: false
+    -
+      login: registerme1
+      first_name: Register
+      last_name: Me1
+      email: registerme1@example.com.au
+      password: Pass.123
+      is_student: false
+    -
+      login: registerme2
+      first_name: Register
+      last_name: Me2
+      email: registerme2@example.com.au
+      password: Pass.123
+      is_student: false
+    -
+      login: registerme3
+      first_name: Register
+      last_name: Me3
+      email: sean.mccarthy@example.com.au
+      password: Pass.123
+      is_student: false
+test:
+  <<: *dev
+qa:
+  <<: *dev
+staging:
+  <<: *dev
+production:
+  <<: *dev

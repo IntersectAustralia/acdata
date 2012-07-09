@@ -1,0 +1,241 @@
+<div id="new_dataset_dialog" class="jqmWindow lightbox loads_applet">
+
+  <% if !@from_show_page %>
+      <%= link_to "<img src='/images/ICON_VECTOR_300_DEL_000000.png' border=0 id='close_dataset_dialog' class='icon jqmDelete' alt='reject'/>".html_safe, get_dataset_path(@dataset, :new => true), :method => "delete" %>
+  <% end %>
+
+  <div id="container" class="">
+    <div id="title">
+      <h2>
+        <% if @from_show_page %>
+          Add Supplementary Materials
+        <% else %>
+          2. Upload Attachments
+        <% end %>
+      </h2>
+    </div>
+
+    <div class="container">
+      <div class="field">
+        <p class="details">
+          <%= @upload_prompt %>.
+            <% if @from_show_page %> When you have finished uploading files, click Finish.
+            <% else %> When you have finished uploading files, click Next.
+          <% end %>
+        </p>
+      </div>
+      <%= render :partial => 'shared/applet', :locals => {:extension_filter => @extension_filter,
+                                                          :allow_multiselect => true,
+                                                        :file_selection_mode => "files_and_folders",
+                                                        :verify_first => true,
+                                                        :upload_url => upload_attachments_url(:format => :json),
+                                                        :verify_url => verify_upload_attachments_url(:format => :json)} %>
+
+    <div id="upload_notifications" class="field">
+      <% @dataset.attachments.each do |attachment| %>
+          <div class="file_status"><span class="success"><%= attachment.filename %></span></div>
+      <% end %>
+    </div>
+
+    <div class="field actions">
+      <% if @from_show_page %>
+        <%= button_to 'Finish', get_dataset_path(@dataset), :method => :get, :id => "next_button", :class=> "blue", :disabled => true, :remote => true %>
+      <% else %>
+        <div class="left">
+          <%= link_to "<span>Back</span>".html_safe, get_edit_dataset_path(@dataset), :method => :get, :id => "back_button", :class=> "button", :disabled => true, :remote => true %>
+        </div>
+        <%= button_to 'Next', get_metadata_dataset_path(@dataset), :method => :get, :id => "next_button", :class=> "blue", :disabled => true, :remote => true %>
+      <% end %>
+    </div>
+  </div>
+</div>
+</div>
+
+<script type="text/javascript">
+    var uploaded = false;
+    var session_message = "Your upload was not successful. <%= I18n.t :session_timeout, :scope => [:views, :shared] %>";
+
+    function failedToUpload(filename, message) {
+        msg = message || 'please try again or contact your system administrator';
+        return '<span class="failed required exists">' + htmlEncode(filename) + '</span>' + '<span class="required">' + 'Failed to upload: ' + msg + '</span>';
+    }
+
+    function disableButtons() {
+        $('#back_button').prop('disabled', true);
+        $('#next_button').prop('disabled', true);
+    }
+
+    function enableButtons() {
+        $('#back_button').prop('disabled', false);
+        $('#next_button').prop('disabled', false);
+    }
+
+    function appletReady() {
+        $('#new_dataset_dialog').removeClass('loads_applet');
+        enableButtons();
+    }
+
+    function getAuthToken() {
+        var token;
+        $.ajax({
+            url: '<%= users_get_authentication_token_url(:format => :json) %>',
+            dataType: 'json',
+            data: {},
+            async: false,
+            cache: false,
+            success: function(json) {
+              token = json.toString();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              if (jqXHR.status != 401) {
+                unauthorisedError();
+              }
+            }
+        });
+        return token;
+    }
+
+    function startingWork() {
+        disableButtons();
+    }
+
+    function finishedWork() {
+        enableButtons();
+        uploaded = true;
+    }
+
+    function unexpectedError(msg) {
+        alert("Something went wrong: " + msg);
+    }
+
+    function unauthorisedError() {
+        alert(session_message);
+        window.location = '<%= root_path %>';
+    }
+
+    function htmlEncode(str) {
+        return $('<div/>').text(str).html();
+    }
+
+    function extractFilename(path) {
+        var parts = path.split("/");
+        if (parts.length <= 1) {
+            parts = path.split("\\");
+        }
+        // Would use pop(), but Safari doesn't like it!?!
+        return parts[parts.length - 1];
+    }
+
+    function uploadStarting(path) {
+        var filename = extractFilename(path);
+
+        //$('#upload_notifications').focus();
+        $('#upload_notifications').append('<div class="file_status"><span class="working">' + htmlEncode(filename) + '</span></div>');
+    }
+
+    function findLatestFile(filename) {
+        return $("div.file_status").filter(
+                function() {
+                    return $(this).text() == filename;
+                }).last();
+    }
+
+    function uploadFailed(path, message, responseCode) {
+        var filename = extractFilename(path);
+
+        if (responseCode == "401") {
+            unauthorisedError();
+        }
+        else {
+            findLatestFile(filename).html(failedToUpload(filename));
+        }
+    }
+
+    function uploadFinished(responseJson) {
+        //server returns a response of the form {"filename" : {"status" : "success", "message" : "some message"}, "filename2" : {"status" : "failed", "message" : "some failure msg"}}
+        var obj = $.parseJSON(responseJson);
+        $.each(obj, function(filename, value) {
+            var fileStatus = value.status;
+            var message = value.message;
+
+            if (fileStatus == "success") {
+                findLatestFile(filename).html('<span class="success">' + htmlEncode(filename) + '</span>');
+            } else {
+                //TODO: for now we just display a failure message, later we may want to do something with the message
+                findLatestFile(filename).html(failedToUpload(filename, message));
+            }
+        });
+    }
+
+    function handleAbortVerificationResult(path, message) {
+        var filename = extractFilename(path);
+        findLatestFile(filename).html('<span class="failedexistance required">' + htmlEncode(filename) + '</span><span class="required"> - ' + message + '</span>');
+    }
+
+    function handlePromptVerificationResult(fileName, message) {
+        //should never happen for us, do nothing
+        return false;
+    }
+
+    function verificationFailed(path, responseCode) {
+        var filename = extractFilename(path);
+        if (responseCode == "401") {
+            unauthorisedError();
+        }
+        else {
+            findLatestFile(filename).html(failedToUpload(filename));
+        }
+    }
+
+    var session_message = "<%= I18n.t :session_timeout, :scope => [:views, :shared] %>";
+
+    $('.button_to').bind("ajax:error", function(event, data, status, jqXHR) {
+      if (jqXHR.status == 401) {
+        alert(session_message);
+        window.location = '<%= root_path %>';
+      }
+    });
+
+    $('#back_button').click(function(e) {
+      if ($('#back_button').prop('disabled')) {
+        e.preventDefault();
+      }
+    });
+
+    $('#next_button').click(function() {
+
+        if ($('span.success', '#upload_notifications').length == 0) {
+            var proceed = confirm("You have not uploaded any files. Press OK if you want to proceed anyway.");
+            if (proceed) {
+                $(this).addClass('ac_loading');
+            <% if @from_show_page %>
+                $('#new_dataset_dialog').html("<span class='loading'/>");
+                window.location.replace('<%= get_dataset_path(@dataset, :tab => "tabs-files") %>');
+            <% end %>
+
+            }
+            else {
+                return false;
+            }
+        }
+<% if @from_show_page %>
+        else {
+            $('#new_dataset_dialog').html("<span class='loading'/>");
+            window.location.replace('<%= get_dataset_path(@dataset, :tab => "tabs-files") %>');
+        }
+<% end %>
+    });
+
+    $('.jqmDelete').click(function() {
+        var proceed = confirm("Are you sure you want to cancel the creation of this dataset?");
+        if (proceed) {
+            $('#container').html("<span class='loading'/>");
+            $(this).hide();
+
+        }
+        else {
+            return false;
+        }
+    });
+</script>
+

@@ -1,0 +1,25 @@
+<div id="slide_guidelines">
+  <div class="alert">Please read and understand the instructions below before moving on</div>
+
+  <h3>Guidelines for Slide Scanning</h3>
+
+  <ol id="guideline_content" class="instructions instruction">
+    <% SlideGuideline.find_each do |g| %>
+      <li>
+        <% g.description.split(/[\n\r]+/).each do |line| %>
+          <%= line %>
+          <br>
+        <% end %>
+      </li>
+    <% end %>
+  </ol>
+
+  <div class="fields">
+    <%= link_to "Download as PDF", slide_guidelines_pdf_projects_path %>
+  </div>
+
+  <div class="contentbox_actions field actions">
+    <%= link_to '<span>Cancel</span>'.html_safe, "", {:id => 'back_button', :class => 'cancel button left'} %>
+    <%= link_to '<span>Agree</span>'.html_safe, "", {:id => 'next_button', :class => "blue button"} %>
+  </div>
+</div>

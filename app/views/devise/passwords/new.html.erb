@@ -1,0 +1,29 @@
+<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => {:method => :post}) do |f| %>
+  <% if @user.errors.any? %>
+    <p id="*.errors" class="notification">  
+     <% @user.errors.full_messages.each do |msg| %>
+       <%= msg %><br />
+     <% end %>
+   </p>
+  <% end %>
+  <div id="forgot_password">
+    <div id="body_container">
+      <div id="body_container_inner">
+        <div id="loginbox_identifier" class="loginbox_container forgotpassword_box">
+          <div class="contentbox_header">
+            <h3> Forgot your password?</h3>
+          </div>
+          <div class="contentbox_body">
+            <div class="input_group">
+              <%= f.label :email %>
+      <%= f.text_field :email %>
+            </div>
+      <button value="Submit" type="submit" id="forgotpassword_button">Send me reset password <br />instructions</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>

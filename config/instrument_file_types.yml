@@ -1,0 +1,68 @@
+---
+development: &dev
+  instrument_file_types:
+    -
+      name: JCAMP-DX (v4)
+      filter: dx; jdx
+      parser_name: JDX4FileParser
+      visualisation_handler: JCAMPDXVisualisation
+    -
+      name: JCAMP-DX (v5)
+      filter: dx; jdx
+      parser_name: JDX5FileParser
+      visualisation_handler: JCAMPDXVisualisation
+    -
+      name: SP (RamanStation)
+      filter: sp; spa; spc; spg
+      parser_name: SpFileParser
+    -
+      name: FSM (RamanStation)
+      filter: fsm
+      parser_name: FsmFileParser
+    -
+      name: NMR
+      parser_name: NmrFolderParser
+    -
+      name: Potentiostat (.txt)
+      filter: txt
+      parser_name: PotentiostatFileParser
+      visualisation_handler: PotentiostatVisualisation
+    -
+      name: Potentiostat (.ifi)
+      filter: ifi
+    -
+      name: Potentiostat (.ifw)
+      filter: ifw
+    -
+      name: Potentiostat (.ofw)
+      filter: ofw
+    -
+      name: Potentiostat (.frp)
+      filter: frp
+    -
+      name: Capillary Porometer (.txt)
+      filter: txt
+      parser_name: CapillaryPorometerTXTHandler
+      visualisation_handler: CapillaryPorometerTXTHandler
+    -
+      name: Capillary Porometer (.xls)
+      filter: xls
+      parser_name: CapillaryPorometerXLSHandler
+      visualisation_handler: CapillaryPorometerXLSHandler
+    -
+      name: Capillary Porometer (.cft)
+      filter: cft
+    -
+      name: Aperio Label Thumbnail
+      visualisation_handler: AperioVisualisation
+    -
+      name: Aperio Slide Thumbnail
+      visualisation_handler: AperioVisualisation
+test:
+  <<: *dev
+qa:
+  <<: *dev
+staging:
+  <<: *dev
+production:
+  <<: *dev

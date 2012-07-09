@@ -1,0 +1,13 @@
+<%= remotipart_response do %>
+<% if @redirect_path %>
+// redirect
+window.location = '<%= @redirect_path %>';
+<% else %>
+// update errors
+$("#new_project_error_explanation").html("<%= escape_javascript(render 'shared/modal_errors', :target => @project) %>");
+$("#new_project_error_explanation").addClass('alert');
+$('input[type=submit]', '#wizard').removeClass('ac_loading');
+$('#back_button').removeAttr('disabled');
+$('.basic_field').removeAttr('disabled');
+<% end %>
+<% end %>

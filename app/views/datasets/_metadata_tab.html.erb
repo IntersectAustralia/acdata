@@ -1,0 +1,20 @@
+<% if @dataset.metadata_values.present? %>
+    <%= render 'metadata_values', :values => @dataset.metadata_values.order(:key), :table_id => "extended_metadata" %>
+<% else %>
+  <% if @dataset.instrument_rule %>
+    <div id="visualisation_placeholder">
+      Extended Metadata requires a file of type <%= metadata_file_options %>.
+
+      <% if can? :manage, @dataset %>
+          <div>
+
+            <%= link_to '<span>Upload Metadata File</span>'.html_safe, get_upload_dataset_path(@dataset, :file_type => metadata_file_options), :remote => true, :id => "", :class=>"button green add" %>
+          </div>
+
+      <% end %>
+    </div>
+  <% else %>
+    Metadata is not available for the <%= @dataset.instrument.name %>
+  <% end %>
+<% end %>
+

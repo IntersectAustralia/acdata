@@ -1,0 +1,6 @@
+$('#new_experiment_dialog').jqmHide();
+$('#wizard').html('<%= escape_javascript(render :partial => 'form', :locals => {:action => "new"}) %>');
+$('#new_experiment_dialog').jqm({modal:true});
+$('#new_experiment_dialog').jqmShow();
+$('[id^=show_][id$=_wizard]').removeClass('ac_loading');
+$('#add_dropdown').removeClass('ac_loading');

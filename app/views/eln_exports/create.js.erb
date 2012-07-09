@@ -1,0 +1,10 @@
+<% if @saved %>
+  $('#show_eln_wizard').attr('href', '<%= edit_dataset_eln_export_path(@dataset, @eln_export) %>');
+  $('#export_eln_dialog').jqmHide();
+<% else %>
+  $("#error_explanation").html("<%= escape_javascript(render 'shared/modal_errors', :target => @eln_export) %>");
+  $("#error_explanation").addClass('alert');
+  $('input[type=submit]', '#wizard').removeClass('ac_loading');
+  $('#share_dropdown').removeClass('ac_loading');
+  $('input[type=submit]', '#wizard').removeAttr('disabled');
+<% end %>

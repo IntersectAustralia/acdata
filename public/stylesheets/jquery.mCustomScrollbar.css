@@ -1,0 +1,41 @@
+@charset "utf-8";
+/* CSS Document */
+/* content block 1 */
+#container_left_navigation {/* position:relative; top:140px; margin:0 0 0 40px; width:260px; height:600px; padding:0 10px; border-top:1px solid #333; border-bottom:1px solid #333; */}
+#container_left_navigation .customScrollBox{position:relative; height:100%; overflow:hidden;}
+#container_left_navigation .customScrollBox .container{position:relative; width:280px; top:0; float:left;}
+#container_left_navigation .customScrollBox .content{clear:both;}
+#container_left_navigation .customScrollBox .content p{padding:0 5px; margin:10px 0; color:#fff; font-family:Verdana, Geneva, sans-serif; font-size:13px; line-height:20px;}
+#container_left_navigation .customScrollBox .content p.alt{padding:10px 5px; margin:10px 0; color:#fff; font-family:Georgia, "Times New Roman", Times, serif; font-size:17px; line-height:19px; color:#999;}
+#container_left_navigation .customScrollBox img{border:5px solid #fff;}
+
+#container_left_navigation .dragger_container{position:absolute; width:4px; height:100%; display: block; float:left; margin:0 0 0 10px; left: 280px; cursor:pointer -moz-border-radius:2px; -khtml-border-radius:2px; -webkit-border-radius:2px; border-radius:2px; cursor:s-resize;}
+
+#container_left_navigation .dragger{position:absolute; width:4px; height:60px; background:#000; opacity: 0.25; text-align:center; line-height:60px; color:#666; overflow:hidden; cursor:pointer; -moz-border-radius:2px; -khtml-border-radius:2px; -webkit-border-radius:2px; border-radius:2px;}
+
+#container_left_navigation .dragger_pressed{position:absolute; width:4px; height:60px; opacity: 0.60; text-align:center; line-height:60px; color:#666; overflow:hidden; -moz-border-radius:4px; -khtml-border-radius:4px; -webkit-border-radius:4px; border-radius:4px; cursor:s-resize;}
+
+#container_left_navigation .scrollUpBtn,#container_left_navigation .scrollDownBtn{position:absolute; display:inline-block; width:14px; height:15px; margin-right:12px; text-decoration:none; right:0; filter:alpha(opacity=20); -moz-opacity:0.20; -khtml-opacity:0.20; opacity:0.20;}
+#container_left_navigation .scrollUpBtn{top:16px; background:url(mcs_btnUp.png) center center no-repeat;}
+#container_left_navigation .scrollDownBtn{bottom:12px; background:url(mcs_btnDown.png) center center no-repeat;}
+#container_left_navigation .scrollUpBtn:hover,#container_left_navigation .scrollDownBtn:hover{filter:alpha(opacity=60); -moz-opacity:0.60; -khtml-opacity:0.60; opacity:0.60;}
+
+/* content block 2 */
+#container_right_content {/* position:relative; top:140px; margin:0 0 0 40px; width:260px; height:600px; padding:0 10px; border-top:1px solid #333; border-bottom:1px solid #333; */}
+#container_right_content .customScrollBox{position:relative; height:100%; overflow:hidden;}
+#container_right_content .customScrollBox .container{position:relative; top:0; float:left;}
+#container_right_content .customScrollBox .content{clear:both; width: 100%;}
+#container_right_content .customScrollBox .content p{padding:0 5px; margin:10px 0; color:#fff; font-family:Verdana, Geneva, sans-serif; font-size:13px; line-height:20px;}
+#container_right_content .customScrollBox .content p.alt{padding:10px 5px; margin:10px 0; color:#fff; font-family:Georgia, "Times New Roman", Times, serif; font-size:17px; line-height:19px; color:#999;}
+#container_right_content .customScrollBox img{border:5px solid #fff;}
+
+#container_right_content .dragger_container{position:absolute; width:4px; height:100%; position: absolute; display: block; float:left; margin:0 0 0 10px; right: 10px; top: 0; cursor:pointer -moz-border-radius:2px; -khtml-border-radius:2px; -webkit-border-radius:2px; border-radius:2px; cursor:s-resize;}
+
+#container_right_content .dragger{position:absolute; width:4px; height:60px; background:#000; opacity: 0.25; text-align:center; line-height:60px; color:#666; overflow:hidden; cursor:pointer; -moz-border-radius:2px; -khtml-border-radius:2px; -webkit-border-radius:2px; border-radius:2px;}
+
+#container_right_content .dragger_pressed{position:absolute; width:4px; height:60px; opacity: 0.60; text-align:center; line-height:60px; color:#666; overflow:hidden; -moz-border-radius:4px; -khtml-border-radius:4px; -webkit-border-radius:4px; border-radius:4px; cursor:s-resize;}
+
+#container_right_content .scrollUpBtn, #container_right_content .scrollDownBtn{position:absolute; display:inline-block; width:14px; height:15px; margin-right:12px; text-decoration:none; right:0; filter:alpha(opacity=20); -moz-opacity:0.20; -khtml-opacity:0.20; opacity:0.20;}
+#container_right_content .scrollUpBtn{top:16px; background:url(mcs_btnUp.png) center center no-repeat;}
+#container_right_content .scrollDownBtn{bottom:12px; background:url(mcs_btnDown.png) center center no-repeat;}
+#container_right_content .scrollUpBtn:hover, #container_right_content .scrollDownBtn:hover{filter:alpha(opacity=60); -moz-opacity:0.60; -khtml-opacity:0.60; opacity:0.60;}

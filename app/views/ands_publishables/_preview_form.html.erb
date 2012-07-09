@@ -1,0 +1,223 @@
+<div id="preview_ands_publishable_dialog" class="jqmWindow lightbox">
+  <% if !@as_moderator and @ands_publishable.to_be_submitted? %>
+    <%= link_to "<img src='/images/ICON_VECTOR_300_DEL_000000.png' border=0 id='close_preview_ands_publishable_dialog' class='icon jqmDelete' alt='reject'/>".html_safe, project_ands_publishable_path(@project, @ands_publishable, :new => true), :method => "delete" %>
+  <% else %>
+    <img src='/images/ICON_VECTOR_300_DEL_000000.png' border=0 class='icon jqmClose' id="close_preview_ands_publishable_dialog" alt='reject'/>
+  <% end %>
+  <div id="container">
+    <div id="title">
+      <% if !@as_moderator %>
+        <h2>4. Publishable Data Preview</h2>
+      <% else %>
+        <h2>Publishable Data Preview</h2>
+      <% end %>
+    </div>
+
+    <div class="container">
+    <% if !@as_moderator %>
+      <p class="details field">The publishable data below will be sent to <%= @ands_publishable.moderator.full_name %>
+        for approval</p>
+    <% else %>
+      <p class="details field">You can download the full
+        xml <%= link_to "here", download_ands_publishable_path(@ands_publishable) %>.</p>
+    <% end %>
+
+    <div class="field" id="publishable_preview">
+
+      <h3>Collection Details</h3>
+
+      <div class="field">
+        <label> Name: </label> <br>
+
+        <p class="instructions"><%= @ands_publishable.collection_name %></p>
+      </div>
+
+      <div class="field">
+        <label> Collection Description: </label> <br>
+
+        <p class="instructions">
+          <% @ands_publishable.collection_description.split("\r\n").each do |line| %>
+            <%= line %><br>
+          <% end %>
+        </p>
+      </div>
+
+      <div class="field">
+        <label> Address:</label> <br>
+
+        <p class="instructions">
+          <% @ands_publishable.address.split("\r\n").each do |line| %>
+            <%= line %><br>
+          <% end %>
+        </p>
+      </div>
+
+      <div class="field">
+        <label> Access Rights:</label> <br>
+
+        <p class="instructions">
+          <% @ands_publishable.access_rights.split("\r\n").each do |line| %>
+            <%= line %><br>
+          <% end %>
+        </p>
+      </div>
+
+      <div class="field">
+
+        <label>Temporal Coverage:</label>
+
+        <div class="instructions">
+          <% if @ands_publishable.has_temporal_coverage %>
+            From: <%= @ands_publishable.coverage_start_date %>
+            <br>
+            To: <%= @ands_publishable.coverage_end_date %>
+
+          <% else %>
+            No temporal coverage included.
+          <% end %>
+        </div>
+
+      </div>
+
+      <h3 class="field">Subject and Related Information</h3>
+
+      <div class="field">
+        <label>Field of Research (FOR) Tags:</label>
+        <% if @ands_publishable.for_codes.present? %>
+
+          <ul class="instructions" id="for_code_list">
+            <% @ands_publishable.for_codes.each do |code| %>
+              <li id="for_code_<%= code.id %>">
+                <%= code.code %> - <%= code.name %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <div class="instructions">No FOR tags associated.</div>
+        <% end %>
+      </div>
+
+      <div class="field">
+
+        <label>Subject Tags:</label>
+
+        <% if @ands_publishable.ands_subjects.present? %>
+
+          <ul class="instructions" id="ands_subject_list">
+            <% @ands_publishable.ands_subjects.each do |subject| %>
+              <li id="ands_subject_<%= subject.id %>"><%= subject.keyword %></li>
+            <% end %>
+
+          </ul>
+        <% else %>
+          <div class="instructions">No subject tags associated.</div>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <label>Related Information:</label>
+        <% if @ands_publishable.ands_related_infos.present? %>
+
+          <ul id="related_info_list">
+            <% @ands_publishable.ands_related_infos.each do |info| %>
+
+              <li class="instructions" id="related_info_<%= info.id %>">
+                (<%= info.info_type %>) <%= info.identifier %> <br>
+                <%= info.title %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <div class="instructions">No related publications associated.</div>
+        <% end %>
+      </div>
+
+      <h3 class="field">Party and Activity Information </h3>
+      <label class="field">UNSW People or Groups:</label>
+
+      <% if @ands_publishable.ands_related_objects.unsw.present? %>
+
+        <ul class="instructions" id="unsw_party_list">
+          <% @ands_publishable.ands_related_objects.unsw.each do |party| %>
+            <li id="unsw_party_<%= party.handle %>">
+              <%= party.name %> - <%= APP_CONFIG['party_types'][party.relation] %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <div class="instructions">No UNSW people or groups associated</div>
+      <% end %>
+
+      <label class="field">Non-UNSW People or Groups:</label>
+
+      <% if @ands_publishable.ands_related_objects.non_unsw.present? %>
+        <ul class="instructions" id="non_unsw_party_list">
+          <% @ands_publishable.ands_related_objects.non_unsw.each do |party| %>
+            <li id="non_unsw_party_<%= party.handle %>">
+              <%= party.name %> - <%= APP_CONFIG['party_types'][party.relation] %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <div class="instructions">No non-UNSW people or groups associated</div>
+      <% end %>
+
+      <label class="field">Service and Activity Records:</label>
+
+      <% @conditional_services.each do |name, handle| %>
+        <% if @checked_handles.include?(handle) %>
+          <div class="instructions">
+            <%= name %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <% @instruments.each do |instrument| %>
+        <% if @checked_handles.include?(instrument.handle) %>
+          <div class="instructions"><%= instrument.name %></div>
+        <% end %>
+      <% end %>
+
+      <% if @activity and @checked_handles.include?(@activity.handle) %>
+        <div class="instructions">
+          <%= @activity.display_name %>
+        </div>
+      <% end %>
+    </div>
+    <div class="field actions">
+
+      <% if @as_moderator %>
+        <%= link_to '<span>Reject</span>'.html_safe, reject_reason_ands_publishable_path(@ands_publishable), {:method => :get, :remote => true, :class => 'red'} %>
+        <%= button_to 'Approve', approve_ands_publishable_path(@ands_publishable), {:method => :get, :id => "next_button", :class => 'blue'} %>
+
+      <% else %>
+        <%= link_to '<span>Back</span>'.html_safe, specify_party_info_project_ands_publishable_path(@ands_publishable.project_id, @ands_publishable), {:method => :get, :remote => true, :id => 'back_button', :class => 'button left'} %>
+        <%= button_to 'Submit to Moderator', submit_project_ands_publishable_path(@ands_publishable.project_id, @ands_publishable), {:method => :get, :id => "next_button", :class => "blue right"} %>
+      <% end %>
+    </div>
+  </div>
+</div>
+</div>
+
+<script type='text/javascript'>
+  <% if @ands_publishable.to_be_submitted? %>
+
+  $('.jqmDelete').click(function () {
+    var proceed = confirm("Are you sure you want to cancel the creation of this publishable?");
+    if (proceed) {
+      $('#container').html("<span class='loading'/>");
+      $(this).hide();
+
+    }
+    else {
+      return false;
+    }
+  });
+  <% else %>
+
+  $('.jqmClose').click(function () {
+    return confirm("Are you sure you want to cancel the the republishing process?");
+  });
+
+  <% end %>
+</script>

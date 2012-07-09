@@ -1,0 +1,25 @@
+<% title 'Edit Approval' %>
+
+<div>
+<div class="container_650px centered">
+<%= form_header "Select role for #{@user.full_name}" %>
+<%= form_for(@user, :url => approve_user_path(@specimen)) do |f| %>
+
+  <div class="contentbox_body">
+    <%= render "shared/error_messages", :target => @user %>
+    <div class="input_group">
+      <%= f.label :role_id, "Role" %>
+      <%= f.collection_select(:role_id, @roles, :id, :name) %>
+    </div>
+  </div>
+
+  <div class="form_actions">
+    <div class="add_variables">
+      <%= f.submit("Approve") %>
+      <%= link_to 'Back', access_requests_users_path %>
+    </div>
+  </div>
+</div>
+</div>
+<% end %>
+

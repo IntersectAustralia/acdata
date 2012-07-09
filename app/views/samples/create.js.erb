@@ -1,0 +1,12 @@
+<% if @redirect_path %>
+window.location = '<%= @redirect_path %>';
+<% flash[:notice] = "Sample was successfully created." %>
+<% else %>
+$("#new_sample_error_explanation").html("<%= escape_javascript(render 'shared/modal_errors', :target => @sample) %>");
+$("#new_sample_error_explanation").addClass('alert');
+$('input[type=submit]', '#wizard').removeClass('ac_loading');
+$('#add_dropdown').removeClass('ac_loading');
+$('#back_button').removeAttr('disabled');
+$('.basic_field').removeAttr('disabled');
+
+<% end %>

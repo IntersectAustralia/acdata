@@ -1,0 +1,52 @@
+staging: &staging
+  users:
+    -
+      login: z3228583
+      email: dmgloria@unsw.edu.au
+      first_name: Danmar
+      last_name: Gloria
+      password: '******'
+      role: Superuser
+      is_student: false
+    -
+      login: z3401351
+      email: sean@example.com.au
+      first_name: Sean
+      last_name: McCarthy
+      password: '******'
+      role: Superuser
+      is_student: false
+    -
+      login: z3099976
+      email: bianca@student.unsw.edu.au
+      first_name: Bianca
+      last_name: Blunden
+      password: '******'
+      role: Researcher
+      is_student: false
+    -
+      login: z3228457
+      email: shima.hajibabania@unsw.edu.au
+      first_name: Shima
+      last_name: Hajibabania
+      password: '******'
+      role: Researcher
+      is_student: false
+    -
+      login: z3131102
+      email: zenah@student.unsw.edu.au
+      first_name: Zenah
+      last_name: Bradford-Hartke
+      password: '******'
+      role: Researcher
+      is_student: false
+    -
+      login: z3159571
+      email: david.grant@unsw.edu.au
+      first_name: David
+      last_name: Grant
+      password: '******'
+      role: Researcher
+      is_student: false
+production:
+  <<: *staging

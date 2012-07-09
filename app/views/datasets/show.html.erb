@@ -1,0 +1,163 @@
+<div class="datasets">
+<div id="container_page_header" class="wrapper clearfix">
+
+  <div id="container_page_title">
+    <h2 class="orange"><%= @dataset.name %></h2>
+    <span class="orange"><%= @dataset.sample.name %> - <%= @dataset.sample.id %></span>
+  </div>
+
+  <div id="container_page_details">
+    <% if can? :manage, @dataset %>
+      <div id="container_page_buttons" class="right">
+        <%= link_to "<span>Edit</span>".html_safe, get_edit_dataset_path(@dataset, :name_only => true), {:remote => true, :id => "show_edit_dataset_wizard", :class => "button"} %>
+        <a class="button red" href="<%= get_dataset_path(@dataset) %>" data-method="delete" data-confirm="Are you sure you want to delete this dataset?"><span>Delete</span></a>
+      </div>
+    <% end %>
+
+    <div class="right flushright details">
+      <div>Dataset Created: <%= local_date(@dataset.created_at) %></div>
+      <div>Last Modified: <%= local_date(@dataset.updated_at) %></div>
+    </div>
+
+  </div>
+
+</div>
+
+<div id="container_page_actions" class="wrapper">
+    <% if can? :manage, @dataset %>
+  <div class="unit btn-group">
+    <a id="add_dropdown" class="button blue dropdown-toggle" data-toggle="dropdown">
+      <span>Add</span>
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+    <li>
+    <%= link_to '<span>Add Supplementary Material</span>'.html_safe, get_upload_dataset_path(@dataset), :remote => true, :id => "add_attachments_button", :class => "add" %>
+    </li>
+    </ul>
+  </div>
+  <% end %>
+
+  <div class="unit btn-group">
+    <a id="share_dropdown" class="button green dropdown-toggle" data-toggle="dropdown">
+      <span>Share</span>
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu greendropdown">
+
+      <% if current_user.eln_enabled? %>
+        <li>
+          <%= link_to '<span>Export to ELN</span>'.html_safe, get_eln_export_path(@dataset), :remote => true, :id => "show_eln_wizard", :class => "" %>
+        </li>
+      <% end %>
+      <% if current_user.memre_enabled? %>
+        <li>
+          <%= link_to '<span>Export to MemRE</span>'.html_safe, get_memre_export_path(@dataset), :remote => true, :id => "show_memre_wizard", :class => "" %>
+        </li>
+      <% end %>
+      <% if !@dataset.attachments.empty? %>
+        <li>
+          <a class="down" href="<%= download_dataset_path(@dataset) %>"><span>Download</span></a>
+        </li>
+      <% end %>
+    </li>
+    </ul>
+  </div>
+
+
+
+</div>
+
+<div id="container_page_content" class="wrapper fullheight_container">
+
+  <h3 id="container_metanameclass">Class: <span class="normal"><%= @dataset.instrument.instrument_class %></span> Name:
+    <span><%= @dataset.instrument.name %></span></h3>
+
+  <% split_list = split_list(@dataset.metadata_values.core) %>
+  <div id="container_metaone" class="unit information">
+    <% split_list[0].each do |metadata| %>
+      <div>
+        <span class="bold"><%= "#{sanitize metadata.key}:" %></span> <%= sanitize newline_to_br(metadata.value) %>
+      </div>
+    <% end %>
+  </div>
+
+  <div id="container_metatwo" class="lastUnit information">
+    <% split_list[1].each do |metadata| %>
+      <div>
+        <span class="bold"><%= "#{sanitize metadata.key}:" %></span> <%= sanitize newline_to_br(metadata.value).html_safe %>
+      </div>
+    <% end %>
+  </div>
+
+</div>
+
+<div id="image_lightbox"></div>
+
+<div id="container_tabdata" class="clearfix">
+  <div id="tabs" class="clearfix">
+
+    <ul>
+      <li><a id="tabs-vis" href="#tabs-vis-1" title="<%= visualisation_tab_title %>">Visualisation</a></li>
+      <li><a href="#tabs-metadata">Extended Metadata</a></li>
+      <li><a href="#tabs-files">Show Files</a></li>
+    </ul>
+
+    <div id="tabs-vis-1" class="ui-tabs-hide">
+      <%= render :partial => visualisation_partial %>
+    </div>
+
+    <div id="tabs-metadata" class="ui-tabs-hide">
+      <%= render :partial => 'metadata_tab' %>
+    </div>
+
+    <div id="tabs-files" class="ui-tabs-hide">
+      <% if @dataset.attachments.blank? %>
+        No files attached to this dataset.
+      <% else %>
+
+        <table id="attachments">
+
+          <tr>
+            <th width=<%= APP_CONFIG['thumbnail_size'] %>></th>
+            <th class="filename">Filename</th>
+            <th class="date">Added</th>
+            <th class="actions">Manage</th>
+          </tr>
+
+          <% @dataset.attachments.each do |a| %>
+
+            <tr class="<%= cycle("stripe", "") %>">
+              <td><%= show_thumbnail(a) %></td>
+              <td class="filename"><%= show_filename(a) %></td>
+              <td class="date"><%= local_date(a.created_at) %></td>
+              <td class="actions">
+                <%= attachment_download_link(a) %>
+                <% if can? :destroy, a %>
+                  <%= link_to '<span>Delete</span>'.html_safe, attachment_path(a), :method => :delete, :confirm => "Are you sure you want to delete this supplementary file?", :class => "button red" %>
+
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      <% end %>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    $(function () {
+      $("#tabs").tabs();
+      <% if params[:tab] %>
+      $("#tabs").tabs('select', '#<%= params[:tab] %>');
+
+      <% end %>
+    });
+
+  });
+
+</script>

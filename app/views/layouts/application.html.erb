@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% title = (yield :title).to_s %>
+    <title>ACData <%= "- #{title}" unless title.empty? %></title>
+    <%= stylesheet_link_tag :all, :media => "all" %>
+    <%= stylesheet_link_tag 'custom-theme/jquery-ui-1.8.16.custom' %>
+
+    <%= javascript_include_tag :defaults %>
+    <%= javascript_include_tag 'jqModal.js' %>
+    <%= javascript_include_tag 'jquery-ui.min' %>
+    <%= javascript_include_tag 'nested_form.js' %>
+    <%= javascript_include_tag 'jquery.easing.1.3.js' %>
+    <%= javascript_include_tag 'jquery.mousewheel.min.js' %>
+    <%= javascript_include_tag 'jquery.placeholder.js' %>
+    <%= javascript_include_tag 'bootstrap-dropdown.js' %>
+
+    <%= csrf_meta_tag %>
+  </head>
+  
+  <body>
+  
+    <%= render 'layouts/header' %>
+    <%= render 'layouts/messages' %>
+    <%= yield %>  
+    <div id="wizard"></div>
+  
+    <div id="footer" class="hidden">
+      <a target="_about" href="http://www.intersect.org.au/attribution-policy" class="intersect_logo_link"></a>
+      Developed by Intersect Australia Ltd
+      <%= debug(params) if Rails.env.development? %>
+    </div>
+    
+        <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                // Appear/Disappear
+                $('.expandable > li > a.expanded').parent().find('> ul').show();
+                $('.expandable a[id="arrow"]').click(function() {
+                    $(this).toggleClass('expanded').toggleClass('collapsed').parent().find('> ul').toggle();
+                });
+            }, 250);
+        });
+    
+        $('[id^=show_][id$=_wizard]').click(function() {
+            $(this).addClass('ac_loading');
+        });
+        
+        $('#back_button').live('click', function() {
+            $(this).addClass('ac_loading');
+        });
+    
+        $('input[type=submit]', '#wizard').live('click', function() {
+            $(this).addClass('ac_loading');
+        });
+    
+        $('form', '#wizard').live('submit', function() {
+            $('input[name=commit]', '#wizard').attr('disabled', 'disabled');
+        });
+    
+        $(document).keydown(function(e) {
+            if (e.which == 27) {  // escape, close box
+                $('[id^=close_][id$=_dialog]').click();
+            }
+        });
+    
+    </script>
+  
+  </body>
+
+</html>

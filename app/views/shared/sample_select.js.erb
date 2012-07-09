@@ -1,0 +1,12 @@
+<% if has_samples?(@project) %>
+$('#wizard').html('<%= escape_javascript(render :partial => 'shared/sample_select_form') %>');
+$('#new_dataset_dialog').jqm({modal:true}).jqmAddClose($('#close_dataset_dialog'));
+$('#new_dataset_dialog').jqmShow();
+$('#show_dataset_wizard').removeClass('ac_loading');
+$('#add_dropdown').removeClass('ac_loading');
+<% else %>
+
+<% flash[:alert] = 'The project does not have samples to add datasets to.' %>
+window.location.reload();
+
+<% end %>
