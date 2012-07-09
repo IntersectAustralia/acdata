@@ -14,7 +14,7 @@ describe NMRHarvester do
     @i1 = Factory(:instrument, :id => 100, :instrument_class => 'NMR', :name => 'aaa (Flip)')
     @i2 = Factory(:instrument, :id => 101, :instrument_class => 'Not NMR', :name => 'bbb (bar)')
     @i3 = Factory(:instrument, :id => 102, :instrument_class => 'NMR', :name => 'ccc (Gyro)')
-    FileUtils.cp_r FileList["spec/resources/nmr_backup/*"].exclude(".svn"), "spec/resources/"
+    FileUtils.cp_r FileList["spec/resources/nmr_backup/*"], "spec/resources/"
 
   end
 
