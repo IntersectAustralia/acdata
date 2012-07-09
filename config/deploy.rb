@@ -9,17 +9,17 @@ require 'whenever/capistrano'
 set :stages, %w(qa staging production)
 set :default_stage, "qa"
 set :application, 'acdata'
-set :repository, Proc.new { `svn info | grep URL | sed 's/URL: //'`.chomp }
-set :scm, :subversion
 set :rpms, %w{httpd-devel apr-devel apr-util-devel libxml2 libxml2-devel libxslt libxslt-devel libffi gd mod_ssl git mod_xsendfile postgresql84-devel}
 set :shared_children, shared_children + %w(log_archive)
 set :shell, '/bin/bash'
 set :rvm_ruby_string, 'ruby-1.9.3-p194@acdata'
 set :rvm_type, :user
 
-# Deploy using copy since the servers can't see our SVN server
+# Deploy using copy  for now
+set :scm, 'git'
+set :repository, 'https://github.com/IntersectAustralia/anznn.git'
 set :deploy_via, :copy
-set :copy_exclude, [".svn/*"]
+set :copy_exclude, [".git/*"]
 
 set(:user) { "#{defined?(user) ? user : 'devel'}" }
 set(:group) { "#{defined?(group) ? group : user}" }
@@ -195,12 +195,12 @@ namespace :deploy do
   task :load_slide_guidelines, :roles => :db do
     run("cd #{current_path} && bundle exec rake data:slide_guidelines:load", :env => {'RAILS_ENV' => "#{stage}"})
   end
-
-  # Set the revision
-  desc "Set SVN revision on the server so that we can see it in the deployed application"
-  task :set_svn_revision, :roles => :app do
-    put("#{real_revision}", "#{release_path}/app/views/layouts/_revision.rhtml")
-  end
+  #
+  ## Set the revision
+  #desc "Set SVN revision on the server so that we can see it in the deployed application"
+  #task :set_svn_revision, :roles => :app do
+  #  put("#{real_revision}", "#{release_path}/app/views/layouts/_revision.rhtml")
+  #end
 
   desc "Full redeployment, it runs deploy:update, deploy:refresh_db, and deploy:restart"
   task :full_redeploy do
@@ -261,7 +261,7 @@ after 'deploy:update_code' do
   generate_database_yml
   generate_initial_users_yml
   generate_deploy_config
-  deploy.set_svn_revision
+  #deploy.set_svn_revision
 end
 
 desc "After updating code we need to populate a new database.yml"

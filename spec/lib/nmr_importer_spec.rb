@@ -13,7 +13,7 @@ describe "NMRImporter" do
                     :name => 'ccc (Gyro)',
                     :instrument_file_types => [@nmr_file_type])
       @u1 = Factory(:user, :status => 'A', :nmr_username => 'aaa')
-      FileUtils.cp_r FileList["spec/resources/nmr_backup/*"].exclude(".svn"), "spec/resources/"
+      FileUtils.cp_r FileList["spec/resources/nmr_backup/*"], "spec/resources/"
 
       Instrument.should_receive(:find).with(102).and_return(@i1)
       User.should_receive(:find).with(50).and_return(@u1)
@@ -73,7 +73,7 @@ describe "NMRImporter" do
   describe "extracting title from NMR folder" do
 
     before :all do
-      FileUtils.cp_r FileList["spec/resources/nmr_backup/*"].exclude(".svn"), "spec/resources/"
+      FileUtils.cp_r FileList["spec/resources/nmr_backup/*"], "spec/resources/"
     end
 
     after :all do
