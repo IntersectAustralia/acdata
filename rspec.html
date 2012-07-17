@@ -1,0 +1,2025 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>RSpec results</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Expires" content="-1" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <style type="text/css">
+  body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    font-size: 80%;
+  }
+  </style>
+  <script type="text/javascript">
+    // <![CDATA[
+
+function addClass(element_id, classname) {
+  document.getElementById(element_id).className += (" " + classname);
+}
+
+function removeClass(element_id, classname) {
+  var elem = document.getElementById(element_id);
+  var classlist = elem.className.replace(classname,'');
+  elem.className = classlist;
+}
+
+function moveProgressBar(percentDone) {
+  document.getElementById("rspec-header").style.width = percentDone +"%";
+}
+
+function makeRed(element_id) {
+  removeClass(element_id, 'passed');
+  removeClass(element_id, 'not_implemented');
+  addClass(element_id,'failed');
+}
+
+function makeYellow(element_id) {
+  var elem = document.getElementById(element_id);
+  if (elem.className.indexOf("failed") == -1) {  // class doesn't includes failed
+    if (elem.className.indexOf("not_implemented") == -1) { // class doesn't include not_implemented
+      removeClass(element_id, 'passed');
+      addClass(element_id,'not_implemented');
+    }
+  }
+}
+
+function apply_filters() {
+  var passed_filter = document.getElementById('passed_checkbox').checked;
+  var failed_filter = document.getElementById('failed_checkbox').checked;
+  var pending_filter = document.getElementById('pending_checkbox').checked;
+
+  assign_display_style("example passed", passed_filter);
+  assign_display_style("example failed", failed_filter);
+  assign_display_style("example not_implemented", pending_filter);
+
+  assign_display_style_for_group("example_group passed", passed_filter);
+  assign_display_style_for_group("example_group not_implemented", pending_filter, pending_filter || passed_filter);
+  assign_display_style_for_group("example_group failed", failed_filter, failed_filter || pending_filter || passed_filter);
+}
+
+function get_display_style(display_flag) {
+  var style_mode = 'none';
+  if (display_flag == true) {
+    style_mode = 'block';
+  }
+  return style_mode;
+}
+
+function assign_display_style(classname, display_flag) {
+  var style_mode = get_display_style(display_flag);
+  var elems = document.getElementsByClassName(classname)
+  for (var i=0; i<elems.length;i++) {
+    elems[i].style.display = style_mode;
+  }
+}
+
+function assign_display_style_for_group(classname, display_flag, subgroup_flag) {
+  var display_style_mode = get_display_style(display_flag);
+  var subgroup_style_mode = get_display_style(subgroup_flag);
+  var elems = document.getElementsByClassName(classname)
+  for (var i=0; i<elems.length;i++) {
+    var style_mode = display_style_mode;
+    if ((display_flag != subgroup_flag) && (elems[i].getElementsByTagName('dt')[0].innerHTML.indexOf(", ") != -1)) {
+      elems[i].style.display = subgroup_style_mode;
+    } else {
+      elems[i].style.display = display_style_mode;
+    }
+  }
+}
+
+    // ]]>
+  </script>
+  <style type="text/css">
+#rspec-header {
+  background: #65C400; color: #fff; height: 4em;
+}
+
+.rspec-report h1 {
+  margin: 0px 10px 0px 10px;
+  padding: 10px;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+  font-size: 1.8em;
+  position: absolute;
+}
+
+#label {
+  float:left;
+}
+
+#display-filters {
+  float:left;
+  padding: 28px 0 0 40%;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+}
+
+#summary {
+  float:right;
+  padding: 5px 10px;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+  text-align: right;
+}
+
+#summary p {
+  margin: 0 0 0 2px;
+}
+
+#summary #totals {
+  font-size: 1.2em;
+}
+
+.example_group {
+  margin: 0 10px 5px;
+  background: #fff;
+}
+
+dl {
+  margin: 0; padding: 0 0 5px;
+  font: normal 11px "Lucida Grande", Helvetica, sans-serif;
+}
+
+dt {
+  padding: 3px;
+  background: #65C400;
+  color: #fff;
+  font-weight: bold;
+}
+
+dd {
+  margin: 5px 0 5px 5px;
+  padding: 3px 3px 3px 18px;
+}
+
+
+dd.example.passed {
+  border-left: 5px solid #65C400;
+  border-bottom: 1px solid #65C400;
+  background: #DBFFB4; color: #3D7700;
+}
+
+dd.example.not_implemented {
+  border-left: 5px solid #FAF834;
+  border-bottom: 1px solid #FAF834;
+  background: #FCFB98; color: #131313;
+}
+
+dd.example.pending_fixed {
+  border-left: 5px solid #0000C2;
+  border-bottom: 1px solid #0000C2;
+  color: #0000C2; background: #D3FBFF;
+}
+
+dd.example.failed {
+  border-left: 5px solid #C20000;
+  border-bottom: 1px solid #C20000;
+  color: #C20000; background: #FFFBD3;
+}
+
+
+dt.not_implemented {
+  color: #000000; background: #FAF834;
+}
+
+dt.pending_fixed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+dt.failed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+
+#rspec-header.not_implemented {
+  color: #000000; background: #FAF834;
+}
+
+#rspec-header.pending_fixed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+#rspec-header.failed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+
+.backtrace {
+  color: #000;
+  font-size: 12px;
+}
+
+a {
+  color: #BE5C00;
+}
+
+/* Ruby code, style similar to vibrant ink */
+.ruby {
+  font-size: 12px;
+  font-family: monospace;
+  color: white;
+  background-color: black;
+  padding: 0.1em 0 0.2em 0;
+}
+
+.ruby .keyword { color: #FF6600; }
+.ruby .constant { color: #339999; }
+.ruby .attribute { color: white; }
+.ruby .global { color: white; }
+.ruby .module { color: white; }
+.ruby .class { color: white; }
+.ruby .string { color: #66FF00; }
+.ruby .ident { color: white; }
+.ruby .method { color: #FFCC00; }
+.ruby .number { color: white; }
+.ruby .char { color: white; }
+.ruby .comment { color: #9933CC; }
+.ruby .symbol { color: white; }
+.ruby .regex { color: #44B4CC; }
+.ruby .punct { color: white; }
+.ruby .escape { color: white; }
+.ruby .interp { color: white; }
+.ruby .expr { color: white; }
+
+.ruby .offending { background-color: gray; }
+.ruby .linenum {
+  width: 75px;
+  padding: 0.1em 1em 0.2em 0;
+  color: #000000;
+  background-color: #FFFBD3;
+}
+
+  </style>
+</head>
+<body>
+<div class="rspec-report">
+
+<div id="rspec-header">
+  <div id="label">
+    <h1>RSpec Code Examples</h1>
+  </div>
+
+  <div id="display-filters">
+    <input id="passed_checkbox" name="passed_checkbox" type="checkbox" checked onchange="apply_filters()" value="1"> <label for="passed_checkbox">Passed</label>
+    <input id="failed_checkbox" name="failed_checkbox" type="checkbox" checked onchange="apply_filters()" value="2"> <label for="failed_checkbox">Failed</label>
+    <input id="pending_checkbox" name="pending_checkbox" type="checkbox" checked onchange="apply_filters()" value="3"> <label for="pending_checkbox">Pending</label>
+  </div>
+
+  <div id="summary">
+    <p id="totals">&nbsp;</p>
+    <p id="duration">&nbsp;</p>
+  </div>
+</div>
+
+
+<div class="results">
+<div id="div_group_1" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_1" class="passed">DatasetsController</dt>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_1');</script>
+    <script type="text/javascript">makeYellow('example_group_1');</script>
+    <script type="text/javascript">moveProgressBar('0.2');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">should allow selecting a sample for a dataset to be created under (PENDING: No reason given)</span></dd>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_1');</script>
+    <script type="text/javascript">makeYellow('example_group_1');</script>
+    <script type="text/javascript">moveProgressBar('0.4');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">should create and add attachments (PENDING: No reason given)</span></dd>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_1');</script>
+    <script type="text/javascript">makeYellow('example_group_1');</script>
+    <script type="text/javascript">moveProgressBar('0.7');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">should set prompts and filters for the upload page (PENDING: No reason given)</span></dd>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_1');</script>
+    <script type="text/javascript">makeYellow('example_group_1');</script>
+    <script type="text/javascript">moveProgressBar('0.9');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">should set a flag if the metadata page was reached from the show page (PENDING: No reason given)</span></dd>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_1');</script>
+    <script type="text/javascript">makeYellow('example_group_1');</script>
+    <script type="text/javascript">moveProgressBar('1.1');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">should create zip file for download (PENDING: No reason given)</span></dd>
+  </dl>
+</div>
+<div id="div_group_2" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_2" class="passed">ProjectsController</dt>
+  </dl>
+</div>
+<div id="div_group_3" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_3" class="passed">Creating projects</dt>
+    <script type="text/javascript">moveProgressBar('1.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the current user as the owner when creating a new project</span></dd>
+  </dl>
+</div>
+<div id="div_group_4" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_4" class="passed">ApplicationHelper</dt>
+  </dl>
+</div>
+<div id="div_group_5" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_5" class="passed">Split list in two</dt>
+    <script type="text/javascript">moveProgressBar('1.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should split a list exactly in half when even number of items</span></dd>
+    <script type="text/javascript">moveProgressBar('1.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should put the extra item in the first list when an odd number of items</span></dd>
+    <script type="text/javascript">moveProgressBar('2.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should handle a list with 1 item</span></dd>
+    <script type="text/javascript">moveProgressBar('2.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should handle a list with 0 items</span></dd>
+  </dl>
+</div>
+<div id="div_group_6" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_6" class="passed">ProjectsHelper</dt>
+  </dl>
+</div>
+<div id="div_group_7" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_7" class="passed">Check if a project has samples</dt>
+    <script type="text/javascript">moveProgressBar('2.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return false if there are no samples within the project</span></dd>
+    <script type="text/javascript">moveProgressBar('2.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return false if there is an experiment in the project but no samples</span></dd>
+    <script type="text/javascript">moveProgressBar('3.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return true if there is one sample at the project level</span></dd>
+    <script type="text/javascript">moveProgressBar('3.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return true if there is one sample at the experiment level</span></dd>
+    <script type="text/javascript">moveProgressBar('3.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return true if there are many samples attached at various levels</span></dd>
+  </dl>
+</div>
+<div id="div_group_8" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_8" class="passed">Check if a resource has attachments</dt>
+    <script type="text/javascript">moveProgressBar('3.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return true for projects that contain attachments</span></dd>
+    <script type="text/javascript">moveProgressBar('4.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return true for experiments that contain attachments</span></dd>
+  </dl>
+</div>
+<div id="div_group_9" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_9" class="passed">DatasetsHelper</dt>
+    <script type="text/javascript">moveProgressBar('4.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should format the date</span></dd>
+    <script type="text/javascript">moveProgressBar('4.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return a json mapping of available instruments by class</span></dd>
+    <script type="text/javascript">moveProgressBar('4.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return a download path for an attachment</span></dd>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_9');</script>
+    <script type="text/javascript">makeYellow('example_group_9');</script>
+    <script type="text/javascript">moveProgressBar('4.9');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">should  (PENDING: No reason given)</span></dd>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_9');</script>
+    <script type="text/javascript">makeYellow('example_group_9');</script>
+    <script type="text/javascript">moveProgressBar('5.2');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">should  (PENDING: No reason given)</span></dd>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_9');</script>
+    <script type="text/javascript">makeYellow('example_group_9');</script>
+    <script type="text/javascript">moveProgressBar('5.4');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">should  (PENDING: No reason given)</span></dd>
+  </dl>
+</div>
+<div id="div_group_10" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_10" class="passed">dataset paths</dt>
+    <script type="text/javascript">moveProgressBar('5.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should get dataset path</span></dd>
+    <script type="text/javascript">moveProgressBar('5.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should get upload dataset path</span></dd>
+    <script type="text/javascript">moveProgressBar('6.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should get edit dataset path</span></dd>
+    <script type="text/javascript">moveProgressBar('6.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should get new dataset path</span></dd>
+    <script type="text/javascript">moveProgressBar('6.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should get metadata dataset path</span></dd>
+    <script type="text/javascript">moveProgressBar('6.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should get new eln export path</span></dd>
+    <script type="text/javascript">moveProgressBar('7.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should get edit eln export path</span></dd>
+    <script type="text/javascript">moveProgressBar('7.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should get memre export path</span></dd>
+  </dl>
+</div>
+<div id="div_group_11" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_11" class="passed">metadata files</dt>
+    <script type="text/javascript">moveProgressBar('7.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return metadata file options string</span></dd>
+    <script type="text/javascript">moveProgressBar('7.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return metadata file types</span></dd>
+  </dl>
+</div>
+<div id="div_group_12" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_12" class="passed">thumbnails</dt>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_12');</script>
+    <script type="text/javascript">makeYellow('example_group_12');</script>
+    <script type="text/javascript">moveProgressBar('8.0');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">should have a thumbnail for previewable file types (PENDING: No reason given)</span></dd>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_12');</script>
+    <script type="text/javascript">makeYellow('example_group_12');</script>
+    <script type="text/javascript">moveProgressBar('8.2');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">should have a thumbnail for instrument file types that are folders (PENDING: No reason given)</span></dd>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_12');</script>
+    <script type="text/javascript">makeYellow('example_group_12');</script>
+    <script type="text/javascript">moveProgressBar('8.5');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">should have a thumbnail for generic folders (PENDING: No reason given)</span></dd>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_12');</script>
+    <script type="text/javascript">makeYellow('example_group_12');</script>
+    <script type="text/javascript">moveProgressBar('8.7');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">should have a thumbnail for supported file types (PENDING: No reason given)</span></dd>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_12');</script>
+    <script type="text/javascript">makeYellow('example_group_12');</script>
+    <script type="text/javascript">moveProgressBar('9.0');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">should have a default thumbnail for unknown file types (PENDING: No reason given)</span></dd>
+  </dl>
+</div>
+<div id="div_group_13" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_13" class="passed">showing filenames</dt>
+    <script type="text/javascript">moveProgressBar('9.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should show previewable attachments with filename and preview</span></dd>
+    <script type="text/javascript">moveProgressBar('9.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should show the filename of an attachment</span></dd>
+  </dl>
+</div>
+<div id="div_group_14" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_14" class="passed">known file types</dt>
+    <script type="text/javascript">moveProgressBar('9.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return true for known file types</span></dd>
+    <script type="text/javascript">moveProgressBar('9.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return false for unknown file types</span></dd>
+    <script type="text/javascript">moveProgressBar('10.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return false for files without file extensions</span></dd>
+  </dl>
+</div>
+<div id="div_group_15" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_15" class="passed">upload prompt</dt>
+    <script type="text/javascript">moveProgressBar('10.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return the instrument's prompt message if present</span></dd>
+    <script type="text/javascript">moveProgressBar('10.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return a default prompt if no instrument prompt is present</span></dd>
+  </dl>
+</div>
+<div id="div_group_16" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_16" class="passed">update prompt</dt>
+    <script type="text/javascript">moveProgressBar('10.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should give a prompt for a folder if the original is a folder</span></dd>
+    <script type="text/javascript">moveProgressBar('11.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should give a prompt for a generic file if their is no file extension</span></dd>
+    <script type="text/javascript">moveProgressBar('11.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should give a prompt containing a file extension if the original had one</span></dd>
+  </dl>
+</div>
+<div id="div_group_17" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_17" class="passed">visualisation attachment</dt>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_17');</script>
+    <script type="text/javascript">makeYellow('example_group_17');</script>
+    <script type="text/javascript">moveProgressBar('11.6');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">should return the filename of the visualisation attachment (PENDING: No reason given)</span></dd>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_17');</script>
+    <script type="text/javascript">makeYellow('example_group_17');</script>
+    <script type="text/javascript">moveProgressBar('11.8');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">should  (PENDING: No reason given)</span></dd>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_17');</script>
+    <script type="text/javascript">makeYellow('example_group_17');</script>
+    <script type="text/javascript">moveProgressBar('12.0');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">should  (PENDING: No reason given)</span></dd>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_17');</script>
+    <script type="text/javascript">makeYellow('example_group_17');</script>
+    <script type="text/javascript">moveProgressBar('12.3');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">should  (PENDING: No reason given)</span></dd>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_17');</script>
+    <script type="text/javascript">makeYellow('example_group_17');</script>
+    <script type="text/javascript">moveProgressBar('12.5');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">should  (PENDING: No reason given)</span></dd>
+  </dl>
+</div>
+<div id="div_group_18" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_18" class="passed">InstrumentManagementHelper</dt>
+  </dl>
+</div>
+<div id="div_group_19" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_19" class="passed">find intrument file type</dt>
+    <script type="text/javascript">moveProgressBar('12.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">finds it given the correct name</span></dd>
+  </dl>
+</div>
+<div id="div_group_20" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_20" class="passed">Notifier</dt>
+    <script type="text/javascript">moveProgressBar('13.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should send the right email</span></dd>
+    <script type="text/javascript">moveProgressBar('13.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should send the right email</span></dd>
+  </dl>
+</div>
+<div id="div_group_21" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_21" class="passed">Email notifications to users should be sent</dt>
+    <script type="text/javascript">moveProgressBar('13.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should send mail to user after sign up</span></dd>
+    <script type="text/javascript">moveProgressBar('13.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should send mail to user if access request approved</span></dd>
+    <script type="text/javascript">moveProgressBar('13.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should send mail to user if access request denied</span></dd>
+  </dl>
+</div>
+<div id="div_group_22" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_22" class="passed">Email notifications to slide scanning service should be sent</dt>
+    <script type="text/javascript">moveProgressBar('14.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should send mail to supervisor and slide scanning service admin (without ethics approval)</span></dd>
+    <script type="text/javascript">moveProgressBar('14.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should send mail to supervisor and slide scanning service admin (with ethics approval)</span></dd>
+    <script type="text/javascript">moveProgressBar('14.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should send mail to supervisor and slide scanning service admin</span></dd>
+    <script type="text/javascript">moveProgressBar('14.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should send mail to supervisor and slide scanning service admin</span></dd>
+  </dl>
+</div>
+<div id="div_group_23" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_23" class="passed">NMRImporter</dt>
+  </dl>
+</div>
+<div id="div_group_24" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_24" class="passed">importing</dt>
+    <script type="text/javascript">moveProgressBar('15.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should create the default project and import the samples to it</span></dd>
+    <script type="text/javascript">moveProgressBar('15.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should import samples to the NMR Server Data project</span></dd>
+    <script type="text/javascript">moveProgressBar('15.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not import samples that already exist</span></dd>
+    <script type="text/javascript">moveProgressBar('15.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should import samples that already exist if forced</span></dd>
+  </dl>
+</div>
+<div id="div_group_25" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_25" class="passed">extracting title from NMR folder</dt>
+    <script type="text/javascript">moveProgressBar('16.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should get give the value from the title file</span></dd>
+    <script type="text/javascript">moveProgressBar('16.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return Untitled where there is no title file</span></dd>
+    <script type="text/javascript">moveProgressBar('16.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return Untitled where there is no title file content</span></dd>
+  </dl>
+</div>
+<div id="div_group_26" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_26" class="passed">AndsPartyHarvester</dt>
+  </dl>
+</div>
+<div id="div_group_27" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_27" class="passed">Retrieval</dt>
+    <script type="text/javascript">moveProgressBar('16.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should retrieve party records</span></dd>
+    <script type="text/javascript">moveProgressBar('17.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should retrieve party records from a given date</span></dd>
+  </dl>
+</div>
+<div id="div_group_28" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_28" class="passed">Storing records</dt>
+    <script type="text/javascript">moveProgressBar('17.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should add persons</span></dd>
+    <script type="text/javascript">moveProgressBar('17.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not add persons without a name</span></dd>
+    <script type="text/javascript">moveProgressBar('17.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should only add records with party type of person</span></dd>
+    <script type="text/javascript">moveProgressBar('18.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should replace records when forced</span></dd>
+  </dl>
+</div>
+<div id="div_group_29" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_29" class="passed">SpFileParser</dt>
+  </dl>
+</div>
+<div id="div_group_30" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_30" class="passed">Special steps for sp file</dt>
+    <script type="text/javascript">moveProgressBar('18.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should get the multiline value for polynomials</span></dd>
+  </dl>
+</div>
+<div id="div_group_31" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_31" class="passed">Recognising SP files</dt>
+    <script type="text/javascript">moveProgressBar('18.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not recognise other file types</span></dd>
+  </dl>
+</div>
+<div id="div_group_32" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_32" class="passed">recognising known SP file types</dt>
+    <script type="text/javascript">moveProgressBar('18.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should recognise Raman SP files</span></dd>
+  </dl>
+</div>
+<div id="div_group_33" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_33" class="passed">Authentication</dt>
+    <script type="text/javascript">moveProgressBar('18.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should get user details from the directory service</span></dd>
+  </dl>
+</div>
+<div id="div_group_34" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_34" class="passed">PotentiostatFileParser</dt>
+  </dl>
+</div>
+<div id="div_group_35" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_35" class="passed">Potentiostat file parsing</dt>
+    <script type="text/javascript">moveProgressBar('19.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should map key names to their display names</span></dd>
+    <script type="text/javascript">moveProgressBar('19.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should raise exceptions on invalid source files</span></dd>
+  </dl>
+</div>
+<div id="div_group_36" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_36" class="passed">CapillaryPorometerFileHandler</dt>
+  </dl>
+</div>
+<div id="div_group_37" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_37" class="passed">Recognising instrument file types</dt>
+    <script type="text/javascript">moveProgressBar('19.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should recognise Capillary Porometer xls files</span></dd>
+    <script type="text/javascript">moveProgressBar('19.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should recognise Capillary Porometer txt files</span></dd>
+  </dl>
+</div>
+<div id="div_group_38" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_38" class="passed">Identifying Visualisable Test Methods</dt>
+    <script type="text/javascript">moveProgressBar('20.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">tests that are handled by CPBubblePoint are not visualisable</span></dd>
+    <script type="text/javascript">moveProgressBar('20.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should identify unknown tests as not visualisable</span></dd>
+    <script type="text/javascript">moveProgressBar('20.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should identify all known tests as visualisable</span></dd>
+  </dl>
+</div>
+<div id="div_group_39" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_39" class="passed">identify a test type from dataset metadata_values</dt>
+    <script type="text/javascript">moveProgressBar('20.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return nil for a dataset without metadata_values</span></dd>
+    <script type="text/javascript">moveProgressBar('21.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return the value of the 'Test Method' metadata_value</span></dd>
+  </dl>
+</div>
+<div id="div_group_40" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_40" class="passed">Metadata extraction strategy</dt>
+    <script type="text/javascript">moveProgressBar('21.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should choose the right strategy for the given test</span></dd>
+    <script type="text/javascript">moveProgressBar('21.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should parse and return metadata for each test type</span></dd>
+    <script type="text/javascript">moveProgressBar('21.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should create a graph for visualisable tests</span></dd>
+  </dl>
+</div>
+<div id="div_group_41" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_41" class="passed">FsmFileParser</dt>
+  </dl>
+</div>
+<div id="div_group_42" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_42" class="passed">Special steps for fsm file</dt>
+    <script type="text/javascript">moveProgressBar('22.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should get the multiline value for polynomials</span></dd>
+  </dl>
+</div>
+<div id="div_group_43" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_43" class="passed">MemreHarvester</dt>
+    <script type="text/javascript">moveProgressBar('22.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return the list of membrane properties</span></dd>
+    <script type="text/javascript">moveProgressBar('22.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return the list of attributes for a given membrane property</span></dd>
+    <script type="text/javascript">moveProgressBar('22.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return a list of techniques for a given property</span></dd>
+  </dl>
+</div>
+<div id="div_group_44" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_44" class="passed">Add Membrane Property</dt>
+    <script type="text/javascript">moveProgressBar('22.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should add a membrane property record if none exists</span></dd>
+    <script type="text/javascript">moveProgressBar('23.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should update a membrane property record if one already exists</span></dd>
+  </dl>
+</div>
+<div id="div_group_45" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_45" class="passed">Fetch and store properties</dt>
+    <script type="text/javascript">moveProgressBar('23.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should add properties</span></dd>
+    <script type="text/javascript">moveProgressBar('23.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should update properties</span></dd>
+    <script type="text/javascript">moveProgressBar('23.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should replace properties</span></dd>
+  </dl>
+</div>
+<div id="div_group_46" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_46" class="passed">NMRHarvester</dt>
+    <script type="text/javascript">moveProgressBar('24.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return users who have set their NMR username</span></dd>
+    <script type="text/javascript">moveProgressBar('24.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return a list of NMR instruments</span></dd>
+    <script type="text/javascript">moveProgressBar('24.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should give the short name of the NMR instrument</span></dd>
+    <script type="text/javascript">moveProgressBar('24.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should fetch NMR datasets of any age</span></dd>
+    <script type="text/javascript">moveProgressBar('25.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should fetch NMR datasets newer than a given date</span></dd>
+  </dl>
+</div>
+<div id="div_group_47" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_47" class="passed">DatasetRules</dt>
+    <script type="text/javascript">moveProgressBar('25.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should reject attachments with the same filename</span></dd>
+  </dl>
+</div>
+<div id="div_group_48" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_48" class="passed">Reject attachments not meeting the uniqueness rules</dt>
+    <script type="text/javascript">moveProgressBar('25.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should reject more than one file type from the unique list</span></dd>
+    <script type="text/javascript">moveProgressBar('25.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should reject more than one of the same metadata file type</span></dd>
+    <script type="text/javascript">moveProgressBar('26.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should reject more than one of the same visualisable file type</span></dd>
+  </dl>
+</div>
+<div id="div_group_49" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_49" class="passed">Reject attachments not meeting the exclusiveness rules</dt>
+    <script type="text/javascript">moveProgressBar('26.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not accept 2 or more files from the exclusive file type list</span></dd>
+    <script type="text/javascript">moveProgressBar('26.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should reject other visualisable file types where there are multiple</span></dd>
+  </dl>
+</div>
+<div id="div_group_50" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_50" class="passed">KeyValuePairFileParser</dt>
+  </dl>
+</div>
+<div id="div_group_51" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_51" class="passed">Metadata extraction</dt>
+    <script type="text/javascript">moveProgressBar('26.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should parse a given file for metadata</span></dd>
+    <script type="text/javascript">moveProgressBar('27.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should extract values and indicate whether they are core</span></dd>
+  </dl>
+</div>
+<div id="div_group_52" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_52" class="passed">JDXFileParser</dt>
+  </dl>
+</div>
+<div id="div_group_53" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_53" class="passed">Parsing</dt>
+    <script type="text/javascript">moveProgressBar('27.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should parse file contents and return a metadata hash</span></dd>
+    <script type="text/javascript">moveProgressBar('27.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should extract the metadata values from a given set of keys</span></dd>
+  </dl>
+</div>
+<div id="div_group_54" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_54" class="passed">Getting the JCAMP-DX version</dt>
+    <script type="text/javascript">moveProgressBar('27.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return the JCAMP-DX version of JCAMP-DX files &lt; version 6</span></dd>
+    <script type="text/javascript">moveProgressBar('27.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return the JCAMP-DX version of JCAMP-DX files of version 6</span></dd>
+  </dl>
+</div>
+<div id="div_group_55" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_55" class="passed">ELNBlogPost</dt>
+    <script type="text/javascript">moveProgressBar('28.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should create a new blog post</span></dd>
+    <script type="text/javascript">moveProgressBar('28.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should create a new blog post, normalising as needed</span></dd>
+    <script type="text/javascript">moveProgressBar('28.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should add files</span></dd>
+    <script type="text/javascript">moveProgressBar('28.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should add directories as a zip file</span></dd>
+    <script type="text/javascript">moveProgressBar('29.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should update a blog post</span></dd>
+    <script type="text/javascript">moveProgressBar('29.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should encode filenames</span></dd>
+    <script type="text/javascript">moveProgressBar('29.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should normalise</span></dd>
+    <script type="text/javascript">moveProgressBar('29.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should sanitise</span></dd>
+    <script type="text/javascript">moveProgressBar('30.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should clean filenames</span></dd>
+    <script type="text/javascript">moveProgressBar('30.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should add files to a blog post and link anything that roughly exceeds 64MB after encoding (ie 46MB and above)</span></dd>
+  </dl>
+</div>
+<div id="div_group_56" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_56" class="passed">AttachmentBuilder</dt>
+  </dl>
+</div>
+<div id="div_group_57" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_57" class="passed">Building attachments</dt>
+    <script type="text/javascript">moveProgressBar('30.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should add attachments to a dataset</span></dd>
+    <script type="text/javascript">moveProgressBar('30.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not create attachments when rules verification fails</span></dd>
+    <script type="text/javascript">moveProgressBar('31.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should handle both success and failure when handling multiple files</span></dd>
+  </dl>
+</div>
+<div id="div_group_58" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_58" class="passed">Attachment</dt>
+  </dl>
+</div>
+<div id="div_group_59" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_59" class="passed">Associations</dt>
+    <script type="text/javascript">moveProgressBar('31.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to dataset</span></dd>
+  </dl>
+</div>
+<div id="div_group_60" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_60" class="passed">Validations</dt>
+    <script type="text/javascript">moveProgressBar('31.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require dataset to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('31.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow attachments without a preview file or preview mime type</span></dd>
+    <script type="text/javascript">moveProgressBar('31.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow attachments with both a preview file and preview mime type</span></dd>
+    <script type="text/javascript">moveProgressBar('32.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow attachments with only a preview file (missing preview mime type)</span></dd>
+    <script type="text/javascript">moveProgressBar('32.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow attachments with only a preview mime type (missing preview file)</span></dd>
+  </dl>
+</div>
+<div id="div_group_61" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_61" class="passed">is of format method</dt>
+    <script type="text/javascript">moveProgressBar('32.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return true if format matches</span></dd>
+    <script type="text/javascript">moveProgressBar('32.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return false for other formats</span></dd>
+  </dl>
+</div>
+<div id="div_group_62" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_62" class="passed">scopes</dt>
+    <script type="text/javascript">moveProgressBar('33.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">can filter attachments by instrument file type</span></dd>
+  </dl>
+</div>
+<div id="div_group_63" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_63" class="passed">Experiment</dt>
+    <script type="text/javascript">moveProgressBar('33.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to project</span></dd>
+  </dl>
+</div>
+<div id="div_group_64" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_64" class="passed">Validations</dt>
+    <script type="text/javascript">moveProgressBar('33.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require name to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('33.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should reject name of length 256</span></dd>
+    <script type="text/javascript">moveProgressBar('34.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should accept name of length 255</span></dd>
+    <script type="text/javascript">moveProgressBar('34.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should reject description of length 5001</span></dd>
+    <script type="text/javascript">moveProgressBar('34.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should accept description of length 5000</span></dd>
+    <script type="text/javascript">moveProgressBar('34.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should reject an invalid url based on semantics of the url</span></dd>
+    <script type="text/javascript">moveProgressBar('35.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should reject valid url of length 2049</span></dd>
+    <script type="text/javascript">moveProgressBar('35.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should accept a valid url of length 2048</span></dd>
+  </dl>
+</div>
+<div id="div_group_65" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_65" class="passed">Output for the API</dt>
+    <script type="text/javascript">moveProgressBar('35.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return a basic object representing the experiment</span></dd>
+    <script type="text/javascript">moveProgressBar('35.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return a basic object representing the experiment, without samples</span></dd>
+  </dl>
+</div>
+<div id="div_group_66" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_66" class="passed">Moving experiments between projects</dt>
+    <script type="text/javascript">moveProgressBar('36.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not update project parent if move is unsuccessful</span></dd>
+    <script type="text/javascript">moveProgressBar('36.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should update project parent if experiment has no files</span></dd>
+  </dl>
+</div>
+<div id="div_group_67" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_67" class="passed">AndsRelatedObject</dt>
+  </dl>
+</div>
+<div id="div_group_68" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_68" class="passed">Validations</dt>
+    <script type="text/javascript">moveProgressBar('36.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require ands_publishable_id to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('36.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require relation_type to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('36.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require relation to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('37.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require handle to be set</span></dd>
+  </dl>
+</div>
+<div id="div_group_69" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_69" class="passed">PropertyDetail</dt>
+    <script type="text/javascript">moveProgressBar('37.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require name to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('37.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require measurement_technique to be set</span></dd>
+  </dl>
+</div>
+<div id="div_group_70" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_70" class="passed">InstrumentRule</dt>
+  </dl>
+</div>
+<div id="div_group_71" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_71" class="passed">Names as a list</dt>
+    <script type="text/javascript">moveProgressBar('37.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should give a list of exclusive file names</span></dd>
+    <script type="text/javascript">moveProgressBar('38.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should give a list of unique file names</span></dd>
+    <script type="text/javascript">moveProgressBar('38.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should give a list of indelible file names</span></dd>
+    <script type="text/javascript">moveProgressBar('38.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should give a list of metadata file names</span></dd>
+    <script type="text/javascript">moveProgressBar('38.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should give a list of visualisable file names</span></dd>
+  </dl>
+</div>
+<div id="div_group_72" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_72" class="passed">Check if a file type is part of a given rule set</dt>
+    <script type="text/javascript">moveProgressBar('39.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">indelible and metadata files should be indelible</span></dd>
+    <script type="text/javascript">moveProgressBar('39.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should indicate if a file type is a metadata source</span></dd>
+    <script type="text/javascript">moveProgressBar('39.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should indicate if a file type is visualisable</span></dd>
+  </dl>
+</div>
+<div id="div_group_73" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_73" class="passed">MetadataValue</dt>
+  </dl>
+</div>
+<div id="div_group_74" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_74" class="passed">Associations</dt>
+    <script type="text/javascript">moveProgressBar('39.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to dataset</span></dd>
+  </dl>
+</div>
+<div id="div_group_75" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_75" class="passed">Validations</dt>
+    <script type="text/javascript">moveProgressBar('40.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require key to be set</span></dd>
+  </dl>
+</div>
+<div id="div_group_76" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_76" class="passed">AndsSubject</dt>
+  </dl>
+</div>
+<div id="div_group_77" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_77" class="passed">Associations</dt>
+    <script type="text/javascript">moveProgressBar('40.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should have and belong to many ands_publishables</span></dd>
+  </dl>
+</div>
+<div id="div_group_78" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_78" class="passed">Validations</dt>
+    <script type="text/javascript">moveProgressBar('40.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require keyword to be set</span></dd>
+  </dl>
+</div>
+<div id="div_group_79" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_79" class="passed">Potential Code Tests</dt>
+    <script type="text/javascript">moveProgressBar('40.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return the correct number of results</span></dd>
+  </dl>
+</div>
+<div id="div_group_80" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_80" class="passed">Ability</dt>
+  </dl>
+</div>
+<div id="div_group_81" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_81" class="passed">Project permissions</dt>
+    <script type="text/javascript">moveProgressBar('40.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a superuser that owns a project to read it</span></dd>
+    <script type="text/javascript">moveProgressBar('41.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a researcher that owns a project to read it</span></dd>
+    <script type="text/javascript">moveProgressBar('41.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a superuser that is a member of a project to read it</span></dd>
+    <script type="text/javascript">moveProgressBar('41.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a researcher that is a member of a project to read it</span></dd>
+    <script type="text/javascript">moveProgressBar('41.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow an owner of a project to update it</span></dd>
+    <script type="text/javascript">moveProgressBar('42.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow a member of a project to update it</span></dd>
+    <script type="text/javascript">moveProgressBar('42.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project member to remove themself from the project</span></dd>
+    <script type="text/javascript">moveProgressBar('42.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow a project owner to leave their own project</span></dd>
+    <script type="text/javascript">moveProgressBar('42.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project owner to download project data</span></dd>
+    <script type="text/javascript">moveProgressBar('43.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project member to download project data</span></dd>
+    <script type="text/javascript">moveProgressBar('43.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project owner to destroy the project</span></dd>
+    <script type="text/javascript">moveProgressBar('43.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow a project member to destroy the project</span></dd>
+    <script type="text/javascript">moveProgressBar('43.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project owner to see sample selection screen when adding a dataset from the project home page</span></dd>
+    <script type="text/javascript">moveProgressBar('44.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow a project member to see sample selection screen when adding a dataset from the project home page</span></dd>
+    <script type="text/javascript">moveProgressBar('44.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project owner to save the sample selection made as part of adding a dataset</span></dd>
+    <script type="text/javascript">moveProgressBar('44.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow a project member to save the sample selection made as part of adding a dataset</span></dd>
+  </dl>
+</div>
+<div id="div_group_82" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_82" class="passed">Experiment permissions</dt>
+    <script type="text/javascript">moveProgressBar('44.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a superuser that owns the project to view the experiment</span></dd>
+    <script type="text/javascript">moveProgressBar('45.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a researcher the owns the project to view the experiment</span></dd>
+    <script type="text/javascript">moveProgressBar('45.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a superuser that is a member to view the experiment</span></dd>
+    <script type="text/javascript">moveProgressBar('45.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a researcher that is a member to view the experiment</span></dd>
+    <script type="text/javascript">moveProgressBar('45.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project owner to create an experiment in the project</span></dd>
+    <script type="text/javascript">moveProgressBar('45.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow a project member to create an experiment in the project</span></dd>
+    <script type="text/javascript">moveProgressBar('46.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project owner to update an experiment in the project</span></dd>
+    <script type="text/javascript">moveProgressBar('46.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow a project member to update an experiment in the project</span></dd>
+    <script type="text/javascript">moveProgressBar('46.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow project members and collaborators to download related documents</span></dd>
+  </dl>
+</div>
+<div id="div_group_83" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_83" class="passed">Samples perimission</dt>
+    <script type="text/javascript">moveProgressBar('46.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project owner to create a sample</span></dd>
+    <script type="text/javascript">moveProgressBar('47.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow a project member to create a sample</span></dd>
+    <script type="text/javascript">moveProgressBar('47.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project owner to read a sample attached to the project</span></dd>
+    <script type="text/javascript">moveProgressBar('47.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project owner to read a sample attached to an experiment in the project</span></dd>
+    <script type="text/javascript">moveProgressBar('47.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project member to read a sample attached to the project</span></dd>
+    <script type="text/javascript">moveProgressBar('48.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project member to read a sample attached to an experiment in the project</span></dd>
+    <script type="text/javascript">moveProgressBar('48.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project member to update the sample attached to the project</span></dd>
+    <script type="text/javascript">moveProgressBar('48.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project member to update a sample attached to an experiment in the project</span></dd>
+    <script type="text/javascript">moveProgressBar('48.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow a project member to update a sample in the project</span></dd>
+    <script type="text/javascript">moveProgressBar('49.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow a project member to update a sample attached to an experiment in the project</span></dd>
+    <script type="text/javascript">moveProgressBar('49.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project owber to destroy a sample attached to the project</span></dd>
+    <script type="text/javascript">moveProgressBar('49.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project owner to destroy a sample attached to an experiment in the project</span></dd>
+    <script type="text/javascript">moveProgressBar('49.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow a project member to destroy a sample attached to the project</span></dd>
+    <script type="text/javascript">moveProgressBar('50.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow a project member to destroy a sample attached to an experiment in the project</span></dd>
+  </dl>
+</div>
+<div id="div_group_84" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_84" class="passed">Datasets permissions</dt>
+    <script type="text/javascript">moveProgressBar('50.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project owner to read datasets</span></dd>
+    <script type="text/javascript">moveProgressBar('50.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project member to read datasets</span></dd>
+    <script type="text/javascript">moveProgressBar('50.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project owner to download dataset data</span></dd>
+    <script type="text/javascript">moveProgressBar('50.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project member to download dataset data</span></dd>
+    <script type="text/javascript">moveProgressBar('51.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project owner to update the dataset name</span></dd>
+    <script type="text/javascript">moveProgressBar('51.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow a project member to update the dataset name</span></dd>
+    <script type="text/javascript">moveProgressBar('51.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project owner to delete the dataset</span></dd>
+    <script type="text/javascript">moveProgressBar('51.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow a project member to delete the dataset</span></dd>
+    <script type="text/javascript">moveProgressBar('52.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project owner to view metadata</span></dd>
+    <script type="text/javascript">moveProgressBar('52.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project member to view metadata</span></dd>
+    <script type="text/javascript">moveProgressBar('52.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project owner to view the dx file data</span></dd>
+    <script type="text/javascript">moveProgressBar('52.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project member to view the dx file data</span></dd>
+    <script type="text/javascript">moveProgressBar('53.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project owner to upload to the dataset</span></dd>
+    <script type="text/javascript">moveProgressBar('53.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow a project member to upload to the dataset</span></dd>
+  </dl>
+</div>
+<div id="div_group_85" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_85" class="passed">Attachment permissions</dt>
+    <script type="text/javascript">moveProgressBar('53.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project owner to read attachments</span></dd>
+    <script type="text/javascript">moveProgressBar('53.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project owner to download attachments</span></dd>
+    <script type="text/javascript">moveProgressBar('54.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project owner to delete attachments</span></dd>
+    <script type="text/javascript">moveProgressBar('54.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a project owner to upload attachments</span></dd>
+    <script type="text/javascript">moveProgressBar('54.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow a project member to delete attachments</span></dd>
+    <script type="text/javascript">moveProgressBar('54.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow a project member to upload attachments</span></dd>
+  </dl>
+</div>
+<div id="div_group_86" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_86" class="passed">User perimissions</dt>
+    <script type="text/javascript">moveProgressBar('54.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow superusers to access the admin page</span></dd>
+    <script type="text/javascript">moveProgressBar('55.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow researcher to access the admin page</span></dd>
+    <script type="text/javascript">moveProgressBar('55.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow superusers to read user data</span></dd>
+    <script type="text/javascript">moveProgressBar('55.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow reseachers to read user data</span></dd>
+    <script type="text/javascript">moveProgressBar('55.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow superusers to process acccess requests</span></dd>
+    <script type="text/javascript">moveProgressBar('56.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow researchers to process access requests</span></dd>
+    <script type="text/javascript">moveProgressBar('56.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow superusers to update a users role</span></dd>
+    <script type="text/javascript">moveProgressBar('56.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow reseachers to update a users role</span></dd>
+    <script type="text/javascript">moveProgressBar('56.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow superusers to activate and deactivate users</span></dd>
+    <script type="text/javascript">moveProgressBar('57.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow researchers to activate and deactivate users</span></dd>
+    <script type="text/javascript">moveProgressBar('57.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow superusers to approve users</span></dd>
+    <script type="text/javascript">moveProgressBar('57.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow reseachers to approve users</span></dd>
+    <script type="text/javascript">moveProgressBar('57.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow superuser to reject users</span></dd>
+    <script type="text/javascript">moveProgressBar('58.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow reseachers to reject users</span></dd>
+    <script type="text/javascript">moveProgressBar('58.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow users to be listed on the add project page</span></dd>
+  </dl>
+</div>
+<div id="div_group_87" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_87" class="passed">Instrument permissions</dt>
+    <script type="text/javascript">moveProgressBar('58.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a superuser to read the manage instruments page</span></dd>
+    <script type="text/javascript">moveProgressBar('58.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow a researcher to read the manage instruments page</span></dd>
+    <script type="text/javascript">moveProgressBar('59.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a superuser to update an instrument</span></dd>
+    <script type="text/javascript">moveProgressBar('59.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not all a researcher to update an instrument</span></dd>
+    <script type="text/javascript">moveProgressBar('59.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a superuser to mark an instrument as available</span></dd>
+    <script type="text/javascript">moveProgressBar('59.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow a superuser to mark an instrument as unavailable</span></dd>
+    <script type="text/javascript">moveProgressBar('59.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow a researcher to mark an instrument as available</span></dd>
+    <script type="text/javascript">moveProgressBar('60.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow a researcher to mark an instrument as unavailable</span></dd>
+  </dl>
+</div>
+<div id="div_group_88" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_88" class="passed">Activity</dt>
+  </dl>
+</div>
+<div id="div_group_89" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_89" class="passed">Validations</dt>
+    <script type="text/javascript">moveProgressBar('60.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require project_name to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('60.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require funding_sponsor to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('60.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should only allow numeric values for initial_year</span></dd>
+    <script type="text/javascript">moveProgressBar('61.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should validate RDA grant ID exists if from RDA</span></dd>
+    <script type="text/javascript">moveProgressBar('61.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not validate RDA handle exists if not from RDA</span></dd>
+    <script type="text/javascript">moveProgressBar('61.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should validate published is marked as true if from RDA</span></dd>
+  </dl>
+</div>
+<div id="div_group_90" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_90" class="passed">Rif CS Generation Tests</dt>
+    <script type="text/javascript">moveProgressBar('61.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should create correct rif-cs with if it's a new activity record'</span></dd>
+    <script type="text/javascript">moveProgressBar('62.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not create rif-cs with if it's from RDA</span></dd>
+  </dl>
+</div>
+<div id="div_group_91" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_91" class="passed">ands handle test</dt>
+    <script type="text/javascript">moveProgressBar('62.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return the correct handle</span></dd>
+  </dl>
+</div>
+<div id="div_group_92" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_92" class="passed">AndsPublishable</dt>
+  </dl>
+</div>
+<div id="div_group_93" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_93" class="passed">Associations</dt>
+    <script type="text/javascript">moveProgressBar('62.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to project</span></dd>
+    <script type="text/javascript">moveProgressBar('62.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should have and belong to many ands_subjects</span></dd>
+    <script type="text/javascript">moveProgressBar('63.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should have and belong to many for_codes</span></dd>
+    <script type="text/javascript">moveProgressBar('63.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should have and belong to many seo_codes</span></dd>
+    <script type="text/javascript">moveProgressBar('63.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should have and belong to many ands_subjects</span></dd>
+    <script type="text/javascript">moveProgressBar('63.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should have many ands_related_infos</span></dd>
+    <script type="text/javascript">moveProgressBar('63.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should have many ands_related_objects</span></dd>
+  </dl>
+</div>
+<div id="div_group_94" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_94" class="passed">Validations</dt>
+    <script type="text/javascript">moveProgressBar('64.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require collection_name to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('64.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require moderator_id to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('64.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require collection_description to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('64.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require address to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('65.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require access_rights to be set</span></dd>
+  </dl>
+</div>
+<div id="div_group_95" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_95" class="passed">Rif CS Generation Tests</dt>
+    <script type="text/javascript">moveProgressBar('65.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should create correct rif-cs with everything</span></dd>
+  </dl>
+</div>
+<div id="div_group_96" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_96" class="passed">User</dt>
+  </dl>
+</div>
+<div id="div_group_97" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_97" class="passed">Associations</dt>
+    <script type="text/javascript">moveProgressBar('65.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to role</span></dd>
+  </dl>
+</div>
+<div id="div_group_98" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_98" class="passed">Validations</dt>
+    <script type="text/javascript">moveProgressBar('65.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should have unique nmr usernames</span></dd>
+    <script type="text/javascript">moveProgressBar('66.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should restrict length of supervisor details</span></dd>
+  </dl>
+</div>
+<div id="div_group_99" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_99" class="passed">Named Scopes</dt>
+  </dl>
+</div>
+<div id="div_group_100" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_100" class="passed">Users Pending Approval Scope</dt>
+    <script type="text/javascript">moveProgressBar('66.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return users that are unapproved ordered by login</span></dd>
+  </dl>
+</div>
+<div id="div_group_101" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_101" class="passed">Approved Users Scope</dt>
+    <script type="text/javascript">moveProgressBar('66.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return users that are approved ordered by login</span></dd>
+  </dl>
+</div>
+<div id="div_group_102" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_102" class="passed">Approve Access Request</dt>
+    <script type="text/javascript">moveProgressBar('66.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should set the status flag to A</span></dd>
+  </dl>
+</div>
+<div id="div_group_103" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_103" class="passed">Reject Access Request</dt>
+    <script type="text/javascript">moveProgressBar('67.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should set the status flag to R</span></dd>
+  </dl>
+</div>
+<div id="div_group_104" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_104" class="passed">Status Methods</dt>
+  </dl>
+</div>
+<div id="div_group_105" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_105" class="passed">Active</dt>
+    <script type="text/javascript">moveProgressBar('67.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should be active</span></dd>
+    <script type="text/javascript">moveProgressBar('67.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not be pending approval</span></dd>
+  </dl>
+</div>
+<div id="div_group_106" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_106" class="passed">Unapproved</dt>
+    <script type="text/javascript">moveProgressBar('67.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not be active</span></dd>
+    <script type="text/javascript">moveProgressBar('68.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should be pending approval</span></dd>
+  </dl>
+</div>
+<div id="div_group_107" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_107" class="passed">Rejected</dt>
+    <script type="text/javascript">moveProgressBar('68.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not be active</span></dd>
+    <script type="text/javascript">moveProgressBar('68.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not be pending approval</span></dd>
+  </dl>
+</div>
+<div id="div_group_108" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_108" class="passed">Is superuser method</dt>
+    <script type="text/javascript">moveProgressBar('68.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return true if the specified user is a superuser</span></dd>
+    <script type="text/javascript">moveProgressBar('68.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return false if the specified user is not a superuser</span></dd>
+  </dl>
+</div>
+<div id="div_group_109" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_109" class="passed">Find the number of superusers method</dt>
+    <script type="text/javascript">moveProgressBar('69.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return true if there are at least 2 superusers</span></dd>
+    <script type="text/javascript">moveProgressBar('69.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return false if there is only 1 superuser</span></dd>
+    <script type="text/javascript">moveProgressBar('69.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return true if the logged in user does not match the user record being modified</span></dd>
+  </dl>
+</div>
+<div id="div_group_110" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_110" class="passed">User permissions methods</dt>
+  </dl>
+</div>
+<div id="div_group_111" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_111" class="passed">can_read_projects method</dt>
+    <script type="text/javascript">moveProgressBar('69.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return an array of project ids the user can read</span></dd>
+    <script type="text/javascript">moveProgressBar('70.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return an empty array if the user cannot read any projects</span></dd>
+  </dl>
+</div>
+<div id="div_group_112" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_112" class="passed">can_manage_projects method</dt>
+    <script type="text/javascript">moveProgressBar('70.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return an array of project ids the user can manage</span></dd>
+    <script type="text/javascript">moveProgressBar('70.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return an empty array if the user cannot manage any projects</span></dd>
+  </dl>
+</div>
+<div id="div_group_113" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_113" class="passed">can_read_experiments method</dt>
+    <script type="text/javascript">moveProgressBar('70.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return an array of experiment ids the user can read</span></dd>
+    <script type="text/javascript">moveProgressBar('71.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return an empty array if the user cannot read any experiments</span></dd>
+  </dl>
+</div>
+<div id="div_group_114" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_114" class="passed">Project</dt>
+  </dl>
+</div>
+<div id="div_group_115" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_115" class="passed">Associations</dt>
+    <script type="text/javascript">moveProgressBar('71.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to user</span></dd>
+    <script type="text/javascript">moveProgressBar('71.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should have many experiments</span></dd>
+    <script type="text/javascript">moveProgressBar('71.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should have many samples</span></dd>
+    <script type="text/javascript">moveProgressBar('72.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should have one ands_publishable</span></dd>
+  </dl>
+</div>
+<div id="div_group_116" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_116" class="passed">Validations</dt>
+    <script type="text/javascript">moveProgressBar('72.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require name to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('72.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should validate uniqueness</span></dd>
+    <script type="text/javascript">moveProgressBar('72.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should validate uniqueness by stripping whitespace</span></dd>
+    <script type="text/javascript">moveProgressBar('72.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should validate case-insensitive uniqueness</span></dd>
+    <script type="text/javascript">moveProgressBar('73.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should reject name of length 256</span></dd>
+    <script type="text/javascript">moveProgressBar('73.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should accept name of length 255</span></dd>
+    <script type="text/javascript">moveProgressBar('73.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should reject description of length 5001</span></dd>
+    <script type="text/javascript">moveProgressBar('73.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should accept description of length 5000</span></dd>
+    <script type="text/javascript">moveProgressBar('74.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should reject an invalid url based on semantics of the url</span></dd>
+    <script type="text/javascript">moveProgressBar('74.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should reject valid url of length 2049</span></dd>
+    <script type="text/javascript">moveProgressBar('74.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should accept a valid url of length 2048</span></dd>
+  </dl>
+</div>
+<div id="div_group_117" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_117" class="passed">Project Owner</dt>
+    <script type="text/javascript">moveProgressBar('74.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should indicate the user is the owner of the project</span></dd>
+    <script type="text/javascript">moveProgressBar('75.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should indicate the user is not the owner of the project</span></dd>
+  </dl>
+</div>
+<div id="div_group_118" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_118" class="passed">Change</dt>
+    <script type="text/javascript">moveProgressBar('75.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">new owner is owner</span></dd>
+    <script type="text/javascript">moveProgressBar('75.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">new owner is no longer member</span></dd>
+    <script type="text/javascript">moveProgressBar('75.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">old owner is no longer owner</span></dd>
+    <script type="text/javascript">moveProgressBar('76.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">old owner becomes a member</span></dd>
+  </dl>
+</div>
+<div id="div_group_119" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_119" class="passed">Project Members</dt>
+    <script type="text/javascript">moveProgressBar('76.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should list project members</span></dd>
+  </dl>
+</div>
+<div id="div_group_120" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_120" class="passed">Can remove method</dt>
+    <script type="text/javascript">moveProgressBar('76.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return true if the user can remove themself</span></dd>
+    <script type="text/javascript">moveProgressBar('76.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return false if the user cannot remove themself</span></dd>
+  </dl>
+</div>
+<div id="div_group_121" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_121" class="passed">Output for the API</dt>
+    <script type="text/javascript">moveProgressBar('77.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return a basic object representing the project</span></dd>
+    <script type="text/javascript">moveProgressBar('77.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return a basic object representing the project, without samples</span></dd>
+  </dl>
+</div>
+<div id="div_group_122" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_122" class="passed">publishable methods for project</dt>
+    <script type="text/javascript">moveProgressBar('77.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return no instruments if there are no datasets</span></dd>
+    <script type="text/javascript">moveProgressBar('77.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return correct instruments</span></dd>
+    <script type="text/javascript">moveProgressBar('77.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should detect when project contains a dataset that has been exported</span></dd>
+    <script type="text/javascript">moveProgressBar('78.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should detect when project does not contains a dataset that has been exported</span></dd>
+    <script type="text/javascript">moveProgressBar('78.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should detect when project does not contains a dataset that has been exported</span></dd>
+  </dl>
+</div>
+<div id="div_group_123" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_123" class="passed">ForCode</dt>
+  </dl>
+</div>
+<div id="div_group_124" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_124" class="passed">Validations</dt>
+    <script type="text/javascript">moveProgressBar('78.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require name to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('78.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require code to be set</span></dd>
+  </dl>
+</div>
+<div id="div_group_125" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_125" class="passed">Potential Code Tests</dt>
+    <script type="text/javascript">moveProgressBar('79.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return the correct number of results</span></dd>
+  </dl>
+</div>
+<div id="div_group_126" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_126" class="passed">AndsHandle</dt>
+  </dl>
+</div>
+<div id="div_group_127" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_127" class="passed">Associations</dt>
+    <script type="text/javascript">moveProgressBar('79.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to assignable</span></dd>
+  </dl>
+</div>
+<div id="div_group_128" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_128" class="passed">Validations</dt>
+    <script type="text/javascript">moveProgressBar('79.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require key to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('79.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require assignable_id to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('80.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should prevent duplicate assignments</span></dd>
+  </dl>
+</div>
+<div id="div_group_129" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_129" class="passed">AndsRelatedInfo</dt>
+  </dl>
+</div>
+<div id="div_group_130" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_130" class="passed">Validations</dt>
+    <script type="text/javascript">moveProgressBar('80.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require identifier to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('80.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require info_type to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('80.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require title to be set</span></dd>
+  </dl>
+</div>
+<div id="div_group_131" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_131" class="passed">Dataset</dt>
+  </dl>
+</div>
+<div id="div_group_132" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_132" class="passed">Associations</dt>
+    <script type="text/javascript">moveProgressBar('81.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to sample</span></dd>
+    <script type="text/javascript">moveProgressBar('81.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to instrument</span></dd>
+    <script type="text/javascript">moveProgressBar('81.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should have many metadata_values</span></dd>
+    <script type="text/javascript">moveProgressBar('81.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should have many attachments</span></dd>
+  </dl>
+</div>
+<div id="div_group_133" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_133" class="passed">Validations</dt>
+    <script type="text/javascript">moveProgressBar('81.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require sample to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('82.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require name to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('82.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not allow duplicate record names</span></dd>
+    <script type="text/javascript">moveProgressBar('82.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should find duplicates even with leading whitespace</span></dd>
+    <script type="text/javascript">moveProgressBar('82.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should find duplicates even with trailing whitespace</span></dd>
+  </dl>
+</div>
+<div id="div_group_134" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_134" class="passed">attachment rules</dt>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_134');</script>
+    <script type="text/javascript">makeYellow('example_group_134');</script>
+    <script type="text/javascript">moveProgressBar('83.1');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name"> (PENDING: Not Yet Implemented)</span></dd>
+  </dl>
+</div>
+<div id="div_group_135" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_135" class="passed">Before hooks</dt>
+    <script type="text/javascript">moveProgressBar('83.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should remove the dataset files when the dataset is destroyed</span></dd>
+  </dl>
+</div>
+<div id="div_group_136" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_136" class="passed">Whitespace stripper</dt>
+    <script type="text/javascript">moveProgressBar('83.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should remove leading whitespace from the dataset name</span></dd>
+    <script type="text/javascript">moveProgressBar('83.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should remove trailing whitespace from the dataset name</span></dd>
+    <script type="text/javascript">moveProgressBar('84.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should remove leading and trailing whitespace from the dataset name</span></dd>
+  </dl>
+</div>
+<div id="div_group_137" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_137" class="passed">Handling metadata</dt>
+    <script type="text/javascript">moveProgressBar('84.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return a list of metadata instrument file types</span></dd>
+    <script type="text/javascript">moveProgressBar('84.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should indicate whether it has metadata values or not</span></dd>
+    <script type="text/javascript">moveProgressBar('84.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should delete the metadata associated with a given attachment</span></dd>
+    <script type="text/javascript">moveProgressBar('85.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should delete metadata when the supplying attachment is destroyed</span></dd>
+    <script type="text/javascript">moveProgressBar('85.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should flag metadata as core and/or suppled when given</span></dd>
+    <script type="text/javascript">moveProgressBar('85.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should record the attachment the metadata belongs to</span></dd>
+  </dl>
+</div>
+<div id="div_group_138" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_138" class="passed">Output for the API</dt>
+    <script type="text/javascript">moveProgressBar('85.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return a basic object representing the dataset</span></dd>
+  </dl>
+</div>
+<div id="div_group_139" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_139" class="passed">Moving datasets between samples</dt>
+    <script type="text/javascript">moveProgressBar('86.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not update sample parent if move is unsuccessful</span></dd>
+    <script type="text/javascript">moveProgressBar('86.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should update sample parent if dataset has no files</span></dd>
+  </dl>
+</div>
+<div id="div_group_140" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_140" class="passed">SeoCode</dt>
+  </dl>
+</div>
+<div id="div_group_141" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_141" class="passed">Validations</dt>
+    <script type="text/javascript">moveProgressBar('86.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require name to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('86.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require code to be set</span></dd>
+  </dl>
+</div>
+<div id="div_group_142" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_142" class="passed">Potential Code Tests</dt>
+    <script type="text/javascript">moveProgressBar('86.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return the correct number of results</span></dd>
+  </dl>
+</div>
+<div id="div_group_143" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_143" class="passed">InstrumentFileType</dt>
+  </dl>
+</div>
+<div id="div_group_144" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_144" class="passed">Associations</dt>
+    <script type="text/javascript">moveProgressBar('87.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should have and belong to many instruments</span></dd>
+  </dl>
+</div>
+<div id="div_group_145" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_145" class="passed">Parser for file type</dt>
+    <script type="text/javascript">moveProgressBar('87.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return a parser instance if there is a parser name</span></dd>
+    <script type="text/javascript">moveProgressBar('87.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return no parser where no parser name is specified</span></dd>
+  </dl>
+</div>
+<div id="div_group_146" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_146" class="passed">File filtering</dt>
+    <script type="text/javascript">moveProgressBar('87.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return true for files with extensions matching its filter</span></dd>
+    <script type="text/javascript">moveProgressBar('88.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return false for files with extensions not in the filter</span></dd>
+  </dl>
+</div>
+<div id="div_group_147" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_147" class="passed">Recognise known file types</dt>
+    <script type="text/javascript">moveProgressBar('88.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should recognise file types that have filters but not parsers</span></dd>
+    <script type="text/javascript">moveProgressBar('88.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should recognise files types that have parsers only</span></dd>
+    <script type="text/javascript">moveProgressBar('88.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should recognise files with filters and parsers</span></dd>
+  </dl>
+</div>
+<div id="div_group_148" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_148" class="passed">Identify file types</dt>
+    <script type="text/javascript">moveProgressBar('89.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should identify only those file types associated with the instrument</span></dd>
+  </dl>
+</div>
+<div id="div_group_149" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_149" class="passed">Missing dependencies</dt>
+    <script type="text/javascript">moveProgressBar('89.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should raise an error if a given parser class does not exist</span></dd>
+  </dl>
+</div>
+<div id="div_group_150" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_150" class="passed">ElnExport</dt>
+    <script type="text/javascript">moveProgressBar('89.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return the metadata as a hash</span></dd>
+    <script type="text/javascript">moveProgressBar('89.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should destroy associated metadata when deleted</span></dd>
+  </dl>
+</div>
+<div id="div_group_151" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_151" class="passed">Instrument</dt>
+  </dl>
+</div>
+<div id="div_group_152" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_152" class="passed">Associations</dt>
+    <script type="text/javascript">moveProgressBar('90.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should have many datasets</span></dd>
+    <script type="text/javascript">moveProgressBar('90.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should have and belong to many instrument_file_types</span></dd>
+  </dl>
+</div>
+<div id="div_group_153" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_153" class="passed">Validations</dt>
+    <script type="text/javascript">moveProgressBar('90.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require name to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('90.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require instrument_class to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('90.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should prevent duplicate instrument names</span></dd>
+    <script type="text/javascript">moveProgressBar('91.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should prevent duplicate names with leading and trailing whitespace</span></dd>
+    <script type="text/javascript">moveProgressBar('91.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should prevent duplicate names with leading whitespace</span></dd>
+    <script type="text/javascript">moveProgressBar('91.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should prevent duplicate names with trailing whitespace</span></dd>
+  </dl>
+</div>
+<div id="div_group_154" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_154" class="passed">Get extension filter</dt>
+    <script type="text/javascript">moveProgressBar('91.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return nil if no filters are specified</span></dd>
+    <script type="text/javascript">moveProgressBar('92.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return a semicolon separated list of filters if specified</span></dd>
+    <script type="text/javascript">moveProgressBar('92.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return a nil if any of the file types have a nil filter</span></dd>
+  </dl>
+</div>
+<div id="div_group_155" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_155" class="passed">Default ordering of returned instruments</dt>
+    <script type="text/javascript">moveProgressBar('92.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should be ordered by instrument class then by name</span></dd>
+  </dl>
+</div>
+<div id="div_group_156" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_156" class="passed">Publishing of instruments</dt>
+    <script type="text/javascript">moveProgressBar('92.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should export correctly</span></dd>
+  </dl>
+</div>
+<div id="div_group_157" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_157" class="passed">MemreExport</dt>
+    <script type="text/javascript">moveProgressBar('93.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to dataset</span></dd>
+    <script type="text/javascript">moveProgressBar('93.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should have and belong to many characterised_by</span></dd>
+    <script type="text/javascript">moveProgressBar('93.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should have many property_details</span></dd>
+    <script type="text/javascript">moveProgressBar('93.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require material_name to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('94.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require material_class_name to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('94.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require form_description to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('94.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow material_class_name to be set to &quot;Hybrid&quot;</span></dd>
+    <script type="text/javascript">moveProgressBar('94.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should allow form_description to be set to &quot;Other&quot;</span></dd>
+  </dl>
+</div>
+<div id="div_group_158" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_158" class="passed">XML generation</dt>
+    <script type="text/javascript">moveProgressBar('95.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should generate XML</span></dd>
+  </dl>
+</div>
+<div id="div_group_159" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_159" class="passed">Sample</dt>
+    <script type="text/javascript">moveProgressBar('95.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to samplable</span></dd>
+  </dl>
+</div>
+<div id="div_group_160" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_160" class="passed">Validations</dt>
+    <script type="text/javascript">moveProgressBar('95.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require name to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('95.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should accept a normal entry</span></dd>
+    <script type="text/javascript">moveProgressBar('95.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should reject name of length 256</span></dd>
+    <script type="text/javascript">moveProgressBar('96.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should accept name of length 255</span></dd>
+    <script type="text/javascript">moveProgressBar('96.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should reject description of length 5001</span></dd>
+    <script type="text/javascript">moveProgressBar('96.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should accept description of length 5000</span></dd>
+    <script type="text/javascript">moveProgressBar('96.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">should accept a sample belonging to a project</span></dd>
+    <script type="text/javascript">moveProgressBar('97.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should accept a sample belonging to an experiment</span></dd>
+    <script type="text/javascript">moveProgressBar('97.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should reject a sample with only a parent id, without a type</span></dd>
+    <script type="text/javascript">moveProgressBar('97.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should reject a sample with only a type, without a parent id</span></dd>
+    <script type="text/javascript">moveProgressBar('97.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should reject a sample with neither an parent id or type</span></dd>
+  </dl>
+</div>
+<div id="div_group_161" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_161" class="passed">Output for the API</dt>
+    <script type="text/javascript">moveProgressBar('98.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should return a basic object representing the sample</span></dd>
+  </dl>
+</div>
+<div id="div_group_162" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_162" class="passed">Moving samples around</dt>
+    <script type="text/javascript">moveProgressBar('98.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">should not update sample parent if move is unsuccessful</span></dd>
+    <script type="text/javascript">moveProgressBar('98.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should update sample parent if project has no files</span></dd>
+  </dl>
+</div>
+<div id="div_group_163" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_163" class="passed">Role</dt>
+  </dl>
+</div>
+<div id="div_group_164" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_164" class="passed">Associations</dt>
+    <script type="text/javascript">moveProgressBar('98.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should have many users</span></dd>
+  </dl>
+</div>
+<div id="div_group_165" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_165" class="passed">Scopes</dt>
+  </dl>
+</div>
+<div id="div_group_166" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_166" class="passed">By name</dt>
+    <script type="text/javascript">moveProgressBar('99.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should order the roles by name and include all roles</span></dd>
+  </dl>
+</div>
+<div id="div_group_167" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_167" class="passed">Validations</dt>
+    <script type="text/javascript">moveProgressBar('99.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should require name to be set</span></dd>
+    <script type="text/javascript">moveProgressBar('99.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should reject duplicate names</span></dd>
+    <script type="text/javascript">moveProgressBar('99.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should reject duplicate names identical except for case</span></dd>
+  </dl>
+</div>
+<div id="div_group_168" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_168" class="passed">Get superuser emails</dt>
+    <script type="text/javascript">moveProgressBar('100.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should find all approved superusers and extract their email address</span></dd>
+  </dl>
+</div>
+<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>34.727527648 seconds</strong>";</script>
+<script type="text/javascript">document.getElementById('totals').innerHTML = "422 examples, 0 failures, 19 pending";</script>
+</div>
+</div>
+</body>
+</html>
