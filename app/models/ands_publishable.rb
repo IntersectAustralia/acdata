@@ -196,7 +196,7 @@ class AndsPublishable < ActiveRecord::Base
   private
 
   def get_publishable_xml(xml)
-    xml.name do
+    xml.name :type => "primary" do
       xml.namePart collection_name
     end
     xml.location do

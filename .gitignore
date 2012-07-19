@@ -3,11 +3,7 @@
 .sass-cache
 capybara-*.html
 .rspec
-/.bundle
 /vendor/bundle
-/log/*
-/tmp/*
-/db/*.sqlite3
 /public/system/*
 /coverage/
 /spec/tmp/*
@@ -15,7 +11,6 @@ capybara-*.html
 rerun.txt
 pickle-email-*.html
 rdoc
-doc
 .yardoc
 .bundle
 pkg
@@ -26,4 +21,16 @@ certreq.csr
 build
 bin
 *keystore
+
+# Ignore .idea directory (created by RubyMine)
 .idea
+
+# Ignore bundler config
+/.bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+
+# Ignore the default SQLite database.
+/db/*.sqlite3
