@@ -47,13 +47,12 @@ class Dataset < ActiveRecord::Base
         end
         FileUtils.mv src, dest
       else
-        logger.error("move_dataset: #{src} is NOT a directory")
+        raise "#{src} is NOT a directory"
       end
     rescue StandardError => e
-      dataset.errors.add(:base, "There was an error in moving the dataset. Please contact an administrator")
       logger.error(e.message)
       logger.error(e.backtrace.join("\n"))
-      raise ActiveRecord::Rollback
+      raise "There was an error in moving the dataset. Please contact an administrator"
     end
   end
 
