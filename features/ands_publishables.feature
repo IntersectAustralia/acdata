@@ -135,6 +135,7 @@ Feature: Manage Ands Publishable
       | Ands User  | 3           | UNSW  | 3333 |
       | Ands User  | 4           | UNSW  | 4444 |
     And I have exported dataset "dataset1" to ELN
+    And I have exported dataset "dataset1" to MemRE
 
     Then I am on the project page for "project a"
     And I click on "Share"
@@ -188,6 +189,7 @@ Feature: Manage Ands Publishable
 
     And I should see "Autolab PGSTAT 12 Potentiostat"
     And I should see "ELN"
+    And I should see "MemRE"
 
   #TODO test unsw party
 

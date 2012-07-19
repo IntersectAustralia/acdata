@@ -122,6 +122,12 @@ And /^I have exported dataset "([^"]*)" to ELN$/ do |name|
   Factory(:eln_export, :dataset_id => dataset.id)
 end
 
+And /^I have exported dataset "([^"]*)" to MemRE/ do |name|
+
+  dataset = Dataset.find_by_name(name)
+  Factory(:memre_export, :dataset_id => dataset.id)
+end
+
 Then /^I should have a dataset "([^"]*)" under sample "([^"]*)"$/ do |dataset_name, sample_name|
   dataset = Dataset.find_by_name(dataset_name)
   sample = Sample.find_by_name(sample_name)

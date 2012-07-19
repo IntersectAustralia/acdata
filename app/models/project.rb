@@ -103,6 +103,19 @@ class Project < ActiveRecord::Base
   end
 
   def has_memre_export?
+    self.samples.find_each do |sample|
+      sample.datasets.find_each do |dataset|
+        return true if dataset.memre_export.present?
+      end
+    end
+
+    self.experiments.find_each do |experiment|
+      experiment.samples.find_each do |sample|
+        sample.datasets.find_each do |dataset|
+          return true if dataset.memre_export.present?
+        end
+      end
+    end
 
     return false
   end
