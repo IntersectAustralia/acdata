@@ -124,21 +124,23 @@ class DatasetsController < ApplicationController
           authorize! :update, sample
           params[:dataset][:sample] = sample
         end
-        if @dataset.update_attributes(params[:dataset])
-          # Ensure the parent is updated.
-          @dataset.reload
+        @dataset.update_attributes!(params[:dataset])
+        @dataset.reload
+
+        if @dataset.dataset_path != previous_dataset_dir
           Dataset.move_dataset(@dataset, previous_dataset_dir)
-          if params[:instrument]
-            #coming from editing a newly created dataset
-            @sample = @dataset.sample
-            @extension_filter = @dataset.instrument.file_filter
-            @upload_prompt = upload_prompt(@dataset.instrument)
-            render :upload
+        end
 
-          else
-            @redirect_path = get_dataset_path(@dataset)
+        if params[:instrument]
+          #coming from editing a newly created dataset
+          @sample = @dataset.sample
+          @extension_filter = @dataset.instrument.file_filter
+          @upload_prompt = upload_prompt(@dataset.instrument)
+          render :upload
 
-          end
+        else
+          @redirect_path = get_dataset_path(@dataset)
+
         end
       rescue Exception => e
         @dataset.errors.add(:base, e.message)
