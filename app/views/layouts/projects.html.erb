@@ -5,16 +5,7 @@
   <% title = (yield :title).to_s %>
   <title>ACData <%= "- #{title}" unless title.empty? %></title>
   <%= stylesheet_link_tag :all, :media => "all" %>
-
-  <%= javascript_include_tag :defaults %>
-  <%= javascript_include_tag 'jqModal.js' %>
-  <%= javascript_include_tag 'jquery-ui.min' %>
-  <%= javascript_include_tag 'nested_form.js' %>
-  <%= javascript_include_tag 'jquery.placeholder.js' %>
-  <%= javascript_include_tag 'jquery.easing.1.3.js' %>
-  <%= javascript_include_tag 'jquery.mousewheel.min.js' %>
-  <%= javascript_include_tag 'JSVfunctions.js' %>
-  <%= javascript_include_tag 'bootstrap-dropdown.js' %>
+  <%= javascript_include_tag 'all.min.js' %>
   <%= csrf_meta_tag %>
 </head>
 
