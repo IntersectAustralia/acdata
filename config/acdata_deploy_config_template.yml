@@ -18,8 +18,6 @@ defaults: &defaults
     slide_file_type:
     label_file_type:
     dataserver:
-      --- url:
-      --- port:
       url:
       port:
 

@@ -4,7 +4,7 @@
     <key>hdl:1959.4/004_300</key>
     <originatingSource>https://www.researchdata.unsw.edu.au</originatingSource>
     <collection type="dataset">
-      <name>
+      <name type="primary">
         <namePart>Oxidative Degradation of Polyamide Reverse Osmosis Membranes</namePart>
       </name>
       <location>
