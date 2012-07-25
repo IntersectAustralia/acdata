@@ -43,8 +43,8 @@
     </div>
 
     <div class="field">
-      <%= label_tag 'slide[reference_lab]', 'Reference Lab:<span class="required">*</span>'.html_safe %>
-      <%= text_field_tag 'slide[reference_lab]', "", :max_length => 255 %>
+      <%= label_tag 'slide[reference_lab]', 'Reference Lab:' %>
+      <%= text_field_tag 'slide[reference_lab]', "", :max_length => 255, :class => 'optional' %>
     </div>
 
     <h3>Account Details</h3>
