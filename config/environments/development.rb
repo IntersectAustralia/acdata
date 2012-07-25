@@ -1,15 +1,16 @@
 Acdata::Application.configure do
 
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-
   # email configuration
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.perform_deliveries = false
+  # Don't care if the mailer can't send
+  config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.smtp_settings = {
-    :address => "zimbra.intersect.org.au",
-    :port => 25,
-    :authentication => :plain
-  }
+  #config.action_mailer.smtp_settings = {
+    #:address => "postini.intersect.org.au",
+    #:port => 25,
+    #:authentication => :plain
+  #}
 
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -27,9 +28,6 @@ Acdata::Application.configure do
   config.consider_all_requests_local       = true
   config.action_view.debug_rjs             = true
   config.action_controller.perform_caching = false
-
-  # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
