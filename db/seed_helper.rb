@@ -17,8 +17,7 @@ def create_instrument_file_types
 
   config_file = File.expand_path('../../config/instrument_file_types.yml', __FILE__)
   config = YAML::load_file(config_file)
-  file_set = ENV["RAILS_ENV"] || "development"
-  config[file_set]['instrument_file_types'].each do |hash|
+  config[@env]['instrument_file_types'].each do |hash|
     InstrumentFileType.create!(hash)
   end
 end
@@ -28,8 +27,7 @@ def import_fluorescent_labels
 
   config_file = File.expand_path('../../config/fluorescent_labels.yml', __FILE__)
   config = YAML::load_file(config_file)
-  file_set = ENV["RAILS_ENV"] || "development"
-  config[file_set]['fluorescent_labels'].each do |name|
+  config[@env]['fluorescent_labels'].each do |name|
     FluorescentLabel.create!(:name => name)
   end
 end
@@ -39,12 +37,10 @@ def import_slide_guidelines
 
   config_file = File.expand_path("#{Rails.root}/config/slide_guidelines.yml", __FILE__)
   config = YAML::load_file(config_file)
-  file_set = ENV["RAILS_ENV"] || "development"
-  config[file_set]['slide_guidelines'].each do |description|
+  config[@env]['slide_guidelines'].each do |description|
     SlideGuideline.create!(:description => description, :settings => Settings.instance)
   end
 end
-
 
 def create_initial_users
   User.destroy_all
@@ -101,11 +97,11 @@ def create_instruments
 end
 
 def add_settings
-  Settings.instance.update_attribute(:file_size_limit, APP_CONFIG['eln_file_size_limit'])
+  Settings.instance.update_attribute(:file_size_limit, @config[@env]['eln_file_size_limit'])
 end
 
 def set_slide_scanning_email
-  Settings.instance.update_attribute(:slide_scanning_email, APP_CONFIG['slide_scanning_request_admin_email'])
+  Settings.instance.update_attribute(:slide_scanning_email, @config[@env]['slide_scanning_request_admin_email'])
 end
 
 def set_handle_ranges
