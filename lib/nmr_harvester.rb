@@ -13,14 +13,17 @@ class NMRHarvester
       FileUtils.mkdir(tmp_dir)
     end
 
+    instrument_dirs = ftp.nlst
+
     instruments.each do |instrument|
       instrument_name = self.get_instrument_name(instrument)
+      next unless instrument_dirs.include?(instrument_name)
       begin
         Rails.logger.debug("NMRHarvester: cd #{instrument_name}/data")
         ftp.chdir("#{instrument_name}/data")
       rescue Exception => e
+        Rails.logger.debug("NMRHarvester: cd #{instrument_name}/data")
         $stderr.puts(e.message)
-        $stderr.puts(e.backtrace.join("\n"))
         ftp.chdir('/')
         next
       end
