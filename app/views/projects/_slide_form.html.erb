@@ -101,8 +101,8 @@
     </div>
 
     <div class="field">
-      <%= label_tag 'slide[fluorescent_label]', 'Fluorescent Label:<span class="required">*</span>'.html_safe %>
-      <%= select_tag 'slide[fluorescent_label]', options_for_select(@fluorescent_labels), :include_blank => "Please select..." %>
+      <%= label_tag 'slide[fluorescent_label]', 'Fluorescent Label:' %>
+      <%= select_tag 'slide[fluorescent_label]', options_for_select(@fluorescent_labels), :include_blank => "Please select...", :multiple => true, :class => 'optional' %>
     </div>
   </div>
 
@@ -133,6 +133,22 @@
 
   });
 
+  function hasTooManyFluorescentLabels() {
+    var count = $('#slide_fluorescent_label :selected').length;
+    if (count > 4) {
+      alert('There can be a maximum of four Fluorescent Labels');
+      return true;
+    }
+    return false;
+  }
+
+  $('#slide_fluorescent_label').change(function () {
+    if (hasTooManyFluorescentLabels()) {
+      return false;
+    }
+    return true;
+  });
+
   $('input').blur(function () {
     var old_val = $(this).val();
     $(this).val($.trim(old_val));
@@ -140,9 +156,12 @@
   });
 
   $('form.edit_project').submit(function () {
-    if ($(":input:not(:disabled)[value=]").length) {
+    if ($(":input:not(:disabled,.optional)[value=]").length) {
 
       alert("You must specify a value for every field.");
+      $('#project_submit').removeClass('ac_loading');
+      return false;
+    } else if (hasTooManyFluorescentLabels()) {
       $('#project_submit').removeClass('ac_loading');
       return false;
     }

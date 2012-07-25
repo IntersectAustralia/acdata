@@ -16,6 +16,14 @@ require 'singleton'
 
 class AperioClient
 
+  def self.get_instance
+    if APP_CONFIG['aperio_mock']
+      aperio_mock
+    else
+      AperioClient.new
+    end
+  end
+
   def initialize
     @aperio_host = Net::Telnet::new("Host" => APP_CONFIG['aperio']['dataserver']['url'],
                                     "Port" => APP_CONFIG['aperio']['dataserver']['port'],
@@ -97,6 +105,18 @@ class AperioClient
     params.each { |k, v| params[k] = v.to_s.to_xs.gsub(/\r\n?/, "&#xA;") }
     params
 
+  end
+
+  private
+  def self.aperio_mock
+    mock = Object.new
+    def mock.create_project(*args)
+      true
+    end
+    def mock.close
+      true
+    end
+    mock
   end
 
 end

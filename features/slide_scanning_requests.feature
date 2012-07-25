@@ -176,4 +176,29 @@ Feature: Slide Scanning Requests
     Then I should see a warning containing "You must specify a value for every field"
     And I dismiss popup
 
+  @javascript
+  Scenario: A user can select multiple fluorescent labels
+    Given I am logged in as "user1"
+    And "user1" has enabled slide scanning requests
+    Given I fill in the usual slide scanning details for "project a"
+    And I select "AMCA" from "Fluorescent Label"
+    And I select "APC" from "Fluorescent Label"
+    And I press "Submit"
+    Then I should have a slide scanning request for "project a" with
+     |Fluorescent Label|
+     |Alexa Fluor 350|
+     |AMCA|
+     |APC|
+
+  @javascript
+  Scenario: A user can select no more than 4 fluorescent labels
+    Given I am logged in as "user1"
+    And "user1" has enabled slide scanning requests
+    Given I fill in the usual slide scanning details for "project a"
+    And I select "AMCA" from "Fluorescent Label"
+    And I select "APC" from "Fluorescent Label"
+    And I select "DAPI" from "Fluorescent Label"
+    And I select "EBFP" from "Fluorescent Label"
+    Then I should see a warning containing "There can be a maximum of four Fluorescent Labels"
+    And I dismiss popup
 

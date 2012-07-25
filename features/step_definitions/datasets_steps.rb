@@ -112,10 +112,6 @@ Then /^I should see the list of files for "([^"]*)"$/ do |dataset_name|
   end
 end
 
-Then /^I should (?:have|see) a warning containing "([^"]+?)"$/ do |text|
-  page.driver.browser.switch_to.alert.text.should have_content(text)
-end
-
 And /^I have exported dataset "([^"]*)" to ELN$/ do |name|
 
   dataset = Dataset.find_by_name(name)

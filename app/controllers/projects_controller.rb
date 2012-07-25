@@ -185,7 +185,7 @@ class ProjectsController < ApplicationController
     begin
 
       unless @project.slide_request_sent
-        aperio_client = AperioClient.new
+        aperio_client = AperioClient.get_instance
         aperio_client.create_project :Name => @project.name,
                                      :Description => @project.description,
                                      :ContactName => "#{current_user.first_name} #{current_user.last_name}",
