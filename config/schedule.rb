@@ -1,4 +1,5 @@
 # Use this file to easily define all of your cron jobs.
+set :output, {:error => nil, :standard => nil}
 
 every :sunday, :at => "4am" do
   rake "ands_parties:retrieve"
