@@ -6,6 +6,7 @@ defaults: &defaults
     ftp_user:
     ftp_password:
     download_dir:
+  aperio_mock: true
   aperio:
     base_url:
     project_list_url:
@@ -31,6 +32,7 @@ production:
   <<: *defaults
   eln_url:
   eln_uid:
+  aperio_mock: false
 
 qa:
   <<: *defaults

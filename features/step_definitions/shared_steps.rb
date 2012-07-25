@@ -168,3 +168,7 @@ Then /^I should (|not )be able to edit "([^"]*)"$/ do |action, name|
   end
 end
 
+Then /^I should (?:have|see) a warning containing "([^"]+?)"$/ do |text|
+  page.driver.browser.switch_to.alert.text.should have_content(text)
+end
+
