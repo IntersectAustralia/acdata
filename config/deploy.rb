@@ -9,7 +9,6 @@ require 'whenever/capistrano'
 set :stages, %w(qa staging production)
 set :default_stage, "qa"
 set :application, 'acdata'
-set :rpms, %w{httpd-devel apr-devel apr-util-devel libxml2 libxml2-devel libxslt libxslt-devel libffi gd mod_ssl git mod_xsendfile postgresql84-devel}
 set :shared_children, shared_children + %w(log_archive)
 set :shell, '/bin/bash'
 set :rvm_ruby_string, 'ruby-1.9.3-p194@acdata'
@@ -37,9 +36,6 @@ namespace :noop do
 end
 
 namespace :server_setup do
-  task :rpm_install, :roles => :app do
-    run "#{try_sudo} yum install -y #{rpms.join(' ')}"
-  end
   namespace :filesystem do
     task :dir_perms, :roles => :app do
       run "[[ -d #{data_dir} ]] || #{try_sudo} mkdir -p #{data_dir}"
@@ -83,9 +79,6 @@ namespace :server_setup do
   end
 end
 
-before 'deploy:setup' do
-  server_setup.rpm_install
-end
 after 'deploy:setup', "server_setup:filesystem:dir_perms"
 after 'deploy:update' do
   server_setup.logging.rotation
