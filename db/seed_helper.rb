@@ -60,6 +60,7 @@ def create_initial_users
 end
 
 def create_user(attrs)
+  attrs.delete('password')
   puts "Creating: #{attrs.inspect}"
   u = User.new(attrs)
   u.activate
