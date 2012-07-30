@@ -112,6 +112,12 @@ namespace :deploy do
     restart
   end
 
+  # Create the db
+  desc "Create the database"
+  task :db_create, :roles => :db do
+    run("cd #{current_path} && bundle exec rake db:create", :env => {'RAILS_ENV' => "#{stage}"})
+  end
+
   # Load the schema
   desc "Load the schema into the database (WARNING: destructive!)"
   task :schema_load, :roles => :db do
@@ -301,16 +307,18 @@ task :generate_deploy_config, :roles => :app do
 end
 
 task :generate_initial_users_yml, :roles => :app do
-  require "yaml"
-  set :production_default_password, proc { Capistrano::CLI.password_prompt("Default initial user password: ") }
+  if stage != :production
+    require "yaml"
+    set :production_default_password, proc { Capistrano::CLI.password_prompt("Default initial user password: ") }
 
-  buffer = YAML::load_file('config/initial_users.yml')
+    buffer = YAML::load_file('config/initial_users.yml')
 
-  # Populate production password
-  buffer['staging']['users'].each do |user|
-    user['password'] = production_default_password
+    # Populate password
+    buffer['staging']['users'].each do |user|
+      user['password'] = production_default_password
+    end
+
+    put YAML::dump(buffer), "#{release_path}/config/initial_users.yml", :mode => 0664
   end
-
-  put YAML::dump(buffer), "#{release_path}/config/initial_users.yml", :mode => 0664
 end
 
