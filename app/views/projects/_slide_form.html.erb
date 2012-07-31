@@ -159,7 +159,7 @@
   $('form.edit_project').submit(function () {
     if ($(":input:not(:disabled,.optional)[value=]").length) {
 
-      alert("You must specify a value for every field.");
+      alert("You must specify a value for every mandatory field.");
       $('#project_submit').removeClass('ac_loading');
       return false;
     } else if (hasTooManyFluorescentLabels()) {
