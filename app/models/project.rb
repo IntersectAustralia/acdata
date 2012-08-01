@@ -141,7 +141,7 @@ class Project < ActiveRecord::Base
     current_owner = user
     self.user = new_owner
     self.members.delete new_owner
-    self.members << current_owner
+    self.collaborators << current_owner
     save!
   end
 
