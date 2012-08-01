@@ -124,6 +124,9 @@
 </div>
 
 <script type="text/javascript">
+  $(document).ready(function () {
+    enableFluorescentLabels();
+  });
 
   $('#slide_approval_not_required').click(function () {
     if ($('#slide_approval_not_required').is(':checked')) {
@@ -134,20 +137,36 @@
 
   });
 
-  function hasTooManyFluorescentLabels() {
-    var count = $('#slide_fluorescent_label :selected').length;
-    if (count > 4) {
-      alert('There can be a maximum of four Fluorescent Labels');
-      return true;
+  function enableFluorescentLabels() {
+    if ($('#slide_scanning_type :selected').val() == "Fluorescent") {
+      $('#slide_fluorescent_label').removeAttr('disabled');
     }
-    return false;
+    else {
+      $('#slide_fluorescent_label').attr('disabled', 'true');
+    }
   }
 
-  $('#slide_fluorescent_label').change(function () {
-    if (hasTooManyFluorescentLabels()) {
-      return false;
+  function fluorescentLabelsCheck() {
+    if (!$('#slide_fluorescent_label').attr('disabled')) {
+      var count = $('#slide_fluorescent_label :selected').length;
+      if (count < 1) {
+        alert('Please select one or more Fluorescent Labels');
+        return false;
+      }
+      else if (count > 4) {
+        alert('There can be a maximum of four Fluorescent Labels');
+        return false;
+      }
     }
     return true;
+  }
+
+  $('#slide_scanning_type').change(function () {
+    enableFluorescentLabels();
+  });
+
+  $('#slide_fluorescent_label').change(function () {
+    return fluorescentLabelsCheck();
   });
 
   $('input').blur(function () {
@@ -162,7 +181,7 @@
       alert("You must specify a value for every mandatory field.");
       $('#project_submit').removeClass('ac_loading');
       return false;
-    } else if (hasTooManyFluorescentLabels()) {
+    } else if (!fluorescentLabelsCheck()) {
       $('#project_submit').removeClass('ac_loading');
       return false;
     }
