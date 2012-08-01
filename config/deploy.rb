@@ -14,7 +14,6 @@ set :shell, '/bin/bash'
 set :rvm_ruby_string, 'ruby-1.9.3-p194@acdata'
 set :rvm_type, :user
 
-# Deploy using copy  for now
 set :scm, 'git'
 set :repository, 'https://github.com/IntersectAustralia/acdata.git'
 set :deploy_via, :copy
@@ -25,6 +24,9 @@ set(:group) { "#{defined?(group) ? group : user}" }
 set(:deploy_base) { "/home/#{user}" }
 set(:deploy_to) { "#{deploy_base}/#{application}" }
 set(:data_dir) { "#{defined?(data_dir) ? data_dir : '/data/acdata-samples'}" }
+
+# The built in capistrano deploy:migrate task needs this set
+set(:rails_env) { stage }
 
 default_run_options[:pty] = true
 
