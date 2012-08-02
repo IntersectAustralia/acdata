@@ -177,24 +177,39 @@ Feature: Slide Scanning Requests
     And I dismiss popup
 
   @javascript
+  @fluorescent
   Scenario: A user can select multiple fluorescent labels
     Given I am logged in as "user1"
     And "user1" has enabled slide scanning requests
     Given I fill in the usual slide scanning details for "project a"
+    And I select "Fluorescent" from "Type of Scanning"
     And I select "AMCA" from "Fluorescent Label"
     And I select "APC" from "Fluorescent Label"
     And I press "Submit"
     Then I should have a slide scanning request for "project a" with
      |Fluorescent Label|
-     |Alexa Fluor 350|
      |AMCA|
      |APC|
 
   @javascript
+  @fluorescent
+  Scenario: Fluorescent Label is mandatory for the Fluorescent Type of Scanning
+    Given I am logged in as "user1"
+    And "user1" has enabled slide scanning requests
+    Given I fill in the usual slide scanning details for "project a"
+    And I select "Fluorescent" from "Type of Scanning"
+    And I press "Submit"
+    Then I should see a warning containing "Please select one or more Fluorescent Labels"
+    And I dismiss popup
+
+  @javascript
+  @fluorescent
   Scenario: A user can select no more than 4 fluorescent labels
     Given I am logged in as "user1"
     And "user1" has enabled slide scanning requests
     Given I fill in the usual slide scanning details for "project a"
+    And I select "Fluorescent" from "Type of Scanning"
+    And I select "Alexa Fluor 350" from "Fluorescent Label"
     And I select "AMCA" from "Fluorescent Label"
     And I select "APC" from "Fluorescent Label"
     And I select "DAPI" from "Fluorescent Label"
@@ -202,3 +217,10 @@ Feature: Slide Scanning Requests
     Then I should see a warning containing "There can be a maximum of four Fluorescent Labels"
     And I dismiss popup
 
+  @javascript
+  @fluorescent
+  Scenario: Fluorescent Label selection is disabled for non-fluorescent scanning type
+    Given I am logged in as "user1"
+    And "user1" has enabled slide scanning requests
+    Given I fill in the usual slide scanning details for "project a"
+    Then "Fluorescent Label" should be disabled

@@ -84,6 +84,9 @@ module HtmlSelectorsHelpers
       when "Sample name"
         "#dataset_sample_id"
 
+      when "Fluorescent Label"
+        "#slide_fluorescent_label"
+
       # Add more mappings here.
       # Here is an example that pulls values out of the Regexp:
       #
