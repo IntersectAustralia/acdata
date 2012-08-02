@@ -180,3 +180,13 @@ Then /^I have the usual fluorescent labels$/ do
     FluorescentLabel.create!(:name => name)
   end
 end
+
+Given /^I remove "([^"]*)" from membership of the project$/ do |name|
+  u = User.where(login: name).first
+  page.find(:css, "li#member_#{u.id} span.remove_button").click
+end
+
+Then /^project "([^"]*)" should have (\d+) members$/ do |name, number|
+  Project.where(name: name).first.members.size.should == number.to_i
+end
+
