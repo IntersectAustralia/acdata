@@ -126,22 +126,11 @@
     }
   });
 
-  // monkey patch for jquery ui autocomplete to highlight terms
-  //http://stackoverflow.com/questions/2435964/jqueryui-how-can-i-custom-format-the-autocomplete-plug-in-results
-//  $.ui.autocomplete.prototype._renderItem = function (ul, item) {
-//    // highlights first case-insensitive match
-//    item.label = item.label.replace(new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + $.ui.autocomplete.escapeRegex(this.term) + ")(?![^<>]*>)(?![^&;]+;)", "i"), "<strong>$1</strong>");
-//    return $("<li></li>")
-//            .data("item.autocomplete", item)
-//            .append(item.label)
-//            .appendTo(ul);
-//  };
-
   $(".remove_button", "#<%= dialog_id %>").live('click', function () {
-o
     $(this).parent().remove();
     return false;
   });
+
   $(function () {
     $('#member', "#<%= dialog_id %>").keypress(function (e) {
       // Stop "Enter" choosing arbitrary text from input text field

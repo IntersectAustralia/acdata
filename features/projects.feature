@@ -220,3 +220,16 @@ Feature: Manage Projects
     And I wait for the wizard
     Then "project b" should have owner "user1"
 
+  @javascript
+  Scenario: User can remove members from a Project
+    Given I have the following projects
+      | name      | description   | owner |
+      | project b | The B Project | user2 |
+    And "user1" is a member of "project b"
+    Given I am logged in as "user2"
+    And I am on the project page for "project b"
+    And I follow "Edit"
+    And I remove "user1" from membership of the project
+    And I press "Update Project"
+    And I wait for the wizard
+    Then project "project b" should have 0 members
