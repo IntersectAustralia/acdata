@@ -11,7 +11,6 @@ Given /^I fill in the usual slide scanning details for "([^"]*)"$/ do |project|
   fill_in 'Project Number', :with => '789'
   check 'slide_approval_not_required'
   fill_in 'Number of Slides', :with => '42'
-  select('Alexa Fluor 350', :from => 'Fluorescent Label')
 end
 
 Then /^I should have a slide scanning request for "([^"]*)" with$/ do |project_name, table|
@@ -20,3 +19,8 @@ Then /^I should have a slide scanning request for "([^"]*)" with$/ do |project_n
     msg.body.should have_content row[0]
   end
 end
+
+Then /^"([^"]*)" should be disabled$/ do |field|
+  page.find(:css, selector_for(field))['disabled'].should == "true"
+end
+
