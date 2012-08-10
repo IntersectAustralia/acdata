@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 # https://github.com/brendan/rack/commit/8f7fcf0fdd9fd99aa529159d05c63dc2b0bfe08a
 # rails 3.0.x (actionpack) depends on rack 1.2 whereas 1.3 is the first
 # version that fixes the issue above
-gem 'rack', :git => "http://github.com/brendan/rack.git", :branch => "rack-1.2"
+gem 'rack', :git => "http://github.com/IntersectAustralia/rack.git", :branch => "rack-1.2"
 
 gem 'rails', '~> 3.0.10'
 gem 'rake', '0.8.7', :require => false
