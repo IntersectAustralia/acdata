@@ -6,10 +6,10 @@ GIT
 
 GIT
   remote: http://github.com/IntersectAustralia/rack.git
-  revision: 933f2a2f81a057f4dc6e07b768c4ed8f01138438
+  revision: 3a8d2464f8810abf671defbe84bc1da298b35b3e
   branch: rack-1.2
   specs:
-    rack (1.2.5)
+    rack (1.2.5.1)
 
 GEM
   remote: http://rubygems.org/
