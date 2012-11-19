@@ -49,7 +49,7 @@
       <% end %>
 
       <% if can?(:activate, User) %>
-        <%= link_to "<span>Activate</span>".html_safe, activate_user_path(@user), :classs => "green", :method => :put %>
+        <%= link_to "<span>Activate</span>".html_safe, activate_user_path(@user), :class => "green", :method => :put %>
       <% end %>
 
     </div>
