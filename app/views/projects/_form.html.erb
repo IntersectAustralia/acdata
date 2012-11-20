@@ -63,7 +63,7 @@
                 <input type="hidden" name="project[member_ids][]" value="<%= project_membership.user_id %>">
                 <span name="remove_member" class="remove_button basic_field"></span>
                 <span>
-                  <%= link_to "Make Owner", make_owner_project_path(@project, project_membership.user), {:class => 'button' } %>
+                  <%= link_to "Make Owner", make_owner_project_path(@project, project_membership.user), {:class => 'blue button' } %>
                 </span>
               </li>
             <% end %>
