@@ -79,7 +79,7 @@ class Notifier < ActionMailer::Base
     @params = params
     mail(:to => emails,
          :from => APP_CONFIG['slide_scanning_request_notification_sender'],
-         :reply_to => APP_CONFIG['slide_scanning_request_notification_sender'],
+         :reply_to => @user.email,
          :subject => PREFIX + "There has been a new slide scanning service request by #{@user.full_name}")
   end
 
