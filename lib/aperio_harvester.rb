@@ -179,7 +179,7 @@ class AperioHarvester
     dataset.metadata_values.create!(:key => 'Image ID', :value => slide_data["Image ID"], :core => true, :supplied => false)
 
     dataset.metadata_values.create!(:key => 'Scan Date', :value => slide_data["Captured Date"], :core => false, :supplied => false)
-    dataset.metadata_values.create!(:key => 'Compressed File Location', :value => slide_data["File Location"], :core => false, :supplied => false)
+    dataset.metadata_values.create!(:key => 'Compressed File Location', :value => slide_data["File Location"], :core => true, :supplied => false)
     dataset.metadata_values.create!(:key => 'Rack', :value => slide_data["Rack"], :core => false, :supplied => false)
     dataset.metadata_values.create!(:key => 'Slot', :value => slide_data["Slot"], :core => false, :supplied => false)
 
