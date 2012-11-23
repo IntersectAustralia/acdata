@@ -14,7 +14,7 @@
       <p>
 <span class="label_view">Instrument Status:</span>
 	  <span class="redbullet"></span> Currently Unavailable
-	  (<%= link_to 'Toggle status',  instrument_path(@instrument) , :method => :put, :id => "available_#{@instrument.id}" %>)
+	  (<%= link_to 'Toggle status',  mark_available_instrument_path(@instrument) , :method => :put, :id => "available_#{@instrument.id}" %>)
       </p>
     <% end %>
   </div>
