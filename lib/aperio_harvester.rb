@@ -165,8 +165,8 @@ class AperioHarvester
 
     dataset.metadata_values.clear
 
-    add_thumbnail(:label, dataset, slide_data["Image ID"].to_i)
     add_thumbnail(:slide, dataset, slide_data["Image ID"].to_i)
+    add_thumbnail(:label, dataset, slide_data["Image ID"].to_i)
 
     dataset.metadata_values.create!(:key => 'ID', :value => slide_data["Slide ID"], :core => true, :supplied => false)
     dataset.metadata_values.create!(:key => 'Block ID', :value => slide_data["Block ID"], :core => true, :supplied => false)
@@ -205,12 +205,11 @@ class AperioHarvester
     has_already_been_downloaded = dataset.attachments.any? { |at| at.instrument_file_type == get_instrument_file_type_for(type)}
     return if has_already_been_downloaded
 
-
     image_url = thumbnail_url(type, image_id)
 
     begin
       image = @agent.get(image_url)
-      image_filename = "#{image.filename}.jpg"
+      image_filename = "#{image.filename}_"+type+".jpg"
       dest_dir = File.join(@config[:files_root], PathBuilder::Path.file_path(dataset))
       file_path = File.join(dest_dir, image_filename)
       image.save(file_path)
