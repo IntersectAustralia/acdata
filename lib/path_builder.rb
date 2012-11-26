@@ -45,5 +45,4 @@ module PathBuilder
       end
     end
   end
-
 end
