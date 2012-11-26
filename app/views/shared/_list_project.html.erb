@@ -5,7 +5,7 @@
 
     <a class="<%= current_project ? "expanded" : "collapsed" %>" id="arrow">&nbsp;</a>
 
-    <%= link_to project.name, project, :id => "project_#{project.id}", :title => project.name, :class => [project_class, current_project ? "current" : ""] %>
+    <%= link_to project.name, project_path(project, :anchor => "project_#{project.id}"), :id => "project_#{project.id}", :title => project.name, :class => [project_class, current_project ? "current" : ""] %>
 
     <span class="<%= project_class %>"></span>
 
@@ -20,7 +20,7 @@
           <% else %>
             <span class="experiment_empty"></span>
           <% end %>
-          <%= link_to experiment.name, project_experiment_path(project, experiment), :id => "experiment_#{experiment.id}", :title => experiment.name, :class => ["project_experiment", current_exp ? "current" : ""] %>
+          <%= link_to experiment.name, project_experiment_path(project, experiment, :anchor => "experiment_#{experiment.id}"), :id => "experiment_#{experiment.id}", :title => experiment.name, :class => ["project_experiment", current_exp ? "current" : ""] %>
 
           <!-- Sample level -->
           <%= render :partial => 'shared/sample_list', :locals => {:project => project, :samples => experiment.samples.includes(:samplable).name_ordered, :current_parent => current_exp} %>
@@ -30,7 +30,7 @@
 
     <%= render :partial => 'shared/sample_list', :locals => {:project => project, :samples => project.samples.name_ordered, :current_parent => current_project} %>
   <% else %>
-    <span class="project_empty">&nbsp;</span><%= link_to project.name, project, :id => "project_#{project.id}", :title => project.name, :class => [project_class, "project_empty", current_project ? "current" : ""] %>
+    <span class="project_empty">&nbsp;</span><%= link_to project.name, project_path(project, :anchor => "project_#{project.id}"), :id => "project_#{project.id}", :title => project.name, :class => [project_class, "project_empty", current_project ? "current" : ""] %>
     <span class="<%= project_class %>"></span>
   <% end %>
 </li>

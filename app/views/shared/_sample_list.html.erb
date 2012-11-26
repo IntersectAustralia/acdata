@@ -8,7 +8,7 @@
         <span class="sample_empty"></span>
       <% end %>
       <%= link_to sample.nav_name,
-                  sample_path(sample),
+                  sample_path(sample) + "#experiment_sample_#{sample.id}",
                   :id => "experiment_sample_#{sample.id}",
                   :title => sample.nav_name,
                   :class => ["experiment_sample", current_sample ? "current" : ""] %>
@@ -19,7 +19,7 @@
           <% current_dataset = is_current_dataset?(dataset) %>
           <li class="nav_sample_dataset ">
             <%= link_to "#{dataset.name}",
-                        get_dataset_path(dataset),
+                        get_dataset_path(dataset) + "#experiment_sample_#{sample.id}",
                         :title => dataset.name,
                         :class => ["experiment_sample_dataset", current_dataset ? "current" : ""] %>
           </li>

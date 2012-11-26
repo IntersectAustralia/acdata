@@ -156,7 +156,7 @@ class AperioHarvester
 
     # Create dataset if it does not exist in the database
     unless dataset
-      dataset = sample.datasets.new(:name => slide_id.to_s,
+      dataset = sample.datasets.new(:name => slide_data["File Name"],
                                     :external_data_source => 'Aperio',
                                     :external_id => slide_id,
                                     :instrument => @instrument)
