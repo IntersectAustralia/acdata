@@ -2,9 +2,9 @@ require_relative '../nmr_harvester.rb'
 require_relative '../nmr_importer.rb'
 
 namespace :nmr do  
-  desc "Fetch NMR sample files from FTP site created in the last 5 minutes"
+  desc "Fetch NMR sample files from FTP site created in the last 24 hours"
   task :harvest_daily => :environment do
-    date_after = Time.now - 5.minutes
+    date_after = Time.now - 1.day
     harvest(date_after)
   end
 
