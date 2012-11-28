@@ -21,6 +21,6 @@ every :hour do
   rake "nmr:import"
 end
 
-every :day, :at => "2am" do
+every "5 * * * *" do
   rake "aperio:harvest"
 end
