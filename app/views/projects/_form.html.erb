@@ -48,8 +48,7 @@
 
       <div class="field">
         <span for="member_list" class="details">Current members: Tick the members who are also collaborating on this project.</span>
-
-       <!-- <ul class="" id="member_list">
+        <ul class="" id="member_list">
           <% if action.eql?("new") %>
             <li><%= current_user.full_name %></li>
           <% else %>
@@ -68,47 +67,8 @@
                 </span>
               </li>
             <% end %>
-
           <% end %>
-        </ul>-->
-
-        <table class="member_list_table" id="member_list">
-          <tr>
-            <td/>
-          <% if action.eql?("new") %>
-              <td><%= current_user.full_name %></td>
-          <% else %>
-              <td><%= @project.user.full_name %></td>
-          <% end %>
-          </tr>
-
-          <% if @project.memberships.present? %>
-              <% @project.memberships.each do |project_membership| %>
-                  <tr id="member_<%= project_membership.user_id %>">
-                    <td>
-                    <input type="checkbox" name="project[collaborating][<%= project_membership.user_id %>]" <%= project_membership.collaborating? ? "checked" : "" %> class="basic_field">
-                    </td>
-                    <td>
-                    <%= project_membership.user.full_name %>
-                    </td>
-                    <td>
-                    <input type="hidden" name="project[member_ids][]" value="<%= project_membership.user_id %>">
-                    </td>
-                    <td>
-                    <span name="remove_member" class="remove_button basic_field"></span>
-                    </td>
-                    <td>
-                <span>
-                  <%= link_to "Make Owner", make_owner_project_path(@project, project_membership.user), {:class => 'blue button' } %>
-                </span>
-                    </td>
-                  </tr>
-              <% end %>
-          <% end %>
-
-        </table>
-
-
+        </ul>
       </div>
     </div>
 
