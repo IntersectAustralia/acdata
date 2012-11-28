@@ -71,12 +71,13 @@ describe Notifier do
       user = Factory(:user, :first_name => "Test", :last_name => "1", :email => "user1@test.com", :is_student => false)
 
       project = Factory(:project, :name => "Test Project 1", :user_id => user.id)
-      params = {:user_id => user.id, :project_id => project.id, :dept_group => "group", :fund_number => "fund 1", :dept_id => "dept id 1", :project_number => "project 1", :approval_not_required => 1, :num_slides => "123", :scanning_type => "Brightfield", :magnification => "20x", :include_algorithms => "No", :fluorescent_label => "Alexa Fluor 350"}
+      params = {:user_id => user.id, :project_id => project.id, :dept_group => "group", :fund_number => "fund 1", :dept_id => "dept id 1", :project_number => "project 1", :approval_not_required => 1, :num_slides => "123", :scanning_type => "Brightfield", :magnification => "20x", :include_algorithms => "No"}
       email = Notifier.send_slide_request_email(params).deliver
 
       # check that the email has been queued for sending
       ActionMailer::Base.deliveries.empty?.should eq(false)
       email.to.should eq([user.get_supervisor_email, "acdata@unsw.edu.au"])
+      email.reply_to.should eq ([user.email])
       email.subject.should eq("ACData - There has been a new slide scanning service request by Test 1")
       email.body.should match("Ethics approval not required.")
 
@@ -87,12 +88,13 @@ describe Notifier do
       user = Factory(:user, :first_name => "Test", :last_name => "1", :email => "user1@test.com", :is_student => false)
 
       project = Factory(:project, :name => "Test Project 1", :user_id => user.id)
-      params = {:user_id => user.id, :project_id => project.id, :dept_group => "group", :fund_number => "fund 1", :dept_id => "dept id 1", :project_number => "project 1", :approval_number => "ethics 1", :num_slides => "123", :scanning_type => "Brightfield", :magnification => "20x", :include_algorithms => "No", :fluorescent_label => "Alexa Fluor 350"}
+      params = {:user_id => user.id, :project_id => project.id, :dept_group => "group", :fund_number => "fund 1", :dept_id => "dept id 1", :project_number => "project 1", :approval_number => "ethics 1", :num_slides => "123", :scanning_type => "Brightfield", :magnification => "20x", :include_algorithms => "No"}
       email = Notifier.send_slide_request_email(params).deliver
 
       # check that the email has been queued for sending
       ActionMailer::Base.deliveries.empty?.should eq(false)
       email.to.should eq([user.get_supervisor_email, "acdata@unsw.edu.au"])
+      email.reply_to.should eq ([user.email])
       email.subject.should eq("ACData - There has been a new slide scanning service request by Test 1")
       email.body.should match("ethics 1")
     end
@@ -102,12 +104,13 @@ describe Notifier do
       user = Factory(:user, :first_name => "Test", :last_name => "1", :email => "user1@test.com", :is_student => true, :supervisor_name => "Test Supervisor 1", :supervisor_email => "test-supervisor1@test.com")
 
       project = Factory(:project, :name => "Test Project 1", :user_id => user.id)
-      params = {:user_id => user.id, :project_id => project.id, :dept_group => "group", :fund_number => "fund 1", :dept_id => "dept id 1", :project_number => "project 1", :approval_number => "ethics 1", :num_slides => "123", :scanning_type => "Brightfield", :magnification => "20x", :include_algorithms => "No", :fluorescent_label => "Alexa Fluor 350"}
+      params = {:user_id => user.id, :project_id => project.id, :dept_group => "group", :fund_number => "fund 1", :dept_id => "dept id 1", :project_number => "project 1", :approval_number => "ethics 1", :num_slides => "123", :scanning_type => "Brightfield", :magnification => "20x", :include_algorithms => "No"}
       email = Notifier.send_slide_request_email(params).deliver
 
       # check that the email has been queued for sending
       ActionMailer::Base.deliveries.empty?.should eq(false)
       email.to.should eq([user.get_supervisor_email, "acdata@unsw.edu.au"])
+      email.reply_to.should eq ([user.email])
       email.subject.should eq("ACData - There has been a new slide scanning service request by Test 1")
       email.body.should match("test-supervisor1@test.com")
       email.body.should match("Test Supervisor 1")
@@ -118,7 +121,7 @@ describe Notifier do
       user = Factory(:user, :first_name => "Test", :last_name => "1", :email => "user1@test.com", :is_student => true, :supervisor_name => "Test Supervisor 1", :supervisor_email => "test-supervisor1@test.com")
 
       project = Factory(:project, :name => "Test Project 1", :user_id => user.id)
-      params = {:user_id => user.id, :project_id => project.id, :dept_group => "group", :fund_number => "fund 1", :dept_id => "dept id 1", :project_number => "project 1", :approval_number => "ethics 1", :num_slides => "123", :scanning_type => "Brightfield", :magnification => "20x", :include_algorithms => "No", :fluorescent_label => "Alexa Fluor 350"}
+      params = {:user_id => user.id, :project_id => project.id, :dept_group => "group", :fund_number => "fund 1", :dept_id => "dept id 1", :project_number => "project 1", :approval_number => "ethics 1", :num_slides => "123", :scanning_type => "Brightfield", :magnification => "20x", :include_algorithms => "No"}
       email = Notifier.notify_user_of_slide_request(params).deliver
 
       # check that the email has been queued for sending
