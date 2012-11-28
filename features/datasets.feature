@@ -730,3 +730,24 @@ Feature: Manage Datasets
     And I click on the "Show Files" tab
     Then I should see the preview image for "test.png"
 
+  @upload
+  @dcat
+  Scenario: Uploading data via DCAT treats the additional metadata as primary
+    Given I am logged in as "user1"
+    And I have the following projects
+      | name      | description   | owner |
+      | project d | The D Project | user1 |
+    And I have the following experiments
+      | name | description | project   |
+      | exp2 | desc1       | project d |
+    And I have the following samples
+      | name | description | experiment |
+      | s6   | desc1       | exp2       |
+    And I have the following instruments
+      | name       | instrument_class | instrument_file_types                                | upload_prompt                                     | visual types  | metadata types                       |
+      | name ten   | class one        | JCAMP-DX (v4), SP (RamanStation), FSM (RamanStation) | Select a JCAMP-DX (v4) file and an SP or FSM file | JCAMP-DX (v4) | SP (RamanStation),FSM (RamanStation) |
+    And I have uploaded dataset "dataset2" via DCAT for sample "s6" logged in as "user1" with the metadata "field1: value1"
+    When I am on the view dataset page for "dataset2"
+    Then I should see "field1: value1"
+
+
