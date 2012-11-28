@@ -214,7 +214,7 @@ class DatasetsController < ApplicationController
 
     if (dataset_opts.include?('metadata'))
       dataset_opts['metadata'].each do |key, value|
-        dataset.add_metadata(key, value, {:supplied => true})
+        dataset.add_metadata(key, value, {:supplied => true, :core => true})
       end
     end
     result

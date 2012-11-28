@@ -169,6 +169,10 @@ Then /^I should have a visualisation for "([^"]*)"$/ do |dataset_name|
 end
 
 
+When /^I have uploaded dataset "([^"]*)" via DCAT for sample "([^"]*)" logged in as "([^"]*)" with the metadata "([^"]*)"$/ do |dataset_name, sample_name, userid, metadata|
+  dcat_upload(dataset_name, sample_name, userid, metadata)
+end
+
 def applet_upload(file_tag, dataset_name, userid)
   user = User.find_by_login(userid)
   #post to the upload controller just like the applet would
@@ -201,5 +205,20 @@ def applet_upload(file_tag, dataset_name, userid)
   file = Rack::Test::UploadedFile.new(file_path, "application/octet-stream")
   post post_path, {"file_9004" => file, "dirStruct" => "[{\"file_9004\":\"#{file_name}\"}]", "destDir"=>"#{sample_id}/#{dataset.id}"}
   return file_name
+end
 
+def dcat_upload(dataset_name, sample_name, userid, metadata)
+  # emulates a DCAT upload
+  metadata = metadata.split(': ')
+  user = User.find_by_login(userid)
+  sample = Sample.find_by_name(sample_name)
+  sample_id = sample.id
+  user.reset_authentication_token!
+  token = user.authentication_token
+  post_path = '/api/datasets?auth_token=' + token
+  file_name = "ramanstation.dx"
+  file_path = "#{Rails.root}/features/samples/#{file_name}"
+  raise "Can't find test file: #{file_name}" unless File.exists?(file_path)
+  json = {files:[], name: dataset_name, instrument_id: Instrument.first.id, sample_id: sample_id, metadata:{metadata[0] => metadata[1]}}.to_json
+  post post_path,  'dataset' => json, "CONTENT_TYPE" => "application/json"
 end
