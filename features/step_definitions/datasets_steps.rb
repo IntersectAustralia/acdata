@@ -216,9 +216,6 @@ def dcat_upload(dataset_name, sample_name, userid, metadata)
   user.reset_authentication_token!
   token = user.authentication_token
   post_path = '/api/datasets?auth_token=' + token
-  file_name = "ramanstation.dx"
-  file_path = "#{Rails.root}/features/samples/#{file_name}"
-  raise "Can't find test file: #{file_name}" unless File.exists?(file_path)
   json = {files:[], name: dataset_name, instrument_id: Instrument.first.id, sample_id: sample_id, metadata:{metadata[0] => metadata[1]}}.to_json
   post post_path,  'dataset' => json, "CONTENT_TYPE" => "application/json"
 end
