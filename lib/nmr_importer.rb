@@ -22,10 +22,10 @@ class NMRImporter
             next if project.samples.where(:name => sample_name).present?
           end
           sample = project.samples.create!(:name => sample_name)
-
           dataset_dirs = Dir.glob(File.join(sample_dir, '*'))
           dataset_dirs.each do |dataset_dir|
             dataset = self.create_dataset(dataset_dir, instrument, sample, user)
+            #attach_jcamp(dataset_dir, dataset)
           end
 
         end
@@ -41,6 +41,20 @@ class NMRImporter
     files_struct, file_map = ACDataDatasetAPI.build_files_structure([File.open(dataset_dir)])
     builder = AttachmentBuilder.new(file_map, APP_CONFIG['files_root'], DatasetRules)
     builder.build(dataset, files_struct)
+
+    #attach jcamp
+    path_components = dataset_dir.to_s.split('/').to_a
+    if !path_components.empty?
+      dir_num = path_components.last!
+      dir_dateuser = path_components.last!
+      jcamp_path = "#{dataset_dir}/pdata/1/#{dir_dateuser}_#{dir_num}_1.dx"
+      if File.exist?(jcamp_path)
+        files_struct, file_map = ACDataDatasetAPI.build_files_structure([File.open(jcamp_path)])
+        builder = AttachmentBuilder.new(file_map, APP_CONFIG['files_root'], DatasetRules)
+        builder.build(dataset, files_struct)
+      end
+    end
+    return dataset
   end
 
   def self.extract_title(nmr_dir)
