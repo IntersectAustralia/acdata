@@ -63,6 +63,8 @@ class AperioHarvester
     # Acknowledge terms
     ack_form = page.form
     page = @agent.submit(ack_form, ack_form.buttons.first)
+    page = @agent.page.link_with(:text => "Project").click
+    page = @agent.page.link_with(:text => "Projects").click
 
     Rails.logger.info("Logged in to Aperio successfully")
   end
