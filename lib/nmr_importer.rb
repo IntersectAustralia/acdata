@@ -41,20 +41,18 @@ class NMRImporter
     files_struct, file_map = ACDataDatasetAPI.build_files_structure([File.open(dataset_dir)])
     builder = AttachmentBuilder.new(file_map, APP_CONFIG['files_root'], DatasetRules)
     builder.build(dataset, files_struct)
-
-    #attach jcamp
-    path_components = dataset_dir.to_s.split('/').to_a
-    if !path_components.empty?
-      dir_num = path_components.last!
-      dir_dateuser = path_components.last!
-      jcamp_path = "#{dataset_dir}/pdata/1/#{dir_dateuser}_#{dir_num}_1.dx"
-      if File.exist?(jcamp_path)
-        files_struct, file_map = ACDataDatasetAPI.build_files_structure([File.open(jcamp_path)])
-        builder = AttachmentBuilder.new(file_map, APP_CONFIG['files_root'], DatasetRules)
-        builder.build(dataset, files_struct)
-      end
-    end
+    attach_jcamp(dataset, dataset_dir)
     return dataset
+  end
+
+  def self.attach_jcamp(dataset, dataset_dir)
+    path_components = dataset_dir.to_s.split('/').to_a
+    jcamp = "#{dataset_dir}/pdata/1/#{path_components[5]}_#{path_components[6]}_1.dx"
+    if File.exist?(jcamp)
+      files_struct, file_map = ACDataDatasetAPI.build_files_structure([File.open(jcamp)])
+      builder = AttachmentBuilder.new(file_map, APP_CONFIG['files_root'], DatasetRules)
+      builder.build(dataset, files_struct)
+    end
   end
 
   def self.extract_title(nmr_dir)
