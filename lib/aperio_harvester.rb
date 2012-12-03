@@ -63,6 +63,8 @@ class AperioHarvester
     # Acknowledge terms
     ack_form = page.form
     page = @agent.submit(ack_form, ack_form.buttons.first)
+    page = @agent.page.link_with(:text => "Project").click
+    page = @agent.page.link_with(:text => "Projects").click
 
     Rails.logger.info("Logged in to Aperio successfully")
   end
@@ -96,7 +98,7 @@ class AperioHarvester
 
   def process_slide(slide_data)
     # Specimens in Aperio are samples in AC DATA
-    sample_id = slide_data["Specimen ID"].to_i
+    sample_id = slide_data["User Specimen ID"].to_i
     project_id = slide_data["ACData ID"].to_i
 
     project = Project.find(project_id) if project_id > 0
@@ -156,6 +158,10 @@ class AperioHarvester
 
     # Create dataset if it does not exist in the database
     unless dataset
+      # There is no "File Name", we extract it from path
+      path = slide_data["File Location"]
+      slide_data["File Name"] = /.*\\(.*)/.match(path)[1]
+
       dataset = sample.datasets.new(:name => slide_data["File Name"],
                                     :external_data_source => 'Aperio',
                                     :external_id => slide_id,
@@ -165,8 +171,8 @@ class AperioHarvester
 
     dataset.metadata_values.clear
 
-    add_thumbnail(:slide, dataset, slide_data["Image ID"].to_i)
-    add_thumbnail(:label, dataset, slide_data["Image ID"].to_i)
+    add_thumbnail('slide', dataset, slide_data["Image ID"].to_i)
+    add_thumbnail('label', dataset, slide_data["Image ID"].to_i)
 
     dataset.metadata_values.create!(:key => 'ID', :value => slide_data["Slide ID"], :core => true, :supplied => false)
     dataset.metadata_values.create!(:key => 'Block ID', :value => slide_data["Block ID"], :core => true, :supplied => false)
