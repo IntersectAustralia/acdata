@@ -95,9 +95,9 @@ class SamplesController < ApplicationController
           @sample.reload
           Sample.move_sample(@sample, current_sample_dir)
           if experiment_id.blank?
-            @redirect_path = project_sample_url(@sample.samplable, @sample)
+            @redirect_path = project_sample_url(@sample.samplable, @sample, :anchor => "experiment_sample_#{@sample.id}")
           else
-            @redirect_path = project_experiment_sample_url(@sample.samplable.project, @sample.samplable, @sample)
+            @redirect_path = project_experiment_sample_url(@sample.samplable.project, @sample.samplable, @sample, :anchor => "experiment_sample_#{@sample.id}")
           end
         end
       rescue Exception => e
