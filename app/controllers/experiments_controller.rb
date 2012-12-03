@@ -27,7 +27,7 @@ class ExperimentsController < ApplicationController
     @experiment = Experiment.new(params[:experiment])
 
     if @experiment.save
-      @redirect_path = project_experiment_url(@experiment.project, @experiment)
+      @redirect_path = project_experiment_url(@experiment.project, @experiment, :anchor => "experiment_#{@experiment.id}")
       flash[:notice] = 'The experiment was successfully added.'
 
     else

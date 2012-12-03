@@ -139,7 +139,7 @@ class DatasetsController < ApplicationController
           render :upload
 
         else
-          @redirect_path = get_dataset_path(@dataset)
+          @redirect_path = get_dataset_path(@dataset, :anchor => "experiment_sample_#{@dataset.sample.id}")
 
         end
       rescue Exception => e
