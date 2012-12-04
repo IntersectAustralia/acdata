@@ -3,7 +3,8 @@
 
 // redirect
 window.location = '<%= @redirect_path %>';
-window.location.reload(true)
+window.location.hash = '<%= @scroll_anchor %>';
+window.location.reload(true);
 <% else %>
 
 // update errors

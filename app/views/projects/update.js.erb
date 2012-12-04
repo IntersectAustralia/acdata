@@ -3,7 +3,8 @@
 
 // redirect
 window.location = '<%= @redirect_path %>';
-window.location.reload(true)
+setTimeout('window.location.reload()',0);
+
 <% else %>
 
 // update errors

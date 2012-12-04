@@ -57,7 +57,8 @@ class ExperimentsController < ApplicationController
           # Ensure the project relationship is updated
           @experiment.reload
           Experiment.move_experiment(@experiment, current_exp_dir)
-          @redirect_path = project_experiment_path(@experiment.project, @experiment)
+          @redirect_path = project_experiment_url(@experiment.project, @experiment)
+          @scroll_anchor =  "experiment_#{@experiment.id}"
           flash[:notice] = 'The experiment was successfully updated.'
         end
       rescue Exception => e
