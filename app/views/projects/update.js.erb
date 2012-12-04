@@ -3,7 +3,7 @@
 
 // redirect
 window.location = '<%= @redirect_path %>';
-setTimeout('window.location.reload()',0);
+window.location.hash = '<%= @scroll_anchor %>';
 
 <% else %>
 

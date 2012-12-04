@@ -82,7 +82,8 @@ class ProjectsController < ApplicationController
     end
 
     if @project.update_attributes(params[:project])
-      @redirect_path = project_url(@project, :anchor => "project_#{@project.id}")
+      @redirect_path = project_url(@project)
+      @scroll_anchor =  "project_#{@project.id}"
       flash[:notice] = "Project was successfully updated."
     else
       @redirect_path = nil
