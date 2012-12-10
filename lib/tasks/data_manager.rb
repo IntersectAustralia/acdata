@@ -67,10 +67,12 @@ def save_instruments
         'name' => instrument.name,
         'instrument_class' => instrument.instrument_class,
         'description' => instrument.description,
-        #      'identifier' => instrument.identifier,
         'is_available' => instrument.is_available,
         'upload_prompt' => instrument.upload_prompt,
-        'instrument_file_types' => instrument.instrument_file_types.map(&:name),
+        'email' => instrument.email,
+        'voice' => instrument.voice,
+        'managed_by' => instrument.managed_by,
+        'instrument_file_types' => instrument.instrument_file_types.map(&:name)
     }
     if instrument.instrument_rule
       ir = instrument.instrument_rule
