@@ -124,6 +124,103 @@ describe Instrument do
 
 
     end
+    it "should exclude email if not defined" do
+      instrument = Factory(:instrument, :name => 'Renishaw Raman RM100', :instrument_class => 'Sad')
+      Settings.instance.update_attribute(:start_handle_range, "hdl:1959.4/004_325")
+      Settings.instance.update_attribute(:end_handle_range, "hdl:1959.4/004_325")
+      AndsHandle.assign_handle(instrument)
+
+      instrument.update_attributes(:email => "",
+                                   :voice => "+61 (2) 9385 9795",
+                                   :description => "The RM1000 uses a microscope to focus a 780nm laser onto a sample and " +
+                                       "the scattered light passes through a Raman spectrometer. The 50x microscope objective on the 1000RM " +
+                                       "enables the 780nm laser spot to be focused to a smaller spot than is possible with the 785nm laser on " +
+                                       "the RamanStation. We recommend the RM1000 when you need to measure features smaller than 100micron on the sample surface\r\n\n" +
+                                       "Excitation source: 780nm (infrared) laser.\r\nMicroscope objectives available: 5x, 10x, and 50x, plus 20x long working distance.\r\n" +
+                                       "Manual stage only (mapping not available).\r\nSamples include organic compounds and polymers with chromophores exhibiting fluorescence.",
+                                   :address => "Room G31\r\n" +
+                                       "Chemical Sciences Bldg F10\r\n" +
+                                       "University of NSW\r\n" +
+                                       "Kensington NSW 2052",
+                                   :managed_by => "Mark Wainright Analytical Centre")
+
+      instrument.publish
+
+      sanitized_handle = instrument.handle.gsub(/[^0-9A-Za-z.\-]/, '_')
+      file_path = "#{APP_CONFIG['rda_files_root']}/#{Time.now.strftime("%Y%m%d")}/#{sanitized_handle}.xml"
+      File.exists?(file_path).should eq(true)
+      returned_xml = File.open(file_path, "r").read
+      returned_hash = Hash.from_xml(returned_xml)
+      read_xml = File.open("test/data/test_service_record_without_email.xml", "r").read
+      expected_hash = Hash.from_xml(read_xml)
+      returned_hash.should eq(expected_hash)
+
+    end
+
+    it "should exclude address if both not defined" do
+      instrument = Factory(:instrument, :name => 'Renishaw Raman RM100', :instrument_class => 'Sad')
+      Settings.instance.update_attribute(:start_handle_range, "hdl:1959.4/004_325")
+      Settings.instance.update_attribute(:end_handle_range, "hdl:1959.4/004_325")
+      AndsHandle.assign_handle(instrument)
+
+      instrument.update_attributes(:email => "a.rich@unsw.edu.au",
+                                   :voice => "",
+                                   :description => "The RM1000 uses a microscope to focus a 780nm laser onto a sample and " +
+                                       "the scattered light passes through a Raman spectrometer. The 50x microscope objective on the 1000RM " +
+                                       "enables the 780nm laser spot to be focused to a smaller spot than is possible with the 785nm laser on " +
+                                       "the RamanStation. We recommend the RM1000 when you need to measure features smaller than 100micron on the sample surface\r\n\n" +
+                                       "Excitation source: 780nm (infrared) laser.\r\nMicroscope objectives available: 5x, 10x, and 50x, plus 20x long working distance.\r\n" +
+                                       "Manual stage only (mapping not available).\r\nSamples include organic compounds and polymers with chromophores exhibiting fluorescence.",
+                                   :address => "",
+                                   :managed_by => "Mark Wainright Analytical Centre")
+
+      instrument.publish
+
+      sanitized_handle = instrument.handle.gsub(/[^0-9A-Za-z.\-]/, '_')
+      file_path = "#{APP_CONFIG['rda_files_root']}/#{Time.now.strftime("%Y%m%d")}/#{sanitized_handle}.xml"
+      File.exists?(file_path).should eq(true)
+      returned_xml = File.open(file_path, "r").read
+      returned_hash = Hash.from_xml(returned_xml)
+      read_xml = File.open("test/data/test_service_record_without_address.xml", "r").read
+      expected_hash = Hash.from_xml(read_xml)
+      returned_hash.should eq(expected_hash)
+
+
+    end
+    it "should export correctly" do
+      instrument = Factory(:instrument, :name => 'Renishaw Raman RM100', :instrument_class => 'Sad')
+      Settings.instance.update_attribute(:start_handle_range, "hdl:1959.4/004_325")
+      Settings.instance.update_attribute(:end_handle_range, "hdl:1959.4/004_325")
+      AndsHandle.assign_handle(instrument)
+
+      instrument.update_attributes(:email => "a.rich@unsw.edu.au",
+                                   :voice => "",
+                                   :description => "The RM1000 uses a microscope to focus a 780nm laser onto a sample and " +
+                                       "the scattered light passes through a Raman spectrometer. The 50x microscope objective on the 1000RM " +
+                                       "enables the 780nm laser spot to be focused to a smaller spot than is possible with the 785nm laser on " +
+                                       "the RamanStation. We recommend the RM1000 when you need to measure features smaller than 100micron on the sample surface\r\n\n" +
+                                       "Excitation source: 780nm (infrared) laser.\r\nMicroscope objectives available: 5x, 10x, and 50x, plus 20x long working distance.\r\n" +
+                                       "Manual stage only (mapping not available).\r\nSamples include organic compounds and polymers with chromophores exhibiting fluorescence.",
+                                   :address => "Room G31\r\n" +
+                                       "Chemical Sciences Bldg F10\r\n" +
+                                       "University of NSW\r\n" +
+                                       "Kensington NSW 2052",
+                                   :managed_by => "Mark Wainright Analytical Centre")
+
+      instrument.publish
+
+      sanitized_handle = instrument.handle.gsub(/[^0-9A-Za-z.\-]/, '_')
+      file_path = "#{APP_CONFIG['rda_files_root']}/#{Time.now.strftime("%Y%m%d")}/#{sanitized_handle}.xml"
+      File.exists?(file_path).should eq(true)
+      returned_xml = File.open(file_path, "r").read
+      returned_hash = Hash.from_xml(returned_xml)
+      read_xml = File.open("test/data/test_service_record_without_number.xml", "r").read
+      expected_hash = Hash.from_xml(read_xml)
+      returned_hash.should eq(expected_hash)
+
+
+    end
+
   end
 
 end
