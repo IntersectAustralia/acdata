@@ -104,11 +104,11 @@ class Instrument < ActiveRecord::Base
       xml.address do
         xml.electronic :type => "email" do
           xml.value email
-        end
+        end if email.present?
         xml.physical :type => "streetAddress" do
-          xml.addressPart address, :type => "text"
-          xml.addressPart voice, :type => "telephoneNumber"
-        end
+          xml.addressPart address, :type => "text" if address.present?
+          xml.addressPart voice, :type => "telephoneNumber" if voice.present?
+        end if address.present? or voice.present?
       end
     end
     xml.relatedObject do
