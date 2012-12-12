@@ -1,13 +1,109 @@
 development: &dev
   users:
-#    -
-#      login: z3228583
-#      email: dmgloria@unsw.edu.au
-#      first_name: Danmar
-#      last_name: Gloria
-#      password: Pass.123
-#      role: Superuser
-#      is_student: false
+    -
+      login: z2231967
+      email: z2231967@unsw.edu.au
+      first_name: z2231967
+      last_name: z2231967
+      password: Pass.123
+      role: Superuser
+      is_student: false
+    -
+      login: z3085015
+      email: z3085015@unsw.edu.au
+      first_name: z3085015
+      last_name: z3085015
+      password: Pass.123
+      role: Superuser
+      is_student: false
+    -
+      login: z3099976
+      email: z3099976@unsw.edu.au
+      first_name: z3099976
+      last_name: z3099976
+      password: Pass.123
+      role: Superuser
+      is_student: false
+    -
+      login: z3116181
+      email: z3116181@unsw.edu.au
+      first_name: z3116181
+      last_name: z3116181
+      password: Pass.123
+      role: Superuser
+      is_student: false
+    -
+      login: z3124761
+      email: z3124761@unsw.edu.au
+      first_name: z3124761
+      last_name: z3124761
+      password: Pass.123
+      role: Superuser
+      is_student: false
+    -
+      login: z3160202
+      email: z3160202@unsw.edu.au
+      first_name: z3160202
+      last_name: z3160202
+      password: Pass.123
+      role: Superuser
+      is_student: false
+    -
+      login: z3194903
+      email: z3194903@unsw.edu.au
+      first_name: z3194903
+      last_name: z3194903
+      password: Pass.123
+      role: Superuser
+      is_student: false
+    -
+      login: z3215815
+      email: z3215815@unsw.edu.au
+      first_name: z3215815
+      last_name: z3215815
+      password: Pass.123
+      role: Superuser
+      is_student: false
+    -
+      login: z3228583
+      email: dmgloria@unsw.edu.au
+      first_name: Danmar
+      last_name: Gloria
+      password: Pass.123
+      role: Superuser
+      is_student: false
+    -
+      login: z3250729
+      email: z3250729@unsw.edu.au
+      first_name: z3250729
+      last_name: z3250729
+      password: Pass.123
+      role: Superuser
+      is_student: false
+    -
+      login: z3318300
+      email: z3318300@unsw.edu.au
+      first_name: z3318300
+      last_name: z3318300
+      password: Pass.123
+      role: Superuser
+      is_student: false
+    -
+      login: z3339253
+      email: z3339253@unsw.edu.au
+      first_name: z3339253
+      last_name: z3339253
+      password: Pass.123
+      role: Superuser
+      is_student: false
+    -
+      login: z3344031
+      email: z3344031@unsw.edu.au
+      first_name: z3344031
+      last_name: z3344031
+      password: Pass.123
+      role: Superuser
+      is_student: false
     -
       login: ands_user
       email: acdata@student.unsw.edu.au
@@ -32,6 +128,46 @@ development: &dev
       password: Pass.123
       nmr_username: aaa
       role: Moderator
+      is_student: false
+    -
+      login: z8771432
+      email: z8771432@unsw.edu.au
+      first_name: z8771432
+      last_name: z8771432
+      password: Pass.123
+      role: Superuser
+      is_student: false
+    -
+      login: z8803076
+      email: z8803076@unsw.edu.au
+      first_name: z8803076
+      last_name: z8803076
+      password: Pass.123
+      role: Superuser
+      is_student: false
+    -
+      login: z9000008
+      email: z9000008@unsw.edu.au
+      first_name: z9000008
+      last_name: z9000008
+      password: Pass.123
+      role: Superuser
+      is_student: false
+    -
+      login: z9300270
+      email: z9300270@unsw.edu.au
+      first_name: z9300270
+      last_name: z9300270
+      password: Pass.123
+      role: Superuser
+      is_student: false
+    -
+      login: z9900844
+      email: z9900844@unsw.edu.au
+      first_name: z9900844
+      last_name: z9900844
+      password: Pass.123
+      role: Superuser
       is_student: false
     -
       login: marc
