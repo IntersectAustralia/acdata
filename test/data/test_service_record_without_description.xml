@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
+  <registryObject group="University of New South Wales">
+    <key>hdl:1959.4/004_325</key>
+    <originatingSource>https://www.researchdata.unsw.edu.au</originatingSource>
+    <service type="create">
+      <identifier type="local">hdl:1959.4/004_325</identifier>
+      <name type="primary">
+        <namePart>Renishaw Raman RM100</namePart>
+      </name>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>a.rich@unsw.edu.au</value>
+          </electronic>
+          <physical type="streetAddress">
+            <addressPart type="text">Room G31
+Chemical Sciences Bldg F10
+University of NSW
+Kensington NSW 2052</addressPart>
+            <addressPart type="telephoneNumber">+61 (2) 9385 9795</addressPart>
+          </physical>
+        </address>
+      </location>
+      <relatedObject>
+        <key>http://nla.gov.au/nla.party-593921</key>
+        <relation type="hasAssociationWith"/>
+      </relatedObject>
+      <relatedObject>
+        <key>hdl:1959.4/004_128</key>
+        <relation type="isPresentedBy"/>
+      </relatedObject>
+      <description type="deliverymethod">offline</description>
+    </service>
+  </registryObject>
+</registryObjects>

@@ -110,7 +110,7 @@ class Instrument < ActiveRecord::Base
           xml.addressPart voice, :type => "telephoneNumber" if voice.present?
         end if address.present? or voice.present?
       end
-    end
+    end if address.present? or voice.present? or email.present?
     xml.relatedObject do
       xml.key APP_CONFIG['handles']['mandatory']['UNSW']
       xml.relation :type => "hasAssociationWith"
@@ -120,7 +120,7 @@ class Instrument < ActiveRecord::Base
       xml.relation :type => "isPresentedBy"
     end
     xml.description "offline", :type => "deliverymethod"
-    xml.description description, :type => "full"
+    xml.description description, :type => "full" if description.present?
   end
 
   def all_filtered?
