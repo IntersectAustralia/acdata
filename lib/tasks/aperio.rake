@@ -17,7 +17,7 @@ namespace :aperio do
     config[:label_file_type] = APP_CONFIG['aperio']['label_file_type']
     config[:files_root] = APP_CONFIG['files_root']
 
-    Rails.logger.info("Attempting to connect to Aperio")
+    Rails.logger.info("Connecting to Aperio: #{Time.now}")
     AperioHarvester.harvest(config)
   end
 end
