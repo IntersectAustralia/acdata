@@ -5,7 +5,6 @@ class AperioHarvester
 
   def self.harvest(config)
     harvester = AperioHarvester.new(config)
-
     harvester.log_in_to_web_app
 
     projects_to_harvest = harvester.list_projects
@@ -19,7 +18,7 @@ class AperioHarvester
 
   def process_project(project_id)
     ActiveRecord::Base.transaction do
-      Rails.logger.debug("Harvesting Aperio project #{project_id}")
+      Rails.logger.info("Harvesting Aperio project #{project_id}")
       project_data = get_project_data project_id
       CSV.parse(project_data, :headers => true) do |slide_data|
         process_slide slide_data
@@ -215,7 +214,7 @@ class AperioHarvester
 
     begin
       image = @agent.get(image_url)
-      image_filename = "#{image.filename}_"+type+".jpg"
+      image_filename = "#{image.filename}_#{type}.jpg"
       dest_dir = File.join(@config[:files_root], PathBuilder::Path.file_path(dataset))
       file_path = File.join(dest_dir, image_filename)
       image.save(file_path)
@@ -250,7 +249,7 @@ class AperioHarvester
   end
 
   def get_instrument_file_type_for(type)
-    type == :label ? @label_instrument_file_type : @slide_instrument_file_type
+    type == 'label' ? @label_instrument_file_type : @slide_instrument_file_type
   end
 
 end

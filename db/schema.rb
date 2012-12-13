@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120620052312) do
+ActiveRecord::Schema.define(:version => 20121211231345) do
 
   create_table "activities", :force => true do |t|
     t.boolean  "from_rda"
@@ -219,11 +219,11 @@ ActiveRecord::Schema.define(:version => 20120620052312) do
 
   create_table "instrument_rules", :force => true do |t|
     t.integer  "instrument_id"
-    t.string   "unique_list"
-    t.string   "exclusive_list"
-    t.string   "indelible_list"
-    t.string   "metadata_list"
-    t.string   "visualisation_list"
+    t.text     "unique_list"
+    t.text     "exclusive_list"
+    t.text     "indelible_list"
+    t.text     "metadata_list"
+    t.text     "visualisation_list"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

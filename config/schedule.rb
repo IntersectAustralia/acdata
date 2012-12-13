@@ -13,7 +13,7 @@ every :sunday, :at => "5am" do
   rake "rda_grants:retrieve"
 end
 
-every "30 * * * *" do
+every 30.minutes do
   rake "nmr:harvest_daily"
 end
 
@@ -21,6 +21,6 @@ every :hour do
   rake "nmr:import"
 end
 
-every "5 * * * *" do
+every 5.minutes do
   rake "aperio:harvest"
 end
