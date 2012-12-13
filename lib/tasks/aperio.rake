@@ -3,6 +3,7 @@ require_relative '../aperio_harvester.rb'
 namespace :aperio do
   desc "Harvest Aperio information"
   task :harvest => :environment do
+    Rails.logger.auto_flushing = true
     config = {}
     config[:base_url] = APP_CONFIG['aperio']['base_url']
     config[:project_list_url] = APP_CONFIG['aperio']['project_list_url']
@@ -15,6 +16,8 @@ namespace :aperio do
     config[:slide_file_type] = APP_CONFIG['aperio']['slide_file_type']
     config[:label_file_type] = APP_CONFIG['aperio']['label_file_type']
     config[:files_root] = APP_CONFIG['files_root']
+
+    Rails.logger.info("Attempting to connect to Aperio")
     AperioHarvester.harvest(config)
   end
 end

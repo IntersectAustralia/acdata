@@ -230,29 +230,45 @@ namespace :deploy do
   end
 
   namespace :ands_parties do
+    desc "Retrieve and store party records from ANDS"
     task :retrieve, :roles => :db do
       run("cd #{current_path} && bundle exec rake ands_parties:retrieve", :env => {'RAILS_ENV' => "#{stage}"})
     end
+
+    desc "Force add party records to DB from ANDS XML parties file"
     task :retrieve_all, :roles => :db do
       run("cd #{current_path} && bundle exec rake ands_parties:retrieve_all", :env => {'RAILS_ENV' => "#{stage}"})
     end
   end
 
   namespace :rda_grants do
+    desc "Retrieve and store RDA grants records from ANDS from the last week"
     task :retrieve, :roles => :db do
       run("cd #{current_path} && bundle exec rake rda_grants:retrieve", :env => {'RAILS_ENV' => "#{stage}"})
     end
+    desc "Retrieve and store all RDA grants records from ANDS"
     task :retrieve_all, :roles => :db do
       run("cd #{current_path} && bundle exec rake rda_grants:retrieve_all", :env => {'RAILS_ENV' => "#{stage}"})
     end
   end
 
   namespace :memre do
+
+    desc "Add or update measurement properties from MemRE wikiDB"
     task :retrieve, :roles => :db do
       run("cd #{current_path} && bundle exec rake memre:retrieve", :env => {'RAILS_ENV' => "#{stage}"})
     end
+
+    desc "Refresh measurement properties from MemRE wikiDB (deletes current records)"
     task :refresh, :roles => :db do
       run("cd #{current_path} && bundle exec rake memre:refresh", :env => {'RAILS_ENV' => "#{stage}"})
+    end
+  end
+
+  namespace :aperio do
+    desc "Manually harvest from Aperio"
+    task :harvest, :roles => :db do
+      run("cd #{current_path} && bundle exec rake aperio:harvest", :env => {'RAILS_ENV' => "#{stage}"})
     end
   end
 
