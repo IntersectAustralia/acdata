@@ -4,6 +4,75 @@ class User < ActiveRecord::Base
 
   belongs_to :role
   has_many :projects
+
+  # For performance
+  has_many :faster_projects,
+           :class_name => 'FasterProject',
+           :finder_sql => proc { "SELECT projects.id AS p_id, projects.name AS p_name, "\
+           "experiments.id AS e_id, experiments.name AS e_name, "\
+           "samples.id AS s_id, samples.name AS s_name, "\
+           "datasets.id AS d_id, datasets.name AS d_name "\
+           "FROM projects "\
+           "LEFT JOIN experiments ON projects.id = experiments.project_id "\
+           "LEFT JOIN samples ON (experiments.id = samples.samplable_id AND samples.samplable_type = 'Experiment') "\
+           "LEFT JOIN datasets ON samples.id = datasets.sample_id "\
+           "WHERE projects.user_id = #{id} "\
+           "UNION "\
+           "SELECT projects.id AS p_id, projects.name AS p_name, "\
+           "NULL AS e_id, NULL AS e_name, "\
+           "samples.id AS s_id, samples.name AS s_name, "\
+           "datasets.id AS d_id, datasets.name AS d_name "\
+           "FROM projects "\
+           "LEFT JOIN samples ON (projects.id = samples.samplable_id AND samples.samplable_type = 'Project') "\
+           "LEFT JOIN datasets ON samples.id = datasets.sample_id "\
+           "WHERE projects.user_id = #{id} " }
+
+  has_many :faster_viewerships,
+           :class_name => 'FasterViewership',
+           :finder_sql => proc { "SELECT projects.id AS p_id, projects.name AS p_name, "\
+           "experiments.id AS e_id, experiments.name AS e_name, "\
+           "samples.id AS s_id, samples.name AS s_name, "\
+           "datasets.id AS d_id, datasets.name AS d_name "\
+           "FROM projects "\
+           "JOIN project_members ON projects.id = project_members.project_id "\
+           "LEFT JOIN experiments ON projects.id = experiments.project_id "\
+           "LEFT JOIN samples ON (experiments.id = samples.samplable_id AND samples.samplable_type = 'Experiment') "\
+           "LEFT JOIN datasets ON samples.id = datasets.sample_id "\
+           "WHERE project_members.user_id = #{id} AND project_members.collaborating = FALSE "\
+           "UNION "\
+           "SELECT projects.id AS p_id, projects.name AS p_name, "\
+           "NULL AS e_id, NULL AS e_name, "\
+           "samples.id AS s_id, samples.name AS s_name, "\
+           "datasets.id AS d_id, datasets.name AS d_name "\
+           "FROM projects "\
+           "JOIN project_members ON projects.id = project_members.project_id "\
+           "LEFT JOIN samples ON (projects.id = samples.samplable_id AND samples.samplable_type = 'Project') "\
+           "LEFT JOIN datasets ON samples.id = datasets.sample_id "\
+           "WHERE project_members.user_id = #{id} AND project_members.collaborating = FALSE " }
+
+  has_many :faster_collaborations,
+           :class_name => 'FasterCollaboration',
+           :finder_sql => proc { "SELECT projects.id AS p_id, projects.name AS p_name, "\
+           "experiments.id AS e_id, experiments.name AS e_name, "\
+           "samples.id AS s_id, samples.name AS s_name, "\
+           "datasets.id AS d_id, datasets.name AS d_name "\
+           "FROM projects "\
+           "JOIN project_members ON projects.id = project_members.project_id "\
+           "LEFT JOIN experiments ON projects.id = experiments.project_id "\
+           "LEFT JOIN samples ON (experiments.id = samples.samplable_id AND samples.samplable_type = 'Experiment') "\
+           "LEFT JOIN datasets ON samples.id = datasets.sample_id "\
+           "WHERE project_members.user_id = #{id} AND project_members.collaborating = TRUE "\
+           "UNION "\
+           "SELECT projects.id AS p_id, projects.name AS p_name, "\
+           "NULL AS e_id, NULL AS e_name, "\
+           "samples.id AS s_id, samples.name AS s_name, "\
+           "datasets.id AS d_id, datasets.name AS d_name "\
+           "FROM projects "\
+           "JOIN project_members ON projects.id = project_members.project_id "\
+           "LEFT JOIN samples ON (projects.id = samples.samplable_id AND samples.samplable_type = 'Project') "\
+           "LEFT JOIN datasets ON samples.id = datasets.sample_id "\
+           "WHERE project_members.user_id = #{id} AND project_members.collaborating = TRUE " }
+
   has_many :eln_blogs, :dependent => :destroy
 
   has_many :ands_publishables, :foreign_key => :moderator_id
@@ -210,6 +279,128 @@ class User < ActiveRecord::Base
 
   def is_moderator?
     self.role.name.eql?("Moderator")
+  end
+
+  def build_faster_tree(type)
+    # leaf could be one of project, experiment, sample or dataset
+    if type == "projects"
+      @leaf_nodes = self.faster_projects
+    elsif type == "viewerships"
+      @leaf_nodes = self.faster_viewerships
+    else
+      @leaf_nodes = self.faster_collaborations
+    end
+
+    @sample_nodes = []
+    @experiment_nodes = []
+    @project_nodes = []
+
+    @leaf_nodes.each do |leaf_node|
+      unless leaf_node.d_id.nil? # This is a dataset
+        dataset = leaf_node
+        add_to_sample(dataset)
+
+        next
+      end
+
+      unless leaf_node.s_id.nil? # This is a sample
+        sample = leaf_node
+        id = sample.s_id.to_i
+        @sample_nodes[id] = {:node_data => sample, :datasets => []}
+
+        if sample.e_id.nil? # This sample directly belongs to a project
+          add_sample_to_project(sample)
+        else # This sample belongs to a experiment
+          add_to_experiment(sample)
+        end
+
+        next
+      end
+
+      unless leaf_node.e_id.nil? # This is an experiment
+        experiment = leaf_node
+        id = experiment.e_id.to_i
+        @experiment_nodes[id] = {:node_data => experiment, :samples => []}
+        add_experiment_to_project(experiment)
+
+        next
+      end
+
+      # This is a project
+      project = leaf_node
+      id = project.p_id.to_i
+      @project_nodes[id] = {:node_data => project, :experiments => [], :samples => [] }
+    end
+
+    compress_and_sort
+  end
+
+  def compress_and_sort
+    @new_p_nodes = []
+
+    @project_nodes.each do |p_node|
+      if p_node.nil?
+        next
+      else
+        @new_p_nodes << p_node
+      end
+    end
+
+    @new_p_nodes.sort_by { |p| p[:node_data].p_name.downcase }
+  end
+
+  def add_to_sample(dataset)
+    sample = dataset # Duplicate node data
+    id = sample.s_id.to_i
+
+    if @sample_nodes[id].nil? # Never seen this sample node before
+      @sample_nodes[id] = {:node_data => sample, :datasets => [dataset]}
+
+      if sample.e_id.nil? # This sample belongs to a project
+        add_sample_to_project(sample)
+      else
+        add_to_experiment(sample) # This sample belongs to an experiment
+      end
+    else # This sample is already in tree, only push dataset
+      @sample_nodes[id][:datasets] << dataset
+    end
+  end
+
+  def add_sample_to_project(sample)
+    project = sample
+    p_id = project.p_id.to_i
+    s_id = sample.s_id.to_i
+
+    if @project_nodes[p_id].nil? # Never seen this project node before
+      @project_nodes[p_id] = {:node_data => project, :experiments => [], :samples => [@sample_nodes[s_id]]}
+    else
+      @project_nodes[p_id][:samples] << @sample_nodes[s_id]
+    end
+  end
+
+  def add_to_experiment(sample)
+    experiment = sample
+    e_id = experiment.e_id.to_i
+    s_id = sample.s_id.to_i
+
+    if @experiment_nodes[e_id].nil? # Never seen this experiment node before
+      @experiment_nodes[e_id] = {:node_data => experiment, :samples => [@sample_nodes[s_id]] }
+      add_experiment_to_project(experiment)
+    else
+      @experiment_nodes[e_id][:samples] << @sample_nodes[s_id]
+    end
+  end
+
+  def add_experiment_to_project(experiment)
+    project = experiment
+    p_id = project.p_id.to_i
+    e_id = experiment.e_id.to_i
+
+    if @project_nodes[p_id].nil? # Never seen this project node before
+      @project_nodes[p_id] = {:node_data => project, :experiments => [@experiment_nodes[e_id]], :samples => [] }
+    else
+      @project_nodes[p_id][:experiments] << @experiment_nodes[e_id]
+    end
   end
 
   private

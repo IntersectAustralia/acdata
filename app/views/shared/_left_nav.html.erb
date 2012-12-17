@@ -2,24 +2,18 @@
     <div class="horWrapper clearfix">
         <div id="project_nav" class="content">          
           <ul class="expandable collapsible truncate" id="project_list">
-            <% if @projects.present? %>
               <h3>Projects you own:</h3>
               <% @projects.each do |project| %>
-                <%= render :partial => "shared/list_project", :locals => {:project => project, :project_class => 'project_owner'} %>
+                  <%= render :partial => "shared/list_project", :locals => {:project => project, :project_class => 'project_owner'} %>
               <% end %>
-            <% end %>
-            <% if @collaborations.present? %>
               <h3>Projects you are collaborating on:</h3>
               <% @collaborations.each do |project| %>
-                <%= render :partial => "shared/list_project", :locals => {:project => project, :project_class => 'project_collaborator'} %>
+                  <%= render :partial => "shared/list_project", :locals => {:project => project, :project_class => 'project_collaborator'} %>
               <% end %>
-            <% end %>
-            <% if @viewerships.present? %>
               <h3>Projects you are a member of:</h3>
               <% @viewerships.each do |project| %>
-                <%= render :partial => "shared/list_project", :locals => {:project => project, :project_class => 'project_member'} %>
+                  <%= render :partial => "shared/list_project", :locals => {:project => project, :project_class => 'project_member'} %>
               <% end %>
-            <% end %>
           </ul>
           
         </div>

@@ -1,37 +1,34 @@
 <% current_project = is_current_project?(project) %>
 <li id="project_item" class="<%= current_project ? "open" : "closed" %>">
 
-  <% if project.experiments.present? or project.samples.present? %>
-
-    <a class="<%= current_project ? "expanded" : "collapsed" %>" id="arrow">&nbsp;</a>
-
-    <%= link_to project.name, project_path(project, :anchor => "project_#{project.id}"), :id => "project_#{project.id}", :title => project.name, :class => [project_class, current_project ? "current" : ""] %>
-
-    <span class="<%= project_class %>"></span>
-
-    <!-- Experiment level -->
-
-    <% for experiment in project.experiments.name_ordered do %>
-      <% current_exp = is_current_experiment?(experiment) %>
-      <ul id="project_exp" class="expandable <%= "hidden" unless current_project %>">
-        <li>
-          <% if experiment.samples.present? %>
-            <a class="<%= current_exp ? "expanded" : "collapsed" %>" id="arrow">&nbsp;</a>
-          <% else %>
-            <span class="experiment_empty"></span>
-          <% end %>
-          <%= link_to experiment.name, project_experiment_path(project, experiment, :anchor => "experiment_#{experiment.id}"), :id => "experiment_#{experiment.id}", :title => experiment.name, :class => ["project_experiment", current_exp ? "current" : ""] %>
-
-          <!-- Sample level -->
-          <%= render :partial => 'shared/sample_list', :locals => {:project => project, :samples => experiment.samples.includes(:samplable).name_ordered, :current_parent => current_exp} %>
-        </li>
-      </ul>
-    <% end %> <!-- end experiment -->
-
-    <%= render :partial => 'shared/sample_list', :locals => {:project => project, :samples => project.samples.name_ordered, :current_parent => current_project} %>
+  <% if project[:experiments].blank? and project[:samples].blank? %>
+      <span class="project_empty">&nbsp;</span><%=raw faster_link_to_project(project[:node_data].p_id, project[:node_data].p_name, project[:node_data].p_name, project_class, " project_empty", current_project ? " current" : "")%>
+      <span class="<%= project_class %>"></span>
   <% else %>
-    <span class="project_empty">&nbsp;</span><%= link_to project.name, project_path(project, :anchor => "project_#{project.id}"), :id => "project_#{project.id}", :title => project.name, :class => [project_class, "project_empty", current_project ? "current" : ""] %>
-    <span class="<%= project_class %>"></span>
+      <a class="<%= current_project ? "expanded" : "collapsed" %>" id="arrow">&nbsp;</a>
+      <%=raw faster_link_to_project(project[:node_data].p_id, project[:node_data].p_name, project[:node_data].p_name, project_class, "", current_project ? " current" : "") %>
+      <span class="<%= project_class %>"></span>
+
+      <!-- Experiment level -->
+      <% for experiment in project[:experiments].sort_by{|e| e[:node_data].e_name.downcase} do %>
+          <% current_exp = is_current_experiment?(experiment) %>
+          <ul id="project_exp" class="expandable <%= "hidden" unless current_project %>">
+            <li>
+              <% if experiment[:samples].blank? %>
+                  <span class="experiment_empty"></span>
+              <% else %>
+                  <a class="<%= current_exp ? "expanded" : "collapsed" %>" id="arrow">&nbsp;</a>
+              <% end %>
+              <%= raw faster_link_to_experiment(project[:node_data].p_id, experiment[:node_data].e_id, experiment[:node_data].e_name, experiment[:node_data].e_name, current_exp ? " current" : "") %>
+
+              <!-- Sample level -->
+              <%= render :partial => 'shared/sample_list', :locals => {:project => project, :experiment => experiment, :samples => experiment[:samples], :current_parent => current_exp} %>
+            </li>
+          </ul>
+      <% end %> <!-- end experiment -->
+
+      <!-- Sample level -->
+      <%= render :partial => 'shared/sample_list', :locals => {:project => project, :samples => project[:samples], :current_parent => current_project} %>
   <% end %>
 </li>
 

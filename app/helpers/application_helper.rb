@@ -40,9 +40,9 @@ module ApplicationHelper
   end
 
   def is_current_project?(project)
-    if request.fullpath.starts_with?(projects_path)
+    if request.fullpath.starts_with?("/projects")
       id = params[:controller].eql?("projects") ? params[:id] : params[:project_id]
-      if project.id.to_s.eql?(id)
+      if project[:node_data].p_id == id
         return true
       end
     end
@@ -50,9 +50,9 @@ module ApplicationHelper
   end
 
   def is_current_sample?(sample)
-    if request.fullpath.starts_with?(projects_path)
+    if request.fullpath.starts_with?("/projects")
       id = params[:controller].eql?("samples") ? params[:id] : params[:sample_id]
-      if sample.id.to_s.eql?(id)
+      if sample[:node_data].s_id == id
         return true
       end
     end
@@ -60,9 +60,9 @@ module ApplicationHelper
   end
 
   def is_current_experiment?(experiment)
-    if request.fullpath.starts_with?(projects_path)
+    if request.fullpath.starts_with?("/projects")
       id = params[:controller].eql?("experiments") ? params[:id] : params[:experiment_id]
-      if experiment.id.to_s.eql?(id)
+      if experiment[:node_data].e_id == id
         return true
       end
     end
@@ -70,9 +70,9 @@ module ApplicationHelper
   end
 
   def is_current_dataset?(dataset)
-    if request.fullpath.starts_with?(projects_path)
+    if request.fullpath.starts_with?("/projects")
       id = params[:controller].eql?("datasets") ? params[:id] : params[:dataset_id]
-      if dataset.id.to_s.eql?(id)
+      if dataset.d_id == id
         return true
       end
     end

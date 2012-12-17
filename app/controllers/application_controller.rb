@@ -40,10 +40,9 @@ class ApplicationController < ActionController::Base
   def projects_and_memberships
     return unless user_signed_in?
 
-    @projects = current_user.projects.includes(:experiments => {:samples => :datasets}, :samples => :datasets).name_ordered
-    @memberships = current_user.project_memberships.includes(:experiments => {:samples => :datasets}, :samples => :datasets).name_ordered
-    @viewerships = current_user.project_viewerships.includes(:experiments => {:samples => :datasets}, :samples => :datasets).name_ordered
-    @collaborations = current_user.project_collaborations.includes(:experiments => {:samples => :datasets}, :samples => :datasets).name_ordered
+    @projects = current_user.build_faster_tree("projects")
+    @viewerships = current_user.build_faster_tree("viewerships")
+    @collaborations = current_user.build_faster_tree("collaborations")
 
   end
 

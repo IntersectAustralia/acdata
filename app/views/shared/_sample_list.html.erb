@@ -1,27 +1,32 @@
-<% for sample in samples do %>
+<% for sample in samples.sort_by {|s| s[:node_data].s_name.downcase} do %>
   <% current_sample = is_current_sample?(sample) %>
-  <ul id="project_sample<%= sample.datasets.empty? ? "_empty" : "" %>" class="expandable <%= "hidden" unless current_parent %>">
+  <ul id="project_sample<%= sample[:datasets] ? "_empty" : "" %>" class="expandable <%= "hidden" unless current_parent %>">
     <li class="nav_sample">
-      <% if !sample.datasets.empty? %>
-        <a class="<%= current_sample ? "expanded" : "collapsed" %>" id="arrow">&nbsp;</a>
+      <% if sample[:datasets].blank? %>
+          <span class="sample_empty"></span>
       <% else %>
-        <span class="sample_empty"></span>
+          <a class="<%= current_sample ? "expanded" : "collapsed" %>" id="arrow">&nbsp;</a>
       <% end %>
-      <%= link_to sample.nav_name,
-                  sample_path(sample) + "#experiment_sample_#{sample.id}",
-                  :id => "experiment_sample_#{sample.id}",
-                  :title => sample.nav_name,
-                  :class => ["experiment_sample", current_sample ? "current" : ""] %>
+
+      <%#= TODO: link_to sample.nav_name,%>
+      <% if sample[:node_data].e_id.nil? %>
+        <%# nav_name = Sample.find(sample[:node_data].s_id).nav_name %>
+        <%#=raw faster_link_to_project_sample(project[:node_data].p_id, sample[:node_data].s_id, nav_name, nav_name, current_sample ? " current" : "")  %>
+        <%=raw faster_link_to_project_sample(project[:node_data].p_id, sample[:node_data].s_id, sample[:node_data].s_name, sample[:node_data].s_name, current_sample ? " current" : "")  %>
+      <% else %>
+          <%=raw faster_link_to_project_experiment_sample(project[:node_data].p_id, experiment[:node_data].e_id, sample[:node_data].s_id, sample[:node_data].s_name, sample[:node_data].s_name, current_sample ? " current" : "")  %>
+      <% end %>
 
       <ul id="project_dataset" class="expandable <%= "hidden" unless current_sample %>">
         <!-- Dataset level -->
-        <% for dataset in sample.datasets.includes(:sample).name_ordered do %>
+        <% for dataset in sample[:datasets].sort_by {|d| d.d_name.downcase} do %>
           <% current_dataset = is_current_dataset?(dataset) %>
           <li class="nav_sample_dataset ">
-            <%= link_to "#{dataset.name}",
-                        get_dataset_path(dataset) + "#experiment_sample_#{sample.id}",
-                        :title => dataset.name,
-                        :class => ["experiment_sample_dataset", current_dataset ? "current" : ""] %>
+            <% if sample[:node_data].e_id.nil? %>
+                <%=raw faster_link_to_project_sample_dataset(project[:node_data].p_id, sample[:node_data].s_id, dataset.d_id, dataset.d_name, dataset.d_name, current_dataset ? " current" : "")  %>
+            <% else %>
+                <%=raw faster_link_to_project_experiment_sample_dataset(project[:node_data].p_id, experiment[:node_data].e_id, sample[:node_data].s_id, dataset.d_id, dataset.d_name, dataset.d_name, current_sample ? " current" : "")  %>
+            <% end %>
           </li>
         <% end %> <!-- end dataset -->
       </ul>

@@ -10,6 +10,7 @@ gem 'rake', '0.8.7', :require => false
 
 group :development do
   gem "rails3-generators"
+  gem "silent-postgres"
 end
 
 group :test do
