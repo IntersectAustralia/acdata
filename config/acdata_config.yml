@@ -103,8 +103,8 @@ defaults: &defaults
       ELN: hdl:1959.4/004_127
   eln_file_size_limit: 20 # in MB
   ands:
-    party_url: http://services.ands.org.au/home/orca/services/oai.php
-    grant_url: http://services.ands.org.au/home/orca/services/oai.php
+    party_url: http://researchdata.ands.org.au/registry/orca/services/oai.php
+    grant_url: http://researchdata.ands.org.au/registry/orca/services/oai.php
   memre:
     base_url: http://membranes.edu.au/valet/ajax.cgi
   # http://en.wikipedia.org/wiki/Base64#Padding
