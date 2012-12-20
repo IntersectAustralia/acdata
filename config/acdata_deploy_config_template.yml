@@ -13,6 +13,7 @@ defaults: &defaults
     export_data_url:
     slide_thumbnail_url:
     label_thumbnail_url:
+    image_url:
     username:
     password:
     instrument_name:

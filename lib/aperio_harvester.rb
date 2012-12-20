@@ -41,7 +41,7 @@ class AperioHarvester
     @slide_instrument_file_type = InstrumentFileType.find_by_name(@config[:slide_file_type])
     @label_instrument_file_type = InstrumentFileType.find_by_name(@config[:label_file_type])
     @samples = {}
-    @aperio_client = AperioClient.new
+    @aperio_client = AperioClient.new unless APP_CONFIG['aperio_mock']
   end
 
   def mark_project_as_harvested(project_id)
@@ -97,12 +97,12 @@ class AperioHarvester
 
   def process_slide(slide_data)
     # Specimens in Aperio are samples in AC DATA
-    sample_id = slide_data["User Specimen ID"].to_i
     project_id = slide_data["ACData ID"].to_i
-
     project = Project.find(project_id) if project_id > 0
 
-    if (project && sample_id > 0)
+    sample_id = generate_sample_id(slide_data, project)
+
+    if (project)
       sample = create_or_update_sample(project, sample_id, slide_data)
       create_or_update_dataset(sample, slide_data)
     end
@@ -111,9 +111,24 @@ class AperioHarvester
     Rails.logger.error(e.backtrace.join("\n"))
   end
 
+
+  def generate_sample_id(slide_data, project)
+    # Creates a sample_id if none is supplied
+    sample_id = slide_data["User Specimen ID"]
+    if sample_id.nil? or sample_id.strip.empty? and project
+      sample_basename = "#{project.name.gsub(/\W/,'_').camelize}_sample"
+      last_sample = Sample.where(:external_data_source => 'Aperio').where('name LIKE ?', sample_basename + '%').order('name ASC').last
+      if last_sample
+        sample_id = last_sample.name.succ
+      else
+        sample_id = sample_basename + '1'
+      end
+    end
+    sample_id
+  end
+
   def create_or_update_sample(project, sample_id, slide_data)
     return @samples[sample_id] if @samples[sample_id]
-
     sample = Sample.where(:external_data_source => 'Aperio').where(:external_id => sample_id).first
 
     # Create sample if it does not exist in the database
@@ -177,6 +192,9 @@ class AperioHarvester
     dataset.metadata_values.create!(:key => 'Block ID', :value => slide_data["Block ID"], :core => true, :supplied => false)
     dataset.metadata_values.create!(:key => 'Stain ID', :value => slide_data["Stain"], :core => true, :supplied => false)
     dataset.metadata_values.create!(:key => 'Description', :value => slide_data["Description"], :core => true, :supplied => false)
+
+    image_url = @config[:image_url].gsub('__image_id__', slide_data["Image ID"]) 
+    dataset.metadata_values.create!(:key => 'Image URL', :value => image_url, :core => true, :supplied => false)
 
     dataset.metadata_values.create!(:key => 'Data Group ID', :value => slide_data["Data Group"], :core => false, :supplied => false)
     dataset.metadata_values.create!(:key => 'Last Job Status', :value => slide_data["Analysis Progress"], :core => false, :supplied => false)

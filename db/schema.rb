@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121211231345) do
+ActiveRecord::Schema.define(:version => 20121218234356) do
 
   create_table "activities", :force => true do |t|
     t.boolean  "from_rda"
@@ -146,7 +146,7 @@ ActiveRecord::Schema.define(:version => 20121211231345) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "external_data_source"
-    t.integer  "external_id"
+    t.string   "external_id"
   end
 
   create_table "eln_blogs", :force => true do |t|
@@ -348,7 +348,7 @@ ActiveRecord::Schema.define(:version => 20121211231345) do
     t.integer  "samplable_id"
     t.string   "samplable_type"
     t.string   "external_data_source"
-    t.integer  "external_id"
+    t.string   "external_id"
   end
 
   create_table "seo_codes", :force => true do |t|
