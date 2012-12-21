@@ -10,6 +10,7 @@ namespace :aperio do
     config[:export_data_url] = APP_CONFIG['aperio']['export_data_url']
     config[:slide_thumbnail_url] = APP_CONFIG['aperio']['slide_thumbnail_url']
     config[:label_thumbnail_url] = APP_CONFIG['aperio']['label_thumbnail_url']
+    config[:image_url] = APP_CONFIG['aperio']['image_url']
     config[:username] = APP_CONFIG['aperio']['username']
     config[:password] = APP_CONFIG['aperio']['password']
     config[:instrument_name] = APP_CONFIG['aperio']['instrument_name']
