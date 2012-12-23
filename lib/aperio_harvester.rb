@@ -18,13 +18,21 @@ class AperioHarvester
 
   def process_project(project_id)
     ActiveRecord::Base.transaction do
-      Rails.logger.info("Harvesting Aperio project #{project_id}")
-      project_data = get_project_data project_id
-      CSV.parse(project_data, :headers => true) do |slide_data|
-        process_slide slide_data
+      begin
+        Rails.logger.info("Harvesting Aperio project #{project_id}")
+        project_data = get_project_data project_id
+
+        CSV.parse(project_data, :headers => true) do |slide_data|
+          process_slide slide_data
+        end
+        mark_project_as_harvested project_id
+        Rails.logger.info("Successfully harvested Aperio project #{project_id}")
+      rescue Exception => e
+        @_errors = true
+        Rails.logger.error("Error harvesting Aperio project #{project_id}:")
+        Rails.logger.error(e.backtrace.join("\n"))
       end
-      mark_project_as_harvested project_id
-      Rails.logger.info("Successfully harvested Aperio project #{project_id}")
+      raise ActiveRecord::Rollback if @_errors
     end
   rescue Net::HTTP::Persistent::Error => exc
     Rails.logger.error("Error connecting to Aperio: #{exc}")
@@ -106,9 +114,6 @@ class AperioHarvester
       sample = create_or_update_sample(project, sample_id, slide_data)
       create_or_update_dataset(sample, slide_data)
     end
-  rescue Exception => e
-    Rails.logger.error("Error creating dataset")
-    Rails.logger.error(e.backtrace.join("\n"))
   end
 
 
