@@ -6,7 +6,7 @@ set :whenever_environment, defer { stage }
 set :whenever_command, "bundle exec whenever"
 require 'whenever/capistrano'
 
-set :stages, %w(qa staging production)
+set :stages, %w(qa staging production production_local)
 set :default_stage, "qa"
 set :application, 'acdata'
 set :shared_children, shared_children + %w(log_archive)
@@ -305,9 +305,9 @@ task :generate_deploy_config, :roles => :app do
   acdata_config = YAML::load_file('config/acdata_config.yml')
   file_path = "#{acdata_config[stage.to_s]['deploy_config_root']}/acdata_deploy_config.yml"
 
-  output = capture("ls #{acdata_config[stage.to_s]['deploy_config_root']} | grep '^acdata_deploy_config.yml$'").strip
+  #output = capture("ls #{acdata_config[stage.to_s]['deploy_config_root']} | grep '^acdata_deploy_config.yml$'").strip
 
-  if output.empty?
+  if !File.file?(file_path)
     buffer = YAML::load_file('config/acdata_deploy_config_template.yml')
 
     # get rid of unneeded configurations
