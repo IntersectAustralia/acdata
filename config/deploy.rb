@@ -81,7 +81,10 @@ namespace :server_setup do
   end
 end
 
-after 'deploy:setup', "server_setup:filesystem:dir_perms"
+after 'deploy:setup' do
+  server_setup.filesystem.dir_perms
+  copy_config_to_shared_folder
+end
 after 'deploy:update' do
   server_setup.logging.rotation
   server_setup.config.apache
@@ -274,11 +277,53 @@ namespace :deploy do
 
 end
 
+
 after 'deploy:update_code' do
   generate_database_yml
   generate_initial_users_yml
   generate_deploy_config
   #deploy.set_svn_revision
+end
+
+desc "Restore config"
+task :restore_config, :roles => :app do
+  dest = "#{release_path}/config/acdata_config.yml"
+  src = "#{shared_path}/config/acdata_config.yml"
+  run "cp #{src} #{dest}"
+
+  dest = "#{release_path}/config/environments/production.rb"
+  src = "#{shared_path}/config/production.rb"
+  run "cp #{src} #{dest}"
+
+  dest = "#{release_path}/config/initializers/devise.rb"
+  src = "#{shared_path}/config/device.rb"
+  run "cp #{src} #{dest}"
+
+  dest = "#{release_path}/config/deploy/production_local.rb"
+  src = "#{shared_path}/config/production_local.rb"
+  run "cp #{src} #{dest}"
+end
+
+desc "Copying config files to shared folder"
+task :copy_config_to_shared_folder,:roles => :app do
+  run "mkdir -p #{shared_path}/config"
+
+  src = "#{release_path}/config/acdata_config.yml"
+  dest = "#{shared_path}/config/acdata_config.yml"
+  run "cp #{src} #{dest}"
+
+  src = "#{release_path}/config/environments/production.rb"
+  dest = "#{shared_path}/config/production.rb"
+  run "cp #{src} #{dest}"
+
+  src = "#{release_path}/config/initializers/devise.rb"
+  dest = "#{shared_path}/config/device.rb"
+  run "cp #{src} #{dest}"
+
+  src = "#{release_path}/config/deploy/production_local.rb"
+  dest = "#{shared_path}/config/production_local.rb"
+  run "cp #{src} #{dest}"
+
 end
 
 desc "After updating code we need to populate a new database.yml"
