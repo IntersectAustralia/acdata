@@ -83,12 +83,13 @@ end
 
 after 'deploy:setup' do
   server_setup.filesystem.dir_perms
-  copy_config_to_shared_folder
 end
+
 after 'deploy:update' do
   server_setup.logging.rotation
   server_setup.config.apache
   server_setup.rvm.trust_rvmrc
+  copy_config_to_shared_folder
   deploy.restart
 end
 
@@ -322,6 +323,10 @@ task :copy_config_to_shared_folder,:roles => :app do
 
   src = "#{release_path}/config/deploy/production_local.rb"
   dest = "#{shared_path}/config/production_local.rb"
+  run "cp #{src} #{dest}"
+
+  src = "#{release_path}/config/ldap.yml"
+  dest = "#{shared_path}/config/ldap.yml"
   run "cp #{src} #{dest}"
 
 end

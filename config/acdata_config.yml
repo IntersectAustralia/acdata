@@ -121,10 +121,10 @@ test:
 
 production:
   <<: *defaults
-  files_root: /spare/acdata/data
-  rda_files_root: /spare/acdata/data/rda
-  memre_files_root: /spare/acdata/data/memre
-  deploy_config_root: /spare/acdata
+  #files_root: /spare/acdata/data
+  #rda_files_root: /spare/acdata/data/rda
+  #memre_files_root: /spare/acdata/data/memre
+  #deploy_config_root: /spare/acdata
 
 qa:
   <<: *defaults
