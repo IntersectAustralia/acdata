@@ -173,7 +173,7 @@ Feature: Slide Scanning Requests
     And I should see "Account Details"
     And I should see "Scanning Details"
     And I press "Submit"
-    Then I should see a warning containing "You must specify a value for every field"
+    Then I should see a warning containing "You must specify a value for every mandatory field"
     And I dismiss popup
 
   @javascript
