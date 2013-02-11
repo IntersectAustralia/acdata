@@ -129,6 +129,14 @@ Then /^(?:|I )should see "([^"]*)"$/ do |text|
   end
 end
 
+Then /^(?:|I )should see a link to "([^"]*)" with text "([^"]*)"$/ do |link, text|
+  if page.respond_to? :should
+    page.should have_xpath('//a', :href => link, :text => text)
+  else
+    assert page.has_xpath?('//a', :href => link, :text => text)
+  end
+end
+
 Then /^(?:|I )should see \/([^\/]*)\/$/ do |regexp|
   regexp = Regexp.new(regexp)
 
@@ -242,9 +250,9 @@ Then /^(?:|the )option "([^"]+?)" for "([^"]+?)" should be selected$/ do |option
 end
 
 When /^I confirm popup$/ do
-  page.driver.browser.switch_to.alert.accept    
+  page.driver.wait_until(page.driver.browser.switch_to.alert.accept)    
 end
 
 When /^I dismiss popup$/ do
- page.driver.browser.switch_to.alert.dismiss
+ page.driver.wait_until(page.driver.browser.switch_to.alert.dismiss)
 end

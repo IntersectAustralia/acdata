@@ -197,6 +197,13 @@ module DatasetsHelper
     @dataset.instrument_rule.visualisation_file_type_names.join('/')
   end
 
+  def metadata_value(metadata)
+    result = sanitize newline_to_br(metadata.value)
+    if metadata.key.eql? "Image URL"
+      result = "<a href=\"#{metadata.value}\">#{result}</a>".html_safe
+    end
+  end
+
   def visualisation_types
     @dataset.instrument_rule.visualisation_file_types
   end

@@ -33,7 +33,8 @@ Feature: Extract metadata from certain file types
     And I am on the view dataset page for "Dataset1"
     And I click on the "Extended Metadata" tab
     Then I should see "Extended Metadata requires a file of type"
-
+  
+  @ilya
   @upload
   Scenario: Metadata is shown after uploading an SP file
     Given I am logged in as "user2"
@@ -185,3 +186,33 @@ Feature: Extract metadata from certain file types
     And I press "Finish"
     And I should see "Supplied metadata key can't be blank"
 
+
+  @applet
+  @javascript
+  Scenario: Metadata for Image URL contains a clickable link
+    Given I am logged in as "user2"
+    And I follow "project b"
+    And I click on "Add"
+    And I follow "Add Dataset"
+    And I wait for the wizard
+    And I select "s2" from "dataset_sample_id"
+    And I press "Next"
+    And I wait for the wizard
+    Then I should see "Add Dataset"
+    And I fill in "Dataset name" with "TEST 1"
+    And I select "Potentiostats" from "Instrument class"
+    And I press "Next"
+    And I wait for the wizard
+    And I wait for the applet to load
+    And I press "Next"
+    And I confirm popup
+    And I wait for the wizard
+    Then I should see "View Metadata"
+    And I follow "Add metadata"
+    And I fill in the 1st supplied metadata field with "Image URL"
+    And I fill in the 2nd supplied metadata field with "http://www.intersect.org.au"
+    And I press "Finish"
+    And I wait for the wizard
+    Then I should be redirected to the view dataset page for "TEST 1"
+    Then I should see the core metadata for "TEST 1"
+    And I should see a link to "http://www.intersect.org.au" with text "http://www.intersect.org.au"

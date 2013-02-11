@@ -77,7 +77,8 @@
   <div id="container_metaone" class="unit information">
     <% split_list[0].each do |metadata| %>
       <div>
-        <span class="bold"><%= "#{sanitize metadata.key}:" %></span> <%= sanitize newline_to_br(metadata.value) %>
+        <span class="bold"><%= "#{sanitize metadata.key}:" %></span>
+        <%= metadata_value metadata %>
       </div>
     <% end %>
   </div>
@@ -85,7 +86,8 @@
   <div id="container_metatwo" class="lastUnit information">
     <% split_list[1].each do |metadata| %>
       <div>
-        <span class="bold"><%= "#{sanitize metadata.key}:" %></span> <%= sanitize newline_to_br(metadata.value).html_safe %>
+        <span class="bold"><%= "#{sanitize metadata.key}:" %></span>
+        <% metadata_value metadata %>
       </div>
     <% end %>
   </div>
