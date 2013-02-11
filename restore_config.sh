@@ -4,8 +4,8 @@ then
   echo "Usage: `basename $0` <deploy_base_folder>"
   exit 1
 fi
-FILE=$1'/acdata-web/share/config'
-if [ ! -f $FILE ]
+FILE=$1'/acdata-web/shared/config'
+if [ ! -d $FILE ]
 then
    echo "Folder $FILE does not exist. "
    exit 1
