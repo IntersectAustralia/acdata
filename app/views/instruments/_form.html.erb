@@ -55,9 +55,10 @@
           <%= label_tag "instrument_file_types", 'File types:' %>
           <%= select_tag("instrument_file_type_ids[]", options_for_select(instrument_file_types, @instrument.instrument_file_type_ids), {:multiple => true, :size => 5, :id => 'instrument_file_types'}) %>
         </div>
+        <div class="field instruction instructions">Hold Ctrl or ⌘ when clicking to add to selection.</div>
       </div>
       <h3>Instrument Rules</h3>
-      <div class="instructions">Please ensure you select instrument rules, especially if you have changed the 'File types' selection above.</div>
+      <div class="instructions">Please ensure you select instrument rules, especially if you have changed the 'File types' selection above. Multiple types for each rule can be selected by holding down Ctrl or ⌘ while clicking.</div>
       <div id="instrument_rules" class="column_form">
         <div class="row">
           <%= label_tag 'instrument_rule[metadata_list]', 'Metadata file types:' %>
