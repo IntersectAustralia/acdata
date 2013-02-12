@@ -108,7 +108,7 @@ class AperioHarvester
     project_id = slide_data["ACData ID"].to_i
     project = Project.find(project_id) if project_id > 0
 
-    sample_id = generate_sample_id(slide_data, project)
+    sample_id = generate_sample_id(slide_data)
 
     if (project)
       sample = create_or_update_sample(project, sample_id, slide_data)
@@ -116,20 +116,10 @@ class AperioHarvester
     end
   end
 
-
-  def generate_sample_id(slide_data, project)
-    # Creates a sample_id if none is supplied
-    sample_id = slide_data["User Specimen ID"]
-    if sample_id.nil? or sample_id.strip.empty? and project
-      sample_basename = "#{project.name.gsub(/\W/,'_').camelize}_sample"
-      last_sample = Sample.where(:external_data_source => 'Aperio').where('name LIKE ?', sample_basename + '%').order('name ASC').last
-      if last_sample
-        sample_id = last_sample.name.succ
-      else
-        sample_id = sample_basename + '1'
-      end
-    end
-    sample_id
+  def generate_sample_id(slide_data)
+    # Creates a sample_id from thr slide filename
+    path = slide_data["File Location"]
+    sample_id = /.*\\(\w+\sHMU\d+-\d+)/.match(path)[1]
   end
 
   def create_or_update_sample(project, sample_id, slide_data)
