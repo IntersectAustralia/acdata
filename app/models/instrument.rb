@@ -106,8 +106,12 @@ class Instrument < ActiveRecord::Base
           xml.value email
         end if email.present?
         xml.physical :type => "streetAddress" do
-          xml.addressPart address, :type => "text" if address.present?
-          xml.addressPart voice, :type => "telephoneNumber" if voice.present?
+					unless address.blank?          
+						xml.addressPart address, :type => "text" if address.present?
+					end
+					unless voice.blank?
+						xml.addressPart voice, :type => "telephoneNumber" if voice.present?
+					end          
         end if address.present? or voice.present?
       end
     end if address.present? or voice.present? or email.present?
