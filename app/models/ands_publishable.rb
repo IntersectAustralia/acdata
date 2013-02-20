@@ -201,20 +201,22 @@ class AndsPublishable < ActiveRecord::Base
     end
     xml.location do
       xml.address do
-        xml.physical :type => "postalAddress" do
-          address_parts = address.split("\r\n")
-          address_parts.each do |line|
-            xml.addressPart line, :type => "addressLine"
-          end
-        end
+				xml.physical :type => "postalAddress" do
+	        address_parts = address.split("\r\n")
+	        address_parts.each do |line|
+	          xml.addressPart line, :type => "addressLine"
+	        end
+	      end
       end
     end
 
     if has_temporal_coverage?
       xml.coverage do
-        xml.temporal do
+        xml.temporal do 
           xml.date coverage_end_date ? coverage_end_date.to_time.to_formatted_s(:w3cdtf) : "", :type => "dateTo", :dateFormat => "W3CDTF"
-          xml.date coverage_start_date ? coverage_start_date.to_time.to_formatted_s(:w3cdtf) : "", :type => "dateFrom", :dateFormat => "W3CDTF"
+					unless coverage_start_date.blank?
+						xml.date coverage_start_date ? coverage_start_date.to_time.to_formatted_s(:w3cdtf) : "", :type => "dateFrom", :dateFormat => "W3CDTF"
+					end          
         end
       end
     end
