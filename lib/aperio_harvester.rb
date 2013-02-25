@@ -194,25 +194,25 @@ class AperioHarvester
     image_url = @config[:image_url].gsub('__image_id__', slide_data["Image ID"]) 
     dataset.metadata_values.create!(:key => 'Image URL', :value => image_url, :core => true, :supplied => false)
 
-    dataset.metadata_values.create!(:key => 'Data Group ID', :value => slide_data["Data Group"], :core => false, :supplied => false)
+    dataset.metadata_values.create!(:key => 'Data Group ID', :value => slide_data["Data Group"], :core => true, :supplied => false)
     dataset.metadata_values.create!(:key => 'Last Job Status', :value => slide_data["Analysis Progress"], :core => false, :supplied => false)
 
     dataset.metadata_values.create!(:key => 'Image ID', :value => slide_data["Image ID"], :core => true, :supplied => false)
 
-    dataset.metadata_values.create!(:key => 'Scan Date', :value => slide_data["Captured Date"], :core => false, :supplied => false)
+    dataset.metadata_values.create!(:key => 'Scan Date', :value => slide_data["Captured Date"], :core => true, :supplied => false)
     dataset.metadata_values.create!(:key => 'Compressed File Location', :value => slide_data["File Location"], :core => true, :supplied => false)
     dataset.metadata_values.create!(:key => 'Rack', :value => slide_data["Rack"], :core => false, :supplied => false)
     dataset.metadata_values.create!(:key => 'Slot', :value => slide_data["Slot"], :core => false, :supplied => false)
 
 
-    dataset.metadata_values.create!(:key => 'Scan Status', :value => slide_data["Scan Status"], :core => true, :supplied => false)
-    dataset.metadata_values.create!(:key => 'Quality Factor', :value => slide_data["Quality Factor"], :core => true, :supplied => false)
+    dataset.metadata_values.create!(:key => 'Scan Status', :value => slide_data["Scan Status"], :core => false, :supplied => false)
+    dataset.metadata_values.create!(:key => 'Quality Factor', :value => slide_data["Quality Factor"], :core => false, :supplied => false)
     dataset.metadata_values.create!(:key => 'Scan Scope ID', :value => slide_data["ScanScope ID"], :core => true, :supplied => false)
 
 
-    dataset.metadata_values.create!(:key => 'Run Time', :value => slide_data["Run Time"], :core => false, :supplied => false)
-    dataset.metadata_values.create!(:key => 'TWidth', :value => slide_data["TWidth"], :core => false, :supplied => false)
-    dataset.metadata_values.create!(:key => 'THeight', :value => slide_data["THeight"], :core => false, :supplied => false)
+    dataset.metadata_values.create!(:key => 'Run Time', :value => slide_data["Run Time"], :core => true, :supplied => false)
+    dataset.metadata_values.create!(:key => 'TWidth', :value => slide_data["TWidth"], :core => true, :supplied => false)
+    dataset.metadata_values.create!(:key => 'THeight', :value => slide_data["THeight"], :core => true, :supplied => false)
   end
 
   def thumbnail_url(type, image_id)
