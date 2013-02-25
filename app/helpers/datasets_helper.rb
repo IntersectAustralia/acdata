@@ -199,7 +199,7 @@ module DatasetsHelper
 
   def metadata_value(metadata)
     result = sanitize newline_to_br(metadata.value)
-    if /^Image URL$|Thumbnail$/.match(metadata.key)
+    if /^http\:\/\//.match(result)
       result = "<a href=\"#{metadata.value}\">#{result}</a>".html_safe
     end
   end
