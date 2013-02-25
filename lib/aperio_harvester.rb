@@ -111,6 +111,9 @@ class AperioHarvester
     sample_id = generate_sample_id(slide_data)
 
     if (project)
+      project.name = slide_data['Project Name']
+      project.description = slide_data['Description']
+      project.save!
       sample = create_or_update_sample(project, sample_id, slide_data)
       create_or_update_dataset(sample, slide_data)
     end
