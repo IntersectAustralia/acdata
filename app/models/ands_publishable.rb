@@ -22,7 +22,7 @@ class AndsPublishable < ActiveRecord::Base
   validates_presence_of :collection_description
   validates_presence_of :address
   validates_presence_of :access_rights
-
+	validates_presence_of :coverage_start_date, :if => :has_temporal_coverage
   validate :dates_valid
 
   validates_length_of :collection_name, :maximum => 255
@@ -212,12 +212,10 @@ class AndsPublishable < ActiveRecord::Base
 
     if has_temporal_coverage?
       xml.coverage do
-        xml.temporal do 
-          xml.date coverage_end_date ? coverage_end_date.to_time.to_formatted_s(:w3cdtf) : "", :type => "dateTo", :dateFormat => "W3CDTF"
-					unless coverage_start_date.blank?
-						xml.date coverage_start_date ? coverage_start_date.to_time.to_formatted_s(:w3cdtf) : "", :type => "dateFrom", :dateFormat => "W3CDTF"
-					end          
-        end
+        xml.temporal do     
+					xml.date coverage_end_date ? coverage_end_date.to_time.to_formatted_s(:w3cdtf) : "", :type => "dateTo", :dateFormat => "W3CDTF" unless coverage_end_date.blank?  
+					xml.date coverage_start_date ? coverage_start_date.to_time.to_formatted_s(:w3cdtf) : "", :type => "dateFrom", :dateFormat => "W3CDTF" unless coverage_start_date.blank?        
+		  	end
       end
     end
 
