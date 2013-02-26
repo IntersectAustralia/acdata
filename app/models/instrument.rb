@@ -104,17 +104,13 @@ class Instrument < ActiveRecord::Base
       xml.address do
         xml.electronic :type => "email" do
           xml.value email
-        end if email.present?
+        end unless email.blank?
         xml.physical :type => "streetAddress" do
-					unless address.blank?          
-						xml.addressPart address, :type => "text" if address.present?
-					end
-					unless voice.blank?
-						xml.addressPart voice, :type => "telephoneNumber" if voice.present?
-					end          
-        end if address.present? or voice.present?
+					xml.addressPart address, :type => "text" unless address.blank?
+					xml.addressPart voice, :type => "telephoneNumber" unless voice.blank?				
+        end unless address.blank? and voice.blank?
       end
-    end if address.present? or voice.present? or email.present?
+    end unless address.blank? and voice.blank? and email.blank?
     xml.relatedObject do
       xml.key APP_CONFIG['handles']['mandatory']['UNSW']
       xml.relation :type => "hasAssociationWith"
@@ -124,7 +120,7 @@ class Instrument < ActiveRecord::Base
       xml.relation :type => "isPresentedBy"
     end
     xml.description "offline", :type => "deliverymethod"
-    xml.description description, :type => "full" if description.present?
+    xml.description description, :type => "full" unless description.blank?
   end
 
   def all_filtered?
