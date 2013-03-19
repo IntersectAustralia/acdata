@@ -202,6 +202,7 @@ module DatasetsHelper
     if /^http\:\/\//.match(result)
       result = "<a href=\"#{metadata.value}\">#{result}</a>".html_safe
     end
+    result
   end
 
   def visualisation_types
