@@ -87,7 +87,7 @@
     <% split_list[1].each do |metadata| %>
       <div>
         <span class="bold"><%= "#{sanitize metadata.key}:" %></span>
-        <% metadata_value metadata %>
+        <%= metadata_value metadata %>
       </div>
     <% end %>
   </div>
