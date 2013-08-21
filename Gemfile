@@ -5,7 +5,7 @@ source 'http://rubygems.org'
 # version that fixes the issue above
 gem 'rack', :git => "http://github.com/IntersectAustralia/rack.git", :branch => "rack-1.2"
 
-gem 'rails', '~> 3.0.10'
+gem 'rails', '3.0.19'
 gem 'rake', '0.8.7', :require => false
 
 group :development do
@@ -37,6 +37,7 @@ end
 
 group :development, :test, :qa do
   gem "faker"
+  gem "ladle"
 end
 
 gem 'acdata-dataset-api', :git => "http://github.com/IntersectAustralia/acdata-dataset-api.git", :require => false
@@ -47,7 +48,7 @@ gem "decent_exposure"
 gem 'meta_search'
 gem 'meta_where'
 gem "jquery-rails"
-gem "devise"
+gem "devise", '1.5.4'
 gem "nested_form"
 gem "cancan"
 gem "capistrano-ext"
