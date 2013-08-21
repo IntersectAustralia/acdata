@@ -1,0 +1,239 @@
+version: 1
+
+dn: ou=people,dc=localhost
+objectClass: top
+objectClass: organizationalUnit
+ou: people
+
+dn: cn=sean,ou=people,dc=localhost
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: sean
+sn: McCarthy
+givenName: Sean
+mail: sean@example.com.au
+# Password is "Pass.123"
+userpassword: {SHA}AUDkAzejxr2o93d/bKnYBR07Fpw=
+
+dn: cn=ands_user,ou=people,dc=localhost
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: ands_user
+sn: User
+givenName: ANDS
+mail: acdata@student.unsw.edu.au
+# Password is "Pass.123"
+userpassword: {SHA}AUDkAzejxr2o93d/bKnYBR07Fpw=
+
+dn: cn=z3401351,ou=people,dc=localhost
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: z3401351
+sn: McCarthy
+givenName: Sean
+mail: sean@example.com.au
+# Password is "Pass.123"
+userpassword: {SHA}AUDkAzejxr2o93d/bKnYBR07Fpw=
+
+dn: cn=marc,ou=people,dc=localhost
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: marc
+sn: Ziani de Ferranti
+givenName: Marc
+mail: marc@example.com.au
+# Password is "Pass.123"
+userpassword: {SHA}AUDkAzejxr2o93d/bKnYBR07Fpw=
+
+dn: cn=sq,ou=people,dc=localhost
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: sq
+sn: Hon
+givenName: Shuqian
+mail: sq@example.com.au
+# Password is "Pass.123"
+userpassword: {SHA}AUDkAzejxr2o93d/bKnYBR07Fpw=
+
+dn: cn=shuqian,ou=people,dc=localhost
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: shuqian
+sn: Hon
+givenName: Shuqian
+mail: shuqian@example.com.au
+# Password is "Pass.123"
+userpassword: {SHA}AUDkAzejxr2o93d/bKnYBR07Fpw=
+
+dn: cn=kali,ou=people,dc=localhost
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: kali
+sn: Waterford
+givenName: Kali
+mail: kali@intersect.org.au
+# Password is "Pass.123"
+userpassword: {SHA}AUDkAzejxr2o93d/bKnYBR07Fpw=
+
+dn: cn=kali_admin,ou=people,dc=localhost
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: kali
+sn: Waterford
+givenName: Kali
+mail: kali@intersect.org.au
+# Password is "Pass.123"
+userpassword: {SHA}AUDkAzejxr2o93d/bKnYBR07Fpw=
+
+dn: cn=z1,ou=people,dc=localhost
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: z1
+sn: User1
+givenName: Normal
+mail: normal1@intersect.org.au
+# Password is "Pass.123"
+userpassword: {SHA}AUDkAzejxr2o93d/bKnYBR07Fpw=
+
+dn: cn=z2,ou=people,dc=localhost
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: z2
+sn: User2
+givenName: Normal
+mail: normal2@intersect.org.au
+# Password is "Pass.123"
+userpassword: {SHA}AUDkAzejxr2o93d/bKnYBR07Fpw=
+
+dn: cn=z3,ou=people,dc=localhost
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: z3
+sn: User3
+givenName: Normal
+mail: normal3@intersect.org.au
+# Password is "Pass.123"
+userpassword: {SHA}AUDkAzejxr2o93d/bKnYBR07Fpw=
+
+dn: cn=bad_email_user,ou=people,dc=localhost
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: bad_email_user
+sn: Email
+givenName: Bad
+mail: not@this.address
+# Password is "Pass.123"
+userpassword: {SHA}AUDkAzejxr2o93d/bKnYBR07Fpw=
+
+dn: cn=register_kali,ou=people,dc=localhost
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: register_kali
+sn: Waterford
+givenName: Kali
+mail: kali@example.com.au
+# Password is "Pass.123"
+userpassword: {SHA}AUDkAzejxr2o93d/bKnYBR07Fpw=
+
+dn: cn=registerme1,ou=people,dc=localhost
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: registerme1
+sn: Me1
+givenName: Register
+mail: registerme1@example.com.au
+# Password is "Pass.123"
+userpassword: {SHA}AUDkAzejxr2o93d/bKnYBR07Fpw=
+
+dn: cn=registerme2,ou=people,dc=localhost
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: registerme2
+sn: Me2
+givenName: Register
+mail: registerme2@example.com.au
+# Password is "Pass.123"
+userpassword: {SHA}AUDkAzejxr2o93d/bKnYBR07Fpw=
+
+dn: cn=registerme3,ou=people,dc=localhost
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: registerme3
+sn: Me3
+givenName: Register
+mail: registerme3@example.com.au
+# Password is "Pass.123"
+userpassword: {SHA}AUDkAzejxr2o93d/bKnYBR07Fpw=
+
+
+# Test accounts
+dn: cn=user1,ou=people,dc=localhost
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: user1
+sn: One
+givenName: User
+mail: user1@example.com.au
+# Password is "Pas$w0rd"
+userpassword: {SHA}y4gS1RROlZiJsI0BJZr9cHo+6eQ=
+
+dn: cn=user2,ou=people,dc=localhost
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: user2
+sn: One
+givenName: User
+mail: user2@example.com.au
+# Password is "Pas$w0rd"
+userpassword: {SHA}y4gS1RROlZiJsI0BJZr9cHo+6eQ=
+
+dn: cn=user4,ou=people,dc=localhost
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: user4
+sn: One
+givenName: User
+mail: user4@example.com.au
+# Password is "Pas$w0rd"
+userpassword: {SHA}y4gS1RROlZiJsI0BJZr9cHo+6eQ=
+
+
+

@@ -29,7 +29,7 @@ create_roles_and_permissions
 create_instrument_file_types
 create_instruments #todo comment this out again
 create_initial_users
-TestLDAP.new(Rails.env).populate_ldap('initial_users') unless Rails.env == 'production'
+#TestLDAP.new(Rails.env).populate_ldap('initial_users') unless Rails.env == 'production'
 import_for_codes
 import_seo_codes
 import_fluorescent_labels
