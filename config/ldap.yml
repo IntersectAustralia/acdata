@@ -24,12 +24,20 @@ common: &common
   admin_password: Pass.123
   ssl: false
 
+mock: &mock
+  host: localhost
+  port: 3897
+  attribute: cn
+  base: ou=people,dc=localhost
+  admin_user: cn=admin,dc=localhost
+  admin_password: cQmN7yTArff6cd9e9Ow4DLcHNYL7wLyK
+  ssl: false
+
 development:
-  <<: *common
+  <<: *mock
 
 test:
-  <<: *common
-  base: ou=people,o=test,dc=localhost
+  <<: *mock
 
 qa:
   <<: *common
