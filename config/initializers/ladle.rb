@@ -15,8 +15,7 @@ unless defined?(::Rake)
     $ladle = Ladle::Server.new(
         :port   => 3897,
         :ldif   => "lib/ladle/sample_data.ldif",
-        :domain => "dc=localhost",
-        :tmpdir => "/home/danielt/tmp"
+        :domain => "dc=localhost"
     )
 
     puts 'Initializing local LDAP...'
