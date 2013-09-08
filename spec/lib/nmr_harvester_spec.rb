@@ -59,6 +59,7 @@ describe NMRHarvester do
     instruments = NMRHarvester.get_instruments
     users = NMRHarvester.get_users
 
+    ftp.should_receive('nlst').and_return(%w{Flip Gyro})
     instruments.each do |instrument|
       ftp.should_receive('chdir').with("#{NMRHarvester.get_instrument_name(instrument)}/data")
       ftp.should_receive('nlst').and_return(%w{aaa foo})

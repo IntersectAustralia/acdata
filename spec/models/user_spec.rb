@@ -147,7 +147,7 @@ describe User do
         project2.members << user1
         project3.members << user1
         project3.members << user2
-        user1.can_read_projects.should eq([1, 2, 3])
+        user1.can_read_projects.should =~ [1, 2, 3]
         user2.can_read_projects.should eq([3])
       end
 

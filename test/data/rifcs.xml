@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<registryObjects xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd" xmlns="http://ands.org.au/standards/rif-cs/registryObjects" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.3/schema/registryObjects.xsd">
   <registryObject group="University of New South Wales">
     <key>hdl:1959.4/004_300</key>
     <originatingSource>https://www.researchdata.unsw.edu.au</originatingSource>
@@ -60,7 +60,7 @@
       <subject type="local">salt rejection</subject>
       <description type="full">The collection was obtained from a range of experiments investigating the influence of free chlorine on polyamide reverse osmosis membranes under accelerated ageing conditions. Sodium Hypochlorite was used as a source of free chlorine and ATR-FTIR has been used to characterize the changes in membrane surface chemistry</description>
       <rights>
-        <rightsStatement>Copyright © University of New South Wales 2012</rightsStatement>
+        <rightsStatement>Copyright © University of New South Wales 2013</rightsStatement>
         <accessRights>For access to this data, please contact:
   [Insert Name]
   [Address Line 1]
