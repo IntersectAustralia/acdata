@@ -19,26 +19,9 @@ describe AperioHarvester do
     double('project', :name => 'Aperio Test Project')
   }
 
-  it 'should have the "User Specimen ID" as the sample_id if it is an Integer' do
-    slide_data = {"ACData ID" => 119, "User Specimen ID" => '1234'}
-    aperio.generate_sample_id(slide_data, project).should eq '1234'
-  end
-
-  it 'should have the "User Specimen ID" as the sample_id if it is a String' do
-    slide_data = {"ACData ID" => 119, "User Specimen ID" => 'Some string'}
-    aperio.generate_sample_id(slide_data, project).should eq 'Some string'
-  end
-
-  it 'should have the "<ProjectName>_sample(n)" as the sample_id if the "Specimen ID" is not supplied' do
-    slide_data = {"ACData ID" => 119}
-    aperio.generate_sample_id(slide_data, project).should eq 'AperioTestProject_sample1'
-  end
-
-  it 'should have the "<ProjectName>_sample(n+1)" as the sample_id if "<ProjectName>_sample(n)" already exists' do
-    slide_data = {"ACData ID" => 119}
-    sample = double('sample', :name => 'AperioTestProject_sample234')
-    Sample.stub_chain(:where, :where, :order, :last) { sample }
-    aperio.generate_sample_id(slide_data, project).should eq 'AperioTestProject_sample235'
+  it 'should have the "File Location" as the sample_id' do
+    slide_data = {"ACData ID" => 119, "File Location" => 'file\BOURNE HMU12-646-013345-1.L.1.svs'}
+    aperio.generate_sample_id(slide_data).should eq 'BOURNE HMU12-646'
   end
 
 end

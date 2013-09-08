@@ -114,9 +114,9 @@ describe Project do
         @project.owner?(@user1).should_not be_true
       end
 
-      it "old owner becomes a member" do
+      it "old owner becomes a collaborator" do
         @project.change_owner(@user2)
-        @project.members.should include(@user1)
+        @project.collaborators.should include(@user1)
       end
     end
   end

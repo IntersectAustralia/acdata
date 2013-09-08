@@ -192,12 +192,8 @@ describe Dataset do
       Dataset.transaction do
         src = dataset.dataset_path
         dataset.update_attributes(:sample => sample2)
-        Dataset.move_dataset(dataset, src)
-        dataset.errors.should be_empty
-
+        lambda { Dataset.move_dataset(dataset, src) }.should raise_error
       end
-
-      Dataset.find(dataset.id).sample.should eq(sample2)
 
     end
 

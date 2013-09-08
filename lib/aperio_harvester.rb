@@ -120,7 +120,6 @@ class AperioHarvester
   end
 
   def generate_sample_id(slide_data)
-    # Creates a sample_id from thr slide filename
     path = slide_data["File Location"]
     sample_id = /.*\\(\w+\sHMU\d+-\d+)/.match(path)[1]
   end
