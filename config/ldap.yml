@@ -34,10 +34,10 @@ mock: &mock
   ssl: false
 
 development:
-  <<: *mock
+  <<: *common
 
 test:
-  <<: *mock
+  <<: *common
 
 qa:
   <<: *common
