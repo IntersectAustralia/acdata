@@ -37,7 +37,13 @@ development:
   <<: *common
 
 test:
-  <<: *common
+  host: localhost
+  port: 389
+  attribute: cn
+  base: ou=people,o=test,dc=localhost
+  admin_user: cn=admin,dc=localhost
+  admin_password: Pass.123
+  ssl: false
 
 qa:
   <<: *common
