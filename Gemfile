@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 # https://github.com/brendan/rack/commit/8f7fcf0fdd9fd99aa529159d05c63dc2b0bfe08a
 # rails 3.0.x (actionpack) depends on rack 1.2 whereas 1.3 is the first
 # version that fixes the issue above
-gem 'rack', :git => "http://github.com/IntersectAustralia/rack.git", :branch => "rack-1.2"
+gem 'rack', :git => "https://github.com/IntersectAustralia/rack.git", :branch => "rack-1.2"
 
 gem 'rails', '3.0.19'
 gem 'rake', '0.8.7', :require => false
@@ -40,7 +40,7 @@ group :development, :test, :qa do
   gem "ladle"
 end
 
-gem 'acdata-dataset-api', :git => "http://github.com/IntersectAustralia/acdata-dataset-api.git", :require => false
+gem 'acdata-dataset-api', :git => "https://github.com/IntersectAustralia/acdata-dataset-api.git", :require => false
 gem 'nokogiri'
 gem 'pg'
 gem "rubyzip", :require => 'zip/zip'
