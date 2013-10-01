@@ -1,11 +1,11 @@
 GIT
-  remote: http://github.com/IntersectAustralia/acdata-dataset-api.git
-  revision: db74f745feacd7198bb8c95f9e63e27400a1c44e
+  remote: https://github.com/IntersectAustralia/acdata-dataset-api.git
+  revision: c66194811148c54e7ddb8defe6a79164c8e91c2c
   specs:
     acdata-dataset-api (1.0.1)
 
 GIT
-  remote: http://github.com/IntersectAustralia/rack.git
+  remote: https://github.com/IntersectAustralia/rack.git
   revision: 3a8d2464f8810abf671defbe84bc1da298b35b3e
   branch: rack-1.2
   specs:
