@@ -1,7 +1,6 @@
 <% if @redirect_path %>
 <% flash[:notice] = "Sample was successfully updated." %>
-window.location = '<%= @redirect_path %>';
-window.location.reload(true)
+window.location.replace("<%= @redirect_path %>");
 <% else %>
 $("#edit_sample_error_explanation").html("<%= escape_javascript(render 'shared/modal_errors', :target => @sample) %>");
 $("#edit_sample_error_explanation").addClass('alert');

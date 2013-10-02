@@ -1,6 +1,5 @@
 <% if @redirect_path %>
-window.location = '<%= @redirect_path %>';
-window.location.reload(true)
+window.location.replace("<%= @redirect_path %>");
 <% else %>
 $("#edit_dataset_error_explanation").html("<%= escape_javascript(render 'shared/modal_errors', :target => @dataset) %>");
 $("#edit_dataset_error_explanation").addClass('alert');
