@@ -40,7 +40,11 @@
     </div>
 
 
-    <div id="member_picker" <%= action.eql?("new") ^ can?(:edit_member, @project) ? "" : "class='hidden'" %>>
+    <% if action.eql? "new" or can? :edit_member, @project %>
+    <div id="member_picker">
+    <% else %>
+    <div id="member_picker" class="hidden">
+    <% end %>
       <div class="field">
         <label for="member">Project Members:</label>
         <%= text_field_tag 'member', nil, :title => 'Start typing a name', :class => "text basic_field", :placeholder => "Search here for members to add" %>
