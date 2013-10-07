@@ -16,7 +16,7 @@ group :test do
   # cucumber gems
   gem "cucumber"
   gem "cucumber-rails", '1.1.1', :require => false
-  gem "selenium-webdriver", "~> 2.26.0"
+  gem "selenium-webdriver", "~> 2.35.1"
 end
 
 group :development, :test do
