@@ -14,6 +14,6 @@ fi
 #actual copy
 cp $FILE/acdata_config.yml $PWD/config/acdata_config.yml
 cp $FILE/production.rb $PWD/config/environments/production.rb
-cp $FILE/device.rb $PWD/config/initializers/devise.rb
+cp $FILE/devise.rb $PWD/config/initializers/devise.rb
 cp $FILE/production_local.rb $PWD/config/deploy/production_local.rb
 cp $FILE/ldap.yml $PWD/config/ldap.yml

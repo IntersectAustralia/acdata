@@ -350,7 +350,7 @@ task :restore_config, :roles => :app do
   run "cp #{src} #{dest}"
 
   dest = "#{release_path}/config/initializers/devise.rb"
-  src = "#{shared_path}/config/device.rb"
+  src = "#{shared_path}/config/devise.rb"
   run "cp #{src} #{dest}"
 
   dest = "#{release_path}/config/deploy/production_local.rb"
@@ -371,7 +371,7 @@ task :copy_config_to_shared_folder,:roles => :app do
   run "cp #{src} #{dest}"
 
   src = "#{release_path}/config/initializers/devise.rb"
-  dest = "#{shared_path}/config/device.rb"
+  dest = "#{shared_path}/config/devise.rb"
   run "cp #{src} #{dest}"
 
   src = "#{release_path}/config/deploy/production_local.rb"
