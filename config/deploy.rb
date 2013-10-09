@@ -28,6 +28,10 @@ set(:data_dir) { "#{defined?(data_dir) ? data_dir : '/data/acdata-samples'}" }
 # The built in capistrano deploy:migrate task needs this set
 set(:rails_env) { stage }
 
+# Shared files
+set :shared_file_dir, "files"
+set(:shared_file_path) { File.join(shared_path, shared_file_dir) }
+
 default_run_options[:pty] = true
 
 namespace :noop do
@@ -276,8 +280,57 @@ namespace :deploy do
     end
   end
 
-end
+  namespace :shared_file do
 
+    desc <<-DESC
+      Generate shared file dirs under shared/files dir and then copies files over.
+
+      For example, given:
+        set :shared_files, %w(config/database.yml db/seeds.yml)
+
+      The following directories will be generated:
+        shared/files/config/
+        shared/files/db/
+    DESC
+
+    task :setup, :except => { :no_release => true } do
+      if exists?(:shared_files)
+        dirs = shared_files.map {|f| File.join(shared_file_path, File.dirname(f)) }
+        run "#{try_sudo} mkdir -p #{dirs.join(' ')}"
+        run "#{try_sudo} chmod g+w #{dirs.join(' ')}" if fetch(:group_writable, true)
+        run "#{try_sudo} chown -R #{user}.#{group} #{dirs.join(' ')}"
+
+        servers = find_servers(:no_release => false)
+        servers.each do |server|
+          shared_files.each do |file_path|
+            top.upload(file_path, File.join(shared_file_path, file_path))
+            puts "    Uploaded #{file_path} to #{File.join(shared_file_path, file_path)}"
+          end
+        end
+
+      end
+    end
+
+    after "deploy:setup", "deploy:shared_file:setup"
+
+    desc <<-DESC
+      Symlink shared files to release path.
+
+      WARNING: It DOES NOT warn you when shared files not exist.  \
+      So symlink will be created even when a shared file does not \
+      exist.
+    DESC
+
+    task :create_symlink, :except => { :no_release => true } do
+      (shared_files || []).each do |path|
+        run "ln -nfs #{shared_file_path}/#{path} #{release_path}/#{path}"
+      end
+    end
+    
+    after "deploy:finalize_update", "deploy:shared_file:create_symlink"
+  
+  end
+end
 
 after 'deploy:update_code' do
   generate_database_yml
@@ -325,9 +378,9 @@ task :copy_config_to_shared_folder,:roles => :app do
   dest = "#{shared_path}/config/production_local.rb"
   run "cp #{src} #{dest}"
 
-  src = "#{release_path}/config/ldap.yml"
-  dest = "#{shared_path}/config/ldap.yml"
-  run "cp #{src} #{dest}"
+  #src = "#{release_path}/config/ldap.yml"
+  #dest = "#{shared_path}/config/ldap.yml"
+  #run "cp #{src} #{dest}"
 
 end
 
@@ -390,3 +443,7 @@ task :generate_initial_users_yml, :roles => :app do
   end
 end
 
+after 'multistage:ensure' do
+  set(:rails_env) { "#{defined?(rails_env) ? rails_env : stage.to_s}" }
+  set :shared_files, %W(config/ldap.yml)
+end
