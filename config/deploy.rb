@@ -94,12 +94,15 @@ after 'deploy:update' do
   server_setup.config.apache
   server_setup.rvm.trust_rvmrc
   copy_config_to_shared_folder
+  deploy.new_secret
   deploy.restart
 end
 
 
 namespace :deploy do
-
+  task :new_secret, :roles => :app do
+     run("cd #{current_path} && rake app:generate_secret", :env => {'RAILS_ENV' => "#{stage}"})
+   end
   # Passenger specifics: restart by touching the restart.txt file
   task :start, :roles => :app, :except => {:no_release => true} do
     restart
