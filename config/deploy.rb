@@ -101,7 +101,7 @@ end
 
 namespace :deploy do
   task :new_secret, :roles => :app do
-     run("cd #{current_path} && rake app:generate_secret", :env => {'RAILS_ENV' => "#{stage}"})
+     run("cd #{current_path} && bundle exec rake app:generate_secret", :env => {'RAILS_ENV' => "#{stage}"})
    end
   # Passenger specifics: restart by touching the restart.txt file
   task :start, :roles => :app, :except => {:no_release => true} do
@@ -329,9 +329,9 @@ namespace :deploy do
         run "ln -nfs #{shared_file_path}/#{path} #{release_path}/#{path}"
       end
     end
-    
+
     after "deploy:finalize_update", "deploy:shared_file:create_symlink"
-  
+
   end
 end
 
