@@ -35,7 +35,7 @@ group :development, :test do
   gem "webmock", :require => false
 end
 
-group :development, :test, :qa do
+group :development, :test, :qa do:
   gem "faker"
   gem "ladle"
 end
@@ -58,6 +58,7 @@ gem "net-ldap"
 gem "devise_ldap_authenticatable"
 gem "rails3-jquery-autocomplete"
 gem 'acts_as_singleton'
+gem 'whoops_rails_logger', git: 'https://github.com/IntersectAustralia/whoops_rails_logger.git'
 gem "file-temp", :require => 'file/temp'
 gem "paperclip"
 gem "remotipart" #ajax file uploads
