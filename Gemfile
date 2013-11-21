@@ -35,7 +35,7 @@ group :development, :test do
   gem "webmock", :require => false
 end
 
-group :development, :test, :qa do:
+group :development, :test, :qa do
   gem "faker"
   gem "ladle"
 end
