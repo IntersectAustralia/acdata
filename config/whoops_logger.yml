@@ -1,15 +1,13 @@
 common: &common
-  host: deployment-tracker.intersect.org.au
+  host: deployment-tracker.intersect.org.au
 
 # development:
 #   host: localhost
 #   port: 3001
 
 qa:
-  <<: *common
-
+  <<: *common
 staging:
-  <<: *common
-
+  <<: *common
 production:
-  <<: *common
+  <<: *common
