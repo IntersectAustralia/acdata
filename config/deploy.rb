@@ -35,6 +35,30 @@ set(:shared_file_path) { File.join(shared_path, shared_file_dir) }
 
 default_run_options[:pty] = true
 
+#version tagging
+set :branch do
+  require 'colorize'
+  default_tag = 'HEAD'
+
+  availableLocalBranches = `git branch`.split (/\r?\n/)
+  availableLocalBranches.map! { |s|  "(local) " + s.strip}
+
+  availableRemoteBranches = `git branch -r`.split (/\r?\n/)
+  availableRemoteBranches.map! { |s|  "(remote) " + s.split('/')[-1].strip}
+
+  puts "Availible tags:".colorize(:yellow)
+  puts `git tag`
+  puts "Availible branches:".colorize(:yellow)
+  availableLocalBranches.each {|s| puts s}
+  availableRemoteBranches.each {|s| puts s.colorize(:red)}
+
+  tag = Capistrano::CLI.ui.ask "Tag to deploy (make sure to push the branch/tag first) or HEAD?: [#{default_tag}] ".colorize(:yellow)
+  tag = default_tag if tag.empty?
+  tag = nil if tag.eql?("HEAD")
+
+  tag
+end
+
 namespace :noop do
   task :info do
     puts "stage=#{stage}, user=#{user}, group=#{group}, home=#{deploy_base}"
