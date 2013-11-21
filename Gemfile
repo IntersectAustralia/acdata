@@ -10,6 +10,7 @@ gem 'rake', '0.8.7', :require => false
 
 group :development do
   gem "rails3-generators"
+  gem "create_deployment_record", git: 'https://github.com/IntersectAustralia/create_deployment_record.git'
 end
 
 group :test do
@@ -35,7 +36,7 @@ group :development, :test do
   gem "webmock", :require => false
 end
 
-group :development, :test, :qa do:
+group :development, :test, :qa do
   gem "faker"
   gem "ladle"
 end

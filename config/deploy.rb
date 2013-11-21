@@ -2,6 +2,7 @@
 require 'rvm/capistrano'
 require 'capistrano/ext/multistage'
 require 'bundler/capistrano'
+require 'deploy/create_deployment_record'
 set :whenever_environment, defer { stage }
 set :whenever_command, "bundle exec whenever"
 require 'whenever/capistrano'
