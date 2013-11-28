@@ -14,6 +14,7 @@ class ProjectsController < ApplicationController
   load_and_authorize_resource :except => [:create]
 
   def index
+    raise "error"
   end
 
   def new
@@ -26,6 +27,7 @@ class ProjectsController < ApplicationController
 
   def show
     @sample = Sample.new
+    raise "error"
   end
 
   def list
