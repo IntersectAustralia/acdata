@@ -56,7 +56,8 @@ class ProjectsController < ApplicationController
       params[:project][:viewer_ids] = members
     end
 
-    @project = Project.new(params[:project])
+    #@project = Project.new(params[:project])
+    @project = nil
     @project.user = current_user
     if @project.save
       @redirect_path = project_url(@project)
@@ -67,7 +68,8 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    @project = Project.find(params[:id])
+    #@project = Project.find(params[:id])
+    @project = nil
     params.delete(:member)
     params[:project][:member_ids] = [] if params[:project][:member_ids].blank?
     members = params[:project].delete(:member_ids)
