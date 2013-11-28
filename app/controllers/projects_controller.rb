@@ -17,7 +17,7 @@ class ProjectsController < ApplicationController
   end
 
   def new
-
+    raise "error"
   end
 
   def edit
