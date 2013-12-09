@@ -150,6 +150,24 @@ namespace :deploy do
     restart
   end
 
+  desc "Safe redeployment"
+  task :safe do # TODO roles?
+    require 'colorize'
+    update
+
+    cat_migrations_output = capture("cd #{current_path} && bundle exec rake db:cat_pending_migrations 2>&1", :env => {'RAILS_ENV' => stage}).chomp
+    puts cat_migrations_output.blue
+
+    unless cat_migrations_output[/0 pending migration\(s\)/]
+      print "    There are pending migrations. Are you sure you want to continue? [NO/yes] ".red
+      abort "    Exiting because you didn't type 'yes'" unless STDIN.gets.chomp == 'yes'
+    end
+
+    backup.db.dump
+    backup.db.trim
+    migrate
+  end
+
   # Create the db
   desc "Create the database"
   task :db_create, :roles => :db do

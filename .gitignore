@@ -37,3 +37,5 @@ bin
 
 # Ignore the LDAP configuration file
 config/ldap.yml
+
+db_dumps/
