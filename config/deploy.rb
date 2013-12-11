@@ -178,7 +178,7 @@ namespace :deploy do
 
     backup.db.dump
     backup.db.trim
-    migrate
+    run("cd #{current_path} && bundle exec rake db:migrate", :env => {'RAILS_ENV' => "#{stage}"})
   end
 
   # Create the db
