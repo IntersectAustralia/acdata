@@ -127,7 +127,7 @@ namespace :backup do
   namespace :db do
     desc "make a database backup"
     task :dump do
-      run "cd #{current_path} && bundle exec rake db:backup --trace", :env => {'RAILS_ENV' => stage}
+      run "cd #{current_path} && bundle exec rake db:backup", :env => {'RAILS_ENV' => stage}
     end
 
     desc "trim database backups"
